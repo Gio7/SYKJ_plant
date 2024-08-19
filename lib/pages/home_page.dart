@@ -7,7 +7,7 @@ import 'package:plant/controllers/user_controller.dart';
 
 import 'login/login_page.dart';
 import 'set_page.dart';
-import 'widgets/nav_bar.dart';
+import '../controllers/user_nav_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const NavBar(),
+        const UserNavBar(),
         Stack(
           children: [
             Container(
@@ -73,7 +73,7 @@ class HomePage extends StatelessWidget {
                   if (Get.find<UserController>().isLogin.value) {
                     Get.to(() => const SetPage());
                   } else {
-                    Get.to(() => const LoginPage());
+                    Get.to(() => const LoginPage(), fullscreenDialog: true);
                   }
                 },
                 child: Image.asset('images/icon/user2.png', width: 48),

@@ -2,6 +2,7 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/components/page_bg.dart';
 import 'package:plant/controllers/main_controller.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/pages/my_plants_page.dart';
@@ -36,15 +37,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          stops: [0, 0.28],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [UIColor.cD9F0E5, UIColor.cF3F4F3],
-        ),
-      ),
+    return PageBG(
       child: Scaffold(
         backgroundColor: UIColor.transparent,
         body: SafeArea(

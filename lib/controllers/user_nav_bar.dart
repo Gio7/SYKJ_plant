@@ -6,8 +6,8 @@ import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/pages/login/login_page.dart';
 import 'package:plant/pages/set_page.dart';
 
-class NavBar extends StatelessWidget {
-  const NavBar({super.key, this.needUser = false});
+class UserNavBar extends StatelessWidget {
+  const UserNavBar({super.key, this.needUser = false});
   final bool needUser;
 
   @override
@@ -23,7 +23,7 @@ class NavBar extends StatelessWidget {
               onTap: () {
                 if (Get.find<UserController>().isLogin.value) {
                 } else {
-                  Get.to(() => const LoginPage());
+                  Get.to(() => const LoginPage(), fullscreenDialog: true);
                 }
               },
               child: Image.asset(
@@ -38,7 +38,7 @@ class NavBar extends StatelessWidget {
                 if (Get.find<UserController>().isLogin.value) {
                   Get.to(() => const SetPage());
                 } else {
-                  Get.to(() => const LoginPage());
+                  Get.to(() => const LoginPage(), fullscreenDialog: true);
                 }
               },
               child: Image.asset(

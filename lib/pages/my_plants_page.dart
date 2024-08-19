@@ -5,7 +5,7 @@ import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 
 import 'shoot_page.dart';
-import 'widgets/nav_bar.dart';
+import '../controllers/user_nav_bar.dart';
 
 class MyPlantsPage extends StatelessWidget {
   const MyPlantsPage({super.key});
@@ -15,7 +15,7 @@ class MyPlantsPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const NavBar(needUser: true),
+        const UserNavBar(needUser: true),
         Container(
           margin: const EdgeInsets.only(left: 24, top: 16),
           child: Text(

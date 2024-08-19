@@ -8,13 +8,14 @@ class NormalButton extends StatelessWidget {
     required this.textColor,
     this.icon,
     this.width,
-    this.onTap,
+    this.onTap, this.iconWidget,
   });
 
   final Color bgColor;
   final String text;
   final Color textColor;
   final String? icon;
+  final Widget? iconWidget;
   final double? width;
   final Function()? onTap;
 
@@ -38,13 +39,15 @@ class NormalButton extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             if (icon != null) ImageIcon(AssetImage(icon!), color: textColor, size: 20),
-            if (icon != null) const SizedBox(width: 10),
+            if (iconWidget != null) iconWidget!,
+            if (icon != null || iconWidget != null) const SizedBox(width: 10),
             Text(
               text,
               style: TextStyle(
                 color: textColor,
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
+                decoration: TextDecoration.none,
               ),
             ),
           ],
