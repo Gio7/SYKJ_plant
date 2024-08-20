@@ -29,8 +29,10 @@ class UIColor {
   static const Color c15221D = Color(0xFF15221D);
 
   static const Color cB3B3B3 = Color(0xFFB3B3B3);
-  
+
   static const Color cD1D1D1 = Color(0xFFD1D1D1);
+
+  static const Color cFF3257 = Color(0xFFFF3257);
 }
 
 extension FontWeightExt on FontWeight {
