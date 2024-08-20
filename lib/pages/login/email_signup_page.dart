@@ -18,10 +18,12 @@ class _EmailSignupPageState extends State<EmailSignupPage> {
   @override
   Widget build(BuildContext context) {
     return PageBG(
-      child: SafeArea(
+      child: Scaffold(
+        backgroundColor: UIColor.transparent,
+        appBar: NavBar(title: 'createAnAccount'.tr),
+        body: SafeArea(
         child: Column(
           children: [
-            NavBar(title: 'createAnAccount'.tr),
             SizedBox(
               width: double.infinity,
               child: NormalButton(
@@ -36,6 +38,7 @@ class _EmailSignupPageState extends State<EmailSignupPage> {
             const SizedBox(height: 24),
           ],
         ),
+      ),
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
+import 'package:plant/controllers/nav_bar.dart';
 import 'package:plant/pages/login/email_signup_page.dart';
 
 import 'email_login_page.dart';
@@ -24,28 +25,22 @@ class LoginPage extends StatelessWidget {
       ),
       child: Scaffold(
         backgroundColor: UIColor.transparent,
+        appBar: NavBar(
+          leftWidget: IconButton(
+            onPressed: () => Get.back(),
+            icon: const ImageIcon(
+              AssetImage('images/icon/close.png'),
+              size: 32,
+              color: UIColor.c15221D,
+            ),
+          ),
+        ),
         body: SafeArea(
           top: true,
           bottom: false,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 56,
-                width: double.infinity,
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Get.back(),
-                      icon: const ImageIcon(
-                        AssetImage('images/icon/close.png'),
-                        size: 32,
-                        color: UIColor.c15221D,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               Image.asset('images/icon/login_bg.png', height: 174),
               const SizedBox(height: 6),
               const Text(
