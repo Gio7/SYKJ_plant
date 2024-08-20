@@ -23,7 +23,7 @@ class UserNavBar extends StatelessWidget {
               onTap: () {
                 if (Get.find<UserController>().isLogin.value) {
                 } else {
-                  Get.to(() => const LoginPage(), fullscreenDialog: true);
+                  Get.to(() => const LoginPage(), fullscreenDialog: true, routeName: 'login_page');
                 }
               },
               child: Image.asset(
@@ -35,11 +35,11 @@ class UserNavBar extends StatelessWidget {
           if (needUser)
             GestureDetector(
               onTap: () {
-                if (Get.find<UserController>().isLogin.value) {
-                  Get.to(() => const SetPage());
-                } else {
-                  Get.to(() => const LoginPage(), fullscreenDialog: true);
-                }
+                Get.to(() => const SetPage());
+                // if (Get.find<UserController>().isLogin.value) {
+                // } else {
+                //   Get.to(() => const LoginPage(), fullscreenDialog: true, routeName: 'login_page');
+                // }
               },
               child: Image.asset(
                 'images/icon/user.png',

@@ -4,6 +4,7 @@ import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/components/page_bg.dart';
 import 'package:plant/controllers/nav_bar.dart';
+import 'package:plant/pages/login/email_verify_page.dart';
 
 import 'widgets.dart';
 
@@ -32,7 +33,11 @@ class _EmailSignupPageState extends State<EmailSignupPage> {
 
   bool _isSubmit = false;
 
-  void _submit() {}
+  void _submit() {
+    // TODO 提交
+    Get.to(() => EmailVerifyPage(email: _emailController.text));
+  }
+
   bool _verSubmit() {
     if (_emailController.text.isEmpty) {
       return false;
@@ -195,8 +200,8 @@ class _EmailSignupPageState extends State<EmailSignupPage> {
                     SizedBox(
                       width: double.infinity,
                       child: NormalButton(
-                        bgColor: _isSubmit ? UIColor.primary : UIColor.cD1D1D1,
                         text: 'signUp'.tr,
+                        bgColor: _isSubmit ? UIColor.primary : UIColor.cD1D1D1,
                         textColor: UIColor.white,
                         onTap: _isSubmit ? () => _submit() : null,
                       ),

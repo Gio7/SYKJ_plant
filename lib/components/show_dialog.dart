@@ -1,98 +1,312 @@
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:plant/components/button.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:plant/common/ui_color.dart';
+import 'package:plant/components/btn.dart';
 
-// import '../common/ui_color.dart';
+class NormalDialog extends StatelessWidget {
+  const NormalDialog({
+    super.key,
+    required this.title,
+    this.subText,
+    required this.confirmText,
+    this.cancelText,
+    this.icon,
+    this.onConfirm,
+    this.onCancel,
+  });
 
-// class DialogUtil {
-//   static Future<void> showTextField(String title, String value,{Function(String)? okTap, Function()? cancelTap, required String okText, String? cancelText}) async {
-//     TextEditingController controller = TextEditingController();
-//     controller.text = value;
-//     await Get.dialog(
-//       // barrierDismissible: false,
-//       GestureDetector(
-//         onTap: () => Get.back(),
-//         child: Container(
-//           color: Colors.black12,
-//           child: Center(
-//             child: GestureDetector(
-//               onTap: () {},
-//               child: Container(
-//                 margin: const EdgeInsets.symmetric(horizontal: 36),
-//                 padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-//                 width: double.infinity,
-//                 decoration: BoxDecoration(
-//                   borderRadius: BorderRadius.circular(24.0),
-//                   color: UIColor.c1A1A1A,
-//                   border: Border.all(color: UIColor.primary, width: 3.0, style: BorderStyle.solid, strokeAlign: BorderSide.strokeAlignOutside),
-//                 ),
-//                 child: Column(
-//                   mainAxisSize: MainAxisSize.min,
-//                   children: [
-//                     Text(
-//                       title,
-//                       textAlign: TextAlign.center,
-//                       style: const TextStyle(
-//                         color: UIColor.cF9F9F9,
-//                         fontSize: 14,
-//                         decoration: TextDecoration.none,
-//                         fontWeight: FontWeight.w600,
-//                       ),
-//                     ),
-//                     const SizedBox(height: 16),
-//                     Material(
-//                       color: Colors.transparent,
-//                       child: SizedBox(
-//                         height: 42,
-//                         child: TextField(
-//                           maxLines: 1,
-//                           maxLength: 20,
-//                           controller: controller,
-//                           style: const TextStyle(fontSize: 14, color: UIColor.white),
-//                           decoration: InputDecoration(
-//                             border: OutlineInputBorder(
-//                               borderSide: const BorderSide(color: UIColor.c4D4D4D, width: 1.0),
-//                               borderRadius: BorderRadius.circular(8),
-//                             ),
-//                             hintText: value.isNotEmpty ? value : 'newDraft'.tr,
-//                             hintStyle: const TextStyle(fontSize: 14, color: UIColor.c848484),
-//                             contentPadding: const EdgeInsets.symmetric(horizontal: 6),
-//                             counterText: '',
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-//                     const SizedBox(height: 30),
-//                     Row(
-//                       mainAxisAlignment: MainAxisAlignment.center,
-//                       children: [
-//                         Expanded(
-//                           child: NormalButton(
-//                             height: 42,
-//                             text: okText,
-//                             primary: true,
-//                             onPressed: () {
-//                               okTap!(controller.text);
-//                             },
-//                           ),
-//                         ),
-//                         const SizedBox(width: 14),
-//                         Expanded(
-//                           child: NormalButton(
-//                             height: 42,
-//                             text: cancelText ?? 'cancel'.tr,
-//                             onPressed: cancelTap ?? () => Get.back(),
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+  final String title;
+  final String? subText;
+  final String confirmText;
+  final Function()? onConfirm;
+  final String? cancelText;
+  final Function()? onCancel;
+  final Widget? icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return DialogContainer(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (icon != null) icon!,
+          Container(
+            margin: const EdgeInsets.all(16),
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: UIColor.c15221D,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                decoration: TextDecoration.none,
+              ),
+            ),
+          ),
+          if (subText != null)
+            Text(
+              subText!,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: UIColor.c8E8B8B,
+                fontSize: 14,
+                fontWeight: FontWeightExt.medium,
+                decoration: TextDecoration.none,
+              ),
+            ),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.only(top: 24),
+            child: Row(
+              children: [
+                if (cancelText != null) ...[
+                  Expanded(
+                    child: SizedBox(
+                      height: 44,
+                      child: NormalButton(
+                        onTap: onCancel ?? () => Get.back(),
+                        text: cancelText!,
+                        textColor: UIColor.white,
+                        bgColor: UIColor.cD1D1D1,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: SizedBox(
+                      height: 44,
+                      child: NormalButton(
+                        onTap: onConfirm,
+                        text: confirmText,
+                        textColor: UIColor.white,
+                        bgColor: UIColor.c40BD95,
+                      ),
+                    ),
+                  ),
+                ] else ...[
+                  Expanded(
+                    child: SizedBox(
+                      height: 44,
+                      child: NormalButton(
+                        onTap: onConfirm,
+                        text: confirmText,
+                        textColor: UIColor.white,
+                        bgColor: UIColor.c40BD95,
+                      ),
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DialogContainer extends StatelessWidget {
+  const DialogContainer({super.key, required this.child});
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return UnconstrainedBox(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+        margin: const EdgeInsets.symmetric(horizontal: 20),
+        width: Get.width - 40,
+        decoration: ShapeDecoration(
+          color: UIColor.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        child: child,
+      ),
+    );
+  }
+}
+
+/// 弹出输入框
+///
+/// Example:
+/// ```
+/// Get.dialog(
+///   TextFieldDialog(
+///     title: 'setYourPlantName'.tr,
+///    confirmText: 'save'.tr,
+///     cancelText: 'cancel'.tr,
+///     onConfirm: (String v) {
+///       print(v);
+///     },
+///   ),
+/// );
+/// ```
+class TextFieldDialog extends StatelessWidget {
+  const TextFieldDialog({
+    super.key,
+    required this.title,
+    required this.confirmText,
+    this.cancelText,
+    this.onConfirm,
+    this.onCancel,
+    this.value,
+  });
+
+  final String title;
+  final String confirmText;
+  final Function(String)? onConfirm;
+  final String? cancelText;
+  final Function()? onCancel;
+  final String? value;
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = TextEditingController();
+    if (value != null) {
+      controller.text = value!;
+    }
+    return DialogContainer(
+      child: Material(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              margin: const EdgeInsets.all(16),
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: UIColor.c15221D,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  decoration: TextDecoration.none,
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+            TextField(
+              maxLines: 1,
+              maxLength: 40,
+              controller: controller,
+              // focusNode: focusNode,
+              style: TextStyle(fontSize: 14, color: UIColor.c15221D, fontWeight: FontWeightExt.medium),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(26),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(26),
+                ),
+                hintText: 'writeHere'.tr,
+                hintStyle: TextStyle(fontSize: 14, color: UIColor.cBDBDBD, fontWeight: FontWeightExt.medium),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+                // counterText: '',
+                fillColor: UIColor.cEEEEEE,
+                filled: true,
+              ),
+              // cursorColor: UIColor.cAEE9CD,
+            ),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.only(top: 8),
+              child: Row(
+                children: [
+                  if (cancelText != null) ...[
+                    Expanded(
+                      child: SizedBox(
+                        height: 44,
+                        child: NormalButton(
+                          onTap: onCancel ?? () => Get.back(),
+                          text: cancelText!,
+                          textColor: UIColor.white,
+                          bgColor: UIColor.cD1D1D1,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: SizedBox(
+                        height: 44,
+                        child: NormalButton(
+                          onTap: () => onConfirm?.call(controller.text),
+                          text: confirmText,
+                          textColor: UIColor.white,
+                          bgColor: UIColor.c40BD95,
+                        ),
+                      ),
+                    ),
+                  ] else ...[
+                    Expanded(
+                      child: SizedBox(
+                        height: 44,
+                        child: NormalButton(
+                          onTap: () => onConfirm?.call(controller.text),
+                          text: confirmText,
+                          textColor: UIColor.white,
+                          bgColor: UIColor.c40BD95,
+                        ),
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// 底部弹出
+///
+/// Example:
+/// ```
+/// Get.bottomSheet(
+///    BottomPopOptions(children:[])
+///)
+/// ```
+class BottomPopOptions extends StatelessWidget {
+  const BottomPopOptions({super.key, required this.children});
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(top: 20, left: 24, right: 24, bottom: 40),
+      decoration: const ShapeDecoration(
+        color: UIColor.cF3F4F3,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              GestureDetector(
+                onTap: () => Get.back(),
+                child: const ImageIcon(
+                  AssetImage('images/icon/close.png'),
+                  size: 24,
+                  color: UIColor.black,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          ...children,
+        ],
+      ),
+    );
+  }
+}

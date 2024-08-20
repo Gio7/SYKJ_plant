@@ -6,11 +6,12 @@ class UIColor {
   static const Color transparentWhite20 = Color(0x33FFFFFF);
   static const Color transparent = Color(0x66FFFFFF);
   static const Color transparent40 = Color(0x00FFFFFF);
+  static const Color transparent60 = Color(0x99FFFFFF);
   static const Color transparentPrimary40 = Color(0x66AEE9CD);
   static const Color transparentPrimary70 = Color(0xB240BD95);
 
   /// 默认
-  static const Color primary = Color(0xFF40BD95);
+  static const Color primary = c40BD95;
 
   static const Color black = Color(0xFF000000);
 
@@ -33,6 +34,16 @@ class UIColor {
   static const Color cD1D1D1 = Color(0xFFD1D1D1);
 
   static const Color cFF3257 = Color(0xFFFF3257);
+
+  static const Color c8E8B8B = Color(0xFF8E8B8B);
+
+  static const Color c00997A = Color(0xFF00997A);
+
+  static const Color cD7FF38 = Color(0xFFD7FF38);
+
+  static const Color cAAFFD6 = Color(0xFFAAFFD6);
+  
+  static const Color cEEEEEE = Color(0xFFEEEEEE);
 }
 
 extension FontWeightExt on FontWeight {

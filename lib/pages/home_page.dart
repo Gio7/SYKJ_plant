@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/controllers/user_controller.dart';
+import 'package:plant/controllers/user_nav_bar.dart';
 
-import 'login/login_page.dart';
 import 'set_page.dart';
-import '../controllers/user_nav_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -70,11 +68,11 @@ class HomePage extends StatelessWidget {
               right: 40,
               child: GestureDetector(
                 onTap: () {
-                  if (Get.find<UserController>().isLogin.value) {
-                    Get.to(() => const SetPage());
-                  } else {
-                    Get.to(() => const LoginPage(), fullscreenDialog: true);
-                  }
+                  Get.to(() => const SetPage());
+                  // if (Get.find<UserController>().isLogin.value) {
+                  // } else {
+                  //   Get.to(() => const LoginPage(), fullscreenDialog: true, routeName: 'login_page');
+                  // }
                 },
                 child: Image.asset('images/icon/user2.png', width: 48),
               ),
