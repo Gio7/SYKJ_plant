@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:plant/common/ui_color.dart';
+import 'package:plant/controllers/nav_bar.dart';
 
 class PlantInfoPage extends StatefulWidget {
   const PlantInfoPage({super.key});
@@ -10,6 +12,13 @@ class PlantInfoPage extends StatefulWidget {
 class _PlantInfoPageState extends State<PlantInfoPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+      color: UIColor.white,
+      child: Column(
+        children: [
+          NavBar(),
+        ],
+      ),
+    );
   }
 }

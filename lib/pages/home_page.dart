@@ -6,6 +6,7 @@ import 'package:plant/common/ui_color.dart';
 import 'package:plant/controllers/user_nav_bar.dart';
 
 import 'set_page.dart';
+import 'shoot_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -101,9 +102,23 @@ class HomePage extends StatelessWidget {
         Row(
           children: [
             const SizedBox(width: 20),
-            Expanded(child: Image.asset('images/icon/identify.png')),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(() => const ShootPage());
+                },
+                child: Image.asset('images/icon/identify.png'),
+              ),
+            ),
             const SizedBox(width: 6),
-            Expanded(child: Image.asset('images/icon/diagnose.png')),
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(() => const ShootPage(shootType: 'diagnose'));
+                },
+                child: Image.asset('images/icon/diagnose.png'),
+              ),
+            ),
             const SizedBox(width: 20),
           ],
         ),

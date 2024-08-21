@@ -1,14 +1,268 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'dart:io';
 
-class ShootPage extends StatelessWidget {
-  const ShootPage({super.key});
+import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:image/image.dart' as img;
+import 'package:path_provider/path_provider.dart';
+import 'package:plant/common/ui_color.dart';
+import 'package:plant/components/btn.dart';
+import 'package:plant/controllers/nav_bar.dart';
+import 'package:plant/pages/scan_page.dart';
+
+class ShootPage extends StatefulWidget {
+  const ShootPage({super.key, this.shootType = 'identify'});
+
+  final String shootType;
+
+  @override
+  State<ShootPage> createState() => _ShootPageState();
+}
+
+class _ShootPageState extends State<ShootPage> {
+  CameraController? _controller;
+
+  FlashMode _flashMode = FlashMode.off;
+
+  String _shootType = "identify";
+
+  // Uint8List? _photoImage;
+
+  @override
+  void initState() {
+    _shootType = widget.shootType;
+    super.initState();
+    initCamera();
+  }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
+  }
+
+  Future<void> initCamera() async {
+    final cameras = await availableCameras();
+    final firstCamera = cameras.first;
+
+    _controller = CameraController(
+      firstCamera,
+      ResolutionPreset.veryHigh,
+      enableAudio: false,
+      imageFormatGroup: ImageFormatGroup.jpeg,
+    );
+
+    _controller!.initialize().then((_) {
+      if (mounted) {
+        setState(() {});
+      }
+    }).catchError((Object e) {
+      Get.log(e.toString(), isError: true);
+      if (e is CameraException) {
+        Fluttertoast.showToast(msg: e.description ?? 'error', toastLength: Toast.LENGTH_LONG, gravity: ToastGravity.CENTER);
+        switch (e.code) {
+          case 'CameraAccessDenied':
+            // 当用户拒绝相机访问权限时抛出
+            break;
+          case 'CameraAccessDeniedWithoutPrompt':
+            // 目前仅限 iOS。当用户先前拒绝权限时抛出。iOS 不允许第二次提示警报对话框。用户必须转到“设置”>“隐私”>“相机”才能启用相机访问权限
+            break;
+          case 'CameraAccessRestricted':
+            // 目前仅限 iOS。当相机访问受到限制且用户无法授予权限（家长控制）时抛出。
+            break;
+          case 'AudioAccessDenied':
+            // 当用户拒绝音频访问权限时抛出
+            break;
+          case 'AudioAccessDeniedWithoutPrompt':
+            // 目前仅限 iOS。当用户先前拒绝权限时抛出。iOS 不允许第二次提示警报对话框。用户必须转到“设置”>“隐私”>“麦克风”才能启用音频访问。
+            break;
+          case 'AudioAccessRestricted':
+            // 目前仅限 iOS。当音频访问受到限制且用户无法授予权限（家长控制）时抛出。
+            break;
+          default:
+            break;
+        }
+      }
+    });
+  }
+
+  Future<void> _didShoot() async {
+    try {
+      // 设置对焦，提高拍照效率
+      await _controller?.setFocusMode(FocusMode.locked);
+      await _controller?.setExposureMode(ExposureMode.locked);
+      if (_controller?.value.isInitialized ?? false) {
+        final imageFile = await _controller!.takePicture();
+
+        final completeImage = await File(imageFile.path).readAsBytes();
+        img.Image image = img.decodeImage(completeImage)!;
+///////////// 计算需要裁剪的区域
+        final showSize = Get.width - 116;
+        double scaleFactor = image.width / Get.width;
+        double cropWidth = scaleFactor * showSize;
+        double x = (image.width - cropWidth) / 2;
+        double y = (image.height - cropWidth) / 2;
+////////////
+        final cropImage = img.copyCrop(image, x: x.toInt(), y: y.toInt(), width: cropWidth.toInt(), height: cropWidth.toInt());
+        final appDocDir = (await getApplicationCacheDirectory()).path;
+        final imgPath = '$appDocDir/test.jpeg';
+        final photoImage = img.encodeNamedImage(imgPath, cropImage);
+        if (photoImage == null) {
+          return;
+        }
+        Get.off(() => ScanPage(photoImage: photoImage));
+      }
+    } catch (e) {
+      Get.log(e.toString(), isError: true);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('shoot'),leading: IconButton(onPressed: () {Get.back();}, icon: Icon(Icons.arrow_back)),),
-      body: const Placeholder(),
+    final width = Get.width - 116;
+
+    return Container(
+      color: UIColor.black,
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: (_controller?.value.isInitialized ?? false) ? CameraPreview(_controller!) : const Center(child: CircularProgressIndicator()),
+          ),
+          // if (_photoImage != null)
+          //   Center(
+          //     child: Container(
+          //       decoration: ShapeDecoration(
+          //         shape: RoundedRectangleBorder(
+          //           borderRadius: BorderRadius.circular(22),
+          //         ),
+          //       ),
+          //       width: width,
+          //       height: width,
+          //       clipBehavior: Clip.antiAlias,
+          //       child: Image.memory(
+          //         _photoImage!,
+          //       ),
+          //     ),
+          //   ),
+          Center(
+            child: Image.asset(
+              'images/icon/canera_border.png',
+              width: width,
+            ),
+          ),
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: NavBar(
+              leftWidget: IconButton(
+                onPressed: () async {
+                  if (_flashMode == FlashMode.off) {
+                    await _controller?.setFlashMode(FlashMode.torch);
+                  } else {
+                    await _controller?.setFlashMode(FlashMode.off);
+                  }
+                  setState(() {
+                    _flashMode = (_flashMode == FlashMode.off ? FlashMode.torch : FlashMode.off);
+                  });
+                },
+                icon: Image.asset(
+                  _flashMode == FlashMode.off ? 'images/icon/flash_close.png' : 'images/icon/flash_open.png',
+                  width: 32,
+                ),
+              ),
+              rightWidget: IconButton(
+                onPressed: () => Get.back(),
+                icon: Image.asset('images/icon/close_back.png', width: 32),
+              ),
+            ),
+            body: Container(
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 50),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    width: 250,
+                    height: 52,
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    decoration: ShapeDecoration(
+                      color: Colors.black.withOpacity(0.5),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(256),
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: NormalButton(
+                            onTap: () {
+                              setState(() {
+                                _shootType = 'identify';
+                              });
+                            },
+                            text: 'identify'.tr,
+                            textColor: _shootType == 'identify' ? UIColor.primary : UIColor.white,
+                            bgColor: _shootType == 'identify' ? UIColor.white : UIColor.transparent,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: NormalButton(
+                            onTap: () {
+                              setState(() {
+                                _shootType = 'diagnose';
+                              });
+                            },
+                            text: 'multiple'.tr,
+                            textColor: _shootType == 'diagnose' ? UIColor.primary : UIColor.white,
+                            bgColor: _shootType == 'diagnose' ? UIColor.white : UIColor.transparent,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 36),
+                  Container(
+                    height: 70,
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            // TODO 选择照片
+                          },
+                          child: Image.asset(
+                            'images/icon/image_picker.png',
+                            width: 50,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            _didShoot();
+                          },
+                          child: Image.asset(
+                            _shootType == 'identify' ? 'images/icon/camera_search.png' : 'images/icon/camera_diagnose.png',
+                            width: 70,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            // TODO 弹出帮助
+                          },
+                          child: Image.asset(
+                            'images/icon/help.png',
+                            width: 50,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

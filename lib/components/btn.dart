@@ -30,7 +30,7 @@ class NormalButton extends StatelessWidget {
         height: 48,
         width: width,
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        decoration: ShapeDecoration(
+        decoration: BoxDecoration(
           color: bgColors != null ? null : bgColor,
           gradient: bgColors == null
               ? null
@@ -40,9 +40,7 @@ class NormalButton extends StatelessWidget {
                   end: const FractionalOffset(0, 0.5),
                   colors: bgColors!,
                 ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(256),
-          ),
+          borderRadius: BorderRadius.circular(256),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,

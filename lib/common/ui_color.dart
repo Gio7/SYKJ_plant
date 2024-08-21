@@ -4,8 +4,8 @@ import 'dart:ui';
 class UIColor {
   /// 用于禁用遮罩
   static const Color transparentWhite20 = Color(0x33FFFFFF);
-  static const Color transparent = Color(0x66FFFFFF);
-  static const Color transparent40 = Color(0x00FFFFFF);
+  static const Color transparent = Color(0x00FFFFFF);
+  static const Color transparent40 = Color(0x66FFFFFF);
   static const Color transparent60 = Color(0x99FFFFFF);
   static const Color transparentPrimary40 = Color(0x66AEE9CD);
   static const Color transparentPrimary70 = Color(0xB240BD95);
