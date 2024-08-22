@@ -1,4 +1,6 @@
 PODS:
+  - app_settings (5.1.1):
+    - Flutter
   - camera_avfoundation (0.0.1):
     - Flutter
   - Firebase/Analytics (10.29.0):
@@ -122,6 +124,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - app_settings (from `.symlinks/plugins/app_settings/ios`)
   - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -149,6 +152,8 @@ SPEC REPOS:
     - Toast
 
 EXTERNAL SOURCES:
+  app_settings:
+    :path: ".symlinks/plugins/app_settings/ios"
   camera_avfoundation:
     :path: ".symlinks/plugins/camera_avfoundation/ios"
   firebase_analytics:
@@ -175,6 +180,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
+  app_settings: 017320c6a680cdc94c799949d95b84cb69389ebc
   camera_avfoundation: dd002b0330f4981e1bbcb46ae9b62829237459a4
   Firebase: cec914dab6fd7b1bd8ab56ea07ce4e03dd251c2d
   firebase_analytics: 04491d1ee74c8e7c2330c96afc54188a969b06ee

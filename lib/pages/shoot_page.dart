@@ -1,13 +1,14 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:plant/common/file_utils.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
+import 'package:plant/components/show_dialog.dart';
 import 'package:plant/controllers/nav_bar.dart';
 import 'package:plant/pages/scan_page.dart';
 
@@ -62,7 +63,19 @@ class _ShootPageState extends State<ShootPage> {
     }).catchError((Object e) {
       Get.log(e.toString(), isError: true);
       if (e is CameraException) {
-        Fluttertoast.showToast(msg: e.description ?? 'error', toastLength: Toast.LENGTH_LONG, gravity: ToastGravity.CENTER);
+        Get.dialog(
+          NormalDialog(
+            title: 'photoPermissionTitle'.tr,
+            subText: 'photoPermissionTips'.tr,
+            icon: Image.asset('images/icon/picture.png', height: 70),
+            confirmText: 'goToSettings'.tr,
+            onConfirm: () {
+              Get.back();
+              AppSettings.openAppSettings();
+            },
+          ),
+        );
+        // Fluttertoast.showToast(msg: e.description ?? 'error', toastLength: Toast.LENGTH_LONG, gravity: ToastGravity.CENTER);
         switch (e.code) {
           case 'CameraAccessDenied':
             // 当用户拒绝相机访问权限时抛出
@@ -131,7 +144,19 @@ class _ShootPageState extends State<ShootPage> {
     } catch (e) {
       Get.log(e.toString(), isError: true);
       if (e is PlatformException) {
-        Fluttertoast.showToast(msg: e.message ?? 'error', toastLength: Toast.LENGTH_LONG, gravity: ToastGravity.CENTER);
+        // Fluttertoast.showToast(msg: e.message ?? 'error', toastLength: Toast.LENGTH_LONG, gravity: ToastGravity.CENTER);
+        Get.dialog(
+          NormalDialog(
+            title: 'photoPermissionTitle'.tr,
+            subText: 'photoPermissionTips'.tr,
+            icon: Image.asset('images/icon/picture.png', height: 70),
+            confirmText: 'goToSettings'.tr,
+            onConfirm: () {
+              Get.back();
+              AppSettings.openAppSettings();
+            },
+          ),
+        );
         switch (e.code) {
           case 'photo_access_denied':
             break;
@@ -152,22 +177,6 @@ class _ShootPageState extends State<ShootPage> {
           Positioned.fill(
             child: (_controller?.value.isInitialized ?? false) ? CameraPreview(_controller!) : const Center(child: CircularProgressIndicator()),
           ),
-          // if (_photoImage != null)
-          //   Center(
-          //     child: Container(
-          //       decoration: ShapeDecoration(
-          //         shape: RoundedRectangleBorder(
-          //           borderRadius: BorderRadius.circular(22),
-          //         ),
-          //       ),
-          //       width: width,
-          //       height: width,
-          //       clipBehavior: Clip.antiAlias,
-          //       child: Image.memory(
-          //         _photoImage!,
-          //       ),
-          //     ),
-          //   ),
           Center(
             child: Image.asset(
               'images/icon/canera_border.png',
@@ -252,7 +261,6 @@ class _ShootPageState extends State<ShootPage> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            // TODO 选择照片
                             _didPickerPhoto();
                           },
                           child: Image.asset(
