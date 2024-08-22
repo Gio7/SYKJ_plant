@@ -9,6 +9,7 @@ class UIColor {
   static const Color transparent60 = Color(0x99FFFFFF);
   static const Color transparentPrimary40 = Color(0x66AEE9CD);
   static const Color transparentPrimary70 = Color(0xB240BD95);
+  static const Color transparentBlack70 = Color(0xB2000000);
 
   /// 默认
   static const Color primary = c40BD95;

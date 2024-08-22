@@ -11,6 +11,7 @@ import 'package:plant/components/btn.dart';
 import 'package:plant/components/show_dialog.dart';
 import 'package:plant/controllers/nav_bar.dart';
 import 'package:plant/pages/scan_page.dart';
+import 'package:plant/pages/widgets/help_example.dart';
 
 import 'widgets/plant_crop_image.dart';
 
@@ -166,6 +167,10 @@ class _ShootPageState extends State<ShootPage> {
     }
   }
 
+  void _didShowHelp(){
+    Get.dialog(const HelpExample(), useSafeArea: false);
+  }
+
   @override
   Widget build(BuildContext context) {
     final width = Get.width - 116;
@@ -279,7 +284,7 @@ class _ShootPageState extends State<ShootPage> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            // TODO 弹出帮助
+                            _didShowHelp();
                           },
                           child: Image.asset(
                             'images/icon/help.png',
