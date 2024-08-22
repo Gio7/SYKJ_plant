@@ -5,7 +5,7 @@ class FireBaseUtil {
 
   static late FirebaseAnalyticsObserver observer;
 
-  static void initServices() {
+  static void initAnalyticsServices() {
     _analytics = FirebaseAnalytics.instance;
     observer = FirebaseAnalyticsObserver(analytics: _analytics);
   }

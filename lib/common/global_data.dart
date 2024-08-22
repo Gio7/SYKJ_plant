@@ -1,7 +1,7 @@
 // import 'buy_shop.dart';
 
 class GlobalData {
-  static String baseUrl = 'http://192.168.0.128:19115/sunoMusic';
+  static String baseUrl = 'https://test.plantidentifier.co';
   
   /// 用户协议
   static String termsOfUseUrl = '';

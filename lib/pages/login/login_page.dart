@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
+import 'package:plant/controllers/login_controller.dart';
 import 'package:plant/controllers/nav_bar.dart';
 import 'package:plant/pages/login/email_signup_page.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import 'email_login_page.dart';
 import 'widgets.dart';
@@ -12,8 +16,42 @@ import 'widgets.dart';
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
+  Future<AuthorizationCredentialAppleID> signInWithApple() async {
+    try {
+      return await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+    } catch (e) {
+      if (e is SignInWithAppleAuthorizationException) {
+        Get.log(e.toString(), isError: true);
+      }
+      rethrow;
+    }
+  }
+
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final LoginController loginCtr = Get.put(LoginController());
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -44,7 +82,7 @@ class LoginPage extends StatelessWidget {
               Image.asset('images/icon/login_bg.png', height: 174),
               const SizedBox(height: 6),
               const Text(
-                'XXX',
+                'Plant Identifier',
                 style: TextStyle(
                   color: UIColor.c15221D,
                   fontSize: 36,
@@ -61,7 +99,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32),
-              ...loginBtns,
+              ...loginBtns(loginCtr),
               const Spacer(),
               const AgreementTips(),
               Container(
@@ -102,15 +140,19 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  List<Widget> get loginBtns {
+  List<Widget> loginBtns(LoginController loginCtr) {
     return [
       if (GetPlatform.isIOS)
         Container(
           width: double.infinity,
           margin: const EdgeInsets.symmetric(horizontal: 20),
           child: NormalButton(
-            onTap: () {
-              // TODO: 跳转到Apple登录
+            onTap: () async{
+              final aca  = await signInWithApple();
+              if (aca.userIdentifier != null) {
+                await loginCtr.login(aca.userIdentifier!, aca.email);
+                Get.back(closeOverlays: true);
+              }
             },
             bgColor: UIColor.transparentPrimary70,
             text: 'continueWithApple'.tr,
@@ -118,7 +160,7 @@ class LoginPage extends StatelessWidget {
             icon: 'images/icon/apple.png',
           ),
         )
-      else
+      else ...[
         Container(
           width: double.infinity,
           margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -132,18 +174,19 @@ class LoginPage extends StatelessWidget {
             iconWidget: Image.asset('images/icon/google.png', width: 24),
           ),
         ),
-      const SizedBox(height: 24),
-      Container(
-        width: double.infinity,
-        margin: const EdgeInsets.symmetric(horizontal: 20),
-        child: NormalButton(
-          onTap: () => Get.to(() => const EmailSignupPage()),
-          bgColor: UIColor.c40BD95,
-          text: 'signUpWithEmail'.tr,
-          textColor: UIColor.white,
-          iconWidget: Image.asset('images/icon/mail.png', width: 24),
+        const SizedBox(height: 24),
+        Container(
+          width: double.infinity,
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          child: NormalButton(
+            onTap: () => Get.to(() => const EmailSignupPage()),
+            bgColor: UIColor.c40BD95,
+            text: 'signUpWithEmail'.tr,
+            textColor: UIColor.white,
+            iconWidget: Image.asset('images/icon/mail.png', width: 24),
+          ),
         ),
-      ),
+      ],
     ];
   }
 }

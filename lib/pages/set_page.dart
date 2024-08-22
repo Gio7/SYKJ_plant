@@ -98,8 +98,8 @@ class SetPage extends StatelessWidget {
         cancelText: 'cancel'.tr,
         subText: 'deleteAccountTips'.tr,
         icon: Image.asset('images/icon/delete_account_dialog.png', height: 70),
-        onConfirm: () {
-          // TODO 删除账号
+        onConfirm: () async {
+          Get.find<UserController>().userDelete();
           Get.back();
         },
       ),
@@ -108,7 +108,7 @@ class SetPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var userController = Get.find<UserController>();
+    var userCtr = Get.find<UserController>();
 
     return Scaffold(
       appBar: NavBar(title: 'settings'.tr),
@@ -140,17 +140,28 @@ class SetPage extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            '${'hi'.tr}${userController.isLogin.value ? userController.userInfo.value.nickname : 'plantLover'.tr}',
+                            '${'hi'.tr}${userCtr.isLogin.value ? userCtr.userInfo.value.nickname : 'plantLover'.tr}',
                             style: const TextStyle(
                               color: UIColor.white,
                               fontSize: 16,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
-                          if (userController.isLogin.value)
+                          if (userCtr.isLogin.value)
                             GestureDetector(
                               onTap: () {
-                                // TODO 编辑昵称
+                                Get.dialog(
+                                  TextFieldDialog(
+                                    value: userCtr.userInfo.value.nickname,
+                                    title: 'setYourName'.tr,
+                                    confirmText: 'save'.tr,
+                                    cancelText: 'cancel'.tr,
+                                    onConfirm: (String v) {
+                                      userCtr.userEdit(v);
+                                      Get.back();
+                                    },
+                                  ),
+                                );
                               },
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 4.0),
@@ -161,7 +172,7 @@ class SetPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        _getWelcomeText(userController),
+                        _getWelcomeText(userCtr),
                         style: const TextStyle(
                           color: UIColor.transparent60,
                           fontSize: 12,
@@ -171,63 +182,21 @@ class SetPage extends StatelessWidget {
                       const SizedBox(height: 8),
                       SizedBox(
                         height: 30,
-                        child: _buildBtn(userController),
+                        child: _buildBtn(userCtr),
                       )
                     ],
                   ),
                 ),
-                _buildImage(userController),
+                _buildImage(userCtr),
               ],
             ),
             const SizedBox(height: 16),
-            _buildListItem(
-              () {
-                Get.bottomSheet(
-                  BottomPopOptions(
-                    children: [
-                      SizedBox(
-                        width: double.infinity,
-                        child: NormalButton(
-                          onTap: () {
-                            // TODO 重命名
-                            Get.back();
-                            Get.dialog(
-                              TextFieldDialog(
-                                title: 'setYourPlantName'.tr,
-                                confirmText: 'save'.tr,
-                                cancelText: 'cancel'.tr,
-                                onConfirm: (String v) {
-                                  print(v);
-                                },
-                              ),
-                            );
-                          },
-                          text: 'rename'.tr,
-                          textColor: UIColor.c15221D,
-                          bgColor: UIColor.white,
-                          iconWidget: Image.asset('images/icon/edit.png', width: 28),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        width: double.infinity,
-                        child: NormalButton(
-                          onTap: () {
-                            // TODO 删除
-                          },
-                          text: 'removeBtn'.tr,
-                          textColor: UIColor.c15221D,
-                          bgColor: UIColor.white,
-                          iconWidget: Image.asset('images/icon/delete_red.png', width: 28),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-              'images/icon/set_code.png',
-              'activationCode'.tr,
-            ),
+            if (userCtr.isLogin.value)
+              _buildListItem(
+                () {},
+                'images/icon/set_code.png',
+                'activationCode'.tr,
+              ),
             _buildListItem(
               () {
                 _onContact();
@@ -250,21 +219,30 @@ class SetPage extends StatelessWidget {
               'images/icon/set_privacy.png',
               'privacyPolicy'.tr,
             ),
-            _buildListItem(
-              () {
-                // Get.defaultDialog(title: '123',content: Text('data'));
-                // DialogUtil.showDialog();
-                _onDeleteAccount();
-              },
-              'images/icon/set_delete_account.png',
-              'deleteAccoun'.tr,
-            ),
+            if (userCtr.isLogin.value)
+              _buildListItem(
+                () {
+                  // Get.defaultDialog(title: '123',content: Text('data'));
+                  // DialogUtil.showDialog();
+                  _onDeleteAccount();
+                },
+                'images/icon/set_delete_account.png',
+                'deleteAccoun'.tr,
+              ),
             _buildListItem(
               () {},
               'images/icon/set_version.png',
               'appVersion'.tr,
-              rightText: userController.version.value,
+              rightText: userCtr.version.value,
             ),
+            const SizedBox(height: 54),
+            if (userCtr.isLogin.value)
+              NormalButton(
+                onTap: () => userCtr.logout(),
+                text: 'logOut'.tr,
+                textColor: UIColor.c00997A,
+                bgColor: UIColor.transparentPrimary40,
+              ),
           ],
         ),
       ),

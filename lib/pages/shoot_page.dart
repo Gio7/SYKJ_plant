@@ -10,9 +10,11 @@ import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/components/show_dialog.dart';
 import 'package:plant/controllers/nav_bar.dart';
+import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/pages/scan_page.dart';
 import 'package:plant/pages/widgets/help_example.dart';
 
+import 'login/login_page.dart';
 import 'widgets/plant_crop_image.dart';
 
 class ShootPage extends StatefulWidget {
@@ -104,6 +106,10 @@ class _ShootPageState extends State<ShootPage> {
   }
 
   Future<void> _didShootPhoto() async {
+    if (!(Get.find<UserController>().isLogin.value)) {
+      Get.to(() => const LoginPage(), fullscreenDialog: true);
+      return;
+    }
     try {
       // 设置对焦，提高拍照效率
       await _controller?.setFocusMode(FocusMode.locked);
@@ -132,6 +138,10 @@ class _ShootPageState extends State<ShootPage> {
   }
 
   Future<void> _didPickerPhoto() async {
+    if (!(Get.find<UserController>().isLogin.value)) {
+      Get.to(() => const LoginPage(), fullscreenDialog: true);
+      return;
+    }
     try {
       final XFile? pickedFile = await _picker.pickImage(
         source: ImageSource.gallery,

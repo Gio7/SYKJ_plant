@@ -12,41 +12,43 @@ class UserNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 56,
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          if (!(Get.find<UserController>().isLogin.value))
-            GestureDetector(
-              onTap: () {
-                if (Get.find<UserController>().isLogin.value) {
-                } else {
-                  Get.to(() => const LoginPage(), fullscreenDialog: true, routeName: 'login_page');
-                }
-              },
-              child: Image.asset(
-                'images/icon/pro.png',
-                height: 30,
+    return Obx(
+      () => Container(
+        height: 56,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (!(Get.find<UserController>().isLogin.value))
+              GestureDetector(
+                onTap: () {
+                  if (Get.find<UserController>().isLogin.value) {
+                  } else {
+                    Get.to(() => const LoginPage(), fullscreenDialog: true, routeName: 'login_page');
+                  }
+                },
+                child: Image.asset(
+                  'images/icon/pro.png',
+                  height: 30,
+                ),
               ),
-            ),
-          const Spacer(),
-          if (needUser)
-            GestureDetector(
-              onTap: () {
-                Get.to(() => const SetPage());
-                // if (Get.find<UserController>().isLogin.value) {
-                // } else {
-                //   Get.to(() => const LoginPage(), fullscreenDialog: true, routeName: 'login_page');
-                // }
-              },
-              child: Image.asset(
-                'images/icon/user.png',
-                height: 32,
+            const Spacer(),
+            if (needUser)
+              GestureDetector(
+                onTap: () {
+                  Get.to(() => const SetPage());
+                  // if (Get.find<UserController>().isLogin.value) {
+                  // } else {
+                  //   Get.to(() => const LoginPage(), fullscreenDialog: true, routeName: 'login_page');
+                  // }
+                },
+                child: Image.asset(
+                  'images/icon/user.png',
+                  height: 32,
+                ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plant/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'api/dio.dart';
@@ -15,10 +17,10 @@ Future<void> main() async {
 }
 
 Future<void> initMain() async {
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
-  // FireBaseUtil.initServices();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // FireBaseUtil.initAnalyticsServices();
 
   final prefs = await SharedPreferences.getInstance();
   final String? token = prefs.getString('token');
