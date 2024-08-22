@@ -1,15 +1,17 @@
-import 'dart:io';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
-import 'package:path_provider/path_provider.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:plant/common/file_utils.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/controllers/nav_bar.dart';
 import 'package:plant/pages/scan_page.dart';
+
+import 'widgets/plant_crop_image.dart';
 
 class ShootPage extends StatefulWidget {
   const ShootPage({super.key, this.shootType = 'identify'});
@@ -27,7 +29,7 @@ class _ShootPageState extends State<ShootPage> {
 
   String _shootType = "identify";
 
-  // Uint8List? _photoImage;
+  final ImagePicker _picker = ImagePicker();
 
   @override
   void initState() {
@@ -87,16 +89,15 @@ class _ShootPageState extends State<ShootPage> {
     });
   }
 
-  Future<void> _didShoot() async {
+  Future<void> _didShootPhoto() async {
     try {
       // 设置对焦，提高拍照效率
       await _controller?.setFocusMode(FocusMode.locked);
       await _controller?.setExposureMode(ExposureMode.locked);
       if (_controller?.value.isInitialized ?? false) {
-        final imageFile = await _controller!.takePicture();
+        final XFile imageFile = await _controller!.takePicture();
+        img.Image image = (await FileUtils.xFileToImage(imageFile))!;
 
-        final completeImage = await File(imageFile.path).readAsBytes();
-        img.Image image = img.decodeImage(completeImage)!;
 ///////////// 计算需要裁剪的区域
         final showSize = Get.width - 116;
         double scaleFactor = image.width / Get.width;
@@ -105,9 +106,7 @@ class _ShootPageState extends State<ShootPage> {
         double y = (image.height - cropWidth) / 2;
 ////////////
         final cropImage = img.copyCrop(image, x: x.toInt(), y: y.toInt(), width: cropWidth.toInt(), height: cropWidth.toInt());
-        final appDocDir = (await getApplicationCacheDirectory()).path;
-        final imgPath = '$appDocDir/test.jpeg';
-        final photoImage = img.encodeNamedImage(imgPath, cropImage);
+        final photoImage = await FileUtils.imageToList(cropImage);
         if (photoImage == null) {
           return;
         }
@@ -115,6 +114,30 @@ class _ShootPageState extends State<ShootPage> {
       }
     } catch (e) {
       Get.log(e.toString(), isError: true);
+    }
+  }
+
+  Future<void> _didPickerPhoto() async {
+    try {
+      final XFile? pickedFile = await _picker.pickImage(
+        source: ImageSource.gallery,
+        // imageQuality: quality,
+      );
+      if (pickedFile != null) {
+        final photoImage = await FileUtils.xFileToList(pickedFile);
+        // Get.dialog(PlantCropImage(imageData: photoImage,));
+        Get.off(() => PlantCropImage(imageData: photoImage));
+      }
+    } catch (e) {
+      Get.log(e.toString(), isError: true);
+      if (e is PlatformException) {
+        Fluttertoast.showToast(msg: e.message ?? 'error', toastLength: Toast.LENGTH_LONG, gravity: ToastGravity.CENTER);
+        switch (e.code) {
+          case 'photo_access_denied':
+            break;
+          default:
+        }
+      }
     }
   }
 
@@ -230,6 +253,7 @@ class _ShootPageState extends State<ShootPage> {
                         GestureDetector(
                           onTap: () {
                             // TODO 选择照片
+                            _didPickerPhoto();
                           },
                           child: Image.asset(
                             'images/icon/image_picker.png',
@@ -238,7 +262,7 @@ class _ShootPageState extends State<ShootPage> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            _didShoot();
+                            _didShootPhoto();
                           },
                           child: Image.asset(
                             _shootType == 'identify' ? 'images/icon/camera_search.png' : 'images/icon/camera_diagnose.png',
