@@ -1,3 +1,6 @@
+//import java.text.SimpleDateFormat
+//import org.apache.commons.io.FileUtils
+
 plugins {
     id "com.android.application"
     id "kotlin-android"
@@ -21,6 +24,10 @@ def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     namespace "com.plant.identifier.diagnosis.scanner.app"
@@ -49,13 +56,36 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
+    }
+
+    signingConfigs {
+        config {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+        debug {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
     }
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            signingConfig signingConfigs.config
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
 }
@@ -65,3 +95,89 @@ flutter {
 }
 
 dependencies {}
+
+
+//android.applicationVariants.configureEach { variant ->
+//    def buildTypeName = variant.buildType.name
+//    def versionCode = android.defaultConfig.versionCode
+//    variant.outputs.configureEach {
+//        outputFileName = "${rootProject.name}-${buildTypeName}-${versionName}(${versionCode})-${buildId}.apk"
+//    }
+//}
+
+//static long getBuildId() {
+//    def buildId = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())
+//    return Long.parseLong(buildId)
+//}
+
+//gradle.addListener(new BuildAdapter() {
+//    @Override
+//    void buildFinished(BuildResult result) {
+//        if (result.getFailure() != null) {
+//            System.out.println("Build failed!");
+//        } else {
+//            System.out.println("Build succeeded!");
+//
+//            // 指定 build 目录路径
+//            File buildDir = new File(project.buildDir.absolutePath, "outputs")
+//            // 获取所有 APK 文件
+//            def apkFiles = fileTree(dir: buildDir, include: ['**/*.apk']).files
+//            apkFiles.each { println it }
+//
+//            // 获取所有 AAB 文件
+//            def aabFiles = fileTree(dir: buildDir, include: ['**/*.aab']).files
+//            aabFiles.each { println it }
+//            def names = gradle.startParameter.getTaskNames()
+//            def buildTypeName = ""
+//
+//            for (int i = 0; i < names.size(); i++) {
+//                println "buildTypeName  names :" + names[i]
+//
+//                if (names[i].contains("Debug") || names[i].contains("Release")) {
+//                    buildTypeName = names[i]
+//                    break
+//                }
+//            }
+//
+//            println "buildTypeName  :" + buildTypeName.toLowerCase()
+//
+//            File desFilePath
+//            if (buildTypeName.toLowerCase().contains("debug")) {
+//                desFilePath = new File("/data/web/apk/PlantIdentifier/debug")
+//            } else {
+//                desFilePath = new File("/data/web/apk/PlantIdentifier/release")
+//            }
+////            File desFilePath = new File("${rootDir}/output")
+//
+//            if (!desFilePath.exists()) {
+//                desFilePath.mkdir()
+//            }
+//            def today = new SimpleDateFormat("yyyy-MM-dd-HH-mm").format(new Date())
+//            File todayDir = new File(desFilePath.absolutePath, today.toString())
+//            if (!todayDir.exists()) {
+//                todayDir.mkdir()
+//            }
+//
+//            apkFiles.each { file ->
+//                def name = "PlantIdenitifer-${flutterVersionName}-${flutterVersionCode}-${buildId}.apk"
+//                File newFile = new File(file.parentFile.absolutePath, name)
+//                boolean success = file.renameTo(newFile)
+//                println "name :" + name + "  success:" + success + " it:" + newFile.toString()
+//                FileUtils.copyFileToDirectory(newFile, todayDir)
+//                println "rename file :" + newFile.absolutePath
+//                println "todayDir  :" + todayDir.absolutePath
+//
+//            }
+//            aabFiles.each { file ->
+//                def name = "PlantIdenitifer-${flutterVersionName}-${flutterVersionCode}-${buildId}.aab"
+//                File newFile = new File(file.parentFile.absolutePath, name)
+//                boolean success = file.renameTo(newFile)
+//                println "name :" + name + "  success:" + success + " it:" + newFile.toString()
+//                FileUtils.copyFileToDirectory(newFile, todayDir)
+//                println "rename file :" + newFile.absolutePath
+//                println "todayDir  :" + todayDir.absolutePath
+//            }
+//
+//        }
+//    }
+//})
