@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "300865795740",
+    "project_id": "plant-identifier-scanner",
+    "storage_bucket": "plant-identifier-scanner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300865795740:android:179281265d5142334b5f59",
+        "android_client_info": {
+          "package_name": "com.plant.identifier.diagnosis.scanner.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgX-CPjGk7BvYy51hlnZomWMIekbrUB0U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

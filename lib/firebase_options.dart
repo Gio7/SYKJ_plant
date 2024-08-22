@@ -29,9 +29,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        return iosTest;
       case TargetPlatform.macOS:
-        return macos;
+        return iosTest;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -49,47 +49,36 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB7wZb2tO1-Fs6GbDADUSTs2Qs3w08Hovw',
-    appId: '1:406099696497:web:87e25e51afe982cd3574d0',
-    messagingSenderId: '406099696497',
-    projectId: 'flutterfire-e2e-tests',
-    authDomain: 'flutterfire-e2e-tests.firebaseapp.com',
-    databaseURL: 'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'flutterfire-e2e-tests.appspot.com',
-    measurementId: 'G-JN95N1JV2E',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBV1OBqLfh9LqnXjOvn63q_gIh1XftGDxI',
-    appId: '1:625862086747:android:77756249c913ee3544ef7e',
-    messagingSenderId: '625862086747',
-    projectId: 'musiclab-pro-40056',
+    apiKey: 'AIzaSyAgX-CPjGk7BvYy51hlnZomWMIekbrUB0U',
+    appId: '1:300865795740:android:179281265d5142334b5f59',
+    messagingSenderId: '300865795740',
+    projectId: 'plant-identifier-scanner',
     databaseURL: 'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'musiclab-pro-40056.appspot.com',
+    storageBucket: 'plant-identifier-scanner.appspot.com',
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAgO_anq1tv5c7E9AHLD0R-rnliNsUBObs',
-    appId: '1:521001214636:ios:1d7bb32eb605444d0fb509',
-    messagingSenderId: '521001214636',
-    projectId: 'musiclab-pro-ios',
+  static const FirebaseOptions iosPro = FirebaseOptions(
+    apiKey: 'AIzaSyAhFkMn6MYMvNOBDIWuLB2VaKqu4BdDfjQ',
+    appId: '1:225439231868:ios:68d1bba0d4c56a5fc2bef9',
+    messagingSenderId: '225439231868',
+    projectId: 'plant-identifier-for-ios',
     databaseURL: 'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'musiclab-pro-ios.appspot.com',
-    androidClientId: 'musiclab.suno.music.ai',
-    iosClientId: 'musiclab.suno.music.ai',
-    iosBundleId: 'musiclab.suno.music.ai',
+    storageBucket: 'plant-identifier-for-ios.appspot.com',
+    androidClientId: 'com.plant.identifier.diagnosis.scanner.app',
+    iosClientId: 'com.plant.identifier.diagnosis.scanner.app',
+    iosBundleId: 'com.plant.identifier.diagnosis.scanner.app',
   );
 
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAgO_anq1tv5c7E9AHLD0R-rnliNsUBObs',
-    appId: '1:521001214636:ios:1d7bb32eb605444d0fb509',
-    messagingSenderId: '521001214636',
-    projectId: 'musiclab-pro-ios',
+  static const FirebaseOptions iosTest = FirebaseOptions(
+    apiKey: 'AIzaSyD6NsCMq7-HL8ytu1gfK4sOdOSC0w0N1WE',
+    appId: '1:361651658601:ios:ae5f05d1c815d4e0d0e7f8',
+    messagingSenderId: '361651658601',
+    projectId: 'test-bundle-2024',
     databaseURL: 'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'musiclab-pro-ios.appspot.com',
-    androidClientId: 'musiclab.suno.music.ai',
-    iosClientId: 'musiclab.suno.music.ai',
-    iosBundleId: 'musiclab.suno.music.ai',
+    storageBucket: 'test-bundle-2024.appspot.com',
+    androidClientId: 'com.plant.identification',
+    iosClientId: 'com.plant.identification',
+    iosBundleId: 'com.plant.identification',
   );
 }
