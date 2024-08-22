@@ -13,7 +13,7 @@ class PlantCropImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _controller = CropController();
+    final controller = CropController();
     return Stack(
       children: [
         Column(
@@ -21,9 +21,10 @@ class PlantCropImage extends StatelessWidget {
             Expanded(
               child: Crop(
                 willUpdateScale: (newScale) => newScale < 5,
-                controller: _controller,
+                controller: controller,
                 image: imageData,
                 onCropped: (croppedData) {
+                  Get.back();
                   Get.off(() => ScanPage(photoImage: croppedData));
                 },
                 withCircleUi: false,
@@ -54,7 +55,7 @@ class PlantCropImage extends StatelessWidget {
               height: 120,
               alignment: Alignment.center,
               child: GestureDetector(
-                onTap: () => _controller.crop(),
+                onTap: () => controller.crop(),
                 child: Image.asset(
                   'images/icon/check.png',
                   width: 60,

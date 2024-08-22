@@ -138,8 +138,8 @@ class _ShootPageState extends State<ShootPage> {
       );
       if (pickedFile != null) {
         final photoImage = await FileUtils.xFileToList(pickedFile);
-        // Get.dialog(PlantCropImage(imageData: photoImage,));
-        Get.off(() => PlantCropImage(imageData: photoImage));
+        Get.dialog(PlantCropImage(imageData: photoImage,), useSafeArea: false);
+        // Get.off(() => PlantCropImage(imageData: photoImage));
       }
     } catch (e) {
       Get.log(e.toString(), isError: true);
