@@ -1,10 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:plant/common/common_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/components/page_bg.dart';
+import 'package:plant/controllers/login_controller.dart';
 import 'package:plant/controllers/nav_bar.dart';
 import 'package:plant/pages/login/email_verify_page.dart';
 
@@ -35,22 +35,10 @@ class _EmailSignupPageState extends State<EmailSignupPage> {
 
   bool _isSubmit = false;
 
+  final LoginController loginCtr = Get.find<LoginController>();
+
   Future<void> _submit() async {
-    try {
-      final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _cPwdController.text,
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        Fluttertoast.showToast(msg: 'The password provided is too weak.', gravity: ToastGravity.CENTER);
-      } else if (e.code == 'email-already-in-use') {
-        Fluttertoast.showToast(msg: 'The account already exists for that email.', gravity: ToastGravity.CENTER);
-      }
-    } catch (e) {
-      print(e);
-    }
-    // TODO 提交
+    await loginCtr.emailCreateUser(_emailController.text, _cPwdController.text);
     Get.to(() => EmailVerifyPage(email: _emailController.text));
   }
 
@@ -219,7 +207,7 @@ class _EmailSignupPageState extends State<EmailSignupPage> {
                         text: 'signUp'.tr,
                         bgColor: _isSubmit ? UIColor.primary : UIColor.cD1D1D1,
                         textColor: UIColor.white,
-                        onTap: _isSubmit ? () => _submit() : null,
+                        onTap: _isSubmit ? Common.debounce(() => _submit(),3000) : null,
                       ),
                     ),
                   ],

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/components/page_bg.dart';
+import 'package:plant/controllers/login_controller.dart';
 import 'package:plant/controllers/nav_bar.dart';
 
 class ResetPwdPage extends StatefulWidget {
@@ -22,8 +23,8 @@ class _ResetPwdPageState extends State<ResetPwdPage> {
 
   bool _isSend = false;
 
-  void _submit() {
-    // TODO 提交
+  Future<void> _submit() async {
+    await Get.find<LoginController>().sendPasswordResetEmail(_emailController.text);
     setState(() {
       _isSend = true;
     });
@@ -102,25 +103,26 @@ class _ResetPwdPageState extends State<ResetPwdPage> {
                   onTap: _isSubmit && !_isSend ? () => _submit() : null,
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 24,left: 8),
-                child: Row(
-                  children: [
-                    Image.asset('images/icon/successful.png', width: 16),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Text(
-                        'resetPasswordDone'.tr,
-                        style: TextStyle(
-                          color: UIColor.c40BD95,
-                          fontSize: 12,
-                          fontWeight: FontWeightExt.medium,
+              if (_isSend)
+                Container(
+                  margin: const EdgeInsets.only(top: 24, left: 8),
+                  child: Row(
+                    children: [
+                      Image.asset('images/icon/successful.png', width: 16),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          'resetPasswordDone'.tr,
+                          style: TextStyle(
+                            color: UIColor.c40BD95,
+                            fontSize: 12,
+                            fontWeight: FontWeightExt.medium,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
             ],
           ),
         ),

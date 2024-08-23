@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/components/page_bg.dart';
+import 'package:plant/controllers/login_controller.dart';
 import 'package:plant/controllers/nav_bar.dart';
 import 'package:plant/pages/login/reset_pwd_page.dart';
 
@@ -28,11 +29,13 @@ class _EmailLoginPageState extends State<EmailLoginPage> {
 
   bool _isSubmit = false;
 
-  void _submit() {
-    // TODO 提交
+  final LoginController loginCtr = Get.find<LoginController>();
+
+  Future<void> _submit() async{
+    await loginCtr.emailSignIn(_emailController.text, _pwdController.text);
     // Get.until((route) => Get.currentRoute == '/');
-    Get.back(closeOverlays: true);
-    Get.back();
+    // Get.back(closeOverlays: true);
+    // Get.back();
   }
 
   bool _verSubmit() {

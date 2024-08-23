@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plant/common/common_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/components/page_bg.dart';
+import 'package:plant/controllers/login_controller.dart';
 import 'package:plant/controllers/nav_bar.dart';
 
 class EmailVerifyPage extends StatefulWidget {
@@ -18,11 +20,13 @@ class EmailVerifyPage extends StatefulWidget {
 class _EmailVerifyPageState extends State<EmailVerifyPage> {
   bool _isSubmit = false;
   Timer? _timer;
-  int _duration = 60;
+  int _duration = 59;
+
+  final LoginController loginCtr = Get.find<LoginController>();
+
   @override
   void initState() {
     super.initState();
-    // TODO 发送验证邮件
     _startTimer();
   }
 
@@ -35,14 +39,19 @@ class _EmailVerifyPageState extends State<EmailVerifyPage> {
   void _startTimer() {
     const period = Duration(seconds: 1);
     _timer = Timer.periodic(period, (timer) {
-      setState(() {
-        _duration--;
-        if (_duration <= 0) {
-          _timer?.cancel();
-          _timer = null;
-          _isSubmit = true;
-        }
-      });
+      if (mounted) {
+        setState(() {
+          _duration--;
+          if (_duration <= 0) {
+            _timer?.cancel();
+            _timer = null;
+            _isSubmit = true;
+          }
+          if (_duration % 5 == 0) {
+            loginCtr.emailVerifiedReload();
+          }
+        });
+      }
     });
   }
 
@@ -112,8 +121,8 @@ class _EmailVerifyPageState extends State<EmailVerifyPage> {
                 textColor: UIColor.white,
                 onTap: _isSubmit
                     ? () {
-                        // TODO 重发
-                        _duration = 60;
+                        loginCtr.emailSend();
+                        _duration = 59;
                         _isSubmit = false;
                         setState(() {});
                         _startTimer();
@@ -146,10 +155,10 @@ class _EmailVerifyPageState extends State<EmailVerifyPage> {
                       text: 'refresh'.tr,
                       bgColor: UIColor.primary,
                       textColor: UIColor.white,
-                      onTap: () {
-                        // TODO 检查是否通过验证
-                        Get.until((route) => Get.currentRoute == '/login_page');
-                      },
+                      onTap: Common.debounce(() async {
+                        await loginCtr.emailVerifiedReload();
+                        // Get.until((route) => Get.currentRoute == '/login_page');
+                      }, 3000),
                     ),
                   ),
                 ],
