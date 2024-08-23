@@ -1,9 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/components/scanning_effect/scanning_effect.dart';
+import 'package:plant/sdk/scanning_effect/scanning_effect.dart';
 
 class ScanPage extends StatelessWidget {
   const ScanPage({super.key, required this.photoImage});
