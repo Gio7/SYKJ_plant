@@ -1,7 +1,11 @@
+import 'dart:ui';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:plant/common/global_data.dart';
 import 'package:plant/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,9 +32,11 @@ Future<void> initMain() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   // FireBaseUtil.initAnalyticsServices();
-
+  final info = await PackageInfo.fromPlatform();
+  GlobalData.versionName = info.version;
   final prefs = await SharedPreferences.getInstance();
   final String? token = prefs.getString('token');
+
   if (token != null) {
     DioUtil.token = token;
   }

@@ -16,6 +16,13 @@ class DioUtil {
     return true;
   }
 
+  /*
+  version-name    //版本号
+  Platform   //android或iOS
+  region    //地区代码
+  adId      //唯一设备ID
+  language   //语言代码 
+  */
   DioUtil._init() {
     _dio = Dio(
       BaseOptions(
@@ -27,6 +34,10 @@ class DioUtil {
         headers: {
           'Authorization': (GetUtils.isBlank(token) ?? true) ? null : token,
           'platform': GetPlatform.isAndroid ? 'android' : 'iOS',
+          'version-name': GlobalData.versionName,
+          'region': Get.deviceLocale?.countryCode,
+          'adId': GlobalData.adId,
+          'language': Get.deviceLocale?.languageCode,
         },
       ),
     )

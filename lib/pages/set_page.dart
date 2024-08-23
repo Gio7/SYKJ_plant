@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plant/common/global_data.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/components/show_dialog.dart';
@@ -233,7 +234,7 @@ class SetPage extends StatelessWidget {
               () {},
               'images/icon/set_version.png',
               'appVersion'.tr,
-              rightText: userCtr.version.value,
+              rightText: "V${GlobalData.versionName}"//userCtr.version.value,
             ),
             const SizedBox(height: 54),
             if (userCtr.isLogin.value)

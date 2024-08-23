@@ -25,7 +25,6 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
   void initState() {
     mainController.tabController = TabController(length: 3, vsync: this);
     super.initState();
-    userController.getVersion();
     userController.getUserInfo();
   }
 

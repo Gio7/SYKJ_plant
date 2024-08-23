@@ -2,7 +2,7 @@
 
 class GlobalData {
   static String baseUrl = 'https://test.plantidentifier.co';
-  
+
   /// 用户协议
   static String termsOfUseUrl = '';
 
@@ -14,4 +14,9 @@ class GlobalData {
   static String unsubscribeUrl = '';
 
   // static BuyShop buyShop = BuyShop();
+
+  static String versionName = '';
+
+  /// 唯一标识
+  static String adId = '';
 }

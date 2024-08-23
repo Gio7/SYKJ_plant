@@ -2,13 +2,11 @@ import 'package:get/get.dart';
 import 'package:plant/api/dio.dart';
 import 'package:plant/api/request.dart';
 import 'package:plant/models/userinfo_model.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:plant/pages/login/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserController extends GetxController {
   var isLogin = false.obs;
-  var version = ''.obs;
   var userInfo = UserInfoModel().obs;
 
   Future<void> logout() async {
@@ -27,12 +25,6 @@ class UserController extends GetxController {
   void showLogin() {
     isLogin.value = false;
     Get.to(() => const LoginPage(), fullscreenDialog: true);
-  }
-
-  void getVersion() {
-    PackageInfo.fromPlatform().then((info) {
-      version.value = "V${info.version}";
-    });
   }
 
   Future<void> getUserInfo() async {
