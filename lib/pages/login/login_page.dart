@@ -25,9 +25,11 @@ class LoginPage extends StatelessWidget {
           AppleIDAuthorizationScopes.fullName,
         ],
       );
+    } on SignInWithAppleAuthorizationException catch (e) {
+      Get.log(e.toString(), isError: true);
+      rethrow;
     } catch (e) {
       Get.log(e.toString(), isError: true);
-      if (e is SignInWithAppleAuthorizationException) {}
       rethrow;
     }
   }
@@ -44,9 +46,11 @@ class LoginPage extends StatelessWidget {
       );
 
       return await FirebaseAuth.instance.signInWithCredential(credential);
+    } on PlatformException catch (e) {
+      Get.log(e.toString(), isError: true);
+      rethrow;
     } catch (e) {
       Get.log(e.toString(), isError: true);
-      if (e is PlatformException) {}
       rethrow;
     }
   }

@@ -149,35 +149,39 @@ class _ShootPageState extends State<ShootPage> {
       );
       if (pickedFile != null) {
         final photoImage = await FileUtils.xFileToList(pickedFile);
-        Get.dialog(PlantCropImage(imageData: photoImage,), useSafeArea: false);
+        Get.dialog(
+            PlantCropImage(
+              imageData: photoImage,
+            ),
+            useSafeArea: false);
         // Get.off(() => PlantCropImage(imageData: photoImage));
       }
+    } on PlatformException catch (e) {
+      Get.dialog(
+        NormalDialog(
+          title: 'photoPermissionTitle'.tr,
+          subText: 'photoPermissionTips'.tr,
+          icon: Image.asset('images/icon/picture.png', height: 70),
+          confirmText: 'goToSettings'.tr,
+          onConfirm: () {
+            Get.back();
+            AppSettings.openAppSettings();
+          },
+        ),
+      );
+      switch (e.code) {
+        case 'photo_access_denied':
+          break;
+        default:
+      }
+      rethrow;
     } catch (e) {
       Get.log(e.toString(), isError: true);
-      if (e is PlatformException) {
-        // Fluttertoast.showToast(msg: e.message ?? 'error', toastLength: Toast.LENGTH_LONG, gravity: ToastGravity.CENTER);
-        Get.dialog(
-          NormalDialog(
-            title: 'photoPermissionTitle'.tr,
-            subText: 'photoPermissionTips'.tr,
-            icon: Image.asset('images/icon/picture.png', height: 70),
-            confirmText: 'goToSettings'.tr,
-            onConfirm: () {
-              Get.back();
-              AppSettings.openAppSettings();
-            },
-          ),
-        );
-        switch (e.code) {
-          case 'photo_access_denied':
-            break;
-          default:
-        }
-      }
+      rethrow;
     }
   }
 
-  void _didShowHelp(){
+  void _didShowHelp() {
     Get.dialog(const HelpExample(), useSafeArea: false);
   }
 
