@@ -1,15 +1,16 @@
-import 'dart:typed_data';
+import 'dart:io';
 
 import 'package:crop_your_image/crop_your_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plant/common/file_utils.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/controllers/nav_bar.dart';
 import 'package:plant/pages/scan_page.dart';
 
 class PlantCropImage extends StatelessWidget {
-  const PlantCropImage({super.key, required this.imageData});
-  final Uint8List imageData;
+  const PlantCropImage({super.key, required this.originalFile});
+  final File originalFile;
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +23,13 @@ class PlantCropImage extends StatelessWidget {
               child: Crop(
                 willUpdateScale: (newScale) => newScale < 5,
                 controller: controller,
-                image: imageData,
-                onCropped: (croppedData) {
-                  Get.back();
-                  Get.off(() => ScanPage(photoImage: croppedData));
+                image: originalFile.readAsBytesSync(),
+                onCropped: (croppedData) async {
+                  final cropFile = await FileUtils.listToFile(croppedData);
+                  if (cropFile == null) {
+                    return;
+                  }
+                  Get.off(() => ScanPage(cropFile: cropFile, originalFile: originalFile));
                 },
                 withCircleUi: false,
                 onStatusChanged: (status) {

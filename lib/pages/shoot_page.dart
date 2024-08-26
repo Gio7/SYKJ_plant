@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app_settings/app_settings.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,7 @@ import 'package:plant/common/file_utils.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/components/show_dialog.dart';
+import 'package:plant/controllers/identify_controller.dart';
 import 'package:plant/controllers/nav_bar.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/pages/scan_page.dart';
@@ -31,13 +34,13 @@ class _ShootPageState extends State<ShootPage> {
 
   FlashMode _flashMode = FlashMode.off;
 
-  String _shootType = "identify";
-
   final ImagePicker _picker = ImagePicker();
+
+  final ctr = Get.put(IdentifyController());
 
   @override
   void initState() {
-    _shootType = widget.shootType;
+    ctr.shootType.value = widget.shootType;
     super.initState();
     initCamera();
   }
@@ -126,11 +129,16 @@ class _ShootPageState extends State<ShootPage> {
         double y = (image.height - cropWidth) / 2;
 ////////////
         final cropImage = img.copyCrop(image, x: x.toInt(), y: y.toInt(), width: cropWidth.toInt(), height: cropWidth.toInt());
-        final photoImage = await FileUtils.imageToList(cropImage);
-        if (photoImage == null) {
+        final cropFile = await FileUtils.imageToFile(cropImage);
+        if (cropFile == null) {
           return;
         }
-        Get.off(() => ScanPage(photoImage: photoImage));
+        Get.off(
+          () => ScanPage(
+            cropFile: cropFile,
+            originalFile: File(imageFile.path),
+          ),
+        );
       }
     } catch (e) {
       Get.log(e.toString(), isError: true);
@@ -148,12 +156,12 @@ class _ShootPageState extends State<ShootPage> {
         // imageQuality: quality,
       );
       if (pickedFile != null) {
-        final photoImage = await FileUtils.xFileToList(pickedFile);
         Get.dialog(
-            PlantCropImage(
-              imageData: photoImage,
-            ),
-            useSafeArea: false);
+          PlantCropImage(
+            originalFile: File(pickedFile.path),
+          ),
+          useSafeArea: false,
+        );
         // Get.off(() => PlantCropImage(imageData: photoImage));
       }
     } on PlatformException catch (e) {
@@ -241,34 +249,32 @@ class _ShootPageState extends State<ShootPage> {
                         borderRadius: BorderRadius.circular(256),
                       ),
                     ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: NormalButton(
-                            onTap: () {
-                              setState(() {
-                                _shootType = 'identify';
-                              });
-                            },
-                            text: 'identify'.tr,
-                            textColor: _shootType == 'identify' ? UIColor.primary : UIColor.white,
-                            bgColor: _shootType == 'identify' ? UIColor.white : UIColor.transparent,
+                    child: Obx(
+                      () => Row(
+                        children: [
+                          Expanded(
+                            child: NormalButton(
+                              onTap: () {
+                                ctr.shootType.value = 'identify';
+                              },
+                              text: 'identify'.tr,
+                              textColor: ctr.shootType.value == 'identify' ? UIColor.primary : UIColor.white,
+                              bgColor: ctr.shootType.value == 'identify' ? UIColor.white : UIColor.transparent,
+                            ),
                           ),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: NormalButton(
-                            onTap: () {
-                              setState(() {
-                                _shootType = 'diagnose';
-                              });
-                            },
-                            text: 'multiple'.tr,
-                            textColor: _shootType == 'diagnose' ? UIColor.primary : UIColor.white,
-                            bgColor: _shootType == 'diagnose' ? UIColor.white : UIColor.transparent,
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: NormalButton(
+                              onTap: () {
+                                ctr.shootType.value = 'diagnose';
+                              },
+                              text: 'multiple'.tr,
+                              textColor: ctr.shootType.value == 'diagnose' ? UIColor.primary : UIColor.white,
+                              bgColor: ctr.shootType.value == 'diagnose' ? UIColor.white : UIColor.transparent,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: 36),
@@ -291,9 +297,11 @@ class _ShootPageState extends State<ShootPage> {
                           onTap: () {
                             _didShootPhoto();
                           },
-                          child: Image.asset(
-                            _shootType == 'identify' ? 'images/icon/camera_search.png' : 'images/icon/camera_diagnose.png',
-                            width: 70,
+                          child: Obx(
+                            () => Image.asset(
+                              ctr.shootType.value == 'identify' ? 'images/icon/camera_search.png' : 'images/icon/camera_diagnose.png',
+                              width: 70,
+                            ),
                           ),
                         ),
                         GestureDetector(
