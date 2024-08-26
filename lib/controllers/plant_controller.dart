@@ -22,15 +22,13 @@ class PlantController extends GetxController {
     if (shootType.value == 'identify') {
       return await plantScan(cropFile, originalFile);
     } else {
-      return await plantDiagnosis(originalFile);
+      return await plantDiagnosis(cropFile, originalFile);
     }
   }
 
-  Future<void> uploadFile(File? cropFile, File originalFile) async {
+  Future<void> uploadFile(File cropFile, File originalFile) async {
     originalUrl = await AwsUtils.uploadByFile(originalFile);
-    if (cropFile != null) {
-      thumbnailUrl = await AwsUtils.uploadByFile(cropFile);
-    }
+    thumbnailUrl = await AwsUtils.uploadByFile(cropFile);
     isAnalyzingImage.value = true;
     Future.delayed(const Duration(seconds: 3), () {
       isDetectingLeaves.value = true;
@@ -41,7 +39,7 @@ class PlantController extends GetxController {
     await uploadFile(cropFile, originalFile);
 
     if (originalUrl == null || thumbnailUrl == null) {
-      Fluttertoast.showToast(msg: '图片上传失败');
+      Fluttertoast.showToast(msg: '图片上传失败', gravity: ToastGravity.CENTER);
       return false;
     }
     final res = await Request.plantScan(originalUrl!, thumbnailUrl!);
@@ -52,7 +50,7 @@ class PlantController extends GetxController {
         isIdentifyingPlant.value = true;
         plantInfo = responseData['data'];
         Get.log(plantInfo.toString());
-        Get.off(const InfoIdentifyPage());
+        Get.off(() => const InfoIdentifyPage());
         // 成功
         return true;
       }
@@ -61,11 +59,11 @@ class PlantController extends GetxController {
     return false;
   }
 
-  Future<bool> plantDiagnosis(File originalFile) async {
-    await uploadFile(null, originalFile);
+  Future<bool> plantDiagnosis(File cropFile, File originalFile) async {
+    await uploadFile(cropFile, originalFile);
 
-    if (originalUrl == null || thumbnailUrl == null) {
-      Fluttertoast.showToast(msg: '图片上传失败');
+    if (originalUrl == null) {
+      Fluttertoast.showToast(msg: '图片上传失败', gravity: ToastGravity.CENTER);
       return false;
     }
     final res = await Request.plantDiagnosis(originalUrl!);
@@ -76,7 +74,7 @@ class PlantController extends GetxController {
         isIdentifyingPlant.value = true;
         plantInfo = responseData['data'];
         Get.log(plantInfo.toString());
-        Get.off(const InfoDiagnosePage());
+        Get.off(() => const InfoDiagnosePage());
         // 成功
         return true;
       }
