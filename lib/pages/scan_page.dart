@@ -15,7 +15,7 @@ class ScanPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ctr = Get.find<IdentifyController>();
-    ctr.uploadFile(cropFile, originalFile).then((isSuccess) => {
+    ctr.requestInfo(cropFile, originalFile).then((isSuccess) => {
           if (!isSuccess)
             {
               Get.dialog(

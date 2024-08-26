@@ -7,6 +7,8 @@ class Request {
   static const String _userDelete = '/Plant/user/delete';
   static const String _uploadToken = '/Plant/common/uploadToken';
   static const String _plantScan = '/Plant/plant/scan';
+  static const String _plantDiagnosis = '/Plant/plant/diagnosis';
+  
 
   static Future<dynamic> getUploadToken() async {
     return await DioUtil.httpGet(_uploadToken);
@@ -30,5 +32,9 @@ class Request {
 
   static Future<dynamic> plantScan(String url, String thumbnail) async {
     return await DioUtil.httpPost(_plantScan, data: {'url': url, 'thumbnail': thumbnail});
+  }
+
+  static Future<dynamic> plantDiagnosis(String url) async {
+    return await DioUtil.httpPost(_plantDiagnosis, data: {'url': url});
   }
 }
