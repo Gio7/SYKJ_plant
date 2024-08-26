@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:plant/common/global_data.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
@@ -28,8 +29,19 @@ class SetPage extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             GestureDetector(
-              onTap: () {
-                // TODO 打开网页
+              onTap: () async {
+                Get.back();
+                try {
+                  final url = Uri.parse(GlobalData.telegramGroup);
+                  final bool isSul = await launchUrl(
+                    url,
+                  );
+                  if (!isSul) {
+                    Get.snackbar('error', 'fail');
+                  }
+                } catch (e) {
+                  Get.snackbar('error', e.toString());
+                }
               },
               child: Container(
                 height: 36,
@@ -57,8 +69,19 @@ class SetPage extends StatelessWidget {
             ),
             const SizedBox(height: 28),
             GestureDetector(
-              onTap: () {
-                // TODO 调邮箱
+              onTap: () async {
+                Get.back();
+                try {
+                  final url = Uri.parse('mailto:${GlobalData.email}');
+                  final bool isSul = await launchUrl(
+                    url,
+                  );
+                  if (!isSul) {
+                    Get.snackbar('error', 'fail');
+                  }
+                } catch (e) {
+                  Get.snackbar('error', e.toString());
+                }
               },
               child: Container(
                 height: 36,
@@ -70,8 +93,7 @@ class SetPage extends StatelessWidget {
                     const SizedBox(width: 16),
                     Expanded(
                       child: Text(
-                        // TODO 邮箱确认
-                        'support@aicover.ai',
+                        GlobalData.email,
                         style: TextStyle(
                           color: UIColor.c8E8B8B,
                           fontSize: 14,
@@ -230,12 +252,8 @@ class SetPage extends StatelessWidget {
                 'images/icon/set_delete_account.png',
                 'deleteAccoun'.tr,
               ),
-            _buildListItem(
-              () {},
-              'images/icon/set_version.png',
-              'appVersion'.tr,
-              rightText: "V${GlobalData.versionName}"//userCtr.version.value,
-            ),
+            _buildListItem(() {}, 'images/icon/set_version.png', 'appVersion'.tr, rightText: "V${GlobalData.versionName}" //userCtr.version.value,
+                ),
             const SizedBox(height: 54),
             if (userCtr.isLogin.value)
               NormalButton(

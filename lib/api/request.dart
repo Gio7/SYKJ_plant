@@ -9,9 +9,15 @@ class Request {
   static const String _plantScan = '/Plant/plant/scan';
   static const String _plantDiagnosis = '/Plant/plant/diagnosis';
   static const String _plantScanHistory = '/Plant/plant/scanHistory';
-  
+
   static const String _plantScanRename = '/Plant/plant/scanRename';
   static const String _plantScanDelete = '/Plant/plant/scanDelete';
+  static const String _getConfig = '/Plant/common/getConfig';
+
+  /// telegram_group\email
+  static Future<void> getConfig([List<String> conKey = const ['telegram_group', 'email']]) async {
+    return await DioUtil.httpPost(_getConfig, data: {'conKey': conKey});
+  }
 
   static Future<dynamic> getUploadToken() async {
     return await DioUtil.httpGet(_uploadToken);
@@ -44,7 +50,7 @@ class Request {
   }
 
   static Future<dynamic> getPlantScanHistory(int pageNum, [int pageSize = 20]) async {
-    return await DioUtil.httpGet(_plantScanHistory,parameters: {'pageNum': pageNum, 'pageSize': pageSize}, allData: true);
+    return await DioUtil.httpGet(_plantScanHistory, parameters: {'pageNum': pageNum, 'pageSize': pageSize}, allData: true);
   }
 
   static Future<void> plantScanRename(int id, String plantName) async {

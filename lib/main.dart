@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:plant/api/request.dart';
 import 'package:plant/common/global_data.dart';
 import 'package:plant/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -41,8 +42,19 @@ Future<void> initMain() async {
     DioUtil.token = token;
   }
   DioUtil.resetDio();
-
+  getConfig();
   // GlobalData.buyShop.initializeInAppPurchase();
+}
+
+Future<void> getConfig() async {
+  final list = await Request.getConfig();
+  for (final item in (list as List)) {
+    if (item['conKey'] == 'telegram_group') {
+      GlobalData.telegramGroup = item['conValue'];
+    } else if (item['conKey'] == 'email') {
+      GlobalData.email = item['conValue'];
+    }
+  }
 }
 
 class MainApp extends StatelessWidget {

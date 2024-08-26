@@ -9,8 +9,6 @@ class GlobalData {
   /// 隐私协议
   static String privacyNoticeUrl = '';
 
-  static String tg = '';
-
   static String unsubscribeUrl = '';
 
   // static BuyShop buyShop = BuyShop();
@@ -19,4 +17,8 @@ class GlobalData {
 
   /// 唯一标识
   static String adId = '';
+
+  static String telegramGroup = '';
+
+  static String email = '';
 }
