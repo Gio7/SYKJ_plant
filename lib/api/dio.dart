@@ -98,9 +98,18 @@ class DioUtil {
   }
 
   /// post请求
-  static Future<dynamic> httpPost(String url, {required Map<String, dynamic> data, bool allData = false, bool ignore208 = false}) async {
+  static Future<dynamic> httpPost(
+    String url, {
+    required Map<String, dynamic> data,
+    bool allData = false,
+    bool ignore208 = false,
+    bool ignoreAll = false
+  }) async {
     try {
       var response = await _dio!.post(url, data: data);
+      if (ignoreAll) {
+        return response;
+      }
       if (response.statusCode == 200) {
         var responseData = response.data;
         if (ignore208 && responseData['code'] == 208) {

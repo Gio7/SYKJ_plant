@@ -6,7 +6,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
 class FileUtils {
-
   static Future<Uint8List> xFileToList(XFile file) async {
     return await File(file.path).readAsBytes();
   }
@@ -22,5 +21,19 @@ class FileUtils {
     return encodeNamedImage(imgPath, image);
   }
 
+  static Future<File?> imageToFile(Image image) async {
+    final appDocDir = (await getApplicationCacheDirectory()).path;
+    final imgPath = '$appDocDir/${DateTime.now().microsecondsSinceEpoch}.jpeg';
+    final Uint8List? imageBytes = encodeNamedImage(imgPath, image);
+    if (imageBytes == null) return null;
+    final file = File(imgPath);
+    return await file.writeAsBytes(imageBytes);
+  }
 
+  static Future<File?> listToFile(Uint8List list) async {
+    final appDocDir = (await getApplicationCacheDirectory()).path;
+    final imgPath = '$appDocDir/${DateTime.now().microsecondsSinceEpoch}.jpeg';
+    final file = File(imgPath);
+    return await file.writeAsBytes(list);
+  }
 }
