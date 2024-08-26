@@ -28,6 +28,10 @@ class ScanPage extends StatelessWidget {
                   onConfirm: () {
                     Get.back(closeOverlays: true);
                   },
+                  onCancel: () {
+                    Get.back(closeOverlays: true);
+                    Get.back();
+                  },
                 ),
               )
             }
