@@ -63,6 +63,7 @@ dependencies:
   app_settings: ^5.1.1
   #上传图片依赖
   amazon_cognito_identity_dart_2: ^3.6.5
+  easy_refresh: ^3.4.0
 
 dev_dependencies:
   flutter_test:

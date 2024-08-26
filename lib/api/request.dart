@@ -8,7 +8,10 @@ class Request {
   static const String _uploadToken = '/Plant/common/uploadToken';
   static const String _plantScan = '/Plant/plant/scan';
   static const String _plantDiagnosis = '/Plant/plant/diagnosis';
+  static const String _plantScanHistory = '/Plant/plant/scanHistory';
   
+  static const String _plantScanRename = '/Plant/plant/scanRename';
+  static const String _plantScanDelete = '/Plant/plant/scanDelete';
 
   static Future<dynamic> getUploadToken() async {
     return await DioUtil.httpGet(_uploadToken);
@@ -30,11 +33,25 @@ class Request {
     return await DioUtil.httpPost(_userDelete, data: {});
   }
 
+  /// 200 正确， 201 不是植物  404 失败
   static Future<dynamic> plantScan(String url, String thumbnail) async {
-    return await DioUtil.httpPost(_plantScan, data: {'url': url, 'thumbnail': thumbnail});
+    return await DioUtil.httpPost(_plantScan, data: {'url': url, 'thumbnail': thumbnail}, ignoreAll: true);
   }
 
+  /// 200 正确， 201 不是植物  404 失败
   static Future<dynamic> plantDiagnosis(String url) async {
-    return await DioUtil.httpPost(_plantDiagnosis, data: {'url': url});
+    return await DioUtil.httpPost(_plantDiagnosis, data: {'url': url}, ignoreAll: true);
+  }
+
+  static Future<dynamic> getPlantScanHistory(int pageNum, [int pageSize = 20]) async {
+    return await DioUtil.httpGet(_plantScanHistory,parameters: {'pageNum': pageNum, 'pageSize': pageSize}, allData: true);
+  }
+
+  static Future<void> plantScanRename(int id, String plantName) async {
+    return await DioUtil.httpPost(_plantScanRename, data: {'plantName': plantName, 'id': id});
+  }
+
+  static Future<void> plantScanDelete(int id) async {
+    return await DioUtil.httpPost(_plantScanDelete, data: {'id': id});
   }
 }

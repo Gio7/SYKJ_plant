@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'api/dio.dart';
 import 'common/ui_color.dart';
+import 'components/easy_refresh_custom.dart';
 import 'controllers/core_binding.dart';
 import 'language/language.dart';
 import 'pages/main_page.dart';
@@ -31,6 +30,7 @@ Future<void> initMain() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  EasyRefreshCustom.setup();
   // FireBaseUtil.initAnalyticsServices();
   final info = await PackageInfo.fromPlatform();
   GlobalData.versionName = info.version;

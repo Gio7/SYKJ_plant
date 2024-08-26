@@ -169,6 +169,7 @@ class TextFieldDialog extends StatelessWidget {
     }
     return DialogContainer(
       child: Material(
+        color: UIColor.white,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

@@ -126,6 +126,7 @@ class LanguageEnUs {
       'yourPlantIs':'Your plant Is ',
       'notHealthy':'Not Healthy!',
       'healthy':'Healthy!',
+      'addedAt': 'added at',
     };
   }
 }
