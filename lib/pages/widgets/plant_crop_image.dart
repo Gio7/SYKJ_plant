@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/file_utils.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/controllers/nav_bar.dart';
+import 'package:plant/components/nav_bar.dart';
 import 'package:plant/pages/scan_page.dart';
 
 class PlantCropImage extends StatelessWidget {

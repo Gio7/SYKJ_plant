@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/show_dialog.dart';
-import 'package:plant/controllers/identify_controller.dart';
+import 'package:plant/controllers/plant_controller.dart';
 import 'package:plant/sdk/scanning_effect/scanning_effect.dart';
 
 class ScanPage extends StatelessWidget {
@@ -14,7 +14,7 @@ class ScanPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ctr = Get.find<IdentifyController>();
+    final ctr = Get.find<PlantController>();
     ctr.requestInfo(cropFile, originalFile).then((isSuccess) => {
           if (!isSuccess)
             {

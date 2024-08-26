@@ -7,7 +7,7 @@ import 'package:plant/common/aws_utils.dart';
 import 'package:plant/pages/info_diagnose_page.dart';
 import 'package:plant/pages/info_identify_page.dart';
 
-class IdentifyController extends GetxController {
+class PlantController extends GetxController {
   /// 识别类型 identify diagnose
   RxString shootType = 'identify'.obs;
   String? originalUrl;

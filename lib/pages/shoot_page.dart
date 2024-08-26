@@ -11,8 +11,8 @@ import 'package:plant/common/file_utils.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/components/show_dialog.dart';
-import 'package:plant/controllers/identify_controller.dart';
-import 'package:plant/controllers/nav_bar.dart';
+import 'package:plant/controllers/plant_controller.dart';
+import 'package:plant/components/nav_bar.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/pages/scan_page.dart';
 import 'package:plant/pages/widgets/help_example.dart';
@@ -36,7 +36,7 @@ class _ShootPageState extends State<ShootPage> {
 
   final ImagePicker _picker = ImagePicker();
 
-  final ctr = Get.put(IdentifyController());
+  final ctr = Get.put(PlantController());
 
   @override
   void initState() {

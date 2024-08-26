@@ -9,7 +9,7 @@ import 'package:plant/components/btn.dart';
 import 'package:plant/components/show_dialog.dart';
 
 import 'shoot_page.dart';
-import '../controllers/user_nav_bar.dart';
+import '../components/user_nav_bar.dart';
 
 class MyPlantsPage extends StatelessWidget {
   const MyPlantsPage({super.key});

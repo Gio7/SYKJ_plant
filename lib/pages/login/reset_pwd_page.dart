@@ -4,7 +4,7 @@ import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/components/page_bg.dart';
 import 'package:plant/controllers/login_controller.dart';
-import 'package:plant/controllers/nav_bar.dart';
+import 'package:plant/components/nav_bar.dart';
 
 class ResetPwdPage extends StatefulWidget {
   const ResetPwdPage({super.key});

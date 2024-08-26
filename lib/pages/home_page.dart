@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/controllers/user_nav_bar.dart';
+import 'package:plant/components/user_nav_bar.dart';
 
 import 'set_page.dart';
 import 'shoot_page.dart';

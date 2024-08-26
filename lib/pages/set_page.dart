@@ -4,7 +4,7 @@ import 'package:plant/common/global_data.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/components/show_dialog.dart';
-import 'package:plant/controllers/nav_bar.dart';
+import 'package:plant/components/nav_bar.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/pages/login/login_page.dart';
 

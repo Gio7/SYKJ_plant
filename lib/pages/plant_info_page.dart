@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/controllers/nav_bar.dart';
+import 'package:plant/components/nav_bar.dart';
 
 class PlantInfoPage extends StatefulWidget {
   const PlantInfoPage({super.key});

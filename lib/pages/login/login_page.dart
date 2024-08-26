@@ -7,7 +7,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/controllers/login_controller.dart';
-import 'package:plant/controllers/nav_bar.dart';
+import 'package:plant/components/nav_bar.dart';
 import 'package:plant/pages/login/email_signup_page.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
