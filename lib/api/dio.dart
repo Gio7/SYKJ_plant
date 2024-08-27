@@ -24,6 +24,11 @@ class DioUtil {
   language   //语言代码 
   */
   DioUtil._init() {
+    final dl = Get.deviceLocale;
+    String language = dl?.languageCode ?? '';
+    if (dl?.scriptCode != null && dl!.scriptCode!.isNotEmpty) {
+      language += '_${dl.scriptCode}';
+    }
     _dio = Dio(
       BaseOptions(
         baseUrl: GlobalData.baseUrl,
@@ -37,7 +42,7 @@ class DioUtil {
           'version-name': GlobalData.versionName,
           'region': Get.deviceLocale?.countryCode,
           'adId': GlobalData.adId,
-          'language': Get.deviceLocale?.languageCode,
+          'language': language,
         },
       ),
     )
@@ -98,13 +103,7 @@ class DioUtil {
   }
 
   /// post请求
-  static Future<dynamic> httpPost(
-    String url, {
-    required Map<String, dynamic> data,
-    bool allData = false,
-    bool ignore208 = false,
-    bool ignoreAll = false
-  }) async {
+  static Future<dynamic> httpPost(String url, {required Map<String, dynamic> data, bool allData = false, bool ignore208 = false, bool ignoreAll = false}) async {
     try {
       var response = await _dio!.post(url, data: data);
       if (ignoreAll) {
