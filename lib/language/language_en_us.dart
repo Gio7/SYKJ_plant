@@ -127,6 +127,9 @@ class LanguageEnUs {
       'notHealthy':'Not Healthy!',
       'healthy':'Healthy!',
       'addedAt': 'added at',
+      'CDKey': 'CDKey',
+      'pleaseInputCDKey': 'Please Input CDKey',
+      'submit': 'Submit',
     };
   }
 }

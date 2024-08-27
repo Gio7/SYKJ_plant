@@ -130,6 +130,21 @@ class SetPage extends StatelessWidget {
     );
   }
 
+  void _onActivationCode() {
+    Get.dialog(
+      TextFieldDialog(
+        title: 'CDKey'.tr,
+        confirmText: 'submit'.tr,
+        cancelText: 'cancel'.tr,
+        hintText: 'pleaseInputCDKey'.tr,
+        counterText: '',
+        onConfirm: (String v) {
+          Get.back();
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var userCtr = Get.find<UserController>();
@@ -215,12 +230,14 @@ class SetPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            if (userCtr.isLogin.value)
-              _buildListItem(
-                () {},
-                'images/icon/set_code.png',
-                'activationCode'.tr,
-              ),
+            // if (userCtr.isLogin.value)
+            //   _buildListItem(
+            //     () {
+            //       _onActivationCode();
+            //     },
+            //     'images/icon/set_code.png',
+            //     'activationCode'.tr,
+            //   ),
             _buildListItem(
               () {
                 _onContact();
@@ -228,11 +245,11 @@ class SetPage extends StatelessWidget {
               'images/icon/set_contact.png',
               'contactUs'.tr,
             ),
-            _buildListItem(
-              () {},
-              'images/icon/set_share.png',
-              'shareWithFriends'.tr,
-            ),
+            // _buildListItem(
+            //   () {},
+            //   'images/icon/set_share.png',
+            //   'shareWithFriends'.tr,
+            // ),
             _buildListItem(
               () {},
               'images/icon/set_terms.png',
@@ -253,8 +270,12 @@ class SetPage extends StatelessWidget {
                 'images/icon/set_delete_account.png',
                 'deleteAccoun'.tr,
               ),
-            _buildListItem(() {}, 'images/icon/set_version.png', 'appVersion'.tr, rightText: "V${GlobalData.versionName}" //userCtr.version.value,
-                ),
+            _buildListItem(
+              null,
+              'images/icon/set_version.png',
+              'appVersion'.tr,
+              rightText: "V${GlobalData.versionName}",
+            ),
             const SizedBox(height: 54),
             if (userCtr.isLogin.value)
               NormalButton(
@@ -269,7 +290,13 @@ class SetPage extends StatelessWidget {
     );
   }
 
-  Widget _buildListItem(Function()? onTap, String liftIcon, String title, {String rightIcon = 'images/icon/arrow_right.png', String? rightText}) {
+  Widget _buildListItem(
+    Function()? onTap,
+    String liftIcon,
+    String title, {
+    String rightIcon = 'images/icon/arrow_right.png',
+    String? rightText,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -351,14 +378,22 @@ class SetPage extends StatelessWidget {
 
   NormalButton _buildBtn(UserController userController) {
     if (userController.userInfo.value.memberType == 1) {
+      // return NormalButton(
+      //   onTap: () {
+      //     // TODO 订阅
+      //   },
+      //   text: 'getPro'.tr,
+      //   textColor: UIColor.c00997A,
+      //   bgColors: const [UIColor.cD7FF38, UIColor.cAAFFD6],
+      //   bgColor: UIColor.cAAFFD6,
+      // );
       return NormalButton(
         onTap: () {
-          // TODO 订阅
+          // TODO 复制
         },
-        text: 'getPro'.tr,
+        text: '${'no.'.tr}${userController.userInfo.value.userid}',
         textColor: UIColor.c00997A,
-        bgColors: const [UIColor.cD7FF38, UIColor.cAAFFD6],
-        bgColor: UIColor.cAAFFD6,
+        bgColor: UIColor.cAEE9CD,
       );
     }
 

@@ -152,6 +152,8 @@ class TextFieldDialog extends StatelessWidget {
     this.onConfirm,
     this.onCancel,
     this.value,
+    this.hintText,
+    this.counterText,
   });
 
   final String title;
@@ -160,6 +162,8 @@ class TextFieldDialog extends StatelessWidget {
   final String? cancelText;
   final Function()? onCancel;
   final String? value;
+  final String? hintText;
+  final String? counterText;
 
   @override
   Widget build(BuildContext context) {
@@ -202,10 +206,10 @@ class TextFieldDialog extends StatelessWidget {
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.circular(26),
                 ),
-                hintText: 'writeHere'.tr,
+                hintText: hintText ?? 'writeHere'.tr,
                 hintStyle: TextStyle(fontSize: 14, color: UIColor.cBDBDBD, fontWeight: FontWeightExt.medium),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-                // counterText: '',
+                counterText: counterText,
                 fillColor: UIColor.cEEEEEE,
                 filled: true,
               ),
@@ -213,7 +217,7 @@ class TextFieldDialog extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.only(top: 8),
+              padding: EdgeInsets.only(top: counterText == null ? 8 : 24),
               child: Row(
                 children: [
                   if (cancelText != null) ...[
