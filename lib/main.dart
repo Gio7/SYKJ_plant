@@ -1,3 +1,4 @@
+import 'package:advertising_id/advertising_id.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -43,7 +44,19 @@ Future<void> initMain() async {
   }
   DioUtil.resetDio();
   getConfig();
+  initPlatformState();
   // GlobalData.buyShop.initializeInAppPurchase();
+}
+
+void initPlatformState() async {
+  try {
+    GlobalData.adId = await AdvertisingId.id(true) ?? '';
+    if (GlobalData.adId.isNotEmpty) {
+      DioUtil.resetDio();
+    }
+  } on PlatformException {
+    // advertisingId = 'Failed to get platform version.';
+  }
 }
 
 Future<void> getConfig() async {

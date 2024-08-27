@@ -1,4 +1,6 @@
 PODS:
+  - advertising_id (0.0.1):
+    - Flutter
   - app_settings (5.1.1):
     - Flutter
   - AppAuth (1.7.5):
@@ -166,6 +168,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - advertising_id (from `.symlinks/plugins/advertising_id/ios`)
   - app_settings (from `.symlinks/plugins/app_settings/ios`)
   - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
   - firebase_analytics (from `.symlinks/plugins/firebase_analytics/ios`)
@@ -204,6 +207,8 @@ SPEC REPOS:
     - Toast
 
 EXTERNAL SOURCES:
+  advertising_id:
+    :path: ".symlinks/plugins/advertising_id/ios"
   app_settings:
     :path: ".symlinks/plugins/app_settings/ios"
   camera_avfoundation:
@@ -238,6 +243,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
+  advertising_id: 631182eb0c0e9e6520c7442bad165da1302ac55a
   app_settings: 017320c6a680cdc94c799949d95b84cb69389ebc
   AppAuth: 501c04eda8a8d11f179dbe8637b7a91bb7e5d2fa
   camera_avfoundation: dd002b0330f4981e1bbcb46ae9b62829237459a4
