@@ -20,11 +20,11 @@ class AwsUtils {
   static Future<String> uploadByFile(File file) async {
     try {
       if (accessKeyId.isEmpty) {
-        final res = await Request.getUploadToken();
-        accessKeyId = res['accessKeyId'];
-        secretAccessKey = res['secretAccessKey'];
-        sessionToken = res['sessionToken'];
       }
+      final tokenRes = await Request.getUploadToken();
+      accessKeyId = tokenRes['accessKeyId'];
+      secretAccessKey = tokenRes['secretAccessKey'];
+      sessionToken = tokenRes['sessionToken'];
 
       final stream = http.ByteStream(Stream.castFrom(file.openRead()));
       final length = await file.length();

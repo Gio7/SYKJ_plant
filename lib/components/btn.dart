@@ -9,8 +9,10 @@ class NormalButton extends StatelessWidget {
     required this.bgColor,
     this.bgColors,
     this.icon,
+    this.iconRight,
     this.width,
     this.iconWidget,
+    this.borderRadius,
   });
 
   final List<Color>? bgColors;
@@ -18,9 +20,11 @@ class NormalButton extends StatelessWidget {
   final String text;
   final Color textColor;
   final String? icon;
+  final String? iconRight;
   final Widget? iconWidget;
   final double? width;
   final Function()? onTap;
+  final double? borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +44,7 @@ class NormalButton extends StatelessWidget {
                   end: const FractionalOffset(0, 0.5),
                   colors: bgColors!,
                 ),
-          borderRadius: BorderRadius.circular(256),
+          borderRadius: BorderRadius.circular(borderRadius ?? 256),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -59,6 +63,11 @@ class NormalButton extends StatelessWidget {
                 decoration: TextDecoration.none,
               ),
             ),
+            if (iconRight != null)
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: ImageIcon(AssetImage(iconRight!), color: textColor, size: 20),
+              ),
           ],
         ),
       ),

@@ -56,7 +56,7 @@ class PlantController extends GetxController {
         isIdentifyingPlant.value = true;
         plantInfo = responseData['data'];
         Get.log(plantInfo.toString());
-        Get.off(() => const InfoIdentifyPage());
+        Get.off(() => InfoIdentifyPage());
         // 成功
         return true;
       }
