@@ -121,6 +121,7 @@ class SetPage extends StatelessWidget {
         cancelText: 'cancel'.tr,
         subText: 'deleteAccountTips'.tr,
         icon: Image.asset('images/icon/delete_account_dialog.png', height: 70),
+        confirmPositionLeft: false,
         onConfirm: () async {
           Get.find<UserController>().userDelete();
           Get.back();

@@ -234,10 +234,23 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
             child: NormalButton(
               onTap: () async {
                 Get.back();
-                Request.plantScanDelete(model.id!);
-                setState(() {
-                  _dataList.removeWhere((element) => element.id == model.id);
-                });
+                Get.dialog(
+                  NormalDialog(
+                    title: 'warning'.tr,
+                    confirmText: 'delete'.tr,
+                    cancelText: 'cancel'.tr,
+                    subText: 'deletePlantTips'.tr,
+                    icon: Image.asset('images/icon/delete.png', height: 70),
+                    confirmPositionLeft: false,
+                    onConfirm: () async {
+                      Get.back();
+                      Request.plantScanDelete(model.id!);
+                      setState(() {
+                        _dataList.removeWhere((element) => element.id == model.id);
+                      });
+                    },
+                  ),
+                );
               },
               text: 'removeBtn'.tr,
               textColor: UIColor.c15221D,

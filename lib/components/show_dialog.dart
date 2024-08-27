@@ -13,6 +13,7 @@ class NormalDialog extends StatelessWidget {
     this.icon,
     this.onConfirm,
     this.onCancel,
+    this.confirmPositionLeft = true,
   });
 
   final String title;
@@ -22,6 +23,7 @@ class NormalDialog extends StatelessWidget {
   final String? cancelText;
   final Function()? onCancel;
   final Widget? icon;
+  final bool confirmPositionLeft;
 
   @override
   Widget build(BuildContext context) {
@@ -60,46 +62,44 @@ class NormalDialog extends StatelessWidget {
             child: Row(
               children: [
                 if (cancelText != null) ...[
-                  Expanded(
-                    child: SizedBox(
-                      height: 44,
-                      child: NormalButton(
-                        onTap: onCancel ?? () => Get.back(),
-                        text: cancelText!,
-                        textColor: UIColor.white,
-                        bgColor: UIColor.cD1D1D1,
-                      ),
-                    ),
-                  ),
+                  confirmPositionLeft ? _buildConfirmBtn() : _buildCancelBtn(),
                   const SizedBox(width: 16),
-                  Expanded(
-                    child: SizedBox(
-                      height: 44,
-                      child: NormalButton(
-                        onTap: onConfirm,
-                        text: confirmText,
-                        textColor: UIColor.white,
-                        bgColor: UIColor.c40BD95,
-                      ),
-                    ),
-                  ),
+                  confirmPositionLeft ? _buildCancelBtn() : _buildConfirmBtn(),
                 ] else ...[
-                  Expanded(
-                    child: SizedBox(
-                      height: 44,
-                      child: NormalButton(
-                        onTap: onConfirm,
-                        text: confirmText,
-                        textColor: UIColor.white,
-                        bgColor: UIColor.c40BD95,
-                      ),
-                    ),
-                  ),
+                  _buildConfirmBtn(),
                 ],
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Expanded _buildCancelBtn() {
+    return Expanded(
+      child: SizedBox(
+        height: 44,
+        child: NormalButton(
+          onTap: onCancel ?? () => Get.back(),
+          text: cancelText!,
+          textColor: UIColor.white,
+          bgColor: UIColor.cD1D1D1,
+        ),
+      ),
+    );
+  }
+
+  Expanded _buildConfirmBtn() {
+    return Expanded(
+      child: SizedBox(
+        height: 44,
+        child: NormalButton(
+          onTap: onConfirm,
+          text: confirmText,
+          textColor: UIColor.white,
+          bgColor: UIColor.c40BD95,
+        ),
       ),
     );
   }
@@ -221,10 +221,10 @@ class TextFieldDialog extends StatelessWidget {
                       child: SizedBox(
                         height: 44,
                         child: NormalButton(
-                          onTap: onCancel ?? () => Get.back(),
-                          text: cancelText!,
+                          onTap: () => onConfirm?.call(controller.text),
+                          text: confirmText,
                           textColor: UIColor.white,
-                          bgColor: UIColor.cD1D1D1,
+                          bgColor: UIColor.c40BD95,
                         ),
                       ),
                     ),
@@ -233,10 +233,10 @@ class TextFieldDialog extends StatelessWidget {
                       child: SizedBox(
                         height: 44,
                         child: NormalButton(
-                          onTap: () => onConfirm?.call(controller.text),
-                          text: confirmText,
+                          onTap: onCancel ?? () => Get.back(),
+                          text: cancelText!,
                           textColor: UIColor.white,
-                          bgColor: UIColor.c40BD95,
+                          bgColor: UIColor.cD1D1D1,
                         ),
                       ),
                     ),
