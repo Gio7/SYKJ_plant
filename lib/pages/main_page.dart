@@ -44,9 +44,9 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
           child: TabBarView(
             controller: mainController.tabController,
             physics: const NeverScrollableScrollPhysics(),
-            children: [
-              const HomePage(),
-              const SizedBox(),
+            children: const [
+              HomePage(),
+              SizedBox(),
               MyPlantsPage(),
             ],
           ),

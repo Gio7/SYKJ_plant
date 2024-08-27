@@ -17,6 +17,7 @@ class PlantController extends GetxController {
   RxBool isIdentifyingPlant = false.obs;
 
   dynamic plantInfo;
+  dynamic diagnoseInfo;
 
   Future<bool> requestInfo(File cropFile, File originalFile) async {
     if (shootType.value == 'identify') {
@@ -27,6 +28,11 @@ class PlantController extends GetxController {
   }
 
   Future<void> uploadFile(File cropFile, File originalFile) async {
+    originalUrl = null;
+    thumbnailUrl = null;
+    isAnalyzingImage.value = false;
+    isDetectingLeaves.value = false;
+    isIdentifyingPlant.value = false;
     originalUrl = await AwsUtils.uploadByFile(originalFile);
     thumbnailUrl = await AwsUtils.uploadByFile(cropFile);
     isAnalyzingImage.value = true;
@@ -72,14 +78,18 @@ class PlantController extends GetxController {
       final responseData = res.data;
       if (responseData['code'] == 200 || responseData['code'] == 0) {
         isIdentifyingPlant.value = true;
-        plantInfo = responseData['data'];
-        Get.log(plantInfo.toString());
-        Get.off(() => const InfoDiagnosePage());
+        diagnoseInfo = responseData['data'];
+        Get.log(diagnoseInfo.toString());
+        Get.off(() => InfoDiagnosePage());
         // 成功
         return true;
       }
     }
     Get.log(res.toString());
     return false;
+  }
+
+  Future<void> scanByScientificName(String scientificName) async {
+    plantInfo = await Request.scanByScientificName(scientificName);
   }
 }

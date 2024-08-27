@@ -121,7 +121,7 @@ class LanguageEnUs {
       'funFacts': 'Fun Facts',
       'saveToMyGarden': 'Save to my garden',
       'plantInfo': 'Plant info',
-      'Retake': 'Retake',
+      'retake': 'Retake',
       'diagnosisTips':'This result is an automatic diagnosis. Please ensure that the symptoms of your plant match the ones we described before proceeding with any treatment measures',
       'yourPlantIs':'Your plant Is ',
       'notHealthy':'Not Healthy!',
