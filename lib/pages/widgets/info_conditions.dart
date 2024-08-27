@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/models/plant_info_model.dart';
 
 class InfoConditions extends StatelessWidget {
-  const InfoConditions({super.key});
+  const InfoConditions({super.key, this.conditions});
+
+  final Conditions? conditions;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,7 @@ class InfoConditions extends StatelessWidget {
                 child: _buildItem(
                   'images/icon/detail_temperature.png',
                   'temperature'.tr,
-                  'xxx',
+                  conditions?.temperatureRange ?? '',
                 ),
               ),
               const SizedBox(width: 8),
@@ -49,7 +52,7 @@ class InfoConditions extends StatelessWidget {
                 child: _buildItem(
                   'images/icon/detail_hardness.png',
                   'hardnessZones'.tr,
-                  'xxx',
+                  conditions?.plantingSeason ?? '',
                 ),
               ),
             ],
@@ -58,13 +61,13 @@ class InfoConditions extends StatelessWidget {
           _buildItem(
             'images/icon/detail_sunlight.png',
             'sunlight'.tr,
-            'xxx',
+            conditions?.sunlight ?? '',
           ),
           const SizedBox(height: 8),
           _buildItem(
             'images/icon/detail_location.png',
             'location'.tr,
-            'xxx',
+            conditions?.location ?? '',
           ),
         ],
       ),

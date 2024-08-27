@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
+import 'package:plant/controllers/main_controller.dart';
 import 'package:plant/controllers/plant_controller.dart';
 
 import 'widgets/info_characteristics.dart';
 import 'widgets/info_conditions.dart';
-import 'widgets/info_description.dart';
+import 'widgets/info_key_facts.dart';
 import 'widgets/info_description_text.dart';
 import 'widgets/info_fun_facts.dart';
 import 'widgets/info_how_tos.dart';
@@ -70,17 +71,17 @@ class InfoIdentifyPage extends StatelessWidget {
             children: [
               ..._buildTitle(),
               const SizedBox(height: 24),
-              const InfoIdentifyDescription(),
+              InfoKeyFacts(descriptionList: ctr.plantInfo?.plant?.description),
               const SizedBox(height: 16),
-              const InfoCharacteristics(),
+              InfoCharacteristics(characteristics: ctr.plantInfo?.plant?.characteristics),
               const SizedBox(height: 16),
-              const InfoDescriptionText(),
+              InfoDescriptionText(text: ctr.plantInfo?.plant?.culturalSignificance ?? ''),
               const SizedBox(height: 16),
-              const InfoConditions(),
+              InfoConditions(conditions: ctr.plantInfo?.plant?.conditions),
               const SizedBox(height: 16),
-              const InfoHowTos(),
+              InfoHowTos(howTos: ctr.plantInfo?.plant?.howTos),
               const SizedBox(height: 16),
-              const InfoFunFacts(),
+              InfoFunFacts(littleStory: ctr.plantInfo?.plant?.littleStory ?? ''),
             ],
           ),
         ),
@@ -145,8 +146,13 @@ class InfoIdentifyPage extends StatelessWidget {
             const SizedBox(width: 16),
             Expanded(
               child: NormalButton(
-                onTap: () {
-                  // TODO 保存
+                onTap: () async{
+                  if (ctr.plantInfo?.scanRecordId == null) {
+                    return;
+                  }
+                  await ctr.savePlant(ctr.plantInfo!.scanRecordId!);
+                  Get.until((route) => Get.currentRoute == '/');
+                  Get.find<MainController>().tabController.index = 2;
                 },
                 text: 'saveToMyGarden'.tr,
                 textColor: UIColor.white,
@@ -164,7 +170,7 @@ class InfoIdentifyPage extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.only(left: 10),
         child: Text(
-          'XXXX',
+          ctr.plantInfo?.plant?.plantName ?? '',
           style: const TextStyle(
             color: UIColor.c15221D,
             fontSize: 20,
@@ -187,7 +193,7 @@ class InfoIdentifyPage extends StatelessWidget {
                 ),
               ),
               TextSpan(
-                text: 'XXXX',
+                text: ctr.plantInfo?.plant?.scientificName ?? '',
                 style: const TextStyle(
                   color: UIColor.c15221D,
                   fontSize: 12,
@@ -195,6 +201,17 @@ class InfoIdentifyPage extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(left: 10, top: 4),
+        child: Text(
+          ctr.plantInfo?.plant?.mainCharacteristics ?? '',
+          style: TextStyle(
+            color: UIColor.c15221D,
+            fontSize: 12,
+            fontWeight: FontWeightExt.medium,
           ),
         ),
       ),

@@ -9,7 +9,7 @@ class Request {
   static const String _plantScan = '/Plant/plant/scan';
   static const String _plantDiagnosis = '/Plant/plant/diagnosis';
   static const String _plantScanHistory = '/Plant/plant/scanHistory';
-
+  static const String _scanSave = '/Plant/plant/scanSave';
   static const String _plantScanRename = '/Plant/plant/scanRename';
   static const String _plantScanDelete = '/Plant/plant/scanDelete';
   static const String _getConfig = '/Plant/common/getConfig';
@@ -46,8 +46,8 @@ class Request {
   }
 
   /// 200 正确， 201 不是植物  404 失败
-  static Future<dynamic> plantDiagnosis(String url) async {
-    return await DioUtil.httpPost(_plantDiagnosis, data: {'url': url}, ignoreAll: true);
+  static Future<dynamic> plantDiagnosis(String url, String thumbnail) async {
+    return await DioUtil.httpPost(_plantDiagnosis, data: {'url': url, 'thumbnail': thumbnail}, ignoreAll: true);
   }
 
   static Future<dynamic> getPlantScanHistory(int pageNum, [int pageSize = 20]) async {
@@ -62,7 +62,11 @@ class Request {
     return await DioUtil.httpPost(_plantScanDelete, data: {'id': id});
   }
 
-  static Future<dynamic> scanByScientificName(String scientificName) async {
+  static Future<dynamic> scanByScientificName(String scientificName, int scanRecordId) async {
     return await DioUtil.httpPost(_scanByScientificName, data: {'scientificName': scientificName});
+  }
+
+  static Future<void> scanSave(int id) async {
+    await DioUtil.httpPost(_scanSave, data: {'id': id});
   }
 }

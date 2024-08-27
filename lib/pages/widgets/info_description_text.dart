@@ -5,7 +5,9 @@ import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 
 class InfoDescriptionText extends StatefulWidget {
-  const InfoDescriptionText({super.key});
+  const InfoDescriptionText({super.key, required this.text});
+
+  final String text;
 
   @override
   State<InfoDescriptionText> createState() => _InfoDescriptionTextState();
@@ -13,7 +15,6 @@ class InfoDescriptionText extends StatefulWidget {
 
 class _InfoDescriptionTextState extends State<InfoDescriptionText> {
   bool _showMore = false;
-  final text = 'XXX';
   final _textStyle = TextStyle(
     color: UIColor.c8E8B8B,
     fontSize: 12,
@@ -25,7 +26,7 @@ class _InfoDescriptionTextState extends State<InfoDescriptionText> {
   void initState() {
     final textHeight = StringUtils.getTextContextSizeHeight(
       Get.context!,
-      text,
+      widget.text,
       _textStyle.fontSize!,
       _textStyle.fontWeight!,
       Get.width - 72,
@@ -71,7 +72,7 @@ class _InfoDescriptionTextState extends State<InfoDescriptionText> {
                 maxHeight: (_isTextHeightExceed && !_showMore) ? 140 : double.infinity,
               ),
               child: Text(
-                text,
+                widget.text,
                 style: _textStyle,
               ),
             ),

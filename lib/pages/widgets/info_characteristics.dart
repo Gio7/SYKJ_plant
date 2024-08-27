@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/models/plant_info_model.dart';
 
 class InfoCharacteristics extends StatelessWidget {
-  const InfoCharacteristics({super.key});
+  const InfoCharacteristics({super.key, required this.characteristics});
+  final Characteristics? characteristics;
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +51,12 @@ class InfoCharacteristics extends StatelessWidget {
     return [
       _buildTitle('images/icon/detail_mature.png', 'maturePlant'.tr),
       const SizedBox(height: 16),
-      _buildInteriorItem('plantHeight'.tr, 'XXX'),
+      _buildInteriorItem('plantHeight'.tr, characteristics?.maturePlant?.plantHeight ?? ''),
       const SizedBox(height: 10),
-      _buildInteriorItem('spread'.tr, 'XXX'),
+      _buildInteriorItem('spread'.tr, characteristics?.maturePlant?.spread ?? ''),
       const SizedBox(height: 10),
-      _buildInteriorItem('leafColor'.tr, 'XXX'),
+      // TODO 颜色处理
+      _buildInteriorItem('leafColor'.tr, characteristics?.maturePlant?.leafColor ?? ''),
     ];
   }
 
@@ -61,9 +64,10 @@ class InfoCharacteristics extends StatelessWidget {
     return [
       _buildTitle('images/icon/detail_flower.png', 'flower'.tr),
       const SizedBox(height: 16),
-      _buildInteriorItem('flowerSize'.tr, 'XXX'),
+      _buildInteriorItem('flowerSize'.tr, characteristics?.flower?.flowerSize ?? ''),
       const SizedBox(height: 10),
-      _buildInteriorItem('flowerColor'.tr, 'XXX'),
+      // TODO 颜色处理
+      _buildInteriorItem('flowerColor'.tr, characteristics?.flower?.flowerColor ?? ''),
     ];
   }
 
@@ -71,9 +75,10 @@ class InfoCharacteristics extends StatelessWidget {
     return [
       _buildTitle('images/icon/detail_fruit.png', 'fruit'.tr),
       const SizedBox(height: 16),
-      _buildInteriorItem('harvestTime'.tr, 'XXX'),
+      _buildInteriorItem('harvestTime'.tr, characteristics?.fruit?.fruitRipeningTime ?? ''),
       const SizedBox(height: 10),
-      _buildInteriorItem('fruitColor'.tr, 'XXX'),
+      // TODO 颜色处理
+      _buildInteriorItem('fruitColor'.tr, characteristics?.fruit?.fruitColor ?? ''),
     ];
   }
 

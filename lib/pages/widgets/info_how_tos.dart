@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/models/plant_info_model.dart';
 
 class InfoHowTos extends StatelessWidget {
-  const InfoHowTos({super.key});
+  const InfoHowTos({super.key, this.howTos});
+  final HowTos? howTos;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class InfoHowTos extends StatelessWidget {
                 child: _buildItem(
                   'images/icon/detail_pruning.png',
                   'pruning'.tr,
-                  'xxx',
+                  howTos?.pruning ?? '',
                 ),
               ),
               const SizedBox(width: 8),
@@ -49,7 +51,7 @@ class InfoHowTos extends StatelessWidget {
                 child: _buildItem(
                   'images/icon/detail_propagation.png',
                   'propagation'.tr,
-                  'xxx',
+                  howTos?.propagation ?? '',
                 ),
               ),
             ],
@@ -58,7 +60,7 @@ class InfoHowTos extends StatelessWidget {
           _buildItem(
             'images/icon/detail_repotting.png',
             'repotting'.tr,
-            'xxx',
+            howTos?.repotting ?? '',
           ),
         ],
       ),

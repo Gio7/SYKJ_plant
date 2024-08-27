@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:get/get.dart';
+import 'package:plant/common/global_data.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AgreementTips extends StatelessWidget {
   const AgreementTips({super.key});
@@ -29,8 +31,18 @@ class AgreementTips extends StatelessWidget {
               decoration: TextDecoration.underline,
             ),
             recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                // TODO 跳转协议
+              ..onTap = () async {
+                try {
+                  final url = Uri.parse(GlobalData.termsOfUseUrl);
+                  final bool isSul = await launchUrl(
+                    url,
+                  );
+                  if (!isSul) {
+                    Get.snackbar('error', 'fail');
+                  }
+                } catch (e) {
+                  Get.snackbar('error', e.toString());
+                }
               },
           ),
           TextSpan(
@@ -50,8 +62,18 @@ class AgreementTips extends StatelessWidget {
               decoration: TextDecoration.underline,
             ),
             recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                // TODO 跳转协议
+              ..onTap = () async{
+                try {
+                  final url = Uri.parse(GlobalData.privacyNoticeUrl);
+                  final bool isSul = await launchUrl(
+                    url,
+                  );
+                  if (!isSul) {
+                    Get.snackbar('error', 'fail');
+                  }
+                } catch (e) {
+                  Get.snackbar('error', e.toString());
+                }
               },
           ),
         ]),

@@ -64,11 +64,14 @@ class InfoDiagnosePage extends StatelessWidget {
               child: NormalButton(
                 onTap: () async {
                   if (ctr.plantInfo == null) {
-                    if (ctr.diagnoseInfo['scientificName'] == null) {
+                    if (ctr.diagnoseInfo?.plant?.scientificName == null || ctr.diagnoseInfo?.scanRecordId == null) {
                       return;
                     }
                     Get.dialog(const LoadingDialog(), barrierDismissible: false);
-                    await ctr.scanByScientificName(ctr.diagnoseInfo['scientificName']);
+                    await ctr.scanByScientificName(
+                      ctr.diagnoseInfo!.plant!.scientificName!,
+                      ctr.diagnoseInfo!.scanRecordId!,
+                    );
                     Get.back();
                   }
                   Get.to(() => InfoIdentifyPage());
@@ -147,9 +150,9 @@ class InfoDiagnosePage extends StatelessWidget {
                                 ),
                               ),
                               TextSpan(
-                                text: ' ${(ctr.diagnoseInfo['healthy'] ?? false) ? 'notHealthy'.tr : 'healthy'.tr}',
+                                text: ' ${(ctr.diagnoseInfo?.plant?.healthy ?? false) ? 'notHealthy'.tr : 'healthy'.tr}',
                                 style: TextStyle(
-                                  color: (ctr.diagnoseInfo['healthy'] ?? false) ? UIColor.primary : UIColor.cFD5050,
+                                  color: (ctr.diagnoseInfo?.plant?.healthy ?? false) ? UIColor.primary : UIColor.cFD5050,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                   decoration: TextDecoration.none,
@@ -184,25 +187,28 @@ class InfoDiagnosePage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 24),
-              Text(
-                ctr.diagnoseInfo['scientificName'] ?? '',
-                style: const TextStyle(
-                  color: UIColor.c15221D,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  decoration: TextDecoration.none,
+              for (final item in ctr.diagnoseInfo?.plant?.diseaseDetail ?? []) ...[
+                Text(
+                  item.displayTitle,
+                  style: const TextStyle(
+                    color: UIColor.c15221D,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    decoration: TextDecoration.none,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 12),
-              Text(
-                ctr.diagnoseInfo['treatmentPlan'],
-                style: const TextStyle(
-                  color: UIColor.c15221D,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  decoration: TextDecoration.none,
+                const SizedBox(height: 12),
+                Text(
+                  item.treatmentPlan,
+                  style: const TextStyle(
+                    color: UIColor.c15221D,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    decoration: TextDecoration.none,
+                  ),
                 ),
-              )
+                const SizedBox(height: 24),
+              ],
             ],
           ),
         ),

@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
 
 class InfoFunFacts extends StatelessWidget {
-  const InfoFunFacts({super.key});
+  const InfoFunFacts({super.key, required this.littleStory});
+  final String littleStory;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class InfoFunFacts extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
-                    'XXX',
+                    littleStory,
                     style: TextStyle(
                       color: UIColor.c8E8B8B,
                       fontSize: 12,

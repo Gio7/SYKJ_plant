@@ -130,6 +130,7 @@ class LanguageEnUs {
       'CDKey': 'CDKey',
       'pleaseInputCDKey': 'Please Input CDKey',
       'submit': 'Submit',
+      'keyFacts': 'Key Facts',
     };
   }
 }

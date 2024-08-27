@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/models/plant_info_model.dart';
 
-class InfoIdentifyDescription extends StatelessWidget {
-  const InfoIdentifyDescription({super.key});
+class InfoKeyFacts extends StatelessWidget {
+  const InfoKeyFacts({super.key, required this.descriptionList});
+  final List<Description>? descriptionList;
 
   @override
   Widget build(BuildContext context) {
-    final descriptionList = [
-      {"item": "XXX", "content": "XXX"},
-      {"item": "XXX", "content": "XXX"},
-      {"item": "XXX", "content": "XXX"},
-      {"item": "XXX", "content": "XXX"},
-      {"item": "XXX", "content": "XXX"},
-      {"item": "XXX", "content": "XXX"}
-    ];
     return Container(
       padding: const EdgeInsets.only(top: 16, left: 8, right: 8, bottom: 8),
       decoration: ShapeDecoration(
@@ -33,7 +27,7 @@ class InfoIdentifyDescription extends StatelessWidget {
                 ),
               ),
               Text(
-                'description'.tr,
+                'keyFacts'.tr,
                 style: const TextStyle(
                   color: UIColor.c15221D,
                   fontSize: 16,
@@ -43,13 +37,13 @@ class InfoIdentifyDescription extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          for (int i = 0; i < descriptionList.length; i++) _buildItem(i, descriptionList[i]),
+          for (int i = 0; i < (descriptionList?.length ?? 0); i++) _buildItem(i, descriptionList![i]),
         ],
       ),
     );
   }
 
-  Widget _buildItem(int i, Map<String, String> item) {
+  Widget _buildItem(int i, Description item) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
       decoration: ShapeDecoration(
@@ -59,7 +53,7 @@ class InfoIdentifyDescription extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            item['item'] ?? '',
+            item.item ?? '',
             style: TextStyle(
               color: UIColor.c8E8B8B,
               fontSize: 12,
@@ -69,7 +63,7 @@ class InfoIdentifyDescription extends StatelessWidget {
           const SizedBox(width: 8),
           Expanded(
             child: Text(
-              item['content'] ?? '',
+              item.content ?? '',
               style: TextStyle(
                 color: UIColor.c15221D,
                 fontSize: 12,

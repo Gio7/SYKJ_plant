@@ -4,6 +4,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:plant/api/request.dart';
 import 'package:plant/common/aws_utils.dart';
+import 'package:plant/models/plant_diagnosis_model.dart';
+import 'package:plant/models/plant_info_model.dart';
 import 'package:plant/pages/info_diagnose_page.dart';
 import 'package:plant/pages/info_identify_page.dart';
 
@@ -16,8 +18,8 @@ class PlantController extends GetxController {
   RxBool isDetectingLeaves = false.obs;
   RxBool isIdentifyingPlant = false.obs;
 
-  dynamic plantInfo;
-  dynamic diagnoseInfo;
+  PlantInfoModel? plantInfo;
+  PlantDiagnosisModel? diagnoseInfo;
 
   Future<bool> requestInfo(File cropFile, File originalFile) async {
     if (shootType.value == 'identify') {
@@ -53,43 +55,58 @@ class PlantController extends GetxController {
     if (res.statusCode == 200) {
       final responseData = res.data;
       if (responseData['code'] == 200 || responseData['code'] == 0) {
-        isIdentifyingPlant.value = true;
-        plantInfo = responseData['data'];
-        Get.log(plantInfo.toString());
-        Get.off(() => InfoIdentifyPage());
-        // 成功
-        return true;
+        try {
+          isIdentifyingPlant.value = true;
+          plantInfo = PlantInfoModel.fromJson(responseData['data']);
+          Get.off(() => InfoIdentifyPage());
+          // 成功
+          return true;
+        } catch (e) {
+          Get.log(e.toString(), isError: true);
+          return false;
+        }
       }
     }
-    Get.log(res.toString());
     return false;
   }
 
   Future<bool> plantDiagnosis(File cropFile, File originalFile) async {
     await uploadFile(cropFile, originalFile);
 
-    if (originalUrl == null) {
+    if (originalUrl == null || thumbnailUrl == null) {
       Fluttertoast.showToast(msg: '图片上传失败', gravity: ToastGravity.CENTER);
       return false;
     }
-    final res = await Request.plantDiagnosis(originalUrl!);
+    final res = await Request.plantDiagnosis(originalUrl!, thumbnailUrl!);
 
     if (res.statusCode == 200) {
       final responseData = res.data;
       if (responseData['code'] == 200 || responseData['code'] == 0) {
-        isIdentifyingPlant.value = true;
-        diagnoseInfo = responseData['data'];
-        Get.log(diagnoseInfo.toString());
-        Get.off(() => InfoDiagnosePage());
-        // 成功
-        return true;
+        try {
+          isIdentifyingPlant.value = true;
+          diagnoseInfo = PlantDiagnosisModel.fromJson(responseData['data']);
+          Get.off(() => InfoDiagnosePage());
+          // 成功
+          return true;
+        } catch (e) {
+          return false;
+        }
       }
     }
-    Get.log(res.toString());
     return false;
   }
 
-  Future<void> scanByScientificName(String scientificName) async {
-    plantInfo = await Request.scanByScientificName(scientificName);
+  Future<void> scanByScientificName(String scientificName, int id) async {
+    try {
+      final res = await Request.scanByScientificName(scientificName, id);
+      plantInfo = PlantInfoModel.fromJson(res);
+    } catch (e) {
+      Get.log(e.toString(), isError: true);
+      rethrow;
+    }
+  }
+
+  Future<void> savePlant(int id) async {
+    await Request.scanSave(id);
   }
 }
