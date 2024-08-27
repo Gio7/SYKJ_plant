@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:plant/api/request.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
+import 'package:plant/components/loading_dialog.dart';
 import 'package:plant/components/show_dialog.dart';
 import 'package:plant/models/plant_model.dart';
 
@@ -162,7 +163,7 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
   }
 
   Widget get _empty {
-    if (_isLoading) return const SizedBox();
+    if (_isLoading) return const LoadingDialog();
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 24),
