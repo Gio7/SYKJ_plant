@@ -14,6 +14,7 @@ class Request {
   static const String _plantScanDelete = '/Plant/plant/scanDelete';
   static const String _getConfig = '/Plant/common/getConfig';
   static const String _scanByScientificName = '/Plant/plant/scanByScientificName';
+  static const String _getPlantDetailByRecord = '/Plant/plant/getPlantDetailByRecord';
 
   /// telegram_group\email
   static Future<void> getConfig([List<String> conKey = const ['telegram_group', 'email']]) async {
@@ -68,5 +69,9 @@ class Request {
 
   static Future<void> scanSave(int id) async {
     await DioUtil.httpPost(_scanSave, data: {'id': id});
+  }
+
+  static Future<dynamic> getPlantDetailByRecord(int id) async {
+    return await DioUtil.httpPost(_getPlantDetailByRecord, data: {'scanRecordId': id});
   }
 }

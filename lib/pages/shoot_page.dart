@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:plant/common/file_utils.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
+import 'package:plant/components/loading_dialog.dart';
 import 'package:plant/components/show_dialog.dart';
 import 'package:plant/controllers/plant_controller.dart';
 import 'package:plant/components/nav_bar.dart';
@@ -113,6 +114,7 @@ class _ShootPageState extends State<ShootPage> {
       Get.to(() => const LoginPage(), fullscreenDialog: true);
       return;
     }
+    Get.dialog(const LoadingDialog());
     try {
       // 设置对焦，提高拍照效率
       await _controller?.setFocusMode(FocusMode.locked);
@@ -133,7 +135,8 @@ class _ShootPageState extends State<ShootPage> {
         if (cropFile == null) {
           return;
         }
-        Get.off(
+        Get.back();
+        Get.to(
           () => ScanPage(
             cropFile: cropFile,
             originalFile: File(imageFile.path),
@@ -141,6 +144,7 @@ class _ShootPageState extends State<ShootPage> {
         );
       }
     } catch (e) {
+      Get.back();
       Get.log(e.toString(), isError: true);
     }
   }

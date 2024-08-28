@@ -85,7 +85,7 @@ class InfoDiagnosePage extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
               child: NormalButton(
-                onTap: () => Get.back(),
+                onTap: () => Get.until((route) => Get.currentRoute == '/ShootPage'),
                 icon: 'images/icon/detail_camera.png',
                 text: 'retake'.tr,
                 textColor: UIColor.white,

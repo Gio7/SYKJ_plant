@@ -16,8 +16,9 @@ import 'widgets/info_fun_facts.dart';
 import 'widgets/info_how_tos.dart';
 
 class InfoIdentifyPage extends StatelessWidget {
-  InfoIdentifyPage({super.key});
+  InfoIdentifyPage({super.key, this.hideBottom = false});
 
+  final bool hideBottom;
   final ctr = Get.find<PlantController>();
 
   @override
@@ -28,7 +29,8 @@ class InfoIdentifyPage extends StatelessWidget {
         children: [
           _buildHeadImage(),
           _buildBody(),
-          _buildBottomBtn(),
+          if (!hideBottom)
+            _buildBottomBtn(),
           _buildNav(),
         ],
       ),

@@ -10,7 +10,10 @@ import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/components/loading_dialog.dart';
 import 'package:plant/components/show_dialog.dart';
+import 'package:plant/controllers/plant_controller.dart';
+import 'package:plant/models/plant_info_model.dart';
 import 'package:plant/models/plant_model.dart';
+import 'package:plant/pages/info_identify_page.dart';
 
 import 'shoot_page.dart';
 import '../components/user_nav_bar.dart';
@@ -62,6 +65,25 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
     });
   }
 
+  Future<void> getPlantDetailByRecord(PlantModel model) async {
+    Get.dialog(const LoadingDialog(), barrierDismissible: false);
+    try {
+      final res = await Request.getPlantDetailByRecord(model.id!);
+      final p = PlantInfoModel.fromJson(res);
+      final ctr = Get.put(PlantController());
+      ctr.thumbnailUrl = model.thumbnail;
+      ctr.plantInfo = p;
+      Get.back();
+      
+      await Get.to(() => InfoIdentifyPage(hideBottom: true));
+      ctr.dispose();
+    } catch (e) {
+      Get.back();
+      Get.log(e.toString(), isError: true);
+      rethrow;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -104,60 +126,63 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
     );
   }
 
-  Container _buildItem(PlantModel model) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-      decoration: ShapeDecoration(
-        color: UIColor.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+  Widget _buildItem(PlantModel model) {
+    return GestureDetector(
+      onTap: () => getPlantDetailByRecord(model),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        decoration: ShapeDecoration(
+          color: UIColor.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
         ),
-      ),
-      child: Row(
-        children: [
-          ClipOval(
-            child: CachedNetworkImage(
-              imageUrl: model.thumbnail ?? '',
-              width: 50,
-              height: 50,
-              fit: BoxFit.cover,
+        child: Row(
+          children: [
+            ClipOval(
+              child: CachedNetworkImage(
+                imageUrl: model.thumbnail ?? '',
+                width: 50,
+                height: 50,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  model.plantName ?? '',
-                  style: const TextStyle(
-                    color: UIColor.c15221D,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    model.plantName ?? '',
+                    style: const TextStyle(
+                      color: UIColor.c15221D,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  '${'addedAt'.tr} ${model.createTimeLoacal}',
-                  style: TextStyle(
-                    color: UIColor.c8E8B8B,
-                    fontSize: 12,
-                    fontWeight: FontWeightExt.medium,
+                  const SizedBox(height: 10),
+                  Text(
+                    '${'addedAt'.tr} ${model.createTimeLoacal}',
+                    style: TextStyle(
+                      color: UIColor.c8E8B8B,
+                      fontSize: 12,
+                      fontWeight: FontWeightExt.medium,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          GestureDetector(
-            onTap: () {
-              _onMore(model);
-            },
-            child: Image.asset(
-              'images/icon/more.png',
-              width: 24,
+            GestureDetector(
+              onTap: () {
+                _onMore(model);
+              },
+              child: Image.asset(
+                'images/icon/more.png',
+                width: 24,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

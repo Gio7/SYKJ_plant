@@ -131,6 +131,7 @@ class LanguageEnUs {
       'pleaseInputCDKey': 'Please Input CDKey',
       'submit': 'Submit',
       'keyFacts': 'Key Facts',
+      'placeThePlantInTheCenter': 'Place the plant in the center',
     };
   }
 }

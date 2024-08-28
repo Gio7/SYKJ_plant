@@ -30,7 +30,7 @@ class ScanPage extends StatelessWidget {
                   },
                   onCancel: () {
                     Get.back(closeOverlays: true);
-                    Get.back();
+                    Get.until((route) => Get.currentRoute == '/');
                   },
                 ),
               )
