@@ -38,69 +38,75 @@ class ScanPage extends StatelessWidget {
         });
 
     final width = Get.width - 116;
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('images/icon/scan_bg.png'),
-          fit: BoxFit.cover,
+    return PopScope(
+      canPop: true,
+      onPopInvoked: (didPop) {
+        ctr.haveReturned = true;
+      },
+      child: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('images/icon/scan_bg.png'),
+            fit: BoxFit.cover,
+          ),
         ),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            'weScanForYou'.tr,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: UIColor.white,
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              decoration: TextDecoration.none,
-            ),
-          ),
-          const SizedBox(height: 24),
-          Text(
-            'scanTips'.tr,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: UIColor.transparent60,
-              fontSize: 14,
-              fontWeight: FontWeightExt.medium,
-              decoration: TextDecoration.none,
-            ),
-          ),
-          const SizedBox(height: 46),
-          Container(
-            width: width,
-            height: width,
-            decoration: ShapeDecoration(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(22),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'weScanForYou'.tr,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: UIColor.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                decoration: TextDecoration.none,
               ),
             ),
-            clipBehavior: Clip.antiAlias,
-            child: ScanningEffect(
-              scanningColor: UIColor.primary,
-              enableBorder: false,
-              scanningLinePadding: EdgeInsets.zero,
-              delay: Duration.zero,
-              child: Image.file(cropFile),
+            const SizedBox(height: 24),
+            Text(
+              'scanTips'.tr,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: UIColor.transparent60,
+                fontSize: 14,
+                fontWeight: FontWeightExt.medium,
+                decoration: TextDecoration.none,
+              ),
             ),
-          ),
-          const SizedBox(height: 50),
-          Obx(() => _buildRow(ctr.isAnalyzingImage.value, 'analyzingImage'.tr)),
-          const SizedBox(height: 16),
-          Obx(() => _buildRow(ctr.isDetectingLeaves.value, 'detectingLeaves'.tr)),
-          const SizedBox(height: 16),
-          Obx(
-            () => _buildRow(
-              ctr.isIdentifyingPlant.value,
-              ctr.shootType.value == 'identify' ? 'identifyingPlant'.tr : 'diagnosingPlant'.tr,
+            const SizedBox(height: 46),
+            Container(
+              width: width,
+              height: width,
+              decoration: ShapeDecoration(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(22),
+                ),
+              ),
+              clipBehavior: Clip.antiAlias,
+              child: ScanningEffect(
+                scanningColor: UIColor.primary,
+                enableBorder: false,
+                scanningLinePadding: EdgeInsets.zero,
+                delay: Duration.zero,
+                child: Image.file(cropFile),
+              ),
             ),
-          ),
-        ],
+            const SizedBox(height: 50),
+            Obx(() => _buildRow(ctr.isAnalyzingImage.value, 'analyzingImage'.tr)),
+            const SizedBox(height: 16),
+            Obx(() => _buildRow(ctr.isDetectingLeaves.value, 'detectingLeaves'.tr)),
+            const SizedBox(height: 16),
+            Obx(
+              () => _buildRow(
+                ctr.isIdentifyingPlant.value,
+                ctr.shootType.value == 'identify' ? 'identifyingPlant'.tr : 'diagnosingPlant'.tr,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

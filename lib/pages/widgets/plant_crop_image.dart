@@ -9,6 +9,7 @@ import 'package:plant/common/file_utils.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/loading_dialog.dart';
 import 'package:plant/components/nav_bar.dart';
+import 'package:plant/controllers/plant_controller.dart';
 import 'package:plant/pages/scan_page.dart';
 
 class PlantCropImage extends StatelessWidget {
@@ -48,6 +49,7 @@ class PlantCropImage extends StatelessWidget {
                       Get.back();
                       return;
                     }
+                    Get.find<PlantController>().haveReturned = false;
                     Get.off(() => ScanPage(cropFile: cropFile, image400File: image400File));
                   },
                   withCircleUi: false,

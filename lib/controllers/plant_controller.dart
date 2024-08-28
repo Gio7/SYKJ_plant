@@ -23,6 +23,9 @@ class PlantController extends GetxController {
   PlantInfoModel? plantInfo;
   PlantDiagnosisModel? diagnoseInfo;
 
+  // 是否已经返回
+  bool haveReturned = false;
+
   Future<bool> requestInfo(File cropFile, File image400File) async {
     if (shootType.value == 'identify') {
       return await plantScan(cropFile, image400File);
@@ -53,7 +56,7 @@ class PlantController extends GetxController {
       return false;
     }
     final res = await Request.plantScan(image400Url!, thumbnailUrl!);
-
+    if (haveReturned) return true;
     if (res.statusCode == 200) {
       final responseData = res.data;
       if (responseData['code'] == 200 || responseData['code'] == 0) {
@@ -80,7 +83,7 @@ class PlantController extends GetxController {
       return false;
     }
     final res = await Request.plantDiagnosis(image400Url!, thumbnailUrl!);
-
+    if (haveReturned) return true;
     if (res.statusCode == 200) {
       final responseData = res.data;
       if (responseData['code'] == 200 || responseData['code'] == 0) {

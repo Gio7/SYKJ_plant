@@ -138,6 +138,7 @@ class _ShootPageState extends State<ShootPage> {
           return;
         }
         Get.back();
+        ctr.haveReturned = false;
         Get.to(
           () => ScanPage(
             cropFile: cropFile,
