@@ -50,8 +50,16 @@ class UIColor {
   static const Color cEEEEEE = Color(0xFFEEEEEE);
 
   static const Color cF6A469 = Color(0xFFF6A469);
-  
+
   static const Color cF7F7F7 = Color(0xFFF7F7F7);
+
+  static Color hexToColor(String s) {
+    if (s.length != 7 || int.tryParse(s.substring(1, 7), radix: 16) == null) {
+      return primary;
+    }
+
+    return Color(int.parse(s.substring(1, 7), radix: 16) + 0xFF000000);
+  }
 }
 
 extension FontWeightExt on FontWeight {

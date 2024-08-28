@@ -62,7 +62,8 @@ class DioUtil {
       });
       UserController().showLogin();
     } else if (response?.statusCode == 500) {
-      Get.snackbar('network error', response?.statusMessage ?? response!.statusCode!.toString());
+      Get.log(response?.statusMessage ?? response!.statusCode!.toString());
+      // Get.snackbar('network error', response?.statusMessage ?? response!.statusCode!.toString());
     } else {
       Get.snackbar('network error', message ?? response?.statusMessage ?? response?.statusCode?.toString() ?? 'unknown error');
     }
@@ -80,6 +81,9 @@ class DioUtil {
           }
           return responseData['data'];
         } else if (responseData['code'] == 401) {
+          if (Get.isDialogOpen ?? false) {
+            Get.back();
+          }
           SharedPreferences.getInstance().then((value) {
             value.remove('token');
             token = '';
@@ -117,6 +121,9 @@ class DioUtil {
         if (responseData['code'] == 200 || responseData['code'] == 0) {
           return responseData['data'];
         } else if (responseData['code'] == 401) {
+          if (Get.isDialogOpen ?? false) {
+            Get.back();
+          }
           SharedPreferences.getInstance().then((value) {
             value.remove('token');
             token = '';

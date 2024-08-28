@@ -55,8 +55,7 @@ class InfoCharacteristics extends StatelessWidget {
       const SizedBox(height: 10),
       _buildInteriorItem('spread'.tr, characteristics?.maturePlant?.spread ?? ''),
       const SizedBox(height: 10),
-      // TODO 颜色处理
-      _buildInteriorItem('leafColor'.tr, characteristics?.maturePlant?.leafColor ?? ''),
+      _buildInteriorItem('leafColor'.tr, characteristics?.maturePlant?.leafColor ?? '', true),
     ];
   }
 
@@ -66,8 +65,7 @@ class InfoCharacteristics extends StatelessWidget {
       const SizedBox(height: 16),
       _buildInteriorItem('flowerSize'.tr, characteristics?.flower?.flowerSize ?? ''),
       const SizedBox(height: 10),
-      // TODO 颜色处理
-      _buildInteriorItem('flowerColor'.tr, characteristics?.flower?.flowerColor ?? ''),
+      _buildInteriorItem('flowerColor'.tr, characteristics?.flower?.flowerColor ?? '', true),
     ];
   }
 
@@ -77,8 +75,7 @@ class InfoCharacteristics extends StatelessWidget {
       const SizedBox(height: 16),
       _buildInteriorItem('harvestTime'.tr, characteristics?.fruit?.fruitRipeningTime ?? ''),
       const SizedBox(height: 10),
-      // TODO 颜色处理
-      _buildInteriorItem('fruitColor'.tr, characteristics?.fruit?.fruitColor ?? ''),
+      _buildInteriorItem('fruitColor'.tr, characteristics?.fruit?.fruitColor ?? '', true),
     ];
   }
 
@@ -117,7 +114,11 @@ class InfoCharacteristics extends StatelessWidget {
     );
   }
 
-  Container _buildInteriorItem(String title, String content) {
+  Container _buildInteriorItem(String title, String content, [bool isColor = false]) {
+    List<Color> colors = [];
+    if (isColor && content.isNotEmpty) {
+      colors = content.split(',').map((e) => UIColor.hexToColor(e)).toList();
+    }
     return Container(
       height: 40,
       padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -136,14 +137,31 @@ class InfoCharacteristics extends StatelessWidget {
               fontWeight: FontWeightExt.medium,
             ),
           ),
-          Text(
-            content,
-            style: TextStyle(
-              color: UIColor.c15221D,
-              fontSize: 12,
-              fontWeight: FontWeightExt.medium,
+          if (isColor && colors.isNotEmpty)
+            Row(
+              children: colors
+                  .map(
+                    (e) => Container(
+                      width: 8,
+                      height: 8,
+                      margin: const EdgeInsets.only(left: 8),
+                      decoration: ShapeDecoration(
+                        color: e,
+                        shape: const OvalBorder(),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            )
+          else
+            Text(
+              content,
+              style: TextStyle(
+                color: UIColor.c15221D,
+                fontSize: 12,
+                fontWeight: FontWeightExt.medium,
+              ),
             ),
-          ),
         ],
       ),
     );

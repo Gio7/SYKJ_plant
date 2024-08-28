@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plant/common/common_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
+import 'package:plant/components/loading_dialog.dart';
 import 'package:plant/controllers/main_controller.dart';
 import 'package:plant/controllers/plant_controller.dart';
 
@@ -146,14 +148,16 @@ class InfoIdentifyPage extends StatelessWidget {
             const SizedBox(width: 16),
             Expanded(
               child: NormalButton(
-                onTap: () async{
+                onTap: Common.debounce(() async {
                   if (ctr.plantInfo?.scanRecordId == null) {
                     return;
                   }
+                  Get.dialog(const LoadingDialog());
                   await ctr.savePlant(ctr.plantInfo!.scanRecordId!);
+                  Get.back();
                   Get.until((route) => Get.currentRoute == '/');
                   Get.find<MainController>().tabController.index = 2;
-                },
+                }, 500),
                 text: 'saveToMyGarden'.tr,
                 textColor: UIColor.white,
                 bgColor: UIColor.primary,
