@@ -38,24 +38,26 @@ class InfoConditions extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(
-                child: _buildItem(
-                  'images/icon/detail_temperature.png',
-                  'temperature'.tr,
-                  conditions?.temperatureRange ?? '',
+          IntrinsicHeight(
+            child: Row(
+              children: [
+                Expanded(
+                  child: _buildItem(
+                    'images/icon/detail_temperature.png',
+                    'temperature'.tr,
+                    conditions?.temperatureRange ?? '',
+                  ),
                 ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: _buildItem(
-                  'images/icon/detail_hardness.png',
-                  'hardnessZones'.tr,
-                  conditions?.plantingSeason ?? '',
+                const SizedBox(width: 8),
+                Expanded(
+                  child: _buildItem(
+                    'images/icon/detail_hardness.png',
+                    'hardnessZones'.tr,
+                    conditions?.plantingSeason ?? '',
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           const SizedBox(height: 8),
           _buildItem(
@@ -86,26 +88,28 @@ class InfoConditions extends StatelessWidget {
         children: [
           Image.asset(icon, width: 28),
           const SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  color: UIColor.c8E8B8B,
-                  fontSize: 12,
-                  fontWeight: FontWeightExt.medium,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: UIColor.c8E8B8B,
+                    fontSize: 12,
+                    fontWeight: FontWeightExt.medium,
+                  ),
                 ),
-              ),
-              Text(
-                content,
-                style: TextStyle(
-                  color: UIColor.c15221D,
-                  fontSize: 12,
-                  fontWeight: FontWeightExt.medium,
+                Text(
+                  content,
+                  style: TextStyle(
+                    color: UIColor.c15221D,
+                    fontSize: 12,
+                    fontWeight: FontWeightExt.medium,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

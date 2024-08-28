@@ -147,7 +147,9 @@ class InfoCharacteristics extends StatelessWidget {
                       margin: const EdgeInsets.only(left: 8),
                       decoration: ShapeDecoration(
                         color: e,
-                        shape: const OvalBorder(),
+                        shape: const OvalBorder(
+                          side: BorderSide(width: 0.5, color: UIColor.cE1E1E1),
+                        ),
                       ),
                     ),
                   )
