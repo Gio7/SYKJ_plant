@@ -48,8 +48,6 @@ class PlantCropImage extends StatelessWidget {
                       Get.back();
                       return;
                     }
-                    print('cropImage: ${cropImage.width} ${cropImage.height} ${await cropFile.length()}');
-                    print('image400: ${image400.width} ${image400.height} ${await image400File.length()}');
                     Get.off(() => ScanPage(cropFile: cropFile, image400File: image400File));
                   },
                   withCircleUi: false,

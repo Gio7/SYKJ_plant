@@ -94,7 +94,12 @@ class ScanPage extends StatelessWidget {
           const SizedBox(height: 16),
           Obx(() => _buildRow(ctr.isDetectingLeaves.value, 'detectingLeaves'.tr)),
           const SizedBox(height: 16),
-          Obx(() => _buildRow(ctr.isIdentifyingPlant.value, 'identifyingPlant'.tr)),
+          Obx(
+            () => _buildRow(
+              ctr.isIdentifyingPlant.value,
+              ctr.shootType.value == 'identify' ? 'identifyingPlant'.tr : 'diagnosingPlant'.tr,
+            ),
+          ),
         ],
       ),
     );
@@ -106,10 +111,18 @@ class ScanPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         if (isDone)
-          Image.asset('images/icon/check.png', width: 24)
+          Image.asset('images/icon/successful.png', width: 20)
         else
-          const SizedBox(width: 21, height: 21, child: CircularProgressIndicator(color: UIColor.primary, strokeWidth: 3)),
-        const SizedBox(width: 8),
+          const SizedBox(
+            width: 20,
+            height: 20,
+            child: CircularProgressIndicator(
+              color: UIColor.primary,
+              strokeWidth: 3,
+              strokeAlign: BorderSide.strokeAlignInside,
+            ),
+          ),
+        const SizedBox(width: 16),
         Text(
           text,
           style: TextStyle(

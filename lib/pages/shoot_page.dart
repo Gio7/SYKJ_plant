@@ -274,7 +274,7 @@ class _ShootPageState extends State<ShootPage> {
                               onTap: () {
                                 ctr.shootType.value = 'diagnose';
                               },
-                              text: 'multiple'.tr,
+                              text: 'diagnose'.tr,
                               textColor: ctr.shootType.value == 'diagnose' ? UIColor.primary : UIColor.white,
                               bgColor: ctr.shootType.value == 'diagnose' ? UIColor.white : UIColor.transparent,
                             ),

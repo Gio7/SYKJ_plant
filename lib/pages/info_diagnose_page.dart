@@ -150,7 +150,7 @@ class InfoDiagnosePage extends StatelessWidget {
                                 ),
                               ),
                               TextSpan(
-                                text: ' ${(ctr.diagnoseInfo?.plant?.healthy ?? false) ? 'notHealthy'.tr : 'healthy'.tr}',
+                                text: ' ${(ctr.diagnoseInfo?.plant?.healthy ?? false) ? 'healthy'.tr : 'notHealthy'.tr}',
                                 style: TextStyle(
                                   color: (ctr.diagnoseInfo?.plant?.healthy ?? false) ? UIColor.primary : UIColor.cFD5050,
                                   fontSize: 14,
