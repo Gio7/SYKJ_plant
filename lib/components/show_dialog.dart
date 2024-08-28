@@ -106,8 +106,9 @@ class NormalDialog extends StatelessWidget {
 }
 
 class DialogContainer extends StatelessWidget {
-  const DialogContainer({super.key, required this.child});
+  const DialogContainer({super.key, required this.child, this.bgColor = UIColor.white});
   final Widget child;
+  final Color bgColor;
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +118,7 @@ class DialogContainer extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 20),
         width: Get.width - 40,
         decoration: ShapeDecoration(
-          color: UIColor.white,
+          color: bgColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),

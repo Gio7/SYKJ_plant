@@ -8,14 +8,14 @@ import 'package:plant/controllers/plant_controller.dart';
 import 'package:plant/sdk/scanning_effect/scanning_effect.dart';
 
 class ScanPage extends StatelessWidget {
-  const ScanPage({super.key, required this.cropFile, required this.originalFile});
+  const ScanPage({super.key, required this.cropFile, required this.image400File});
   final File cropFile;
-  final File originalFile;
+  final File image400File;
 
   @override
   Widget build(BuildContext context) {
     final ctr = Get.find<PlantController>();
-    ctr.requestInfo(cropFile, originalFile).then((isSuccess) => {
+    ctr.requestInfo(cropFile, image400File).then((isSuccess) => {
           if (!isSuccess)
             {
               Get.dialog(

@@ -4,10 +4,10 @@ class GlobalData {
   static String baseUrl = 'https://test.plantidentifier.co';
 
   /// 用户协议
-  static String termsOfUseUrl = '';
+  static String termsOfUseUrl = 'https://plantidentifier.co/terms_of_use.html';
 
   /// 隐私协议
-  static String privacyNoticeUrl = '';
+  static String privacyNoticeUrl = 'https://plantidentifier.co/privacy_policy.html';
 
   static String unsubscribeUrl = '';
 

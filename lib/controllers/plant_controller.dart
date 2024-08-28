@@ -12,7 +12,9 @@ import 'package:plant/pages/info_identify_page.dart';
 class PlantController extends GetxController {
   /// 识别类型 identify diagnose
   RxString shootType = 'identify'.obs;
-  String? originalUrl;
+  /// 压缩到 400* 400
+  String? image400Url;
+  /// 需要压缩质量
   String? thumbnailUrl;
   RxBool isAnalyzingImage = false.obs;
   RxBool isDetectingLeaves = false.obs;
@@ -21,21 +23,21 @@ class PlantController extends GetxController {
   PlantInfoModel? plantInfo;
   PlantDiagnosisModel? diagnoseInfo;
 
-  Future<bool> requestInfo(File cropFile, File originalFile) async {
+  Future<bool> requestInfo(File cropFile, File image400File) async {
     if (shootType.value == 'identify') {
-      return await plantScan(cropFile, originalFile);
+      return await plantScan(cropFile, image400File);
     } else {
-      return await plantDiagnosis(cropFile, originalFile);
+      return await plantDiagnosis(cropFile, image400File);
     }
   }
 
-  Future<void> uploadFile(File cropFile, File originalFile) async {
-    originalUrl = null;
+  Future<void> uploadFile(File cropFile, File image400File) async {
+    image400Url = null;
     thumbnailUrl = null;
     isAnalyzingImage.value = false;
     isDetectingLeaves.value = false;
     isIdentifyingPlant.value = false;
-    originalUrl = await AwsUtils.uploadByFile(originalFile);
+    image400Url = await AwsUtils.uploadByFile(image400File);
     thumbnailUrl = await AwsUtils.uploadByFile(cropFile);
     isAnalyzingImage.value = true;
     Future.delayed(const Duration(seconds: 3), () {
@@ -43,14 +45,14 @@ class PlantController extends GetxController {
     });
   }
 
-  Future<bool> plantScan(File cropFile, File originalFile) async {
-    await uploadFile(cropFile, originalFile);
+  Future<bool> plantScan(File cropFile, File image400File) async {
+    await uploadFile(cropFile, image400File);
 
-    if (originalUrl == null || thumbnailUrl == null) {
+    if (image400Url == null || thumbnailUrl == null) {
       Fluttertoast.showToast(msg: '图片上传失败', gravity: ToastGravity.CENTER);
       return false;
     }
-    final res = await Request.plantScan(originalUrl!, thumbnailUrl!);
+    final res = await Request.plantScan(image400Url!, thumbnailUrl!);
 
     if (res.statusCode == 200) {
       final responseData = res.data;
@@ -70,14 +72,14 @@ class PlantController extends GetxController {
     return false;
   }
 
-  Future<bool> plantDiagnosis(File cropFile, File originalFile) async {
-    await uploadFile(cropFile, originalFile);
+  Future<bool> plantDiagnosis(File cropFile, File image400File) async {
+    await uploadFile(cropFile, image400File);
 
-    if (originalUrl == null || thumbnailUrl == null) {
+    if (image400Url == null || thumbnailUrl == null) {
       Fluttertoast.showToast(msg: '图片上传失败', gravity: ToastGravity.CENTER);
       return false;
     }
-    final res = await Request.plantDiagnosis(originalUrl!, thumbnailUrl!);
+    final res = await Request.plantDiagnosis(image400Url!, thumbnailUrl!);
 
     if (res.statusCode == 200) {
       final responseData = res.data;

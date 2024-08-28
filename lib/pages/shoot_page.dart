@@ -117,8 +117,8 @@ class _ShootPageState extends State<ShootPage> {
     Get.dialog(const LoadingDialog());
     try {
       // 设置对焦，提高拍照效率
-      await _controller?.setFocusMode(FocusMode.locked);
-      await _controller?.setExposureMode(ExposureMode.locked);
+      // await _controller?.setFocusMode(FocusMode.locked);
+      // await _controller?.setExposureMode(ExposureMode.locked);
       if (_controller?.value.isInitialized ?? false) {
         final XFile imageFile = await _controller!.takePicture();
         img.Image image = (await FileUtils.xFileToImage(imageFile))!;
@@ -132,14 +132,16 @@ class _ShootPageState extends State<ShootPage> {
 ////////////
         final cropImage = img.copyCrop(image, x: x.toInt(), y: y.toInt(), width: cropWidth.toInt(), height: cropWidth.toInt());
         final cropFile = await FileUtils.imageToFile(cropImage);
-        if (cropFile == null) {
+        final image400 = img.copyResize(cropImage, width: 400, height: 400);
+        final image400File = await FileUtils.imageToFile(image400);
+        if (cropFile == null || image400File == null) {
           return;
         }
         Get.back();
         Get.to(
           () => ScanPage(
             cropFile: cropFile,
-            originalFile: File(imageFile.path),
+            image400File: image400File,
           ),
         );
       }
@@ -157,7 +159,7 @@ class _ShootPageState extends State<ShootPage> {
     try {
       final XFile? pickedFile = await _picker.pickImage(
         source: ImageSource.gallery,
-        // imageQuality: quality,
+        imageQuality: 60,
       );
       if (pickedFile != null) {
         Get.dialog(

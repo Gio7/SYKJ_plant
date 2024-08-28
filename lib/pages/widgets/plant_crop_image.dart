@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:crop_your_image/crop_your_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image/image.dart' as img;
 import 'package:plant/common/file_utils.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/loading_dialog.dart';
@@ -27,13 +29,28 @@ class PlantCropImage extends StatelessWidget {
                   willUpdateScale: (newScale) => newScale < 5,
                   controller: controller,
                   image: originalFile.readAsBytesSync(),
-                  onCropped: (croppedData) async {
+                  onCropped: (data) async {
+                    List<int> jpegBytes = img.encodeJpg(img.decodeImage(data)!, quality: 60);
+                    final croppedData = Uint8List.fromList(jpegBytes);
                     final cropFile = await FileUtils.listToFile(croppedData);
-                    Get.back();
                     if (cropFile == null) {
+                      Get.back();
                       return;
                     }
-                    Get.off(() => ScanPage(cropFile: cropFile, originalFile: originalFile));
+                    final cropImage = img.decodeImage(croppedData);
+                    if (cropImage == null) {
+                      Get.back();
+                      return;
+                    }
+                    final image400 = img.copyResize(cropImage, width: 400, height: 400);
+                    final image400File = await FileUtils.imageToFile(image400);
+                    if (image400File == null) {
+                      Get.back();
+                      return;
+                    }
+                    print('cropImage: ${cropImage.width} ${cropImage.height} ${await cropFile.length()}');
+                    print('image400: ${image400.width} ${image400.height} ${await image400File.length()}');
+                    Get.off(() => ScanPage(cropFile: cropFile, image400File: image400File));
                   },
                   withCircleUi: false,
                   onStatusChanged: (status) {

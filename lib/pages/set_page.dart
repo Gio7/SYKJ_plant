@@ -15,6 +15,7 @@ class SetPage extends StatelessWidget {
   void _onContact() {
     Get.dialog(
       DialogContainer(
+        bgColor: UIColor.cF3F4F3,
         child: Column(
           children: [
             Text(
@@ -28,46 +29,49 @@ class SetPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            GestureDetector(
-              onTap: () async {
-                Get.back();
-                try {
-                  final url = Uri.parse(GlobalData.telegramGroup);
-                  final bool isSul = await launchUrl(
-                    url,
-                  );
-                  if (!isSul) {
-                    Get.snackbar('error', 'fail');
+            if (GlobalData.telegramGroup.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 28),
+              child: GestureDetector(
+                onTap: () async {
+                  Get.back();
+                  try {
+                    final url = Uri.parse(GlobalData.telegramGroup);
+                    final bool isSul = await launchUrl(
+                      url,
+                    );
+                    if (!isSul) {
+                      Get.snackbar('error', 'fail');
+                    }
+                  } catch (e) {
+                    Get.snackbar('error', e.toString());
                   }
-                } catch (e) {
-                  Get.snackbar('error', e.toString());
-                }
-              },
-              child: Container(
-                height: 36,
-                color: UIColor.transparent,
-                margin: const EdgeInsets.symmetric(horizontal: 4),
-                child: Row(
-                  children: [
-                    Image.asset('images/icon/telegram.png', width: 36),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Text(
-                        'Telegram',
-                        style: TextStyle(
-                          color: UIColor.c8E8B8B,
-                          fontSize: 14,
-                          fontWeight: FontWeightExt.medium,
-                          decoration: TextDecoration.none,
+                },
+                child: Container(
+                  height: 36,
+                  color: UIColor.transparent,
+                  margin: const EdgeInsets.symmetric(horizontal: 4),
+                  child: Row(
+                    children: [
+                      Image.asset('images/icon/telegram.png', width: 36),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Text(
+                          'Telegram',
+                          style: TextStyle(
+                            color: UIColor.c8E8B8B,
+                            fontSize: 14,
+                            fontWeight: FontWeightExt.medium,
+                            decoration: TextDecoration.none,
+                          ),
                         ),
                       ),
-                    ),
-                    Image.asset('images/icon/arrow_right.png', width: 24),
-                  ],
+                      Image.asset('images/icon/arrow_right.png', width: 24),
+                    ],
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 28),
             GestureDetector(
               onTap: () async {
                 Get.back();
