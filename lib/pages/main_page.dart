@@ -1,7 +1,7 @@
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/components/costom_bottom_nav_bar.dart';
 import 'package:plant/components/page_bg.dart';
 import 'package:plant/controllers/main_controller.dart';
 import 'package:plant/controllers/user_controller.dart';
@@ -51,92 +51,19 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
             ],
           ),
         ),
-        bottomNavigationBar: StyleProvider(
-          style: Style(),
-          child: ConvexAppBar(
-            disableDefaultTabController: false,
-            initialActiveIndex: 0,
-            height: 64,
-            top: -15,
-            curveSize: 64,
-            style: TabStyle.fixedCircle,
-            backgroundColor: UIColor.white,
-            shadowColor: UIColor.transparent,
-            color: UIColor.cBDBDBD,
-            activeColor: UIColor.primary,
-            items: [
-              TabItem(
-                title: 'home'.tr,
-                icon: Image.asset(
-                  'images/tabbar/home.png',
-                  width: 24,
-                  height: 24,
-                ),
-                activeIcon: Image.asset(
-                  'images/tabbar/home_selected.png',
-                  width: 24,
-                  height: 24,
-                ),
-              ),
-              TabItem(
-                icon: Container(
-                  // padding: const EdgeInsets.only(bottom: 3),
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [UIColor.c40BD95, UIColor.cAEE9CD],
-                    ),
-                  ),
-                  child: Center(
-                    child: Image.asset('images/icon/camera.png', width: 32),
-                  ),
-                ),
-              ),
-              TabItem(
-                title: "myPlants".tr,
-                icon: Image.asset(
-                  'images/tabbar/my_plant.png',
-                  width: 24,
-                  height: 24,
-                ),
-                activeIcon: Image.asset(
-                  'images/tabbar/my_plant_selected.png',
-                  width: 24,
-                  height: 24,
-                ),
-              ),
-            ],
-            onTabNotify: (i) {
-              var intercept = i == 1;
-              if (intercept) {
-                Get.to(() => const ShootPage());
-              }
-              return !intercept;
-            },
-            onTap: (i) {
-              mainController.tabController.index = i;
-            },
-          ),
+        bottomNavigationBar: CostomBottomNavBar(
+          currentIndex: mainController.tabController.index,
+          onTap: (index) {
+            if (index == 1) {
+              return;
+            }
+            setState(() {
+              mainController.tabController.index = index;
+            });
+          },
+          centerOnTap: () => Get.to(() => const ShootPage()),
         ),
       ),
     );
-  }
-}
-
-class Style extends StyleHook {
-  @override
-  double get activeIconSize => 24;
-
-  @override
-  double get activeIconMargin => 14;
-
-  @override
-  double get iconSize => 24;
-
-  @override
-  TextStyle textStyle(Color color, String? fontFamily) {
-    return TextStyle(fontSize: 9, color: color, fontFamily: fontFamily);
   }
 }
