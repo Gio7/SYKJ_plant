@@ -59,7 +59,7 @@ class InfoIdentifyPage extends StatelessWidget {
       child: SingleChildScrollView(
         // physics: const ClampingScrollPhysics(),
         child: Container(
-          margin: EdgeInsets.only(top: 256, bottom: 70 + Get.mediaQuery.padding.bottom),
+          margin: EdgeInsets.only(top: 226, bottom: 70 + Get.mediaQuery.padding.bottom),
           padding: const EdgeInsets.only(top: 30, left: 16, right: 16),
           decoration: const ShapeDecoration(
             color: UIColor.cF3F4F3,
