@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -15,8 +16,9 @@ class ScanPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ctr = Get.find<PlantController>();
-    ctr.requestInfo(cropFile, image400File).then((isSuccess) => {
-          if (!isSuccess)
+    final completer = Completer<void>();
+    ctr.requestInfo(completer, cropFile, image400File).then((isSuccess) => {
+          if (!isSuccess && !(completer.isCompleted))
             {
               Get.dialog(
                 NormalDialog(
@@ -36,12 +38,13 @@ class ScanPage extends StatelessWidget {
               )
             }
         });
+    completer.future.catchError((e) => Get.log(e.toString(), isError: true));
 
     final width = Get.width - 116;
     return PopScope(
       canPop: true,
       onPopInvoked: (didPop) {
-        ctr.haveReturned = true;
+        completer.completeError('task cancel');
       },
       child: Container(
         decoration: const BoxDecoration(
