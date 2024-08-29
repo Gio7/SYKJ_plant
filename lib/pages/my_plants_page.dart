@@ -11,6 +11,7 @@ import 'package:plant/components/btn.dart';
 import 'package:plant/components/loading_dialog.dart';
 import 'package:plant/components/show_dialog.dart';
 import 'package:plant/controllers/plant_controller.dart';
+import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/plant_info_model.dart';
 import 'package:plant/models/plant_model.dart';
 import 'package:plant/pages/info_identify_page.dart';
@@ -33,9 +34,11 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
 
   @override
   void initState() {
-    _isLoading = true;
     super.initState();
-    _onRefresh();
+    if (Get.find<UserController>().isLogin.value) {
+      _isLoading = true;
+      _onRefresh();
+    }
   }
 
   Future<void> _onRefresh() async {
