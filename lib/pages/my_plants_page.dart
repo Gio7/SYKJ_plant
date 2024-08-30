@@ -77,7 +77,7 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
       ctr.thumbnailUrl = model.thumbnail;
       ctr.plantInfo = p;
       Get.back();
-      
+
       await Get.to(() => InfoIdentifyPage(hideBottom: true));
       ctr.dispose();
     } catch (e) {
@@ -104,10 +104,10 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
             ),
           ),
         ),
-        Expanded(
-          child: _dataList.isEmpty
-              ? _empty
-              : EasyRefresh(
+        _dataList.isEmpty
+            ? _empty
+            : Expanded(
+                child: EasyRefresh(
                   onRefresh: () {
                     _onRefresh();
                   },
@@ -124,7 +124,7 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
                     itemCount: _dataList.length,
                   ),
                 ),
-        ),
+              ),
       ],
     );
   }
@@ -196,7 +196,13 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 24),
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
-      decoration: DottedDecoration(shape: Shape.box, color: UIColor.cAEE9CD, strokeWidth: 1, dash: const <int>[2, 2], borderRadius: BorderRadius.circular(16)),
+      decoration: DottedDecoration(
+        shape: Shape.box,
+        color: UIColor.cAEE9CD,
+        strokeWidth: 1,
+        dash: const <int>[2, 2],
+        borderRadius: BorderRadius.circular(16),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

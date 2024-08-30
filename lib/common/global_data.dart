@@ -1,8 +1,9 @@
 // import 'buy_shop.dart';
 
 class GlobalData {
-  static String baseUrl = 'https://test.plantidentifier.co';
-
+  // static String baseUrl = 'https://test.plantidentifier.co';
+  /// 正式环境
+  static String baseUrl = 'https://api.plantidentifier.co';
   /// 用户协议
   static String termsOfUseUrl = 'https://plantidentifier.co/terms_of_use.html';
 
