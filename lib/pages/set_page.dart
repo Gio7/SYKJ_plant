@@ -311,7 +311,8 @@ class SetPage extends StatelessWidget {
                 ),
               ),
             const SizedBox(width: 8),
-            Image.asset(rightIcon, width: 24),
+            if (onTap != null)
+              Image.asset(rightIcon, width: 24),
           ],
         ),
       ),

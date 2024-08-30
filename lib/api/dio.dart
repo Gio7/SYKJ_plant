@@ -54,7 +54,7 @@ class DioUtil {
     if (Get.isDialogOpen ?? false) {
       Get.back();
     }
-    if (response?.statusCode == 401) {
+    if (response?.statusCode == 401 || response?.statusCode == 403) {
       SharedPreferences.getInstance().then((value) {
         value.remove('token');
         token = '';
@@ -80,7 +80,7 @@ class DioUtil {
             return responseData;
           }
           return responseData['data'];
-        } else if (responseData['code'] == 401) {
+        } else if (responseData['code'] == 401 || responseData['code'] == 403) {
           if (Get.isDialogOpen ?? false) {
             Get.back();
           }
@@ -120,7 +120,7 @@ class DioUtil {
         }
         if (responseData['code'] == 200 || responseData['code'] == 0) {
           return responseData['data'];
-        } else if (responseData['code'] == 401) {
+        } else if (responseData['code'] == 401 || responseData['code'] == 403) {
           if (Get.isDialogOpen ?? false) {
             Get.back();
           }
