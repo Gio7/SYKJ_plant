@@ -13,6 +13,7 @@ class AgreementTips extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: RichText(
+        textAlign: TextAlign.center,
         text: TextSpan(children: [
           TextSpan(
             text: 'agree1'.tr,

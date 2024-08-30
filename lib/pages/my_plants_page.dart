@@ -193,40 +193,46 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
   Widget get _empty {
     if (_isLoading) return const LoadingDialog();
     return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 24),
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
-      decoration: DottedDecoration(
-        shape: Shape.box,
-        color: UIColor.cAEE9CD,
-        strokeWidth: 1,
-        dash: const <int>[2, 2],
+      decoration: BoxDecoration(
+        color: UIColor.transparent40,
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image.asset('images/icon/plants.png', height: 70),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24),
-            child: Text(
-              'youHaveNoPlants'.tr,
-              style: const TextStyle(
-                color: UIColor.c15221D,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 24),
+        width: double.infinity,
+        decoration: DottedDecoration(
+          shape: Shape.box,
+          color: UIColor.cAEE9CD,
+          strokeWidth: 1,
+          dash: const <int>[2, 2],
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset('images/icon/plants.png', height: 70),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 24),
+              child: Text(
+                'youHaveNoPlants'.tr,
+                style: const TextStyle(
+                  color: UIColor.c15221D,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
-          ),
-          NormalButton(
-            onTap: () {
-              Get.to(() => const ShootPage());
-            },
-            bgColor: UIColor.transparentPrimary40,
-            text: 'addPlant'.tr,
-            textColor: UIColor.primary,
-          ),
-        ],
+            NormalButton(
+              onTap: () {
+                Get.to(() => const ShootPage());
+              },
+              bgColor: UIColor.transparentPrimary40,
+              text: 'addPlant'.tr,
+              textColor: UIColor.primary,
+            ),
+          ],
+        ),
       ),
     );
   }
