@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:plant/common/common_util.dart';
 import 'package:plant/common/global_data.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
@@ -35,17 +35,7 @@ class SetPage extends StatelessWidget {
               child: GestureDetector(
                 onTap: () async {
                   Get.back();
-                  try {
-                    final url = Uri.parse(GlobalData.telegramGroup);
-                    final bool isSul = await launchUrl(
-                      url,
-                    );
-                    if (!isSul) {
-                      Get.snackbar('error', 'fail');
-                    }
-                  } catch (e) {
-                    Get.snackbar('error', e.toString());
-                  }
+                  Common.skipUrl(GlobalData.telegramGroup);
                 },
                 child: Container(
                   height: 36,
@@ -75,17 +65,7 @@ class SetPage extends StatelessWidget {
             GestureDetector(
               onTap: () async {
                 Get.back();
-                try {
-                  final url = Uri.parse('mailto:${GlobalData.email}');
-                  final bool isSul = await launchUrl(
-                    url,
-                  );
-                  if (!isSul) {
-                    Get.snackbar('error', 'fail');
-                  }
-                } catch (e) {
-                  Get.snackbar('error', e.toString());
-                }
+                Common.skipUrl('mailto:${GlobalData.email}');
               },
               child: Container(
                 height: 36,
@@ -255,12 +235,12 @@ class SetPage extends StatelessWidget {
             //   'shareWithFriends'.tr,
             // ),
             _buildListItem(
-              () {},
+              () => Common.skipUrl(GlobalData.termsOfUseUrl),
               'images/icon/set_terms.png',
               'termsOfService'.tr,
             ),
             _buildListItem(
-              () {},
+              () => Common.skipUrl(GlobalData.privacyNoticeUrl),
               'images/icon/set_privacy.png',
               'privacyPolicy'.tr,
             ),
