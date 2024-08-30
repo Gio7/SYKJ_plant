@@ -272,7 +272,7 @@ class SetPage extends StatelessWidget {
                   _onDeleteAccount();
                 },
                 'images/icon/set_delete_account.png',
-                'deleteAccoun'.tr,
+                'deleteAccount'.tr,
               ),
             _buildListItem(
               null,

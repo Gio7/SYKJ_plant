@@ -67,7 +67,7 @@ class HelpExample extends StatelessWidget {
                   Image.asset('images/icon/tips3.png', height: 80),
                   const SizedBox(height: 10),
                   Text(
-                    'multiSpecise'.tr,
+                    'multiSpecies'.tr,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: UIColor.white,
