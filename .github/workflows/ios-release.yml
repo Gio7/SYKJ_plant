@@ -76,7 +76,7 @@ jobs:
         id: pgyer
         uses: xtayga/upload-pgyer-action@master
         with:
-            url: https://www.pgyer.com/apiv2/app/upload 
+            url: https://www.pgyer.com/apiv2/app/upload
             forms: '{"_api_key":"${{ secrets.PGY_KEY }}","buildName":"RSS"}'
             fileForms: '{"file":"build-output/ios/Plant Identifier.ipa"}' # ipa 的名字为 info.plist 中的 CFBundleName 
 
