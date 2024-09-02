@@ -10,7 +10,7 @@
 	<string>debugging</string>
 	<key>provisioningProfiles</key>
 	<dict>
-		<key>run.oldbird.hellorss</key>
+		<key>com.plant.identification</key>
 		<string>3a10d4e6-6940-4aed-a52b-f091d1113072</string>
 	</dict>
 	<key>signingCertificate</key>
