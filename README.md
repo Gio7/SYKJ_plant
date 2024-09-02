@@ -1,16 +1,7 @@
-# plant
+# iOS差异配置
 
-plant Scan
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+| - | 开发 | App Store |
+| --- | --- | --- |
+| 包名修改 | com.plant.identification | com.plant.identifier.diagnosis.scanner.app |
+| firebase配置文件 | plant/ios/Runner/test_GoogleService-Info.plist | plant/ios/Runner/pro_GoogleService-Info.plist |
+| firebase代码配置(lib/firebase_options.dart) | iosTest | iosPro |
