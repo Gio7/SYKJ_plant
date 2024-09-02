@@ -7,8 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  if: github.repository == 'Gio7/SYKJ_plant'
   build_ios:
+    if: github.repository == 'Gio7/SYKJ_plant'
     runs-on: macos-latest
     env:
       SHEME: Runner

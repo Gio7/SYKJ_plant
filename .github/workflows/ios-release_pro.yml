@@ -7,8 +7,8 @@ on:
   #     - main
 
 jobs:
-  if: github.repository == 'SuperInteractica/PlantIdentification'
   build:
+    if: github.repository == 'SuperInteractica/PlantIdentification'
     name: build
     runs-on: macos-latest
     steps:
