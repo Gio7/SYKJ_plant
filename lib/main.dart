@@ -77,7 +77,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Music Lab',
+      title: 'Plant Identifier',
       themeMode: ThemeMode.dark,
       initialBinding: CoreBindingController(),
       translations: Language(),
