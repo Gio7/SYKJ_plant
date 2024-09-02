@@ -1,11 +1,13 @@
-name: Build and Distribute
+name: iOS_Build and Distribute
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
 
 jobs:
+  if: github.repository == 'SuperInteractica/PlantIdentification'
   build:
     name: build
     runs-on: macos-latest

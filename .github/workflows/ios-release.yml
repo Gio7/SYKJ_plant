@@ -1,4 +1,4 @@
-name: Flutter_iOS
+name: Flutter_iOS_Test
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
     branches: [main]
 
 jobs:
+  if: github.repository == 'Gio7/SYKJ_plant'
   build_ios:
     runs-on: macos-latest
     env:
@@ -81,7 +82,7 @@ jobs:
             fileForms: '{"file":"build-output/ios/Plant Identifier.ipa"}' # ipa 的名字为 info.plist 中的 CFBundleName 
 
       - name: Publish iOS Artefacts
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: release-ios
           path: build-output/ios
