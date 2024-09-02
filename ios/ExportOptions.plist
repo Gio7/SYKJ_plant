@@ -2,16 +2,26 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>compileBitcode</key>
+	<false/>
+	<key>destination</key>
+	<string>export</string>
 	<key>method</key>
-	<string>development</string>
-	<key>teamID</key>
-	<string>63PFVXMX6T</string>
-	<key>signingStyle</key>
-	<string>manual</string>
+	<string>debugging</string>
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>run.oldbird.hellorss</key>
 		<string>3a10d4e6-6940-4aed-a52b-f091d1113072</string>
 	</dict>
+	<key>signingCertificate</key>
+	<string>Apple Development</string>
+	<key>signingStyle</key>
+	<string>manual</string>
+	<key>stripSwiftSymbols</key>
+	<true/>
+	<key>teamID</key>
+	<string>63PFVXMX6T</string>
+	<key>thinning</key>
+	<string>&lt;none&gt;</string>
 </dict>
 </plist>
