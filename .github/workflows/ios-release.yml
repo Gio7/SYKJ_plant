@@ -14,7 +14,7 @@ jobs:
       BUILD_CONFIGURATION: Release
       TEAM_ID: 63PFVXMX6T
       PROVISIONING_PROFILE: 3a10d4e6-6940-4aed-a52b-f091d1113072
-      CODE_SIGN_IDENTITY: "Apple Development: YING LI (PBURLBLY8R)"
+      CODE_SIGN_IDENTITY: "Apple Development: YING LI (P8URLBLY8R)"
 
     steps:
       - name: Checkout the code
