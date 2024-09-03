@@ -34,7 +34,7 @@ jobs:
       - name: Upload using iTMSTransporter
         env:
           WORKING_DIRECTORY: build/ios/ipa
-          IPA_FILE_NAME: PlantIdentifier.ipa
+          IPA_FILE_NAME: Plant\ Identifier.ipa
           APPLE_USERNAME: ${{ secrets.APPLE_USERNAME }}
           APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
           APPLE_ASC_PROVIDER: ADKZT87JCB
