@@ -29,9 +29,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return iosPro;
+        return ios;
       case TargetPlatform.macOS:
-        return iosPro;
+        return ios;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -58,7 +58,7 @@ class DefaultFirebaseOptions {
     storageBucket: 'plant-identifier-scanner.appspot.com',
   );
 
-  static const FirebaseOptions iosPro = FirebaseOptions(
+  static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAhFkMn6MYMvNOBDIWuLB2VaKqu4BdDfjQ',
     appId: '1:225439231868:ios:68d1bba0d4c56a5fc2bef9',
     messagingSenderId: '225439231868',
