@@ -29,11 +29,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: release-ipa
-          path: build/ios/ipa
+          path: build/ios
       
       - name: Upload using iTMSTransporter
         env:
-          WORKING_DIRECTORY: build/ios/ipa
+          WORKING_DIRECTORY: build/ios
           IPA_FILE_NAME: Plant Identifier.ipa
           APPLE_USERNAME: ${{ secrets.APPLE_USERNAME }}
           APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
