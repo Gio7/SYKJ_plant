@@ -7,11 +7,11 @@
 	<key>destination</key>
 	<string>export</string>
 	<key>method</key>
-	<string>debugging</string>
+	<string>app-store</string><!-- app-store, ad-hoc, enterprise, development -->
 	<key>provisioningProfiles</key>
 	<dict>
-		<key>com.plant.identification</key>
-		<string>3a10d4e6-6940-4aed-a52b-f091d1113072</string>
+		<key>com.plant.identifier.diagnosis.scanner.app</key>
+		<string>9a8485ac-d3a8-4a3b-b1fc-3a5dd9eac381</string>
 	</dict>
 	<key>signingCertificate</key>
 	<string>Apple Development</string>
@@ -20,7 +20,7 @@
 	<key>stripSwiftSymbols</key>
 	<true/>
 	<key>teamID</key>
-	<string>63PFVXMX6T</string>
+	<string>ADKZT87JCB</string>
 	<key>thinning</key>
 	<string>&lt;none&gt;</string>
 </dict>

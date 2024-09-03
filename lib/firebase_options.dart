@@ -29,9 +29,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return iosTest;
+        return iosPro;
       case TargetPlatform.macOS:
-        return iosTest;
+        return iosPro;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
