@@ -38,37 +38,8 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
     if (Get.find<UserController>().isLogin.value) {
       repository.isLoading.value = true;
       controller.onRefresh();
-      // _isLoading = true;
-      // _onRefresh();
     }
   }
-
-  // Future<void> _onRefresh() async {
-  //   _isLastPage = false;
-  //   setState(() {
-  //     // _dataList.clear();
-  //     _isLoading = true;
-  //   });
-  //   _pageNum = 1;
-  //   final res = await Request.getPlantScanHistory(_pageNum);
-  //   _isLastPage = res['lastPage'];
-  //   final rows = (res['rows'] as List).map((plant) => PlantModel.fromJson(plant)).toList();
-  //   setState(() {
-  //     _isLoading = false;
-  //     _dataList = rows;
-  //   });
-  // }
-
-  // Future<void> _onLoad() async {
-  //   if (_isLastPage) return;
-  //   _pageNum++;
-  //   final res = await Request.getPlantScanHistory(_pageNum);
-  //   _isLastPage = res['lastPage'];
-  //   final rows = (res['rows'] as List).map((plant) => PlantModel.fromJson(plant)).toList();
-  //   setState(() {
-  //     _dataList.addAll(rows);
-  //   });
-  // }
 
   Future<void> getPlantDetailByRecord(PlantModel model) async {
     Get.dialog(const LoadingDialog(), barrierDismissible: false);
