@@ -27,13 +27,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Your consent is required to access the camera for photography and other functions.</string>
+	<string>To take pictures of plants and identify them.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>We need your consent to access the microphone, To provide voice related functions andservices.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>App requires access to your photo library to let you browse your albums.</string>
+	<string>To select plant pictures from your albums for identification.</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>This helps Plant Identifier provide you with a more personalized service, which you can turn off at any time through \"Settings\" - \"Privacy\".</string>
+	<string>Your data will be used to deliver personalized ads to you.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

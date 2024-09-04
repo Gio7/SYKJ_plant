@@ -2,26 +2,26 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>compileBitcode</key>
-	<false/>
 	<key>destination</key>
 	<string>export</string>
+	<key>manageAppVersionAndBuildNumber</key>
+	<true/>
 	<key>method</key>
-	<string>debugging</string>
+	<string>app-store</string>
 	<key>provisioningProfiles</key>
 	<dict>
-		<key>com.plant.identification</key>
-		<string>3a10d4e6-6940-4aed-a52b-f091d1113072</string>
+		<key>com.plant.identifier.diagnosis.scanner.app</key>
+		<string>PlantIdentifier</string>
 	</dict>
 	<key>signingCertificate</key>
-	<string>Apple Development</string>
+	<string>Apple Distribution</string>
 	<key>signingStyle</key>
 	<string>manual</string>
 	<key>stripSwiftSymbols</key>
 	<true/>
 	<key>teamID</key>
-	<string>63PFVXMX6T</string>
-	<key>thinning</key>
-	<string>&lt;none&gt;</string>
+	<string>ADKZT87JCB</string>
+	<key>uploadSymbols</key>
+	<true/>
 </dict>
 </plist>
