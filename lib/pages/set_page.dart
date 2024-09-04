@@ -9,6 +9,7 @@ import 'package:plant/components/btn.dart';
 import 'package:plant/components/show_dialog.dart';
 import 'package:plant/components/nav_bar.dart';
 import 'package:plant/controllers/user_controller.dart';
+import 'package:plant/models/userinfo_model.dart';
 import 'package:plant/pages/login/login_page.dart';
 
 class SetPage extends StatelessWidget {
@@ -32,38 +33,38 @@ class SetPage extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             if (GlobalData.telegramGroup.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.only(bottom: 28),
-              child: GestureDetector(
-                onTap: () async {
-                  Get.back();
-                  Common.skipUrl(GlobalData.telegramGroup);
-                },
-                child: Container(
-                  height: 36,
-                  color: UIColor.transparent,
-                  margin: const EdgeInsets.symmetric(horizontal: 4),
-                  child: Row(
-                    children: [
-                      Image.asset('images/icon/telegram.png', width: 36),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Text(
-                          'Telegram',
-                          style: TextStyle(
-                            color: UIColor.c8E8B8B,
-                            fontSize: 14,
-                            fontWeight: FontWeightExt.medium,
-                            decoration: TextDecoration.none,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 28),
+                child: GestureDetector(
+                  onTap: () async {
+                    Get.back();
+                    Common.skipUrl(GlobalData.telegramGroup);
+                  },
+                  child: Container(
+                    height: 36,
+                    color: UIColor.transparent,
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    child: Row(
+                      children: [
+                        Image.asset('images/icon/telegram.png', width: 36),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Text(
+                            'Telegram',
+                            style: TextStyle(
+                              color: UIColor.c8E8B8B,
+                              fontSize: 14,
+                              fontWeight: FontWeightExt.medium,
+                              decoration: TextDecoration.none,
+                            ),
                           ),
                         ),
-                      ),
-                      Image.asset('images/icon/arrow_right.png', width: 24),
-                    ],
+                        Image.asset('images/icon/arrow_right.png', width: 24),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
             GestureDetector(
               onTap: () async {
                 Get.back();
@@ -313,8 +314,7 @@ class SetPage extends StatelessWidget {
                 ),
               ),
             const SizedBox(width: 8),
-            if (onTap != null)
-              Image.asset(rightIcon, width: 24),
+            if (onTap != null) Image.asset(rightIcon, width: 24),
           ],
         ),
       ),
@@ -322,34 +322,34 @@ class SetPage extends StatelessWidget {
   }
 
   String _getWelcomeText(UserController userController) {
-    if (userController.userInfo.value.memberType == 1) {
+    if (userController.userInfo.value.memberType == MemberType.normal) {
       return 'getProTips'.tr;
     }
-    if (userController.userInfo.value.memberType == 2) {
+    if (userController.userInfo.value.memberType == MemberType.weekly) {
       return 'weeklyMembership'.tr;
     }
-    if (userController.userInfo.value.memberType == 4) {
+    if (userController.userInfo.value.memberType == MemberType.yearly) {
       return 'yearsMembership'.tr;
     }
     return 'welcome'.tr;
   }
 
   Positioned _buildImage(UserController userController) {
-    if (userController.userInfo.value.memberType == 1) {
+    if (userController.userInfo.value.memberType == MemberType.normal) {
       return Positioned(
         right: -6,
         bottom: 12,
         child: Image.asset('images/icon/have_logged_in.png', height: 142),
       );
     }
-    if (userController.userInfo.value.memberType == 2) {
+    if (userController.userInfo.value.memberType == MemberType.weekly) {
       return Positioned(
         right: 5,
         bottom: 15,
         child: Image.asset('images/icon/week_vip.png', height: 120),
       );
     }
-    if (userController.userInfo.value.memberType == 4) {
+    if (userController.userInfo.value.memberType == MemberType.yearly) {
       return Positioned(
         right: 5,
         bottom: 15,
@@ -364,52 +364,32 @@ class SetPage extends StatelessWidget {
   }
 
   NormalButton _buildBtn(UserController userController) {
-    if (userController.userInfo.value.memberType == 1) {
-      // return NormalButton(
-      //   onTap: () {
-      //     // TODO 订阅
-      //   },
-      //   text: 'getPro'.tr,
-      //   textColor: UIColor.c00997A,
-      //   bgColors: const [UIColor.cD7FF38, UIColor.cAAFFD6],
-      //   bgColor: UIColor.cAAFFD6,
-      // );
+    if (userController.userInfo.value.memberType == null) {
       return NormalButton(
-        onTap: () async{
-          _copy('${userController.userInfo.value.userid}');
+        onTap: () {
+          Get.to(() => const LoginPage(), fullscreenDialog: true);
         },
-        text: '${'no.'.tr}${userController.userInfo.value.userid}',
+        text: 'logIn'.tr,
         textColor: UIColor.c00997A,
         bgColor: UIColor.cAEE9CD,
       );
     }
-
-    if (userController.userInfo.value.memberType == 2) {
+    if (userController.userInfo.value.memberType == MemberType.normal) {
       return NormalButton(
         onTap: () {
-          _copy('${userController.userInfo.value.userid}');
+          // TODO 订阅
         },
-        text: '${'no.'.tr}${userController.userInfo.value.userid}',
+        text: 'getPro'.tr,
         textColor: UIColor.c00997A,
-        bgColor: UIColor.cAEE9CD,
-      );
-    }
-
-    if (userController.userInfo.value.memberType == 4) {
-      return NormalButton(
-        onTap: () {
-          _copy('${userController.userInfo.value.userid}');
-        },
-        text: '${'no.'.tr}${userController.userInfo.value.userid}',
-        textColor: UIColor.c00997A,
-        bgColor: UIColor.cAEE9CD,
+        bgColors: const [UIColor.cD7FF38, UIColor.cAAFFD6],
+        bgColor: UIColor.cAAFFD6,
       );
     }
     return NormalButton(
       onTap: () {
-        Get.to(() => const LoginPage(), fullscreenDialog: true);
+        _copy('${userController.userInfo.value.userid}');
       },
-      text: 'logIn'.tr,
+      text: '${'no.'.tr}${userController.userInfo.value.userid}',
       textColor: UIColor.c00997A,
       bgColor: UIColor.cAEE9CD,
     );

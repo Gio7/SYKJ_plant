@@ -15,6 +15,7 @@ class Request {
   static const String _getConfig = '/Plant/common/getConfig';
   static const String _scanByScientificName = '/Plant/plant/scanByScientificName';
   static const String _getPlantDetailByRecord = '/Plant/plant/getPlantDetailByRecord';
+  static const String _getShopList = '/Plant/shop/getShopList';
 
   /// telegram_group\email
   static Future<void> getConfig([List<String> conKey = const ['telegram_group', 'email']]) async {
@@ -73,5 +74,12 @@ class Request {
 
   static Future<dynamic> getPlantDetailByRecord(int id) async {
     return await DioUtil.httpPost(_getPlantDetailByRecord, data: {'scanRecordId': id});
+  }
+
+  /// 查询商品列表
+  /// 
+  /// [type]: 0 会员商品 
+  static Future<List<dynamic>> getShopList(String type) async {
+    return await DioUtil.httpGet(_getShopList, parameters: {"type": type});
   }
 }

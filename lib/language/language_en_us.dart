@@ -133,6 +133,10 @@ class LanguageEnUs {
       'keyFacts': 'Key Facts',
       'placeThePlantInTheCenter': 'Place the plant in the center',
       'copySuccess': 'Copy Success',
+      'paymentInitiationFailure': 'Failed to initiate payment',
+      'orderCreationFailure': 'Failed to create order',
+      'productNotFound': 'Product not found',
+      'paymentHasBeenCanceled': 'Payment has been canceled.',
     };
   }
 }

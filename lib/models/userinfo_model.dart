@@ -1,19 +1,45 @@
 import 'package:intl/intl.dart';
 import 'package:plant/common/date_util.dart';
 
+/// 会员类型
+enum MemberType {
+  /// 非会员
+  normal(1),
+
+  /// 周卡
+  weekly(2),
+
+  /// 年卡
+  yearly(3);
+
+  const MemberType(this.value);
+  final int value;
+
+  static MemberType fromValue(int value) {
+    switch (value) {
+      case 1:
+        return MemberType.normal;
+      case 2:
+        return MemberType.weekly;
+      case 3:
+        return MemberType.yearly;
+      default:
+        return MemberType.normal;
+    }
+  }
+}
+
 class UserInfoModel {
   /// 时间戳
   final String? expireTime;
   final int? expireTimestamp;
   String? nickname;
 
-  /// 会员类型 1=普通 2=周卡 3=月卡 4=年卡
-  final int? memberType;
+  final MemberType? memberType;
   final int? userid;
   final int? point;
 
-  /// 是否永久会员
-  final bool isLifetimeUser;
+  final bool _isVip;
 
   UserInfoModel({
     this.expireTimestamp,
@@ -22,31 +48,31 @@ class UserInfoModel {
     this.memberType,
     this.userid,
     this.point,
-    this.isLifetimeUser = false,
-  });
+    bool isVip = false,
+  }) : _isVip = isVip;
 
   factory UserInfoModel.fromJson(Map<String, dynamic> json) => UserInfoModel(
         expireTime: json["expireTime"],
         expireTimestamp: json["expireTimestamp"],
         nickname: json["nickname"],
-        memberType: json["memberType"],
+        memberType: MemberType.fromValue(json["memberType"]),
         userid: json["userid"],
         point: json["point"],
-        isLifetimeUser: json["isLifetimeUser"] ?? false,
+        isVip: json["isVip"] ?? false,
       );
 
   toMap() => {
         "expireTime": expireTime,
         "expireTimestamp": expireTimestamp,
         "nickname": nickname,
-        "memberType": memberType,
+        "memberType": memberType?.value,
         "userid": userid,
         "point": point,
-        "isLifetimeUser": isLifetimeUser,
+        "isVip": _isVip,
       };
 
   bool get isRealVip {
-    if (memberType != 1 && expireTimestamp != null) {
+    if (_isVip && memberType != MemberType.normal && expireTimestamp != null) {
       if (expireTimestamp! > DateTime.now().millisecondsSinceEpoch) {
         return true;
       }

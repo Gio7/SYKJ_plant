@@ -11,10 +11,11 @@ class ShopPage extends StatelessWidget {
   ShopPage({super.key});
 
   final controller = Get.put(ShopController());
-  final repository = Get.find<ShopController>().repository;
+  final state = Get.find<ShopController>().state;
 
   @override
   Widget build(BuildContext context) {
+    controller.getShopList();
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -79,15 +80,15 @@ class ShopPage extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 32),
-                          repository.isInRequest.value
+                          state.isInRequest.value
                               ? const LoadingDialog()
                               : Column(
-                                  children: repository.productList!
+                                  children: state.productList!
                                       .map(
                                         (e) => buildShopItem(
-                                          isSelected: repository.currentProduct == e,
-                                          title: e['title'],
-                                          amount: e['amount'],
+                                          isSelected: state.currentProduct.value == e,
+                                          title: '3-day free trial',
+                                          amount: '123',
                                           onTap: () => controller.selectProduct(e),
                                         ),
                                       )
