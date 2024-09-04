@@ -11,7 +11,7 @@ class ShopPage extends StatelessWidget {
   ShopPage({super.key});
 
   final controller = Get.put(ShopController());
-  final state = Get.find<ShopController>().state;
+  final repository = Get.find<ShopController>().repository;
 
   @override
   Widget build(BuildContext context) {
@@ -79,13 +79,13 @@ class ShopPage extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 32),
-                          state.isInRequest.value
+                          repository.isInRequest.value
                               ? const LoadingDialog()
                               : Column(
-                                  children: state.productList!
+                                  children: repository.productList!
                                       .map(
                                         (e) => buildShopItem(
-                                          isSelected: state.currentProduct == e,
+                                          isSelected: repository.currentProduct == e,
                                           title: e['title'],
                                           amount: e['amount'],
                                           onTap: () => controller.selectProduct(e),

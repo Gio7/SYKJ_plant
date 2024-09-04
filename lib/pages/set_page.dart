@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/common_util.dart';
 import 'package:plant/common/global_data.dart';
@@ -373,8 +375,8 @@ class SetPage extends StatelessWidget {
       //   bgColor: UIColor.cAAFFD6,
       // );
       return NormalButton(
-        onTap: () {
-          // TODO 复制
+        onTap: () async{
+          _copy('${userController.userInfo.value.userid}');
         },
         text: '${'no.'.tr}${userController.userInfo.value.userid}',
         textColor: UIColor.c00997A,
@@ -385,7 +387,7 @@ class SetPage extends StatelessWidget {
     if (userController.userInfo.value.memberType == 2) {
       return NormalButton(
         onTap: () {
-          // TODO 复制
+          _copy('${userController.userInfo.value.userid}');
         },
         text: '${'no.'.tr}${userController.userInfo.value.userid}',
         textColor: UIColor.c00997A,
@@ -396,7 +398,7 @@ class SetPage extends StatelessWidget {
     if (userController.userInfo.value.memberType == 4) {
       return NormalButton(
         onTap: () {
-          // TODO 复制
+          _copy('${userController.userInfo.value.userid}');
         },
         text: '${'no.'.tr}${userController.userInfo.value.userid}',
         textColor: UIColor.c00997A,
@@ -411,5 +413,11 @@ class SetPage extends StatelessWidget {
       textColor: UIColor.c00997A,
       bgColor: UIColor.cAEE9CD,
     );
+  }
+
+  Future<void> _copy(String text) async {
+    HapticFeedback.lightImpact();
+    await Clipboard.setData(ClipboardData(text: text));
+    Fluttertoast.showToast(msg: 'copySuccess'.tr);
   }
 }

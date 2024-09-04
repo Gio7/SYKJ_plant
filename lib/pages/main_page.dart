@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/costom_bottom_nav_bar.dart';
@@ -54,6 +55,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         bottomNavigationBar: CostomBottomNavBar(
           currentIndex: mainController.tabController.index,
           onTap: (index) {
+            HapticFeedback.lightImpact();
             if (index == 1) {
               return;
             }
@@ -61,7 +63,10 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
               mainController.tabController.index = index;
             });
           },
-          centerOnTap: () => Get.to(() => const ShootPage()),
+          centerOnTap: () {
+            HapticFeedback.lightImpact();
+            Get.to(() => const ShootPage());
+          },
         ),
       ),
     );

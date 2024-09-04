@@ -132,6 +132,7 @@ class LanguageEnUs {
       'submit': 'Submit',
       'keyFacts': 'Key Facts',
       'placeThePlantInTheCenter': 'Place the plant in the center',
+      'copySuccess': 'Copy Success',
     };
   }
 }
