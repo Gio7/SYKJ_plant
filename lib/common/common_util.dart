@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:url_launcher/url_launcher.dart';
+
 class Common {
   static Function() debounce(Function fn, [int t = 500]) {
     Timer? debounce;
@@ -14,5 +16,24 @@ class Common {
         debounce = null;
       });
     };
+  }
+
+  static Future<void> skipUrl(String? urlString) async {
+    if (urlString == null || urlString.isEmpty) {
+      throw Exception('url null');
+    }
+    try {
+      final url = Uri.parse(urlString);
+      final bool isSul = await launchUrl(
+        url,
+      );
+      if (!isSul) {
+        // Get.snackbar('error', 'fail');
+        throw Exception('fail');
+      }
+    } catch (e) {
+      rethrow;
+      // Get.snackbar('error', e.toString());
+    }
   }
 }

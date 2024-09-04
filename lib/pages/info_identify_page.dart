@@ -7,6 +7,7 @@ import 'package:plant/components/btn.dart';
 import 'package:plant/components/loading_dialog.dart';
 import 'package:plant/controllers/main_controller.dart';
 import 'package:plant/controllers/plant_controller.dart';
+import 'package:plant/pages/my_plants/my_plants_controller.dart';
 
 import 'widgets/info_characteristics.dart';
 import 'widgets/info_conditions.dart';
@@ -159,6 +160,9 @@ class InfoIdentifyPage extends StatelessWidget {
                   Get.back();
                   Get.until((route) => Get.currentRoute == '/');
                   Get.find<MainController>().tabController.index = 2;
+                  if (Get.isRegistered<MyPlantsController>() == true) {
+                    Get.find<MyPlantsController>().onRefresh();
+                  }
                 }, 500),
                 text: 'saveToMyGarden'.tr,
                 textColor: UIColor.white,

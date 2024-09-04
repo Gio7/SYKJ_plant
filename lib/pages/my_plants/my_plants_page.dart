@@ -16,8 +16,9 @@ import 'package:plant/models/plant_info_model.dart';
 import 'package:plant/models/plant_model.dart';
 import 'package:plant/pages/info_identify_page.dart';
 
-import 'shoot_page.dart';
-import '../components/user_nav_bar.dart';
+import '../shoot_page.dart';
+import '../../components/user_nav_bar.dart';
+import 'my_plants_controller.dart';
 
 class MyPlantsPage extends StatefulWidget {
   const MyPlantsPage({super.key});
@@ -27,45 +28,17 @@ class MyPlantsPage extends StatefulWidget {
 }
 
 class _MyPlantsPageState extends State<MyPlantsPage> {
-  List<PlantModel> _dataList = [];
-  int _pageNum = 1;
-  bool _isLoading = false;
-  bool _isLastPage = false;
+  
+  final controller = Get.put(MyPlantsController());
+  final repository = Get.find<MyPlantsController>().repository;
 
   @override
   void initState() {
     super.initState();
     if (Get.find<UserController>().isLogin.value) {
-      _isLoading = true;
-      _onRefresh();
+      repository.isLoading.value = true;
+      controller.onRefresh();
     }
-  }
-
-  Future<void> _onRefresh() async {
-    _isLastPage = false;
-    setState(() {
-      // _dataList.clear();
-      _isLoading = true;
-    });
-    _pageNum = 1;
-    final res = await Request.getPlantScanHistory(_pageNum);
-    _isLastPage = res['lastPage'];
-    final rows = (res['rows'] as List).map((plant) => PlantModel.fromJson(plant)).toList();
-    setState(() {
-      _isLoading = false;
-      _dataList = rows;
-    });
-  }
-
-  Future<void> _onLoad() async {
-    if (_isLastPage) return;
-    _pageNum++;
-    final res = await Request.getPlantScanHistory(_pageNum);
-    _isLastPage = res['lastPage'];
-    final rows = (res['rows'] as List).map((plant) => PlantModel.fromJson(plant)).toList();
-    setState(() {
-      _dataList.addAll(rows);
-    });
   }
 
   Future<void> getPlantDetailByRecord(PlantModel model) async {
@@ -77,7 +50,7 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
       ctr.thumbnailUrl = model.thumbnail;
       ctr.plantInfo = p;
       Get.back();
-      
+
       await Get.to(() => InfoIdentifyPage(hideBottom: true));
       ctr.dispose();
     } catch (e) {
@@ -89,7 +62,7 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Obx(() => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const UserNavBar(needUser: true),
@@ -104,29 +77,29 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
             ),
           ),
         ),
-        Expanded(
-          child: _dataList.isEmpty
-              ? _empty
-              : EasyRefresh(
+        repository.dataList.isEmpty
+            ? _empty
+            : Expanded(
+                child: EasyRefresh(
                   onRefresh: () {
-                    _onRefresh();
+                    controller.onRefresh();
                   },
                   onLoad: () {
-                    _onLoad();
+                    controller.onLoad();
                   },
                   child: ListView.separated(
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
                     itemBuilder: (_, i) {
-                      final p = _dataList[i];
+                      final p = repository.dataList[i];
                       return _buildItem(p);
                     },
                     separatorBuilder: (_, __) => const SizedBox(height: 16),
-                    itemCount: _dataList.length,
+                    itemCount: repository.dataList.length,
                   ),
                 ),
-        ),
+              ),
       ],
-    );
+    ));
   }
 
   Widget _buildItem(PlantModel model) {
@@ -191,36 +164,48 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
   }
 
   Widget get _empty {
-    if (_isLoading) return const LoadingDialog();
+    if (repository.isLoading.value) return const LoadingDialog();
     return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 24),
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
-      decoration: DottedDecoration(shape: Shape.box, color: UIColor.cAEE9CD, strokeWidth: 1, dash: const <int>[2, 2], borderRadius: BorderRadius.circular(16)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image.asset('images/icon/plants.png', height: 70),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24),
-            child: Text(
-              'youHaveNoPlants'.tr,
-              style: const TextStyle(
-                color: UIColor.c15221D,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
+      decoration: BoxDecoration(
+        color: UIColor.transparent40,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 24),
+        width: double.infinity,
+        decoration: DottedDecoration(
+          shape: Shape.box,
+          color: UIColor.cAEE9CD,
+          strokeWidth: 1,
+          dash: const <int>[2, 2],
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset('images/icon/plants.png', height: 70),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 24),
+              child: Text(
+                'youHaveNoPlants'.tr,
+                style: const TextStyle(
+                  color: UIColor.c15221D,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
-          ),
-          NormalButton(
-            onTap: () {
-              Get.to(() => const ShootPage());
-            },
-            bgColor: UIColor.transparentPrimary40,
-            text: 'addPlant'.tr,
-            textColor: UIColor.primary,
-          ),
-        ],
+            NormalButton(
+              onTap: () {
+                Get.to(() => const ShootPage());
+              },
+              bgColor: UIColor.transparentPrimary40,
+              text: 'addPlant'.tr,
+              textColor: UIColor.primary,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -273,9 +258,9 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
                     onConfirm: () async {
                       Get.back();
                       Request.plantScanDelete(model.id!);
-                      setState(() {
-                        _dataList.removeWhere((element) => element.id == model.id);
-                      });
+                        repository.dataList.removeWhere((element) => element.id == model.id);
+                      // setState(() {
+                      // });
                     },
                   ),
                 );

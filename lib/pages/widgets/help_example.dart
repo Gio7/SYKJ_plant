@@ -28,55 +28,60 @@ class HelpExample extends StatelessWidget {
           Image.asset('images/icon/tips0.png', height: 160),
           const SizedBox(height: 50),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Column(
-                children: [
-                  Image.asset('images/icon/tips1.png', height: 80),
-                  const SizedBox(height: 10),
-                  Text(
-                    'tooClose'.tr,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: UIColor.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      decoration: TextDecoration.none,
-                    ),
-                  )
-                ],
+              Expanded(
+                child: Column(
+                  children: [
+                    Image.asset('images/icon/tips1.png', height: 80),
+                    const SizedBox(height: 10),
+                    Text(
+                      'tooClose'.tr,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: UIColor.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        decoration: TextDecoration.none,
+                      ),
+                    )
+                  ],
+                ),
               ),
-              Column(
-                children: [
-                  Image.asset('images/icon/tips2.png', height: 80),
-                  const SizedBox(height: 10),
-                  Text(
-                    'tooFar'.tr,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: UIColor.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      decoration: TextDecoration.none,
-                    ),
-                  )
-                ],
+              Expanded(
+                child: Column(
+                  children: [
+                    Image.asset('images/icon/tips2.png', height: 80),
+                    const SizedBox(height: 10),
+                    Text(
+                      'tooFar'.tr,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: UIColor.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        decoration: TextDecoration.none,
+                      ),
+                    )
+                  ],
+                ),
               ),
-              Column(
-                children: [
-                  Image.asset('images/icon/tips3.png', height: 80),
-                  const SizedBox(height: 10),
-                  Text(
-                    'multiSpecies'.tr,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: UIColor.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      decoration: TextDecoration.none,
-                    ),
-                  )
-                ],
+              Expanded(
+                child: Column(
+                  children: [
+                    Image.asset('images/icon/tips3.png', height: 80),
+                    const SizedBox(height: 10),
+                    Text(
+                      'multiSpecies'.tr,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: UIColor.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        decoration: TextDecoration.none,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ],
           ),

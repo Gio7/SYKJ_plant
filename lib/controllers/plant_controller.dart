@@ -27,6 +27,8 @@ class PlantController extends GetxController {
   PlantDiagnosisModel? diagnoseInfo;
 
   Future<bool> requestInfo(Completer<void> completer, File cropFile, File image400File) async {
+    plantInfo = null;
+    diagnoseInfo = null;
     await uploadFile(completer, cropFile, image400File);
     if (completer.isCompleted) return false;
     if (image400Url == null || thumbnailUrl == null) {

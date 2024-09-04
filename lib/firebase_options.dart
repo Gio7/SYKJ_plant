@@ -29,9 +29,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return iosTest;
+        return ios;
       case TargetPlatform.macOS:
-        return iosTest;
+        return ios;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -58,19 +58,7 @@ class DefaultFirebaseOptions {
     storageBucket: 'plant-identifier-scanner.appspot.com',
   );
 
-  static const FirebaseOptions iosPro = FirebaseOptions(
-    apiKey: 'AIzaSyAhFkMn6MYMvNOBDIWuLB2VaKqu4BdDfjQ',
-    appId: '1:225439231868:ios:68d1bba0d4c56a5fc2bef9',
-    messagingSenderId: '225439231868',
-    projectId: 'plant-identifier-for-ios',
-    databaseURL: 'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'plant-identifier-for-ios.appspot.com',
-    androidClientId: 'com.plant.identifier.diagnosis.scanner.app',
-    iosClientId: 'com.plant.identifier.diagnosis.scanner.app',
-    iosBundleId: 'com.plant.identifier.diagnosis.scanner.app',
-  );
-
-  static const FirebaseOptions iosTest = FirebaseOptions(
+  static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyD6NsCMq7-HL8ytu1gfK4sOdOSC0w0N1WE',
     appId: '1:361651658601:ios:ae5f05d1c815d4e0d0e7f8',
     messagingSenderId: '361651658601',

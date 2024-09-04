@@ -98,14 +98,21 @@ class ScanPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 50),
-            Obx(() => _buildRow(ctr.isAnalyzingImage.value, 'analyzingImage'.tr)),
-            const SizedBox(height: 16),
-            Obx(() => _buildRow(ctr.isDetectingLeaves.value, 'detectingLeaves'.tr)),
-            const SizedBox(height: 16),
-            Obx(
-              () => _buildRow(
-                ctr.isIdentifyingPlant.value,
-                ctr.shootType.value == 'identify' ? 'identifyingPlant'.tr : 'diagnosingPlant'.tr,
+            IntrinsicWidth(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Obx(() => _buildRow(ctr.isAnalyzingImage.value, 'analyzingImage'.tr)),
+                  const SizedBox(height: 16),
+                  Obx(() => _buildRow(ctr.isDetectingLeaves.value, 'detectingLeaves'.tr)),
+                  const SizedBox(height: 16),
+                  Obx(
+                    () => _buildRow(
+                      ctr.isIdentifyingPlant.value,
+                      ctr.shootType.value == 'identify' ? 'identifyingPlant'.tr : 'diagnosingPlant'.tr,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

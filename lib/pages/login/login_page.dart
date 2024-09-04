@@ -36,13 +36,18 @@ class LoginPage extends StatelessWidget {
 
   Future<UserCredential> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final gs = GoogleSignIn();
+      await gs.signOut();
+      final GoogleSignInAccount? googleUser = await gs.signIn();
 
       final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+      if (googleAuth == null) {
+        throw 'googleAuth 为空';
+      }
 
       final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
       );
 
       return await FirebaseAuth.instance.signInWithCredential(credential);

@@ -5,7 +5,7 @@ import 'package:plant/components/costom_bottom_nav_bar.dart';
 import 'package:plant/components/page_bg.dart';
 import 'package:plant/controllers/main_controller.dart';
 import 'package:plant/controllers/user_controller.dart';
-import 'package:plant/pages/my_plants_page.dart';
+import 'package:plant/pages/my_plants/my_plants_page.dart';
 
 import 'home_page.dart';
 import 'shoot_page.dart';
