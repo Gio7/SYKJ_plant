@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:get/get.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 
 class MemberProductModel with EquatableMixin {
@@ -63,4 +64,18 @@ class MemberProductModel with EquatableMixin {
 
   @override
   List<Object?> get props => [id];
+
+  String get unitStr {
+    final price = productDetails?.price ?? '';
+    String unit = '';
+    if (productDetails?.id == 'plant_sub_vip_plan_weekly' || productDetails?.id == 'sub_vip_plan_weekly') {
+      unit = 'week'.tr;
+    } else if (productDetails?.id == 'sub_vip_plan_yearly' || productDetails?.id == 'plant_sub_vip_plan_yearly') {
+      unit = 'year'.tr;
+    }
+    if (unit.isNotEmpty) {
+      return '$price/$unit';
+    }
+    return price;
+  }
 }

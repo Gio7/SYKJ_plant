@@ -88,7 +88,7 @@ class ShopPage extends StatelessWidget {
                                         (e) => buildShopItem(
                                           isSelected: state.currentProduct.value == e,
                                           title: 'freeTrial'.tr,
-                                          amount: e.productDetails?.price ?? '',
+                                          amount: e.unitStr,
                                           onTap: () => controller.selectProduct(e),
                                         ),
                                       )

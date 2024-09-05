@@ -10,6 +10,7 @@ import 'package:plant/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'api/dio.dart';
+import 'common/firebase_util.dart';
 import 'common/ui_color.dart';
 import 'components/easy_refresh_custom.dart';
 import 'controllers/core_binding.dart';
@@ -33,7 +34,7 @@ Future<void> initMain() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   EasyRefreshCustom.setup();
-  // FireBaseUtil.initAnalyticsServices();
+  FireBaseUtil.initAnalyticsServices();
   final info = await PackageInfo.fromPlatform();
   GlobalData.versionName = info.version;
   final prefs = await SharedPreferences.getInstance();
