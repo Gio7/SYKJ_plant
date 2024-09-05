@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/common_util.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/components/loading_dialog.dart';
@@ -129,6 +130,7 @@ class InfoIdentifyPage extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
+                FireBaseUtil.logEvent(EventName.infoShoot);
                 Get.until((route) => Get.currentRoute == '/ShootPage');
               },
               child: Container(
@@ -155,6 +157,7 @@ class InfoIdentifyPage extends StatelessWidget {
                   if (ctr.plantInfo?.scanRecordId == null) {
                     return;
                   }
+                  FireBaseUtil.logEvent(EventName.infoSave);
                   Get.dialog(const LoadingDialog());
                   await ctr.savePlant(ctr.plantInfo!.scanRecordId!);
                   Get.back();

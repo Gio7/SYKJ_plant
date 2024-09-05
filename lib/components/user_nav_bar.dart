@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/pages/login/login_page.dart';
 import 'package:plant/pages/set_page.dart';
@@ -24,8 +25,10 @@ class UserNavBar extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   if (Get.find<UserController>().isLogin.value) {
+                    FireBaseUtil.subscribePageEvent(Get.currentRoute);
                     Get.to(() => ShopPage());
                   } else {
+                    FireBaseUtil.loginPageEvent(Get.currentRoute);
                     Get.to(() => const LoginPage(), fullscreenDialog: true, routeName: 'login_page');
                   }
                 },

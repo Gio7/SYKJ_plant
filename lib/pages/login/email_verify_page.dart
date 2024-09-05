@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/common_util.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/components/page_bg.dart';
@@ -156,6 +157,7 @@ class _EmailVerifyPageState extends State<EmailVerifyPage> {
                       bgColor: UIColor.primary,
                       textColor: UIColor.white,
                       onTap: Common.debounce(() async {
+                        FireBaseUtil.logEvent(EventName.resendVerification);
                         await loginCtr.emailVerifiedReload();
                         // Get.until((route) => Get.currentRoute == '/login_page');
                       }, 3000),

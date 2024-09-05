@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:plant/api/dio.dart';
 import 'package:plant/api/request.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/models/userinfo_model.dart';
 import 'package:plant/pages/login/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,6 +25,7 @@ class UserController extends GetxController {
   /// 显示登录
   void showLogin() {
     isLogin.value = false;
+    FireBaseUtil.loginPageEvent(Get.currentRoute);
     Get.to(() => const LoginPage(), fullscreenDialog: true, routeName: 'login_page');
   }
 

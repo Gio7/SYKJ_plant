@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/controllers/login_controller.dart';
@@ -139,6 +140,7 @@ class LoginPage extends StatelessWidget {
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
+                            FireBaseUtil.logEvent(EventName.passwordLoginBtn);
                             Get.to(() => const EmailLoginPage());
                           },
                       ),
@@ -162,9 +164,11 @@ class LoginPage extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 20),
           child: NormalButton(
             onTap: () async {
+              FireBaseUtil.logEvent(EventName.apLoginBtn);
               final aca = await signInWithApple();
               if (aca.userIdentifier != null) {
-                await loginCtr.login(aca.userIdentifier!, aca.email);
+                await loginCtr.login(aca.userIdentifier!, aca.email, type: 3);
+                FireBaseUtil.logEvent(EventName.apLoginSuccess);
                 Get.back(closeOverlays: true);
               }
             },
@@ -180,10 +184,12 @@ class LoginPage extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 20),
           child: NormalButton(
             onTap: () async {
+              FireBaseUtil.logEvent(EventName.gaLoginBtn);
               final userCredential = await signInWithGoogle();
               final uid = userCredential.user?.uid;
               if (uid != null) {
-                await loginCtr.login(uid, userCredential.user?.email);
+                await loginCtr.login(uid, userCredential.user?.email, type: 1);
+                FireBaseUtil.logEvent(EventName.gaLoginSuccess);
                 Get.back(closeOverlays: true);
               }
             },
@@ -198,7 +204,10 @@ class LoginPage extends StatelessWidget {
           width: double.infinity,
           margin: const EdgeInsets.symmetric(horizontal: 20),
           child: NormalButton(
-            onTap: () => Get.to(() => const EmailSignupPage()),
+            onTap: () {
+              FireBaseUtil.logEvent(EventName.passwordLoginBtn);
+              Get.to(() => const EmailSignupPage());
+            },
             bgColor: UIColor.c40BD95,
             text: 'signUpWithEmail'.tr,
             textColor: UIColor.white,

@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:plant/api/dio.dart';
 import 'package:plant/api/request.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/rsa.dart';
 import 'package:plant/components/loading_dialog.dart';
 import 'package:plant/controllers/user_controller.dart';
@@ -66,7 +67,7 @@ class LoginController extends GetxController {
       if (isVerified) {
         final uid = firebaseAuth.currentUser?.uid;
         if (uid != null) {
-          await login(uid, firebaseAuth.currentUser?.email);
+          await login(uid, firebaseAuth.currentUser?.email, type: 2);
           // Get.until((route) => Get.currentRoute == '/');
           Get.back(closeOverlays: true);
           Get.back();
@@ -119,7 +120,8 @@ class LoginController extends GetxController {
       );
       final uid = currentCredential.user?.uid;
       if (uid != null) {
-        await login(uid, currentCredential.user?.email);
+        await login(uid, currentCredential.user?.email, type: 2);
+        FireBaseUtil.logEvent(EventName.passwordLoginSuccess);
         Get.back(closeOverlays: true);
         Get.back();
       }
@@ -139,7 +141,7 @@ class LoginController extends GetxController {
     }
   }
 
-  Future<void> login(String uid, String? email) async {
+  Future<void> login(String uid, String? email, {required int type}) async {
     try {
       Get.dialog(const LoadingDialog());
       final uidEncode = await Rsa.encodeString(uid);
@@ -159,6 +161,13 @@ class LoginController extends GetxController {
         prefs.setString('token', token);
       });
     } catch (e) {
+      if (type == 1) {
+        FireBaseUtil.logEvent(EventName.gaLoginFailure);
+      } else if (type == 2) {
+        FireBaseUtil.logEvent(EventName.passwordLoginSuccess);
+      } else if (type == 3) {
+        FireBaseUtil.logEvent(EventName.apLoginFailure);
+      }
       if (Get.isDialogOpen ?? false) {
         Get.back();
       }

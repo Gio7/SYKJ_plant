@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/user_nav_bar.dart';
 
@@ -69,6 +70,7 @@ class HomePage extends StatelessWidget {
               right: 40,
               child: GestureDetector(
                 onTap: () {
+                  FireBaseUtil.logEvent(EventName.homeSettingBtn);
                   Get.to(() => const SetPage());
                   // if (Get.find<UserController>().isLogin.value) {
                   // } else {
@@ -105,6 +107,7 @@ class HomePage extends StatelessWidget {
             Expanded(
               child: GestureDetector(
                 onTap: () {
+                  FireBaseUtil.logEvent(EventName.homeIdentify);
                   Get.to(() => const ShootPage());
                 },
                 child: Image.asset('images/icon/identify.png'),
@@ -114,6 +117,7 @@ class HomePage extends StatelessWidget {
             Expanded(
               child: GestureDetector(
                 onTap: () {
+                  FireBaseUtil.logEvent(EventName.homeDianose);
                   Get.to(() => const ShootPage(shootType: 'diagnose'));
                 },
                 child: Image.asset('images/icon/diagnose.png'),

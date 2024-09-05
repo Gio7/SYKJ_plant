@@ -12,6 +12,7 @@ import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/member_product_model.dart';
 
 import 'des_util.dart';
+import 'firebase_util.dart';
 import 'rsa.dart';
 
 class BuyShop {
@@ -57,6 +58,9 @@ class BuyShop {
           Fluttertoast.showToast(msg: 'paymentHasBeenCanceled'.tr);
         } else if (purchaseDetails.status == PurchaseStatus.purchased || purchaseDetails.status == PurchaseStatus.restored) {
           Get.log("监控到需要验证的订单，订单号：$orderNum");
+          if (purchaseDetails.status == PurchaseStatus.restored) {
+            sign = await Request.getOrderKey();
+          }
           if (!(Get.isDialogOpen ?? false)) {
             Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
           }
@@ -93,6 +97,7 @@ class BuyShop {
     final dataString = DesUtil.desEncrypt(jsonString, desKey, time);
     Get.log("开始验证支付的订单");
     await Request.verifyOrder(dataString, time);
+    FireBaseUtil.logEvent(EventName.memberPurchaseSuccess);
     orderNum = null;
     Get.log("关闭支付的订单");
     try {

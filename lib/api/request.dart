@@ -19,6 +19,7 @@ class Request {
   static const String _createOrder = '/Plant/shop/createOrder';
   static const String _verifyOrder = '/Plant/shop/verifyOrder';
   static const String _exchangeGift = '/Plant/shop/exchangeGift';
+  static const String _getOrderKey = '/Plant/shop/getOrderKey';
 
   /// telegram_group\email
   static Future<void> getConfig([List<String> conKey = const ['telegram_group', 'email']]) async {
@@ -98,5 +99,9 @@ class Request {
 
   static Future<dynamic> exchangeGift(String cdkey) async {
     return await DioUtil.httpPost(_exchangeGift, data: {"cdkey": cdkey});
+  }
+
+  static Future<String> getOrderKey() async {
+    return await DioUtil.httpGet(_getOrderKey);
   }
 }

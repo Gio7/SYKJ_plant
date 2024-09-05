@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:plant/common/file_utils.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/components/loading_dialog.dart';
@@ -111,6 +112,7 @@ class _ShootPageState extends State<ShootPage> {
 
   Future<void> _didShootPhoto() async {
     if (!(Get.find<UserController>().isLogin.value)) {
+      FireBaseUtil.loginPageEvent(Get.currentRoute);
       Get.to(() => const LoginPage(), fullscreenDialog: true);
       return;
     }
@@ -154,6 +156,7 @@ class _ShootPageState extends State<ShootPage> {
 
   Future<void> _didPickerPhoto() async {
     if (!(Get.find<UserController>().isLogin.value)) {
+      FireBaseUtil.loginPageEvent(Get.currentRoute);
       Get.to(() => const LoginPage(), fullscreenDialog: true);
       return;
     }
@@ -262,6 +265,7 @@ class _ShootPageState extends State<ShootPage> {
                           Expanded(
                             child: NormalButton(
                               onTap: () {
+                                FireBaseUtil.logEvent(EventName.shootIdentify);
                                 ctr.shootType.value = 'identify';
                               },
                               text: 'identify'.tr,
@@ -273,6 +277,7 @@ class _ShootPageState extends State<ShootPage> {
                           Expanded(
                             child: NormalButton(
                               onTap: () {
+                                FireBaseUtil.logEvent(EventName.shootDianose);
                                 ctr.shootType.value = 'diagnose';
                               },
                               text: 'diagnose'.tr,
@@ -293,6 +298,7 @@ class _ShootPageState extends State<ShootPage> {
                       children: [
                         GestureDetector(
                           onTap: () {
+                            FireBaseUtil.logEvent(EventName.shootAlbum);
                             _didPickerPhoto();
                           },
                           child: Image.asset(
@@ -313,6 +319,7 @@ class _ShootPageState extends State<ShootPage> {
                         ),
                         GestureDetector(
                           onTap: () {
+                            FireBaseUtil.logEvent(EventName.shootHelp);
                             _didShowHelp();
                           },
                           child: Image.asset(

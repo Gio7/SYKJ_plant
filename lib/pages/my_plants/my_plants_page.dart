@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:plant/api/request.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/components/loading_dialog.dart';
@@ -218,6 +219,7 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
             width: double.infinity,
             child: NormalButton(
               onTap: () {
+                FireBaseUtil.logEvent(EventName.listRename);
                 Get.back();
                 Get.dialog(
                   TextFieldDialog(
@@ -246,6 +248,7 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
             width: double.infinity,
             child: NormalButton(
               onTap: () async {
+                FireBaseUtil.logEvent(EventName.listRemove);
                 Get.back();
                 Get.dialog(
                   NormalDialog(
@@ -256,6 +259,7 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
                     icon: Image.asset('images/icon/delete.png', height: 70),
                     confirmPositionLeft: false,
                     onConfirm: () async {
+                      FireBaseUtil.logEvent(EventName.listRemoveAgree);
                       Get.back();
                       Request.plantScanDelete(model.id!);
                         repository.dataList.removeWhere((element) => element.id == model.id);

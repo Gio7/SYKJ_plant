@@ -2,6 +2,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:plant/api/request.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/global_data.dart';
 import 'package:plant/models/member_product_model.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -30,10 +31,12 @@ class ShopController extends GetxController {
   }
 
   Future<void> restore() async {
+    FireBaseUtil.logEvent(EventName.subscribeRestore);
     GlobalData.buyShop.resumePurchase();
   }
 
   Future<void> subscribe() async {
+    FireBaseUtil.logEvent(EventName.memberPurchaseSelect);
     GlobalData.buyShop.submit(state.currentProduct.value, true);
   }
 

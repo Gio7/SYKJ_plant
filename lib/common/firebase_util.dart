@@ -28,211 +28,125 @@ class FireBaseUtil {
       parameters: parameters,
     );
   }
+
+  /// 调起支付页面
+  static void subscribePageEvent(String fromPage) {
+    _analytics.logEvent(
+      name: EventName.subscribePage,
+      parameters: {'from_event': fromPage},
+    );
+  }
+
+  /// 调起登录页面
+  static void loginPageEvent(String fromPage) {
+    _analytics.logEvent(
+      name: EventName.loginPage,
+      parameters: {'from_event': fromPage},
+    );
+  }
 }
 
 /// 事件名称
 class EventName {
-  /// 页面浏览
-  static const String pageView = 'page_view';
+  /// 打开登陆页面
+  static const String loginPage = 'login_page';
 
-  /// 按钮点击
-  static const String buttonClick = 'button_click';
+  /// google登陆按钮
+  static const String gaLoginBtn = 'ga_login_btn';
 
-  /// 弹窗展示
-  static const String popupView = 'popup_view';
+  /// google登陆成功
+  static const String gaLoginSuccess = 'ga_login_success';
 
-  /// 同意隐私协议
-  static const String privacyAgree = 'privacy_agree';
+  /// google登陆失败
+  static const String gaLoginFailure = 'ga_login_failure';
 
-  /// 拒绝隐私协议
-  static const String privacyDecline = 'privacy_decline';
+  /// 邮箱密码登陆按钮
+  static const String passwordLoginBtn = 'password_login_btn';
 
-  /// 请求创作内容
-  static const String requestCreation = 'request_creation';
+  /// 邮箱密码登陆成功
+  static const String passwordLoginSuccess = 'password_login_success';
 
-  /// 创作结果
-  static const String resultCreation = 'result_creation';
+  /// 邮箱密码登陆失败
+  static const String passwordLoginFailure = 'password_login_failure';
 
-  /// 保存创作结果
-  static const String saveCreation = 'save_creation';
+  /// 点击Sign up发送邮箱验证
+  static const String emailVerification = 'email_verification';
 
-  /// 删除创作结果
-  static const String deleteCreation = 'delete_creation';
+  /// 重发验证邮件
+  static const String resendVerification = 'resend_verification';
 
-  /// 播放音乐
-  static const String playMusic = 'play_music';
+  /// 重置密码点击‘done’
+  static const String resetPassword = 'reset_password';
 
-  /// 拉起分享
-  static const String shareRequest = 'share_request';
+  /// apple登陆按钮
+  static const String apLoginBtn = 'ap_login_btn';
 
-  /// 创建订单
-  static const String createOrder = 'create_order';
+  /// apple登陆成功
+  static const String apLoginSuccess = 'ap_login_success';
 
-  /// 支付订单
-  static const String payOrder = 'pay_order';
+  /// apple登陆失败
+  static const String apLoginFailure = 'ap_login_failure';
 
-  /// 消耗订单
-  static const String consumptionOrder = 'consumption_order';
+  /// 首页点击个人中心
+  static const String homeSettingBtn = 'home_setting_btn';
 
-  /// 故障事件
-  static const String errorEvent = 'error_event';
+  /// 首页点击‘Identify’
+  static const String homeIdentify = 'home_identify';
 
-  /// 保存草稿
-  static const String saveDraft = 'save_draft';
+  /// 首页点击‘Dianose’
+  static const String homeDianose = 'home_dianose';
 
-  /// 删除草稿
-  static const String deleteDraft = 'delete_draft';
+  /// 首页点击底部拍照icon
+  static const String homeShootBttom = 'home_shoot_buttom';
 
-  /// 草稿重命名
-  static const String renameDraft = 'rename_draft';
+  /// 调起支付页面
+  static const String subscribePage = 'subscribe_page';
 
-  /// 导入草稿
-  static const String importDraft = 'import_draft';
+  /// 用户发起会员订阅
+  static const String memberPurchaseSelect = 'member_purchase_select';
 
-  /// 预览草稿
-  static const String previewDraft = 'preview_draft';
+  /// 会员付款成功
+  static const String memberPurchaseSuccess = 'member_purchase_success';
 
-  /// 简单模式导入灵感
-  static const String simpleInspirationImport = 'simple_inspiration_import';
-}
+  /// 会员订阅界面‘restore’
+  static const String subscribeRestore = 'subscribe_restore';
 
-/// 参数 - 页面名称
-class PageName {
-  /// 主页
-  static const String homePage = 'home_page';
+  /// 拍照界面点击拍照提示icon
+  static const String shootHelp = 'shoot_help';
 
-  /// 创作页
-  static const String createPage = 'create_page';
+  /// 点击相册选图icon
+  static const String shootAlbum = 'shoot_album';
 
-  /// 创作历史
-  static const String creationsPage = 'creations_page';
+  /// 拍照界面点击‘Dianose’
+  static const String shootDianose = 'shoot_dianose';
 
-  /// 设置页面
-  static const String settingsPage = 'settings_page';
+  /// 拍照界面点击‘Identify’
+  static const String shootIdentify = 'shoot_identify';
 
-  /// 设置二级页面
-  static const String moreSettingsPage = 'more_settings_page';
+  /// 详情页点击‘save’按钮
+  static const String infoSave = 'info_save';
 
-  /// 点数使用记录
-  static const String pointsHistoryPage = 'points_history_page';
+  /// 详情页点击‘share’icon
+  static const String infoShare = 'info_share';
 
-  /// 点数购买页面
-  static const String pointsPurchasePage = 'points_purchase_page';
+  /// 详情页点击‘拍照’icon
+  static const String infoShoot = 'info_shoot';
 
-  /// 会员购买页面
-  static const String proPurchasePage = 'pro_purchase_page';
+  /// 诊断详情页点击‘plant info’
+  static const String dianoseInfoPlantinfo = 'dianose_info_plantinfo';
 
-  /// 注册页
-  static const String signUpPage = 'sign_up_page';
+  /// 诊断详情页点击‘Retake’
+  static const String dianoseInfoRetake = 'dianose_info_retake';
 
-  /// 注册验证页面
-  static const String registrationVerificationPage = 'registration_verification_page';
+  /// 列表页点击rename
+  static const String listRename = 'list_rename';
 
-  /// 邮箱登录页
-  static const String mailLoginPage = 'mail_login_page';
+  /// 列表页点击remove
+  static const String listRemove = 'list_remove';
 
-  /// 重置密码页
-  static const String resetPasswordPage = 'reset_password_page';
+  /// 用户remove弹窗二次确认删除
+  static const String listRemoveAgree = 'list_remove_agree';
 
-  /// 重置密码验证页面
-  static const String resetVerificationPage = 'reset_verification_page';
-
-  /// 简单模式页面
-  static const String simpleModePage = 'simple_mode_page';
-
-  /// 专家模式页面
-  static const String expertModePage = 'expert_mode_page';
-
-  /// 歌词放大页面
-  static const String lyricsZoomPage = 'lyrics_zoom_page';
-
-  /// 草稿页面
-  static const String draftPage = 'draft_page';
-}
-
-/// 参数 - 按钮名称
-class ButtonName {
-  /// 全局会员入口
-  static const String proButton = 'pro_button';
-
-  /// 全局点数购买入口
-  static const String pointsButton = 'points_button';
-
-  /// 登出
-  static const String logoutButton = 'logout_button';
-
-  /// 注销
-  static const String deleteAccount = 'delete_account';
-
-  /// 设置按钮
-  static const String settingsButton = 'settings_button';
-
-  /// 展开播放器
-  static const String expandPlayer = 'expand_player';
-
-  /// 收起播放器
-  static const String collapsePlayer = 'collapse_player';
-
-  /// 随机风格
-  static const String randomMusic = 'random_music';
-
-  /// 清空风格
-  static const String clearStyle = 'clear_style';
-
-  /// 清空歌词
-  static const String clearLyrics = 'clear_lyrics';
-
-  /// 清空标题
-  static const String clearTitle = 'clear_title';
-
-  /// 去生成按钮（历史页，点数记录页）
-  static const String goCreateButton = 'go_create_button';
-
-  /// 复制用户id
-  static const String copyAccountID = 'copy_accountID';
-
-  /// 退订
-  static const String unsubscribeButton = 'unsubscribe_button';
-
-  /// 点数历史History
-  static const String pointsHistory = 'points_history';
-
-  /// restore
-  static const String restoreButton = 'restore_button';
-
-  /// 导入草稿按钮
-  static const String importDraftButton = 'import_draft_button';
-
-  /// 重命名草稿按钮
-  static const String remaneDraftButton = 'remane_draft_button';
-
-  /// 删除草稿按钮
-  static const String deleteDraftButton = 'delete_draft_button';
-
-  /// 弹窗导入草稿
-  static const String popupImportDraftButton = 'popup_import_draft_button';
-
-  /// 弹窗删除草稿
-  static const String popupDeleteDraftButton = 'popup_delete_draft_button';
-
-  /// 歌词放大按钮
-  static const String lyricsZoomButton = 'lyrics_zoom_button';
-
-  /// 歌词缩小按钮
-  static const String lyricsNarrowButton = 'lyrics_narrow_button';
-
-  /// 简单模式随机灵感按钮
-  static const String simpleSwitchInspiration = 'simple_switch_inspiration';
-
-  /// 清除扩歌按钮
-  static const String extendClearButton = 'extend_clear_button';
-
-  /// part与fullsong标识
-  static const String songLogo = 'song_logo';
-
-  /// 扩歌按钮
-  static const String extendButton = 'extend_button';
-
-  /// 复用按钮
-  static const String reuseButton = 'reuse_button';
+  /// 设置界面分享app
+  static const String settingShareApp = 'setting_share_app';
 }

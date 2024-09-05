@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/components/loading_dialog.dart';
@@ -67,6 +68,7 @@ class InfoDiagnosePage extends StatelessWidget {
                     if (ctr.diagnoseInfo?.plant?.scientificName == null || ctr.diagnoseInfo?.scanRecordId == null) {
                       return;
                     }
+                    FireBaseUtil.logEvent(EventName.dianoseInfoPlantinfo);
                     Get.dialog(const LoadingDialog(), barrierDismissible: false);
                     await ctr.scanByScientificName(
                       ctr.diagnoseInfo!.plant!.scientificName!,
@@ -85,7 +87,10 @@ class InfoDiagnosePage extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
               child: NormalButton(
-                onTap: () => Get.until((route) => Get.currentRoute == '/ShootPage'),
+                onTap: () {
+                  FireBaseUtil.logEvent(EventName.dianoseInfoRetake);
+                  Get.until((route) => Get.currentRoute == '/ShootPage');
+                },
                 icon: 'images/icon/detail_camera.png',
                 text: 'retake'.tr,
                 textColor: UIColor.white,

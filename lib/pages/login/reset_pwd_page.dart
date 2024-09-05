@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
 import 'package:plant/components/page_bg.dart';
@@ -24,6 +25,7 @@ class _ResetPwdPageState extends State<ResetPwdPage> {
   bool _isSend = false;
 
   Future<void> _submit() async {
+    FireBaseUtil.logEvent(EventName.resetPassword);
     await Get.find<LoginController>().sendPasswordResetEmail(_emailController.text);
     setState(() {
       _isSend = true;

@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:plant/api/request.dart';
 import 'package:plant/common/common_util.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/global_data.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
@@ -373,6 +374,7 @@ class SetPage extends StatelessWidget {
     if (userController.userInfo.value.memberType == null) {
       return NormalButton(
         onTap: () {
+          FireBaseUtil.loginPageEvent(Get.currentRoute);
           Get.to(() => const LoginPage(), fullscreenDialog: true);
         },
         text: 'logIn'.tr,
@@ -383,6 +385,7 @@ class SetPage extends StatelessWidget {
     if (userController.userInfo.value.memberType == MemberType.normal) {
       return NormalButton(
         onTap: () {
+          FireBaseUtil.subscribePageEvent(Get.currentRoute);
           Get.to(() => ShopPage());
         },
         text: 'getPro'.tr,
