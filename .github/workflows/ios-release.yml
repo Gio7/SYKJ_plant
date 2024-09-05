@@ -84,22 +84,5 @@ jobs:
       - name: Publish iOS Artefacts
         uses: actions/upload-artifact@v4
         with:
-<<<<<<< Updated upstream
-          name: release-ipa
-          path: build/ios/ipa
-      
-      - name: Upload using iTMSTransporter
-        env:
-          WORKING_DIRECTORY: build/ios/ipa
-          IPA_FILE_NAME: Plant Identifier.ipa
-          APPLE_USERNAME: ${{ secrets.APPLE_USERNAME }}
-          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
-          APPLE_ASC_PROVIDER: ADKZT87JCB
-        run: |
-          cd $WORKING_DIRECTORY
-          git clone https://github.com/ZhangLi1984/itsm.git
-          ./itsm/bin/iTMSTransporter -assetFile "$IPA_FILE_NAME" -u $APPLE_USERNAME -p $APPLE_PASSWORD -m upload -asc_provider $APPLE_ASC_PROVIDER
-=======
           name: release-ios
           path: build-output/ios
->>>>>>> Stashed changes
