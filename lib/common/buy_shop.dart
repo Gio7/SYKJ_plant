@@ -1,6 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -8,14 +9,17 @@ import 'package:get/get.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:plant/api/request.dart';
 import 'package:plant/controllers/user_controller.dart';
+import 'package:plant/models/member_product_model.dart';
 
-import 'firebase_util.dart';
+import 'des_util.dart';
+import 'rsa.dart';
 
 class BuyShop {
   late InAppPurchase _inAppPurchase;
   late StreamSubscription<List<PurchaseDetails>> _subscription;
 
   String? orderNum;
+  String? sign;
 
   void onClose() {
     _subscription.cancel();
@@ -73,45 +77,28 @@ class BuyShop {
   }
 
   Future<void> _checkPayInfo(PurchaseDetails purchaseDetails) async {
-    if (orderNum == null) {
-      await _appleRetryVerifyOrder(purchaseDetails);
-    } else {
-      await _verifyPurchase(purchaseDetails);
+    if (sign == null) {
+      return;
     }
-  }
-
-  Future<void> _verifyPurchase(PurchaseDetails purchaseDetails) async {
+    final desKey = await Rsa.decodeString(sign);
+    Map data = {
+        'orderNum': orderNum ?? '',
+        'productId': purchaseDetails.productID,
+        'purchaseToken': purchaseDetails.verificationData.serverVerificationData,
+        'payOrderId': purchaseDetails.purchaseID,
+        'type': orderNum == null ? 1 : 0,
+      };
+    final jsonString = jsonEncode(data);
+    final time = DateTime.now().millisecondsSinceEpoch;
+    final dataString = DesUtil.desEncrypt(jsonString, desKey, time);
     Get.log("开始验证支付的订单");
-    // await Request.appleVerifyOrder(
-    //   shopId: purchaseDetails.productID,
-    //   receipt: purchaseDetails.verificationData.serverVerificationData,
-    //   transactionId: purchaseDetails.purchaseID,
-    //   orderNum: orderNum,
-    // );
-    FireBaseUtil.logEventConsumptionOrder(purchaseDetails.productID, '');
+    await Request.verifyOrder(dataString, time);
     orderNum = null;
     Get.log("关闭支付的订单");
     try {
       await _inAppPurchase.completePurchase(purchaseDetails);
     } catch (e) {
       Get.log("关闭已支付订单出错:${e.toString()}");
-    }
-  }
-
-  Future<void> _appleRetryVerifyOrder(PurchaseDetails purchaseDetails) async {
-    Get.log("开始验证恢复的订单");
-    // await Request.appleRetryVerifyOrder(
-    //   shopId: purchaseDetails.productID,
-    //   receipt: purchaseDetails.verificationData.serverVerificationData,
-    //   transactionId: purchaseDetails.purchaseID,
-    //   orderNum: null,
-    // );
-    FireBaseUtil.logEventConsumptionOrder(purchaseDetails.productID, '');
-    Get.log("关闭恢复的订单");
-    try {
-      await _inAppPurchase.completePurchase(purchaseDetails);
-    } catch (e) {
-      Get.log("关闭已恢复订单出错:${e.toString()}");
     }
   }
 
@@ -129,17 +116,16 @@ class BuyShop {
     }
   }
 
-  /* void submit(ShopModel? currentItem, bool buyNonConsumable) async {
-    if (currentItem == null) {
-      return;
-    }
+  void submit(MemberProductModel currentItem, bool buyNonConsumable) async {
     if (currentItem.productDetails?.id == null) {
       return;
     }
     Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
-    FireBaseUtil.logEventCreateOrder(currentItem.productDetails!.id);
-    orderNum = await Request.appleCreateOrder(shopID: currentItem.productDetails!.id);
-    if (orderNum == null) {
+    final res = await Request.createOrder(currentItem.productDetails!.id);
+    orderNum = res['orderNum'];
+    sign = res['sign'];
+
+    if (orderNum == null || sign == null) {
       Get.back();
       Fluttertoast.showToast(msg: 'orderCreationFailure'.tr);
       return;
@@ -154,17 +140,16 @@ class BuyShop {
     try {
       late PurchaseParam purchaseParam;
       purchaseParam = PurchaseParam(productDetails: currentItem.productDetails!, applicationUserName: orderNum);
-      if (!buyNonConsumable || currentItem.isForever) {
-        await _inAppPurchase.buyConsumable(purchaseParam: purchaseParam);
-      } else {
+      if (buyNonConsumable) {
         await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
+      } else {
+        await _inAppPurchase.buyConsumable(purchaseParam: purchaseParam);
       }
-      FireBaseUtil.logEventPayOrder(currentItem.productDetails!.id,'');
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
       Get.back();
     }
-  } */
+  }
 
   Future<ProductDetailsResponse> getProduct(Set<String> kIds) async {
     try {

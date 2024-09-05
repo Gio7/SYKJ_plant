@@ -87,8 +87,8 @@ class ShopPage extends StatelessWidget {
                                       .map(
                                         (e) => buildShopItem(
                                           isSelected: state.currentProduct.value == e,
-                                          title: '3-day free trial',
-                                          amount: '123',
+                                          title: 'freeTrial'.tr,
+                                          amount: e.productDetails?.price ?? '',
                                           onTap: () => controller.selectProduct(e),
                                         ),
                                       )
@@ -104,7 +104,7 @@ class ShopPage extends StatelessWidget {
                       text: 'subscribe'.tr,
                       textColor: UIColor.white,
                       bgColor: UIColor.primary,
-                      onTap: () {},
+                      onTap: () => controller.subscribe(),
                     ),
                   ),
                   Padding(

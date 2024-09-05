@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:plant/api/request.dart';
 import 'package:plant/common/common_util.dart';
 import 'package:plant/common/global_data.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/btn.dart';
+import 'package:plant/components/loading_dialog.dart';
 import 'package:plant/components/show_dialog.dart';
 import 'package:plant/components/nav_bar.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/userinfo_model.dart';
 import 'package:plant/pages/login/login_page.dart';
+
+import 'shop/shop_view.dart';
 
 class SetPage extends StatelessWidget {
   const SetPage({super.key});
@@ -125,7 +129,11 @@ class SetPage extends StatelessWidget {
         cancelText: 'cancel'.tr,
         hintText: 'pleaseInputCDKey'.tr,
         counterText: '',
-        onConfirm: (String v) {
+        onConfirm: (String v) async {
+          Get.back();
+          Get.dialog(const LoadingDialog());
+          await Request.exchangeGift(v);
+          await Get.find<UserController>().getUserInfo();
           Get.back();
         },
       ),
@@ -217,14 +225,12 @@ class SetPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            // if (userCtr.isLogin.value)
-            //   _buildListItem(
-            //     () {
-            //       _onActivationCode();
-            //     },
-            //     'images/icon/set_code.png',
-            //     'activationCode'.tr,
-            //   ),
+            if (userCtr.isLogin.value && GetPlatform.isAndroid)
+              _buildListItem(
+                () => _onActivationCode(),
+                'images/icon/set_code.png',
+                'activationCode'.tr,
+              ),
             _buildListItem(
               () {
                 _onContact();
@@ -377,7 +383,7 @@ class SetPage extends StatelessWidget {
     if (userController.userInfo.value.memberType == MemberType.normal) {
       return NormalButton(
         onTap: () {
-          // TODO 订阅
+          Get.to(() => ShopPage());
         },
         text: 'getPro'.tr,
         textColor: UIColor.c00997A,

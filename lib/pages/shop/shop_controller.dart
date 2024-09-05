@@ -34,7 +34,7 @@ class ShopController extends GetxController {
   }
 
   Future<void> subscribe() async {
-    // TODO 订阅
+    GlobalData.buyShop.submit(state.currentProduct.value, true);
   }
 
   Future<void> getShopList() async {

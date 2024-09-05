@@ -113,37 +113,40 @@ class LoginPage extends StatelessWidget {
               ...loginBtns(loginCtr),
               const Spacer(),
               const AgreementTips(),
-              Container(
-                margin: const EdgeInsets.only(top: 24),
-                padding: EdgeInsets.only(top: 16, bottom: Get.mediaQuery.viewPadding.bottom + 16),
-                color: UIColor.transparentPrimary40,
-                alignment: Alignment.center,
-                child: RichText(
-                  text: TextSpan(children: [
-                    TextSpan(
-                      text: 'haveAnAccount'.tr,
-                      style: TextStyle(
-                        fontSize: 12.0,
-                        color: UIColor.cB3B3B3,
-                        fontWeight: FontWeightExt.medium,
+              if (GetPlatform.isAndroid)
+                Container(
+                  margin: const EdgeInsets.only(top: 24),
+                  padding: EdgeInsets.only(top: 16, bottom: Get.mediaQuery.viewPadding.bottom + 16),
+                  color: UIColor.transparentPrimary40,
+                  alignment: Alignment.center,
+                  child: RichText(
+                    text: TextSpan(children: [
+                      TextSpan(
+                        text: 'haveAnAccount'.tr,
+                        style: TextStyle(
+                          fontSize: 12.0,
+                          color: UIColor.cB3B3B3,
+                          fontWeight: FontWeightExt.medium,
+                        ),
                       ),
-                    ),
-                    TextSpan(
-                      text: 'logIn'.tr,
-                      style: const TextStyle(
-                        fontSize: 12.0,
-                        color: UIColor.primary,
-                        fontWeight: FontWeight.w700,
-                        decoration: TextDecoration.underline,
+                      TextSpan(
+                        text: 'logIn'.tr,
+                        style: const TextStyle(
+                          fontSize: 12.0,
+                          color: UIColor.primary,
+                          fontWeight: FontWeight.w700,
+                          decoration: TextDecoration.underline,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Get.to(() => const EmailLoginPage());
+                          },
                       ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Get.to(() => const EmailLoginPage());
-                        },
-                    ),
-                  ]),
-                ),
-              ),
+                    ]),
+                  ),
+                )
+              else
+                SizedBox(height: Get.mediaQuery.viewPadding.bottom),
             ],
           ),
         ),

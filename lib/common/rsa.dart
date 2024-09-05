@@ -11,4 +11,14 @@ class Rsa {
 
     return encrypter.encrypt(content).base64;
   }
+  
+  static Future<String> decodeString(String? content) async {
+    if (content == null) return '';
+    final private = await rootBundle.loadString('keys/buy_private_key.pem');
+    dynamic privateKey = RSAKeyParser().parse(private);
+
+    final encrypter = Encrypter(RSA(privateKey: privateKey));
+
+    return encrypter.decrypt(Encrypted.fromBase64(content)).toString();
+  }
 }

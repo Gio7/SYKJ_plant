@@ -24,7 +24,7 @@ class UserController extends GetxController {
   /// 显示登录
   void showLogin() {
     isLogin.value = false;
-    Get.to(() => const LoginPage(), fullscreenDialog: true);
+    Get.to(() => const LoginPage(), fullscreenDialog: true, routeName: 'login_page');
   }
 
   Future<void> getUserInfo() async {

@@ -3,7 +3,8 @@
 import 'buy_shop.dart';
 
 class GlobalData {
-  static String baseUrl = 'https://test.plantidentifier.co';
+  static String baseUrl = 'http://192.168.0.111:19300';
+  // static String baseUrl = 'https://test.plantidentifier.co';
   /// 正式环境
   // static String baseUrl = 'https://api.plantidentifier.co';
   /// 用户协议
