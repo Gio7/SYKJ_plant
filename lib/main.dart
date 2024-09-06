@@ -1,4 +1,3 @@
-import 'package:advertising_id/advertising_id.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -49,17 +48,6 @@ Future<void> initMain() async {
   GlobalData.buyShop.initializeInAppPurchase();
 }
 
-void initPlatformState() async {
-  try {
-    GlobalData.adId = await AdvertisingId.id(true) ?? '';
-    if (GlobalData.adId.isNotEmpty) {
-      DioUtil.resetDio();
-    }
-  } on PlatformException {
-    // advertisingId = 'Failed to get platform version.';
-  }
-}
-
 Future<void> getConfig() async {
   final list = await Request.getConfig();
   for (final item in (list as List)) {
@@ -84,7 +72,7 @@ class MainApp extends StatelessWidget {
       translations: Language(),
       locale: Get.deviceLocale, //const Locale('zh', 'CN'),
       fallbackLocale: const Locale('en', 'US'),
-      navigatorObservers: [FireBaseUtil.observer],
+      // navigatorObservers: [FireBaseUtil.observer],
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: UIColor.primary),
         useMaterial3: true,

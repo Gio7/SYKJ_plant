@@ -1,7 +1,10 @@
+import 'package:advertising_id/advertising_id.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/firebase_util.dart';
+import 'package:plant/api/dio.dart';
+import 'package:plant/common/global_data.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/costom_bottom_nav_bar.dart';
 import 'package:plant/components/page_bg.dart';
@@ -28,12 +31,24 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
     mainController.tabController = TabController(length: 3, vsync: this);
     super.initState();
     userController.getUserInfo();
+    WidgetsBinding.instance.addPostFrameCallback((_) => initPlatformState());
   }
 
   @override
   void dispose() {
     mainController.tabController.dispose();
     super.dispose();
+  }
+
+  Future<void> initPlatformState() async {
+    try {
+      GlobalData.adId = await AdvertisingId.id(true) ?? '';
+      if (GlobalData.adId.isNotEmpty) {
+        DioUtil.resetDio();
+      }
+    } catch (e) {
+      // advertisingId = 'Failed to get platform version.';
+    }
   }
 
   @override
