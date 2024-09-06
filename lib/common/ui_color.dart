@@ -59,6 +59,10 @@ class UIColor {
 
   static const Color cD8FE5C = Color(0xFFD8FE5C);
 
+  static const Color cEDEDED = Color(0xFFEDEDED);
+
+  static const Color c8FCCB9 = Color(0xFF8FCCB9);
+
   static Color hexToColor(String s) {
     if (s.length != 7 || int.tryParse(s.substring(1, 7), radix: 16) == null) {
       return primary;

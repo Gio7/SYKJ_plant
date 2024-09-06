@@ -101,32 +101,100 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-        Row(
-          children: [
-            const SizedBox(width: 20),
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
+        const SizedBox(height: 40),
+        SizedBox(
+          height: 160,
+          child: Row(
+            children: [
+              const SizedBox(width: 20),
+              _buildItem(
+                'images/icon/camera_search_1.png',
+                'identify'.tr,
+                'images/icon/identify.png',
+                () {
                   FireBaseUtil.logEvent(EventName.homeIdentify);
                   Get.to(() => const ShootPage());
                 },
-                child: Image.asset('images/icon/identify.png'),
               ),
-            ),
-            const SizedBox(width: 6),
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
+              const SizedBox(width: 12),
+              _buildItem(
+                'images/icon/shop_diagnosis.png',
+                'diagnose'.tr,
+                'images/icon/diagnose.png',
+                () {
                   FireBaseUtil.logEvent(EventName.homeDianose);
                   Get.to(() => const ShootPage(shootType: 'diagnose'));
                 },
-                child: Image.asset('images/icon/diagnose.png'),
               ),
-            ),
-            const SizedBox(width: 20),
-          ],
+              const SizedBox(width: 20),
+            ],
+          ),
         ),
       ],
+    );
+  }
+
+  Widget _buildItem(String icon, String title, String image, Function()? onTap) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Container(
+              height: 160,
+              decoration: ShapeDecoration(
+                color: UIColor.cEDEDED,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+            ),
+            Positioned(
+              left: 0,
+              bottom: 0,
+              right: 0,
+              child: Container(
+                height: 36,
+                decoration: const ShapeDecoration(
+                  color: UIColor.c8FCCB9,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(16),
+                      bottomRight: Radius.circular(16),
+                    ),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ImageIcon(
+                      AssetImage(icon),
+                      color: UIColor.white,
+                      size: 24,
+                    ),
+                    const SizedBox(width: 10),
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        color: UIColor.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 42,
+              child: Image.asset(image),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
