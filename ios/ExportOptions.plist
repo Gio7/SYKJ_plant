@@ -11,7 +11,7 @@
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>com.plant.identification</key>
-		<string>2f93ce66-6614-4cbe-adba-e5fde694eb2f</string>
+		<string>plant_identification</string>
 	</dict>
 	<key>signingCertificate</key>
 	<string>Apple Development</string>
