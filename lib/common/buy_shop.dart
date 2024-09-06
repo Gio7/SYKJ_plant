@@ -62,9 +62,7 @@ class BuyShop {
           if (!(Get.isDialogOpen ?? false)) {
             Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
           }
-          if (purchaseDetails.status == PurchaseStatus.restored) {
-            sign = await Request.getOrderKey();
-          }
+          sign ??= await Request.getOrderKey();
           await _checkPayInfo(purchaseDetails);
           await Get.find<UserController>().getUserInfo();
           Get.back(closeOverlays: Get.currentRoute != '/');
