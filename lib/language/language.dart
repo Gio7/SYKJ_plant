@@ -1,18 +1,36 @@
 import 'package:get/get.dart';
-import 'package:plant/language/language_ar.dart';
-import 'package:plant/language/language_de.dart';
-import 'package:plant/language/language_es.dart';
-import 'package:plant/language/language_fr.dart';
-import 'package:plant/language/language_it.dart';
-import 'package:plant/language/language_ja.dart';
-import 'package:plant/language/language_ko.dart';
-import 'package:plant/language/language_nl.dart';
-import 'package:plant/language/language_pt.dart';
-import 'package:plant/language/language_tr.dart';
-import 'package:plant/language/language_zh_tw.dart';
 
+import 'language_ca.dart';
+import 'language_cs.dart';
+import 'language_da.dart';
+import 'language_de.dart';
+import 'language_el.dart';
 import 'language_en_us.dart';
+import 'language_es.dart';
+import 'language_fi.dart';
+import 'language_fr.dart';
+import 'language_hi.dart';
+import 'language_hr.dart';
+import 'language_hu.dart';
+import 'language_id.dart';
+import 'language_it.dart';
+import 'language_ja.dart';
+import 'language_ko.dart';
+import 'language_ms.dart';
+import 'language_nl.dart';
+import 'language_no.dart';
+import 'language_pl.dart';
+import 'language_pt.dart';
+import 'language_ro.dart';
+import 'language_ru.dart';
+import 'language_sk.dart';
+import 'language_sv.dart';
+import 'language_th.dart';
+import 'language_tr.dart';
+import 'language_uk.dart';
+import 'language_vi.dart';
 import 'language_zh_cn.dart';
+import 'language_zh_tw.dart';
 
 class Language extends Translations {
   @override
@@ -23,8 +41,6 @@ class Language extends Translations {
       'zh_Hant_TW': LanguageZhTw.language,
       'zh_Hant_MO': LanguageZhTw.language,
       'en_US': LanguageEnUs.language,
-      // 阿拉伯语
-      'ar': LanguageAr.language,
       // 德语
       'de': LanguageDe.language,
       // 法语
@@ -43,6 +59,44 @@ class Language extends Translations {
       'pt': LanguagePt.language,
       // 土耳其
       'tr': LanguageTr.language,
+      // 丹麦
+      'da': LanguageDa.language,
+      // 加泰罗尼亚
+      'ca': LanguageCa.language,
+      // 捷克
+      'cs': LanguageCs.language,
+      // 希腊
+      'el': LanguageEl.language,
+      // 芬兰语
+      'fi': LanguageFi.language,
+      // 印地语
+      'hi': LanguageHi.language,
+      // 克罗地亚
+      'hr': LanguageHr.language,
+      // 匈牙利
+      'hu': LanguageHu.language,
+      // 印尼语
+      'id': LanguageId.language,
+      // 马来西亚
+      'ms': LanguageMs.language,
+      // 挪威
+      'no': LanguageNo.language,
+      // 波兰语
+      'pl': LanguagePl.language,
+      // 罗马尼亚
+      'ro': LanguageRo.language,
+      // 俄语Ï
+      'ru': LanguageRu.language,
+      // 斯洛伐克
+      'sk': LanguageSk.language,
+      // 瑞典语
+      'sv': LanguageSv.language,
+      // 泰语
+      'th': LanguageTh.language,
+      // 乌克兰
+      'uk': LanguageUk.language,
+      // 越南
+      'vi': LanguageVi.language,
     };
   }
 }
