@@ -58,11 +58,11 @@ class BuyShop {
           Fluttertoast.showToast(msg: 'paymentHasBeenCanceled'.tr);
         } else if (purchaseDetails.status == PurchaseStatus.purchased || purchaseDetails.status == PurchaseStatus.restored) {
           Get.log("监控到需要验证的订单，订单号：$orderNum");
-          if (purchaseDetails.status == PurchaseStatus.restored) {
-            sign = await Request.getOrderKey();
-          }
           if (!(Get.isDialogOpen ?? false)) {
             Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
+          }
+          if (purchaseDetails.status == PurchaseStatus.restored) {
+            sign = await Request.getOrderKey();
           }
           await _checkPayInfo(purchaseDetails);
           await Get.find<UserController>().getUserInfo();
