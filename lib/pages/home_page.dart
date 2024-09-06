@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/user_nav_bar.dart';
+import 'package:plant/controllers/user_controller.dart';
 
 import 'set_page.dart';
 import 'shoot_page.dart';
@@ -14,6 +15,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userCtr = Get.find<UserController>();
     return Column(
       children: [
         const UserNavBar(),
@@ -36,7 +38,7 @@ class HomePage extends StatelessWidget {
                   SizedBox(
                     height: 24,
                     child: Text(
-                      '${'hi'.tr}${'plantLover'.tr}',
+                      '${'hi'.tr}${userCtr.isLogin.value ? userCtr.userInfo.value.nickname : 'plantLover'.tr}',
                       style: TextStyle(
                         color: UIColor.c15221D,
                         fontSize: 14,
