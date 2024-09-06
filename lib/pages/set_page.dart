@@ -175,7 +175,7 @@ class SetPage extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            '${'hi'.tr}${userCtr.isLogin.value ? userCtr.userInfo.value.nickname : 'plantLover'.tr}',
+                            '${'hi'.tr}${userCtr.userInfo.value.nickname ?? 'plantLover'.tr}',
                             style: const TextStyle(
                               color: UIColor.white,
                               fontSize: 16,

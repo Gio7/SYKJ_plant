@@ -15,7 +15,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userCtr = Get.find<UserController>();
     return Column(
       children: [
         const UserNavBar(),
@@ -37,12 +36,14 @@ class HomePage extends StatelessWidget {
                 children: [
                   SizedBox(
                     height: 24,
-                    child: Text(
-                      '${'hi'.tr}${userCtr.isLogin.value ? userCtr.userInfo.value.nickname : 'plantLover'.tr}',
-                      style: TextStyle(
-                        color: UIColor.c15221D,
-                        fontSize: 14,
-                        fontWeight: FontWeightExt.medium,
+                    child: Obx(
+                      () => Text(
+                        '${'hi'.tr}${Get.find<UserController>().userInfo.value.nickname ?? 'plantLover'.tr}',
+                        style: TextStyle(
+                          color: UIColor.c15221D,
+                          fontSize: 14,
+                          fontWeight: FontWeightExt.medium,
+                        ),
                       ),
                     ),
                   ),

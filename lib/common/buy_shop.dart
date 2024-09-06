@@ -32,6 +32,7 @@ class BuyShop {
     //监听购买的事件
     final Stream<List<PurchaseDetails>> purchaseUpdated = _inAppPurchase.purchaseStream;
     _subscription = purchaseUpdated.listen((purchaseDetailsList) {
+      Get.log('检测到需要处理的订单数：${purchaseDetailsList.length}');
       _listenToPurchaseUpdated(purchaseDetailsList);
     }, onDone: () {
       _subscription.cancel();
