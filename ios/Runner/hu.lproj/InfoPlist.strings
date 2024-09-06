@@ -1,0 +1,12 @@
+/* 
+  InfoPlist.strings
+  Runner
+
+  Created by Mac on 2024/9/6.
+  
+*/
+
+"NSMicrophoneUsageDescription" = "A mikrofonhoz való hozzáféréshez szükségünk van az ön beleegyezésére, hogy hanggal kapcsolatos funkciókat és szolgáltatásokat nyújtsunk.";
+"NSPhotoLibraryUsageDescription" = "Növények képeinek kiválasztásához az albumaiból azonosítás céljából.";
+"NSUserTrackingUsageDescription" = "Az adatait személyre szabott hirdetések megjelenítéséhez használjuk fel.";
+"NSCameraUsageDescription" = "Növények fényképezésére és azonosítására.";

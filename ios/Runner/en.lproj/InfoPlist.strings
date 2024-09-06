@@ -1,0 +1,12 @@
+/* 
+  InfoPlist.strings
+  Runner
+
+  Created by Mac on 2024/9/6.
+  
+*/
+
+"NSMicrophoneUsageDescription" = "We need your consent to access the microphone, to provide voice-related functions and services.";
+"NSPhotoLibraryUsageDescription" = "To select plant pictures from your albums for identification.";
+"NSUserTrackingUsageDescription" = "Your data will be used to deliver personalized ads to you.";
+"NSCameraUsageDescription" = "To take pictures of plants and identify them.";

@@ -1,0 +1,12 @@
+/* 
+  InfoPlist.strings
+  Runner
+
+  Created by Mac on 2024/9/6.
+  
+*/
+
+"NSMicrophoneUsageDescription" = "我們需要您的同意才能存取麥克風，以提供語音相關的功能與服務。";
+"NSPhotoLibraryUsageDescription" = "從您的相簿中選取植物照片進行辨識。";
+"NSUserTrackingUsageDescription" = "您的數據將用於為您提供個性化廣告。";
+"NSCameraUsageDescription" = "用於拍攝植物照片並進行辨識。";
