@@ -18,6 +18,7 @@ import 'language/language.dart';
 import 'pages/main_page.dart';
 
 Future<void> main() async {
+  bool isInit = true;
   WidgetsFlutterBinding.ensureInitialized();
   if (GetPlatform.isAndroid) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -37,10 +38,8 @@ Future<void> main() async {
       if (GlobalData.email.isEmpty) {
         getConfig();
       }
-      final prefs = await SharedPreferences.getInstance();
-      final bool isFirstStart = prefs.getBool('isFirstStart') ?? true;
-      if (isFirstStart) {
-        prefs.setBool('isFirstStart', false);
+      if (isInit) {
+        isInit = false;
         WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((_) => getAdid());
       }
     }
