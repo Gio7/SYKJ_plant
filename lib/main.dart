@@ -1,3 +1,5 @@
+import 'package:advertising_id/advertising_id.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,6 +26,25 @@ Future<void> main() async {
     ));
   }
   await initMain();
+  Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) async {
+    // Get.log('network status list: ${result.length}');
+    // for (var element in result) {
+    //   Get.log('network status changed: ${element.name}');
+    // }
+    if (result.contains(ConnectivityResult.none)) {
+      Get.log('No network connection.', isError: true);
+    } else {
+      if (GlobalData.email.isEmpty) {
+        getConfig();
+      }
+      final prefs = await SharedPreferences.getInstance();
+      final bool isFirstStart = prefs.getBool('isFirstStart') ?? true;
+      if (isFirstStart) {
+        prefs.setBool('isFirstStart', false);
+        WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((_) => getAdid());
+      }
+    }
+  });
   runApp(const MainApp());
 }
 
@@ -42,7 +63,6 @@ Future<void> initMain() async {
     DioUtil.token = token;
   }
   DioUtil.resetDio();
-  getConfig();
   // GlobalData.buyShop.initializeInAppPurchase();
 }
 
@@ -54,6 +74,19 @@ Future<void> getConfig() async {
     } else if (item['conKey'] == 'email') {
       GlobalData.email = item['conValue'];
     }
+  }
+}
+
+Future<void> getAdid() async {
+  await Future.delayed(const Duration(milliseconds: 1500));
+  try {
+    GlobalData.adId = await AdvertisingId.id(true) ?? '';
+    if (GlobalData.adId.isNotEmpty) {
+      DioUtil.resetDio();
+    }
+  } catch (e) {
+    Get.log(e.toString(), isError: true);
+    // advertisingId = 'Failed to get platform version.';
   }
 }
 
