@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
 
-class CostomBottomNavBar extends StatelessWidget {
-  const CostomBottomNavBar({super.key, required this.currentIndex, this.onTap, this.centerOnTap});
+class CustomBottomNavBar extends StatelessWidget {
+  const CustomBottomNavBar({super.key, required this.currentIndex, this.onTap, this.centerOnTap});
   final int currentIndex;
   final Function(int)? onTap;
   final Function()? centerOnTap;

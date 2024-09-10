@@ -139,7 +139,7 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    '${'addedAt'.tr} ${model.createTimeLoacal}',
+                    '${'addedAt'.tr} ${model.createTimeLocal}',
                     style: TextStyle(
                       color: UIColor.c8E8B8B,
                       fontSize: 12,

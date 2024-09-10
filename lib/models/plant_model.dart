@@ -64,7 +64,7 @@ class PlantModel {
         "status": status,
       };
 
-  String get createTimeLoacal {
+  String get createTimeLocal {
     return DateUtil.formatString(createTime, format: DateFormat.yMd());
   }
 }

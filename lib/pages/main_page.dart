@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/components/costom_bottom_nav_bar.dart';
+import 'package:plant/components/custom_bottom_nav_bar.dart';
 import 'package:plant/components/page_bg.dart';
 import 'package:plant/controllers/main_controller.dart';
 import 'package:plant/controllers/user_controller.dart';
@@ -55,7 +55,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
             ],
           ),
         ),
-        bottomNavigationBar: CostomBottomNavBar(
+        bottomNavigationBar: CustomBottomNavBar(
           currentIndex: mainController.tabController.index,
           onTap: (index) {
             HapticFeedback.lightImpact();
