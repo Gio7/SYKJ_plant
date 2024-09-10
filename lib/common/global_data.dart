@@ -1,12 +1,17 @@
 // import 'buy_shop.dart';
 
+import 'package:flutter/foundation.dart';
+
 import 'buy_shop.dart';
 
 class GlobalData {
-  static String baseUrl = 'http://192.168.0.111:19300';
-  // static String baseUrl = 'https://test.plantidentifier.co';
-  /// 正式环境
-  // static String baseUrl = 'https://api.plantidentifier.co';
+  static String get baseUrl {
+    if (kDebugMode) {
+      //https://test.plantidentifier.co
+      return 'http://192.168.0.111:19300';
+    }
+    return 'https://api.plantidentifier.co';
+  }
   /// 用户协议
   static String termsOfUseUrl = 'https://plantidentifier.co/terms_of_use.html';
 
