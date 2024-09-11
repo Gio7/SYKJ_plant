@@ -19,7 +19,6 @@ class ScanPage extends StatelessWidget {
 
   void _requestNetwork(PlantController ctr, Completer<void> completer) async {
     if (!(Get.find<UserController>().userInfo.value.isRealVip)) {
-      completer.completeError('nonmember');
       await Future.delayed(const Duration(milliseconds: 800));
       FireBaseUtil.subscribePageEvent(Get.currentRoute);
       await Get.to(() => ShopPage());
