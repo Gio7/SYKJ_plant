@@ -49,9 +49,14 @@ Future<void> main() async {
 }
 
 Future<void> initMain() async {
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  try {
+    await Firebase.initializeApp(
+      name: 'plant ID',
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e) {
+    Get.log('Firebase initialization error: $e');
+  }
   EasyRefreshCustom.setup();
   FireBaseUtil.initAnalyticsServices();
   final info = await PackageInfo.fromPlatform();

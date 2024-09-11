@@ -1,3 +1,17 @@
+// firebase 调试需要，buildscript中都是后添加的
+buildscript {
+    ext.kotlin_version = '1.8.0'
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.3.14'
+    }
+}
+
 allprojects {
     repositories {
         google()
