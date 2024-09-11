@@ -1,7 +1,7 @@
 // import 'buy_shop.dart';
 
-import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
+// import 'package:flutter/foundation.dart';
+// import 'package:get/get.dart';
 
 import 'buy_shop.dart';
 
@@ -10,10 +10,10 @@ class GlobalData {
     // if (GetPlatform.isIOS) {
     //   return 'http://192.168.0.111:19300';
     // }
-    if (kDebugMode) {
-      //https://test.plantidentifier.co
-      return 'http://192.168.0.111:19300';
-    }
+    // if (kDebugMode) {
+    //   //https://test.plantidentifier.co
+    //   return 'http://192.168.0.111:19300';
+    // }
     return 'https://api.plantidentifier.co';
   }
   /// 用户协议

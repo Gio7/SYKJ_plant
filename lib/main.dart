@@ -51,7 +51,6 @@ Future<void> main() async {
 Future<void> initMain() async {
   try {
     await Firebase.initializeApp(
-      name: 'plant ID',
       options: DefaultFirebaseOptions.currentPlatform,
     );
   } catch (e) {
