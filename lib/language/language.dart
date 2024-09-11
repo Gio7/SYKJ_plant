@@ -37,9 +37,7 @@ class Language extends Translations {
   Map<String, Map<String, String>> get keys {
     return {
       'zh_CN': LanguageZhCn.language,
-      'zh_Hant_HK': LanguageZhTw.language,
-      'zh_Hant_TW': LanguageZhTw.language,
-      'zh_Hant_MO': LanguageZhTw.language,
+      'zh_TW': LanguageZhTw.language,
       'en_US': LanguageEnUs.language,
       // 德语
       'de': LanguageDe.language,

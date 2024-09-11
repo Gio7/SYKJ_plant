@@ -101,7 +101,7 @@ class MainApp extends StatelessWidget {
       themeMode: ThemeMode.dark,
       initialBinding: CoreBindingController(),
       translations: Language(),
-      locale: Get.deviceLocale, //const Locale('zh', 'CN'),
+      locale: _parseLocale(Get.deviceLocale ?? const Locale('en', 'US')),
       fallbackLocale: const Locale('en', 'US'),
       navigatorObservers: [FireBaseUtil.observer],
       darkTheme: ThemeData(
@@ -119,5 +119,14 @@ class MainApp extends StatelessWidget {
       ),
       home: const MainPage(),
     );
+  }
+
+  Locale _parseLocale(Locale locale) {
+    if (locale.scriptCode == 'Hans') {
+      return const Locale('zh', 'CN');
+    } else if (locale.scriptCode == 'Hant') {
+      return const Locale('zh', 'TW');
+    }
+    return locale;
   }
 }
