@@ -5,10 +5,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:plant/api/request.dart';
 import 'package:plant/common/aws_utils.dart';
+import 'package:plant/common/firebase_util.dart';
+import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/plant_diagnosis_model.dart';
 import 'package:plant/models/plant_info_model.dart';
 import 'package:plant/pages/info_diagnose_page.dart';
 import 'package:plant/pages/info_identify_page.dart';
+import 'package:plant/pages/shop/shop_view.dart';
 
 class PlantController extends GetxController {
   /// 识别类型 identify diagnose
@@ -27,6 +30,12 @@ class PlantController extends GetxController {
   PlantDiagnosisModel? diagnoseInfo;
 
   Future<bool> requestInfo(Completer<void> completer, File cropFile, File image400File) async {
+    if (!(Get.find<UserController>().userInfo.value.isRealVip)) {
+      completer.completeError('nonmember');
+      FireBaseUtil.subscribePageEvent(Get.currentRoute);
+      Get.to(() => ShopPage());
+      return false;
+    }
     plantInfo = null;
     diagnoseInfo = null;
     await uploadFile(completer, cropFile, image400File);

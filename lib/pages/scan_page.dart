@@ -3,48 +3,68 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/show_dialog.dart';
 import 'package:plant/controllers/plant_controller.dart';
+import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/sdk/scanning_effect/scanning_effect.dart';
+
+import 'shop/shop_view.dart';
 
 class ScanPage extends StatelessWidget {
   const ScanPage({super.key, required this.cropFile, required this.image400File});
   final File cropFile;
   final File image400File;
 
+  void _requestNetwork(PlantController ctr, Completer<void> completer) async {
+    if (!(Get.find<UserController>().userInfo.value.isRealVip)) {
+      completer.completeError('nonmember');
+      await Future.delayed(const Duration(milliseconds: 800));
+      FireBaseUtil.subscribePageEvent(Get.currentRoute);
+      await Get.to(() => ShopPage());
+      if (!(Get.find<UserController>().userInfo.value.isRealVip)) {
+        Get.until((route) => Get.currentRoute == '/');
+        return;
+      }
+    }
+    ctr.requestInfo(completer, cropFile, image400File).then((isSuccess) => {
+      if (!isSuccess && !(completer.isCompleted))
+        {
+          Get.dialog(
+            NormalDialog(
+              title: 'noPlantDetected'.tr,
+              subText: 'noPlantDetectedTips'.tr,
+              icon: Image.asset('images/icon/plant.png', height: 70),
+              confirmText: 'retakePhoto'.tr,
+              cancelText: 'cancel'.tr,
+              onConfirm: () {
+                Get.back(closeOverlays: true);
+              },
+              onCancel: () {
+                Get.back(closeOverlays: true);
+                Get.until((route) => Get.currentRoute == '/');
+              },
+            ),
+          )
+        }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final ctr = Get.find<PlantController>();
     final completer = Completer<void>();
-    ctr.requestInfo(completer, cropFile, image400File).then((isSuccess) => {
-          if (!isSuccess && !(completer.isCompleted))
-            {
-              Get.dialog(
-                NormalDialog(
-                  title: 'noPlantDetected'.tr,
-                  subText: 'noPlantDetectedTips'.tr,
-                  icon: Image.asset('images/icon/plant.png', height: 70),
-                  confirmText: 'retakePhoto'.tr,
-                  cancelText: 'cancel'.tr,
-                  onConfirm: () {
-                    Get.back(closeOverlays: true);
-                  },
-                  onCancel: () {
-                    Get.back(closeOverlays: true);
-                    Get.until((route) => Get.currentRoute == '/');
-                  },
-                ),
-              )
-            }
-        });
+    _requestNetwork(ctr, completer);
     completer.future.catchError((e) => Get.log(e.toString(), isError: true));
 
     final width = Get.width - 116;
     return PopScope(
       canPop: true,
       onPopInvoked: (didPop) {
-        completer.completeError('task cancel');
+        if (!completer.isCompleted) {
+          completer.completeError('task cancel');
+        }
       },
       child: Container(
         decoration: const BoxDecoration(
