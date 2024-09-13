@@ -38,7 +38,7 @@ class BuyShop {
       _subscription.cancel();
     }, onError: (error) {
       error.printError();
-      Fluttertoast.showToast(msg: 'paymentInitiationFailure'.tr);
+      Fluttertoast.showToast(msg: 'paymentInitiationFailure'.tr, toastLength: Toast.LENGTH_LONG,timeInSecForIosWeb: 5,gravity: ToastGravity.CENTER);
     });
   }
 
@@ -51,7 +51,7 @@ class BuyShop {
           if (Get.isDialogOpen ?? false) {
             Get.back();
           }
-          Fluttertoast.showToast(msg: purchaseDetails.error?.message ?? 'pay error');
+          Fluttertoast.showToast(msg: purchaseDetails.error?.message ?? 'pay error', toastLength: Toast.LENGTH_LONG,timeInSecForIosWeb: 5,gravity: ToastGravity.CENTER);
         } else if (purchaseDetails.status == PurchaseStatus.canceled) {
           if (Get.isDialogOpen ?? false) {
             Get.back();
@@ -116,7 +116,6 @@ class BuyShop {
         Get.back();
       }
       Fluttertoast.showToast(msg: 'restoreTips'.tr);
-      // Fluttertoast.showToast(msg: e.toString(), toastLength: Toast.LENGTH_LONG);
     }
   }
 
@@ -131,14 +130,14 @@ class BuyShop {
 
     if (orderNum == null || sign == null) {
       Get.back();
-      Fluttertoast.showToast(msg: 'orderCreationFailure'.tr);
+      Fluttertoast.showToast(msg: 'orderCreationFailure'.tr, toastLength: Toast.LENGTH_LONG,timeInSecForIosWeb: 5,gravity: ToastGravity.CENTER);
       return;
     }
 
     final bool isAvailable = await _inAppPurchase.isAvailable();
     if (!isAvailable) {
       Get.back();
-      Fluttertoast.showToast(msg: 'paymentInitiationFailure'.tr);
+      Fluttertoast.showToast(msg: 'paymentInitiationFailure'.tr, toastLength: Toast.LENGTH_LONG,timeInSecForIosWeb: 5,gravity: ToastGravity.CENTER);
       return;
     }
     try {
@@ -150,7 +149,7 @@ class BuyShop {
         await _inAppPurchase.buyConsumable(purchaseParam: purchaseParam);
       }
     } catch (e) {
-      Fluttertoast.showToast(msg: e.toString());
+      Fluttertoast.showToast(msg: e.toString(), toastLength: Toast.LENGTH_LONG,timeInSecForIosWeb: 5,gravity: ToastGravity.CENTER);
       Get.back();
     }
   }

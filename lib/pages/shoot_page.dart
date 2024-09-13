@@ -83,7 +83,6 @@ class _ShootPageState extends State<ShootPage> {
             },
           ),
         );
-        // Fluttertoast.showToast(msg: e.description ?? 'error', toastLength: Toast.LENGTH_LONG, gravity: ToastGravity.CENTER);
         switch (e.code) {
           case 'CameraAccessDenied':
             // 当用户拒绝相机访问权限时抛出

@@ -65,7 +65,7 @@ class AwsUtils {
       }
     } catch (e) {
       Get.back();
-      Fluttertoast.showToast(msg: e.toString());
+      Fluttertoast.showToast(msg: e.toString(), toastLength: Toast.LENGTH_LONG,timeInSecForIosWeb: 5,gravity: ToastGravity.CENTER);
       Get.log(e.toString(), isError: true);
       rethrow;
     }
