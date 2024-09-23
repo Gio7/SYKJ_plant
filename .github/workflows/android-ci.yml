@@ -1,7 +1,11 @@
 name: android-ci
 
 on:
-  workflow_dispatch:
+#  workflow_dispatch:
+  push:
+    branches: [dev]
+  pull_request:
+    branches: [dev]
 
 jobs:
   build_android:
