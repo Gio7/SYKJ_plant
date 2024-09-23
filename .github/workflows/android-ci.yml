@@ -1,0 +1,54 @@
+name: android-ci
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.3'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build debug-apk
+        run: flutter build apk --debug --obfuscate --split-debug-info=tmp/
+
+      - name: Upload PGYER File
+        id: pgyer
+        uses: xtayga/upload-pgyer-action@master
+        with:
+          url: https://www.pgyer.com/apiv2/app/upload
+          forms: '{"_api_key":"${{ secrets.PGY_KEY }}","buildName":"Plant"}'
+          fileForms: '{"file":"build/app/outputs/flutter-apk/app-debug.apk"}'
+
+      - name: Build AAB
+        run: flutter build appbundle --release --obfuscate --split-debug-info=tmp/
+
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-apk
+          # build/app/outputs/flutter-apk/app-release.apk
+          # build/app/outputs/flutter-apk/app-debug.apk
+          # build/app/outputs/bundle/release/app-release.aab
+          path: build/app/outputs/bundle/release/app-release.aab
+
+      - name: Build release-apk
+        run: flutter build apk --release --obfuscate --split-debug-info=tmp/
+
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-apk
+          # build/app/outputs/flutter-apk/app-release.apk
+          # build/app/outputs/flutter-apk/app-debug.apk
+          # build/app/outputs/bundle/release/app-release.aab
+          path: build/app/outputs/flutter-apk/app-release.apk
