@@ -16,7 +16,7 @@ jobs:
 
       - uses: actions/setup-java@v1
         with:
-          java-version: '17.x'
+          java-version: '17.x' # device_info_plus需要java17
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -25,17 +25,6 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
-
-      - name: Build debug-apk
-        run: flutter build apk --debug --obfuscate --split-debug-info=tmp/
-
-      - name: Upload PGYER File
-        id: pgyer
-        uses: xtayga/upload-pgyer-action@master
-        with:
-          url: https://www.pgyer.com/apiv2/app/upload
-          forms: '{"_api_key":"${{ secrets.PGY_KEY }}","buildName":"Plant"}'
-          fileForms: '{"file":"build/app/outputs/flutter-apk/app-debug.apk"}'
 
       - name: Build AAB
         run: flutter build appbundle --release --obfuscate --split-debug-info=tmp/
@@ -60,3 +49,14 @@ jobs:
           # build/app/outputs/flutter-apk/app-debug.apk
           # build/app/outputs/bundle/release/app-release.aab
           path: build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Build debug-apk
+        run: flutter build apk --debug --obfuscate --split-debug-info=tmp/
+
+      - name: Upload PGYER File
+        id: pgyer
+        uses: xtayga/upload-pgyer-action@master
+        with:
+          url: https://www.pgyer.com/apiv2/app/upload
+          forms: '{"_api_key":"${{ secrets.PGY_KEY }}","buildName":"RSS"}'
+          fileForms: '{"file":"build/app/outputs/flutter-apk/app-debug.apk"}'
