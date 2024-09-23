@@ -1,10 +1,11 @@
 name: Flutter_iOS_Test
 
 on:
-  push:
-    branches: [dev]
-  pull_request:
-    branches: [dev]
+  workflow_dispatch:
+#  push:
+#    branches: [dev]
+#  pull_request:
+#    branches: [dev]
 
 jobs:
   build_ios:
