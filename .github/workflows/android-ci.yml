@@ -1,11 +1,11 @@
 name: android-ci
 
 on:
-#  workflow_dispatch:
-  push:
-    branches: [dev]
-  pull_request:
-    branches: [dev]
+  workflow_dispatch:
+#  push:
+#    branches: [dev]
+#  pull_request:
+#    branches: [dev]
 
 jobs:
   build_android:
@@ -27,27 +27,31 @@ jobs:
         run: flutter pub get
 
       - name: Build AAB
+        if: github.repository == 'SuperInteractica/PlantIdentification'
         run: flutter build appbundle --release --obfuscate --split-debug-info=tmp/
 
-      - name: Build release-apk
-        run: flutter build apk --release --obfuscate --split-debug-info=tmp/
+#      - name: Build release-apk
+#        run: flutter build apk --release --obfuscate --split-debug-info=tmp/
 
       - name: Build debug-apk
+        if: github.repository == 'Gio7/SYKJ_plant'
         run: flutter build apk --debug --obfuscate --split-debug-info=tmp/
 
       - name: Archive production artifacts
+        if: github.repository == 'SuperInteractica/PlantIdentification'
         uses: actions/upload-artifact@v4
         with:
           name: release-aab
           path: build/app/outputs/bundle/release/app-release.aab
 
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+#      - name: Archive production artifacts
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: release-apk
+#          path: build/app/outputs/flutter-apk/app-release.apk
 
       - name: Upload PGYER File
+        if: github.repository == 'Gio7/SYKJ_plant'
         id: pgyer
         uses: xtayga/upload-pgyer-action@master
         with:
