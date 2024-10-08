@@ -139,6 +139,7 @@ class LanguageRo {
       'orderCreationFailure': 'Crearea comenzii a eșuat',
       'productNotFound': 'Produsul nu a fost găsit',
       'paymentHasBeenCanceled': 'Plata a fost anulată.',
+      'restoreTips': 'Nu există conținut de restaurat.',
     };
   }
 }

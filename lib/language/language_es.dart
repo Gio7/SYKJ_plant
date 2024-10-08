@@ -139,6 +139,7 @@ class LanguageEs {
       'orderCreationFailure': 'Error al crear la orden',
       'productNotFound': 'Producto no encontrado',
       'paymentHasBeenCanceled': 'El pago ha sido cancelado.',
+      'restoreTips': 'No hay contenido para restaurar.',
     };
   }
 }

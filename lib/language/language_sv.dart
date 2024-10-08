@@ -139,6 +139,7 @@ class LanguageSv {
       'orderCreationFailure': 'Misslyckades med att skapa beställning',
       'productNotFound': 'Produkten hittades inte',
       'paymentHasBeenCanceled': 'Betalningen har avbrutits.',
+      'restoreTips': 'Inget innehåll att återställa.',
     };
   }
 }

@@ -137,6 +137,7 @@ class LanguageJa {
       'orderCreationFailure': '注文の作成に失敗しました',
       'productNotFound': '商品が見つかりません',
       'paymentHasBeenCanceled': '支払いがキャンセルされました。',
+      'restoreTips': '復元するコンテンツがありません。',
     };
   }
 }

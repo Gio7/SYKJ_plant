@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 class PlantInfoModel {
   final int? scanRecordId;
   final Plant? plant;
@@ -79,49 +81,112 @@ class Characteristics {
 class Flower {
   final String? flowerColor;
   final String? flowerSize;
+  final List<Detail>? details;
 
   Flower({
     this.flowerColor,
     this.flowerSize,
+    this.details,
   });
 
-  factory Flower.fromJson(Map<String, dynamic> json) => Flower(
-        flowerColor: json["flowerColor"],
-        flowerSize: json["flowerSize"],
-      );
+  factory Flower.fromJson(Map<String, dynamic> json) {
+    List<Detail>? details = json["details"] == null ? null : List<Detail>.from(json["details"]!.map((x) => Detail.fromJson(x)));
+    details ??= [
+      Detail(type: 'String', title: 'flowerSize'.tr, value: json["flowerSize"]),
+      Detail(type: 'Colors', title: 'flowerColor'.tr, colors: json["flowerColor"]),
+    ];
+    return Flower(
+      flowerColor: json["flowerColor"],
+      flowerSize: json["flowerSize"],
+      details: details,
+    );
+  }
 }
 
 class Fruit {
   final String? fruitColor;
   final String? fruitRipeningTime;
+  final List<Detail>? details;
 
   Fruit({
     this.fruitColor,
     this.fruitRipeningTime,
+    this.details,
   });
 
-  factory Fruit.fromJson(Map<String, dynamic> json) => Fruit(
-        fruitColor: json["fruitColor"],
-        fruitRipeningTime: json["fruitRipeningTime"],
-      );
+  factory Fruit.fromJson(Map<String, dynamic> json) {
+    List<Detail>? details = json["details"] == null ? null : List<Detail>.from(json["details"]!.map((x) => Detail.fromJson(x)));
+    details ??= [
+      Detail(type: 'String', title: 'harvestTime'.tr, value: json["fruitRipeningTime"]),
+      Detail(type: 'Colors', title: 'fruitColor'.tr, colors: json["fruitColor"]),
+    ];
+    return Fruit(
+      fruitColor: json["fruitColor"],
+      fruitRipeningTime: json["fruitRipeningTime"],
+      details: details,
+    );
+  }
 }
 
 class MaturePlant {
   final String? leafColor;
   final String? plantHeight;
   final String? spread;
+  final List<Detail>? details;
 
   MaturePlant({
     this.leafColor,
     this.plantHeight,
     this.spread,
+    this.details,
   });
 
-  factory MaturePlant.fromJson(Map<String, dynamic> json) => MaturePlant(
-        leafColor: json["leafColor"],
-        plantHeight: json["plantHeight"],
-        spread: json["spread"],
-      );
+  factory MaturePlant.fromJson(Map<String, dynamic> json) {
+    List<Detail>? details = json["details"] == null ? null : List<Detail>.from(json["details"]!.map((x) => Detail.fromJson(x)));
+    details ??= [
+      Detail(type: 'String', title: 'plantHeight'.tr, value: json["plantHeight"]),
+      Detail(type: 'String', title: 'spread'.tr, value: json["spread"]),
+      Detail(type: 'Colors', title: 'leafColor'.tr, colors: json["leafColor"]),
+    ];
+    return MaturePlant(
+      leafColor: json["leafColor"],
+      plantHeight: json["plantHeight"],
+      spread: json["spread"],
+      details: details,
+    );
+  }
+}
+
+class Detail {
+  final String? type;
+  final String? title;
+  final dynamic value;
+  final String? originEnumValue;
+  final String? colors;
+
+  Detail({
+    this.type,
+    this.title,
+    this.value,
+    this.originEnumValue,
+    this.colors,
+  });
+
+  factory Detail.fromJson(Map<String, dynamic> json) => Detail(
+    type: json["type"],
+    title: json["title"],
+    value: json["value"],
+    originEnumValue: json["originEnumValue"],
+    colors: json["colors"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "type": type,
+    "title": title,
+    "value": value,
+    "originEnumValue": originEnumValue,
+    "colors": colors,
+  };
 }
 
 class Conditions {

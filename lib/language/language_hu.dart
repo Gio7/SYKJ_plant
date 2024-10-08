@@ -140,6 +140,7 @@ class LanguageHu {
       'orderCreationFailure': 'A rendelés létrehozása nem sikerült',
       'productNotFound': 'A termék nem található',
       'paymentHasBeenCanceled': 'A fizetés lemondva.',
+      'restoreTips': 'Nincs visszaállítható tartalom.',
     };
   }
 }

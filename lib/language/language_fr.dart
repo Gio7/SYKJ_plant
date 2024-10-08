@@ -139,6 +139,7 @@ class LanguageFr {
       'orderCreationFailure': 'Échec de la création de la commande',
       'productNotFound': 'Produit non trouvé',
       'paymentHasBeenCanceled': 'Le paiement a été annulé.',
+      'restoreTips': 'Aucun contenu à restaurer.',
     };
   }
 }

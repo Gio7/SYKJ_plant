@@ -139,6 +139,7 @@ class LanguagePl {
       'orderCreationFailure': 'Nie udało się utworzyć zamówienia',
       'productNotFound': 'Produkt nie znaleziony',
       'paymentHasBeenCanceled': 'Płatność została anulowana.',
+      'restoreTips': 'Brak treści do przywrócenia.',
     };
   }
 }

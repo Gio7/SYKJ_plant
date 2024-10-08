@@ -26,8 +26,9 @@ class DioUtil {
   DioUtil._init() {
     final dl = Get.deviceLocale;
     String language = dl?.languageCode ?? '';
-    if (dl?.scriptCode != null && dl!.scriptCode!.isNotEmpty) {
-      language += '_${dl.scriptCode}';
+    // if (dl?.scriptCode != null && dl!.scriptCode!.isNotEmpty) {
+    if (dl?.scriptCode == 'Hant') {
+      language += '_Hant}';
     }
     _dio = Dio(
       BaseOptions(

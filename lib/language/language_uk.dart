@@ -138,6 +138,7 @@ class LanguageUk {
       'orderCreationFailure': 'Не вдалося створити замовлення',
       'productNotFound': 'Продукт не знайдено',
       'paymentHasBeenCanceled': 'Платіж скасовано.',
+      'restoreTips': 'Немає вмісту для відновлення.',
     };
   }
 }

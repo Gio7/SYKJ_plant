@@ -139,6 +139,7 @@ class LanguagePt {
       'orderCreationFailure': 'Falha ao criar o pedido',
       'productNotFound': 'Produto não encontrado',
       'paymentHasBeenCanceled': 'O pagamento foi cancelado.',
+      'restoreTips': 'Nenhum conteúdo para restaurar.',
     };
   }
 }

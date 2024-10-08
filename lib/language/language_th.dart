@@ -138,6 +138,7 @@ class LanguageTh {
       'orderCreationFailure': 'ไม่สามารถสร้างคำสั่งซื้อได้',
       'productNotFound': 'ไม่พบสินค้า',
       'paymentHasBeenCanceled': 'การชำระเงินถูกยกเลิก.',
+      'restoreTips': 'ไม่มีเนื้อหาที่จะกู้คืน',
     };
   }
 }

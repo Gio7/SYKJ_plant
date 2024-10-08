@@ -140,6 +140,7 @@ class LanguageNo {
       'orderCreationFailure': 'Kunne ikke opprette bestilling',
       'productNotFound': 'Produktet ble ikke funnet',
       'paymentHasBeenCanceled': 'Betalingen ble avbrutt.',
+      'restoreTips': 'Ingen innhold å gjenopprette.',
     };
   }
 }

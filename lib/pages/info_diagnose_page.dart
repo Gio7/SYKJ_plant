@@ -230,6 +230,7 @@ class InfoDiagnosePage extends StatelessWidget {
       child: CachedNetworkImage(
         imageUrl: ctr.thumbnailUrl ?? '',
         fit: BoxFit.cover,
+        fadeInDuration: Duration.zero,
       ),
     );
   }

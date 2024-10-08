@@ -139,6 +139,7 @@ class LanguageRu {
       'orderCreationFailure': 'Не удалось создать заказ',
       'productNotFound': 'Продукт не найден',
       'paymentHasBeenCanceled': 'Платеж был отменен.',
+      'restoreTips': 'Нет содержимого для восстановления.',
     };
   }
 }

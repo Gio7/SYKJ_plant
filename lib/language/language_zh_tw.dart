@@ -137,6 +137,7 @@ class LanguageZhTw {
       'orderCreationFailure': '創建訂單失敗',
       'productNotFound': '未找到產品',
       'paymentHasBeenCanceled': '支付已取消。',
+      'restoreTips': '無可恢復的內容。',
     };
   }
 }

@@ -139,6 +139,7 @@ class LanguageDe {
       'orderCreationFailure': 'Bestellung konnte nicht erstellt werden',
       'productNotFound': 'Produkt nicht gefunden',
       'paymentHasBeenCanceled': 'Die Zahlung wurde storniert.',
+      'restoreTips': 'Kein Inhalt zur Wiederherstellung.',
     };
   }
 }

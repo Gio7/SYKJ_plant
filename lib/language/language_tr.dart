@@ -139,6 +139,7 @@ class LanguageTr {
       'orderCreationFailure': 'Sipariş oluşturulamadı',
       'productNotFound': 'Ürün bulunamadı',
       'paymentHasBeenCanceled': 'Ödeme iptal edildi.',
+      'restoreTips': 'Geri yüklenecek içerik yok.',
     };
   }
 }

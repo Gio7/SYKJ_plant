@@ -139,6 +139,7 @@ class LanguageFi {
       'orderCreationFailure': 'Tilausta ei voitu luoda',
       'productNotFound': 'Tuotetta ei löytynyt',
       'paymentHasBeenCanceled': 'Maksu on peruutettu。',
+      'restoreTips': 'Ei sisältöä palautettavaksi.',
     };
   }
 }

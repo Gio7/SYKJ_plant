@@ -139,6 +139,7 @@ class LanguageNl {
       'orderCreationFailure': 'Aanmaken van bestelling mislukt',
       'productNotFound': 'Product niet gevonden',
       'paymentHasBeenCanceled': 'Betaling is geannuleerd.',
+      'restoreTips': 'Geen inhoud om te herstellen.',
     };
   }
 }

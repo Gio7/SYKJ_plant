@@ -48,6 +48,7 @@ class InfoIdentifyPage extends StatelessWidget {
       child: CachedNetworkImage(
         imageUrl: ctr.thumbnailUrl ?? '',
         fit: BoxFit.cover,
+        fadeInDuration: Duration.zero,
       ),
     );
   }

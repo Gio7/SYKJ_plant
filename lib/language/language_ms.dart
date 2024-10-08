@@ -139,6 +139,7 @@ class LanguageMs {
       'orderCreationFailure': 'Gagal membuat pesanan',
       'productNotFound': 'Produk tidak dijumpai',
       'paymentHasBeenCanceled': 'Pembayaran telah dibatalkan.',
+      'restoreTips': 'Tiada kandungan untuk dipulihkan.',
     };
   }
 }
