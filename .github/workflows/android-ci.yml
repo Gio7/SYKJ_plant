@@ -59,14 +59,14 @@ jobs:
           name: release-aab
           path: build/app/outputs/bundle/release/app-release.aab
 
-      - name: Archive production artifacts
+      - name: Archive release artifacts
         if: env.BUILD_TYPE == 'release'
         uses: actions/upload-artifact@v4
         with:
           name: release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
-      - name: Archive production artifacts
+      - name: Archive debug artifacts
         if: env.BUILD_TYPE == 'debug'
         uses: actions/upload-artifact@v4
         with:
