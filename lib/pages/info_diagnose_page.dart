@@ -65,15 +65,12 @@ class InfoDiagnosePage extends StatelessWidget {
               child: NormalButton(
                 onTap: () async {
                   if (ctr.plantInfo == null) {
-                    if (ctr.diagnoseInfo?.plant?.scientificName == null || ctr.diagnoseInfo?.scanRecordId == null) {
+                    if (ctr.diagnoseInfo?.scanRecordId == null) {
                       return;
                     }
                     FireBaseUtil.logEvent(EventName.dianoseInfoPlantinfo);
                     Get.dialog(const LoadingDialog(), barrierDismissible: false);
-                    await ctr.scanByScientificName(
-                      ctr.diagnoseInfo!.plant!.scientificName!,
-                      ctr.diagnoseInfo!.scanRecordId!,
-                    );
+                    await ctr.scanByScientificName(ctr.diagnoseInfo!.scanRecordId!);
                     Get.back();
                   }
                   Get.to(() => InfoIdentifyPage());

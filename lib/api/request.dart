@@ -13,7 +13,7 @@ class Request {
   static const String _plantScanRename = '/Plant/plant/scanRename';
   static const String _plantScanDelete = '/Plant/plant/scanDelete';
   static const String _getConfig = '/Plant/common/getConfig';
-  static const String _scanByScientificName = '/Plant/plant/scanByScientificName';
+  // static const String _scanByScientificName = '/Plant/plant/scanByScientificName';
   static const String _getPlantDetailByRecord = '/Plant/plant/getPlantDetailByRecord';
   static const String _getShopList = '/Plant/shop/getShopList';
   static const String _createOrder = '/Plant/shop/createOrder';
@@ -68,9 +68,9 @@ class Request {
     return await DioUtil.httpPost(_plantScanDelete, data: {'id': id});
   }
 
-  static Future<dynamic> scanByScientificName(String scientificName, int scanRecordId) async {
-    return await DioUtil.httpPost(_scanByScientificName, data: {'scientificName': scientificName});
-  }
+  // static Future<dynamic> scanByScientificName(String scientificName, int scanRecordId) async {
+  //   return await DioUtil.httpPost(_scanByScientificName, data: {'scientificName': scientificName});
+  // }
 
   static Future<void> scanSave(int id) async {
     await DioUtil.httpPost(_scanSave, data: {'id': id});

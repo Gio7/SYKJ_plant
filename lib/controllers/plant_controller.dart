@@ -82,9 +82,9 @@ class PlantController extends GetxController {
     });
   }
 
-  Future<void> scanByScientificName(String scientificName, int id) async {
+  Future<void> scanByScientificName(int id) async {
     try {
-      final res = await Request.scanByScientificName(scientificName, id);
+      final res = await Request.getPlantDetailByRecord(id);
       plantInfo = PlantInfoModel.fromJson(res);
     } catch (e) {
       Get.log(e.toString(), isError: true);
