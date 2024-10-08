@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyD6NsCMq7-HL8ytu1gfK4sOdOSC0w0N1WE</string>
+	<string>AIzaSyAhFkMn6MYMvNOBDIWuLB2VaKqu4BdDfjQ</string>
 	<key>GCM_SENDER_ID</key>
-	<string>361651658601</string>
+	<string>225439231868</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.plant.identification</string>
+	<string>com.plant.identifier.diagnosis.scanner.app</string>
 	<key>PROJECT_ID</key>
-	<string>test-bundle-2024</string>
+	<string>plant-identifier-for-ios</string>
 	<key>STORAGE_BUCKET</key>
-	<string>test-bundle-2024.appspot.com</string>
+	<string>plant-identifier-for-ios.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:361651658601:ios:ae5f05d1c815d4e0d0e7f8</string>
+	<string>1:225439231868:ios:68d1bba0d4c56a5fc2bef9</string>
 </dict>
 </plist>
