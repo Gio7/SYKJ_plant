@@ -69,9 +69,8 @@ jobs:
 
       - name: Upload PGYER File
         if: env.UPLOAD_TO_PGY == 'true'
-        id: pgyer
-        uses: xtayga/upload-pgyer-action@master
+        uses: PGYER/pgyer-upload-app-action@v1.3
         with:
-          url: https://www.pgyer.com/apiv2/app/upload
-          forms: '{"_api_key":"${{ secrets.PGY_KEY }}","buildName":"RSS"}'
-          fileForms: '{"file":"build/ios/ipa/Plant Identifier.ipa"}'
+          _api_key: ${{ secrets.PGY_KEY }}
+          appFilePath: build/ios/ipa/Plant Identifier.ipa
+          buildUpdateDescription: '识别结果兼容第三方格式'

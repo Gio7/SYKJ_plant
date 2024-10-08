@@ -140,6 +140,7 @@ class LanguageRu {
       'productNotFound': 'Продукт не найден',
       'paymentHasBeenCanceled': 'Платеж был отменен.',
       'restoreTips': 'Нет содержимого для восстановления.',
+      'soil': 'Почва',
     };
   }
 }

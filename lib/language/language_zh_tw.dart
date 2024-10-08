@@ -138,6 +138,7 @@ class LanguageZhTw {
       'productNotFound': '未找到產品',
       'paymentHasBeenCanceled': '支付已取消。',
       'restoreTips': '無可恢復的內容。',
+      'soil': '土壤',
     };
   }
 }

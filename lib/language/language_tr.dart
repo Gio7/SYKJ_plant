@@ -140,6 +140,7 @@ class LanguageTr {
       'productNotFound': 'Ürün bulunamadı',
       'paymentHasBeenCanceled': 'Ödeme iptal edildi.',
       'restoreTips': 'Geri yüklenecek içerik yok.',
+      'soil': 'Toprak',
     };
   }
 }

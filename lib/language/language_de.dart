@@ -140,6 +140,7 @@ class LanguageDe {
       'productNotFound': 'Produkt nicht gefunden',
       'paymentHasBeenCanceled': 'Die Zahlung wurde storniert.',
       'restoreTips': 'Kein Inhalt zur Wiederherstellung.',
+      'soil': 'Boden',
     };
   }
 }

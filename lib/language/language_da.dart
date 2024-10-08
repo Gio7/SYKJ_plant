@@ -140,6 +140,7 @@ class LanguageDa {
       'productNotFound': 'Produkt ikke fundet',
       'paymentHasBeenCanceled': 'Betalingen er annulleret.',
       'restoreTips': 'Intet indhold at gendanne.',
+      'soil': 'Jord',
     };
   }
 }

@@ -37,31 +37,35 @@ class InfoCharacteristics extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(height: 16),
-          _buildCharacteristicsListView(
-            'images/icon/detail_mature.png',
-            'maturePlant'.tr,
-            characteristics?.maturePlant?.details,
-          ),
-          const SizedBox(height: 10),
-          _buildCharacteristicsListView(
-            'images/icon/detail_flower.png',
-            'flower'.tr,
-            characteristics?.flower?.details,
-          ),
-          const SizedBox(height: 10),
-          _buildCharacteristicsListView(
-            'images/icon/detail_fruit.png',
-            'fruit'.tr,
-            characteristics?.fruit?.details,
-          ),
+          if (characteristics?.maturePlant?.details != null)
+            _buildCharacteristicsListView(
+              'images/icon/detail_mature.png',
+              'maturePlant'.tr,
+              characteristics?.maturePlant?.details,
+              top: 16,
+            ),
+          if (characteristics?.flower?.details != null)
+            _buildCharacteristicsListView(
+              'images/icon/detail_flower.png',
+              'flower'.tr,
+              characteristics?.flower?.details,
+              top: 10,
+            ),
+          if (characteristics?.fruit?.details != null)
+            _buildCharacteristicsListView(
+              'images/icon/detail_fruit.png',
+              'fruit'.tr,
+              characteristics?.fruit?.details,
+              top: 10,
+            ),
         ],
       ),
     );
   }
 
-  Widget _buildCharacteristicsListView(String icon, String title, List<Detail>? details) {
+  Widget _buildCharacteristicsListView(String icon, String title, List<Detail>? details, {required double top}) {
     return Container(
+      margin: EdgeInsets.only(top: top),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
       decoration: ShapeDecoration(
         color: UIColor.transparentPrimary20,
@@ -105,7 +109,7 @@ class InfoCharacteristics extends StatelessWidget {
   }
 
   Container _buildInteriorItem(Detail detail) {
-    final isColor = detail.type == 'Colors' && detail.colors != null;
+    final isColor = detail.type == 'Colors' && detail.colors != null && detail.colors != '';
     List<Color> colors = [];
     if (isColor) {
       colors = detail.colors!.split(',').map((e) => UIColor.hexToColor(e)).toList();
@@ -148,7 +152,7 @@ class InfoCharacteristics extends StatelessWidget {
             )
           else
             Text(
-              "${detail.value}",
+              "${detail.value ?? ''}",
               style: TextStyle(
                 color: UIColor.c15221D,
                 fontSize: 12,

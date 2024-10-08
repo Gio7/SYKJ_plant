@@ -140,6 +140,7 @@ class LanguageHr {
       'productNotFound': 'Proizvod nije pronađen',
       'paymentHasBeenCanceled': 'Plaćanje je otkazano.',
       'restoreTips': 'Nema sadržaja za vraćanje.',
+      'soil': 'Tlo',
     };
   }
 }

@@ -68,8 +68,8 @@ class InfoConditions extends StatelessWidget {
           const SizedBox(height: 8),
           _buildItem(
             'images/icon/detail_location.png',
-            'location'.tr,
-            conditions?.location ?? '',
+            conditions?.location != null ? 'location'.tr : 'soil'.tr,
+            conditions?.location ?? conditions?.soilComposition ?? '',
           ),
         ],
       ),

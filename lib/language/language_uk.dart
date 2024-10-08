@@ -139,6 +139,7 @@ class LanguageUk {
       'productNotFound': 'Продукт не знайдено',
       'paymentHasBeenCanceled': 'Платіж скасовано.',
       'restoreTips': 'Немає вмісту для відновлення.',
+      'soil': 'Ґрунт',
     };
   }
 }

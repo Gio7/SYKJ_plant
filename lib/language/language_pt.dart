@@ -140,6 +140,7 @@ class LanguagePt {
       'productNotFound': 'Produto não encontrado',
       'paymentHasBeenCanceled': 'O pagamento foi cancelado.',
       'restoreTips': 'Nenhum conteúdo para restaurar.',
+      'soil': 'Solo',
     };
   }
 }

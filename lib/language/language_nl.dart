@@ -140,6 +140,7 @@ class LanguageNl {
       'productNotFound': 'Product niet gevonden',
       'paymentHasBeenCanceled': 'Betaling is geannuleerd.',
       'restoreTips': 'Geen inhoud om te herstellen.',
+      'soil': 'Grond',
     };
   }
 }

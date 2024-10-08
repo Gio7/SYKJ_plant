@@ -139,6 +139,7 @@ class LanguageTh {
       'productNotFound': 'ไม่พบสินค้า',
       'paymentHasBeenCanceled': 'การชำระเงินถูกยกเลิก.',
       'restoreTips': 'ไม่มีเนื้อหาที่จะกู้คืน',
+      'soil': 'ดิน',
     };
   }
 }

@@ -140,6 +140,7 @@ class LanguagePl {
       'productNotFound': 'Produkt nie znaleziony',
       'paymentHasBeenCanceled': 'Płatność została anulowana.',
       'restoreTips': 'Brak treści do przywrócenia.',
+      'soil': 'Gleba',
     };
   }
 }

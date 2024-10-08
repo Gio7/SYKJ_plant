@@ -138,6 +138,7 @@ class LanguageJa {
       'productNotFound': '商品が見つかりません',
       'paymentHasBeenCanceled': '支払いがキャンセルされました。',
       'restoreTips': '復元するコンテンツがありません。',
+      'soil': 'どじょう',
     };
   }
 }

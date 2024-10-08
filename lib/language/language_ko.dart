@@ -138,6 +138,7 @@ class LanguageKo {
       'productNotFound': '상품을 찾을 수 없음',
       'paymentHasBeenCanceled': '결제가 취소되었습니다.',
       'restoreTips': '복원할 내용이 없습니다.',
+      'soil': '토양',
     };
   }
 }

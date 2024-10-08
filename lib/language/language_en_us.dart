@@ -140,6 +140,7 @@ class LanguageEnUs {
       'productNotFound': 'Product not found',
       'paymentHasBeenCanceled': 'Payment has been canceled.',
       'restoreTips': "No content to restore.",
+      'soil': 'Soil',
     };
   }
 }

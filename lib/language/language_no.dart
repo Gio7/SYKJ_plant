@@ -141,6 +141,7 @@ class LanguageNo {
       'productNotFound': 'Produktet ble ikke funnet',
       'paymentHasBeenCanceled': 'Betalingen ble avbrutt.',
       'restoreTips': 'Ingen innhold å gjenopprette.',
+      'soil': 'Jord',
     };
   }
 }

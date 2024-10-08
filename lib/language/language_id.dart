@@ -140,6 +140,7 @@ class LanguageId {
       'productNotFound': 'Produk tidak ditemukan',
       'paymentHasBeenCanceled': 'Pembayaran telah dibatalkan.',
       'restoreTips': 'Tidak ada konten yang dapat dipulihkan.',
+      'soil': 'Tanah',
     };
   }
 }

@@ -141,6 +141,7 @@ class LanguageSk {
       'productNotFound': 'Produkt sa nenašiel',
       'paymentHasBeenCanceled': 'Platba bola zrušená.',
       'restoreTips': 'Žiadny obsah na obnovenie.',
+      'soil': 'Pôda',
     };
   }
 }

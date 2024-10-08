@@ -140,6 +140,7 @@ class LanguageHi {
       'productNotFound': 'उत्पाद नहीं मिला',
       'paymentHasBeenCanceled': 'भुगतान रद्द कर दिया गया है।',
       'restoreTips': 'पुनर्स्थापित करने के लिए कोई सामग्री नहीं है।',
+      'soil': 'मिट्टी',
     };
   }
 }

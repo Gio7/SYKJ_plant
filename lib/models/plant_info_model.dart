@@ -91,10 +91,12 @@ class Flower {
 
   factory Flower.fromJson(Map<String, dynamic> json) {
     List<Detail>? details = json["details"] == null ? null : List<Detail>.from(json["details"]!.map((x) => Detail.fromJson(x)));
-    details ??= [
-      Detail(type: 'String', title: 'flowerSize'.tr, value: json["flowerSize"]),
-      Detail(type: 'Colors', title: 'flowerColor'.tr, colors: json["flowerColor"]),
-    ];
+    if (json["flowerSize"] != null || json["flowerColor"] != null) {
+      details ??= [
+        Detail(type: 'String', title: 'flowerSize'.tr, value: json["flowerSize"]),
+        Detail(type: 'Colors', title: 'flowerColor'.tr, colors: json["flowerColor"]),
+      ];
+    }
     return Flower(
       flowerColor: json["flowerColor"],
       flowerSize: json["flowerSize"],
@@ -116,10 +118,12 @@ class Fruit {
 
   factory Fruit.fromJson(Map<String, dynamic> json) {
     List<Detail>? details = json["details"] == null ? null : List<Detail>.from(json["details"]!.map((x) => Detail.fromJson(x)));
-    details ??= [
-      Detail(type: 'String', title: 'harvestTime'.tr, value: json["fruitRipeningTime"]),
-      Detail(type: 'Colors', title: 'fruitColor'.tr, colors: json["fruitColor"]),
-    ];
+    if (json["fruitRipeningTime"] != null || json["fruitColor"] != null) {
+      details ??= [
+        Detail(type: 'String', title: 'harvestTime'.tr, value: json["fruitRipeningTime"]),
+        Detail(type: 'Colors', title: 'fruitColor'.tr, colors: json["fruitColor"]),
+      ];
+    }
     return Fruit(
       fruitColor: json["fruitColor"],
       fruitRipeningTime: json["fruitRipeningTime"],
@@ -143,11 +147,15 @@ class MaturePlant {
 
   factory MaturePlant.fromJson(Map<String, dynamic> json) {
     List<Detail>? details = json["details"] == null ? null : List<Detail>.from(json["details"]!.map((x) => Detail.fromJson(x)));
-    details ??= [
-      Detail(type: 'String', title: 'plantHeight'.tr, value: json["plantHeight"]),
-      Detail(type: 'String', title: 'spread'.tr, value: json["spread"]),
-      Detail(type: 'Colors', title: 'leafColor'.tr, colors: json["leafColor"]),
-    ];
+
+    if (json["plantHeight"] != null || json["spread"] != null || json["leafColor"] != null) {
+      details ??= [
+        Detail(type: 'String', title: 'plantHeight'.tr, value: json["plantHeight"]),
+        Detail(type: 'String', title: 'spread'.tr, value: json["spread"]),
+        Detail(type: 'Colors', title: 'leafColor'.tr, colors: json["leafColor"]),
+      ];
+    }
+
     return MaturePlant(
       leafColor: json["leafColor"],
       plantHeight: json["plantHeight"],
@@ -194,12 +202,14 @@ class Conditions {
   final String? location;
   final String? plantingSeason;
   final String? temperatureRange;
+  final String? soilComposition;
 
   Conditions({
     this.sunlight,
     this.location,
     this.plantingSeason,
     this.temperatureRange,
+    this.soilComposition,
   });
 
   factory Conditions.fromJson(Map<String, dynamic> json) => Conditions(
@@ -207,6 +217,7 @@ class Conditions {
         location: json["location"],
         plantingSeason: json["plantingSeason"],
         temperatureRange: json["temperatureRange"],
+        soilComposition: json["soilComposition"],
       );
 }
 

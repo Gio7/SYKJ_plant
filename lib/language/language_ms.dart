@@ -140,6 +140,7 @@ class LanguageMs {
       'productNotFound': 'Produk tidak dijumpai',
       'paymentHasBeenCanceled': 'Pembayaran telah dibatalkan.',
       'restoreTips': 'Tiada kandungan untuk dipulihkan.',
+      'soil': 'Tanah',
     };
   }
 }

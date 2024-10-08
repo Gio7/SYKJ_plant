@@ -48,13 +48,16 @@ class PlantCropImage extends StatelessWidget {
                       Get.back();
                       return;
                     }
+                    if (Get.isDialogOpen == true) {
+                      Get.back();
+                    }
                     Get.off(() => ScanPage(cropFile: cropFile, image400File: image400File));
                   },
                   withCircleUi: false,
                   onStatusChanged: (status) {
-                    if (status == CropStatus.cropping) {
-                      Get.back();
-                    }
+                    // if (status == CropStatus.cropping) {
+                    //   Get.back();
+                    // }
                     debugPrint(<CropStatus, String>{
                           CropStatus.nothing: 'Crop has no image data',
                           CropStatus.loading: 'Crop is now loading given image',

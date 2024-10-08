@@ -141,6 +141,7 @@ class LanguageEl {
       'productNotFound': 'Το προϊόν δεν βρέθηκε',
       'paymentHasBeenCanceled': 'Η πληρωμή ακυρώθηκε.',
       'restoreTips': 'Δεν υπάρχει περιεχόμενο για επαναφορά.',
+      'soil': 'Έδαφος',
     };
   }
 }

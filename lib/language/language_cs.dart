@@ -142,6 +142,7 @@ class LanguageCs {
       'productNotFound': 'Produkt nebyl nalezen',
       'paymentHasBeenCanceled': 'Platba byla zrušena.',
       'restoreTips': 'Žádný obsah k obnovení.',
+      'soil': 'Půda',
     };
   }
 }

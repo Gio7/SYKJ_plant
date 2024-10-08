@@ -140,6 +140,7 @@ class LanguageSv {
       'productNotFound': 'Produkten hittades inte',
       'paymentHasBeenCanceled': 'Betalningen har avbrutits.',
       'restoreTips': 'Inget innehåll att återställa.',
+      'soil': 'Jord',
     };
   }
 }

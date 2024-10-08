@@ -140,6 +140,7 @@ class LanguageFr {
       'productNotFound': 'Produit non trouvé',
       'paymentHasBeenCanceled': 'Le paiement a été annulé.',
       'restoreTips': 'Aucun contenu à restaurer.',
+      'soil': 'Sol',
     };
   }
 }

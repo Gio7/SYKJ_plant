@@ -140,6 +140,7 @@ class LanguageFi {
       'productNotFound': 'Tuotetta ei löytynyt',
       'paymentHasBeenCanceled': 'Maksu on peruutettu。',
       'restoreTips': 'Ei sisältöä palautettavaksi.',
+      'soil': 'Maa',
     };
   }
 }

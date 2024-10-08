@@ -141,6 +141,7 @@ class LanguageVi {
       'productNotFound': 'Không tìm thấy sản phẩm',
       'paymentHasBeenCanceled': 'Thanh toán đã bị hủy.',
       'restoreTips': 'Không có nội dung để khôi phục.',
+      'soil': 'Đất',
     };
   }
 }

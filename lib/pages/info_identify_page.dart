@@ -88,7 +88,8 @@ class InfoIdentifyPage extends StatelessWidget {
               const SizedBox(height: 16),
               InfoHowTos(howTos: ctr.plantInfo?.plant?.howTos),
               const SizedBox(height: 16),
-              InfoFunFacts(littleStory: ctr.plantInfo?.plant?.littleStory ?? ''),
+              if (ctr.plantInfo?.plant?.littleStory != null && ctr.plantInfo?.plant?.littleStory != '')
+                InfoFunFacts(littleStory: ctr.plantInfo!.plant!.littleStory!),
             ],
           ),
         ),

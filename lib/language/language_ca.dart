@@ -144,6 +144,7 @@ class LanguageCa {
       'productNotFound': 'Producte no trobat',
       'paymentHasBeenCanceled': 'El pagament ha estat cancel·lat.',
       'restoreTips': 'No hi ha contingut per restaurar.',
+      'soil': 'Sòl',
     };
   }
 }
