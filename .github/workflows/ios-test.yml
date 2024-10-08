@@ -1,11 +1,11 @@
-name: iOS_Build and Distribute
+name: iOS_Build and UPLOAD_PGYER
 
 on:
   workflow_dispatch:
 
 jobs:
   build:
-    if: github.repository == 'SuperInteractica/PlantIdentification'
+    if: github.repository == 'Gio7/SYKJ_plant'
     name: build
     runs-on: macos-latest
     steps:
@@ -26,9 +26,9 @@ jobs:
       - uses: cedvdb/action-flutter-build-ios@v1
         with:
           build-cmd: flutter build ipa --release --export-options-plist=ios/ExportOptions.plist
-          certificate-base64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          certificate-base64: ${{ secrets.P12_BASE64 }}
           certificate-password: ${{ secrets.P12_PASSWORD }}
-          provisioning-profile-base64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
+          provisioning-profile-base64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
           keychain-password: ${{ secrets.KEYCHAIN_PASSWORD }}
 
       - name: Archive IPA
@@ -37,8 +37,10 @@ jobs:
           name: release-ipa
           path: build/ios/ipa/Plant Identifier.ipa
 
-      - name: 'Upload file to test flight using CLI'
-        run: |
-          echo "Starting upload."
-          xcrun altool --upload-app -t ios -f "build-output/ios/Plant Identifier.ipa" -u ${{ secrets.APPLE_USERNAME }} -p ${{ secrets.APPLE_PASSWORD }} --verbose
-
+      - name: Upload PGYER File
+        id: pgyer
+        uses: xtayga/upload-pgyer-action@master
+        with:
+          url: https://www.pgyer.com/apiv2/app/upload
+          forms: '{"_api_key":"${{ secrets.PGY_KEY }}","buildName":"RSS"}'
+          fileForms: '{"file":"build-output/ios/Plant Identifier.ipa"}'
