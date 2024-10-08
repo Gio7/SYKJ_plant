@@ -43,4 +43,4 @@ jobs:
         with:
           url: https://www.pgyer.com/apiv2/app/upload
           forms: '{"_api_key":"${{ secrets.PGY_KEY }}","buildName":"RSS"}'
-          fileForms: '{"file":"build-output/ios/Plant Identifier.ipa"}'
+          fileForms: '{"file":"build/ios/ipa/Plant Identifier.ipa"}'

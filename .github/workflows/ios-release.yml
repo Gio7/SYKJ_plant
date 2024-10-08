@@ -40,5 +40,5 @@ jobs:
       - name: 'Upload file to test flight using CLI'
         run: |
           echo "Starting upload."
-          xcrun altool --upload-app -t ios -f "build-output/ios/Plant Identifier.ipa" -u ${{ secrets.APPLE_USERNAME }} -p ${{ secrets.APPLE_PASSWORD }} --verbose
+          xcrun altool --upload-app -t ios -f "build/ios/ipa/Plant Identifier.ipa" -u ${{ secrets.APPLE_USERNAME }} -p ${{ secrets.APPLE_PASSWORD }} --verbose
 
