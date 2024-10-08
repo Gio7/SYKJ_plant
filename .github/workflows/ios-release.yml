@@ -13,7 +13,7 @@ jobs:
     runs-on: macos-latest
     env:
       SHEME: Runner
-      BUILD_CONFIGURATION: Debug
+      BUILD_CONFIGURATION: Release
       TEAM_ID: 63PFVXMX6T
       PROVISIONING_PROFILE: plant_identification
       CODE_SIGN_IDENTITY: "Apple Development: YING LI (P8URLBLY8R)"
@@ -63,7 +63,7 @@ jobs:
         run: pod repo update
 
       - name: Build Flutter
-        run: flutter build ios --debug --no-codesign
+        run: flutter build ios --release --no-codesign
 
       - name: Build resolve Swift dependencies
         run: xcodebuild -resolvePackageDependencies -workspace ios/Runner.xcworkspace -scheme ${{ env.SHEME }} -configuration ${{ env.BUILD_CONFIGURATION }}
@@ -85,5 +85,5 @@ jobs:
       - name: Publish iOS Artefacts
         uses: actions/upload-artifact@v4
         with:
-          name: debug-ios
+          name: release-ios
           path: build-output/ios
