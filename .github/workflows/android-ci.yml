@@ -2,14 +2,28 @@ name: android-ci
 
 on:
   workflow_dispatch:
-#  push:
-#    branches: [dev]
-#  pull_request:
-#    branches: [dev]
+    inputs:
+      build-type:
+        description: '选择Build'
+        required: true
+        default: 'debug'
+        type: choice
+        options:
+          - debug
+          - release
+          - aab
+      upload-to-pgy:
+        description: '上传到蒲公英'
+        required: false
+        type: boolean
 
 jobs:
-  build_android:
+  build-android:
     runs-on: ubuntu-latest
+    env:
+      BUILD_TYPE: ${{ inputs.build-type }}
+      UPLOAD_TO_PGY: ${{ inputs.upload-to-pgy }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -27,41 +41,54 @@ jobs:
         run: flutter pub get
 
       - name: Build AAB
-        if: github.repository == 'SuperInteractica/PlantIdentification'
+        if: env.BUILD_TYPE == 'aab'
         run: flutter build appbundle --release --obfuscate --split-debug-info=tmp/
 
-#      - name: Build release-apk
-#        run: flutter build apk --release --obfuscate --split-debug-info=tmp/
+      - name: Build release-apk
+        if: env.BUILD_TYPE == 'release'
+        run: flutter build apk --release --obfuscate --split-debug-info=tmp/
 
       - name: Build debug-apk
-        if: github.repository == 'Gio7/SYKJ_plant'
+        if: env.BUILD_TYPE == 'debug'
         run: flutter build apk --debug --obfuscate --split-debug-info=tmp/
 
       - name: Archive production artifacts
-        if: github.repository == 'SuperInteractica/PlantIdentification'
+        if: env.BUILD_TYPE == 'aab'
         uses: actions/upload-artifact@v4
         with:
           name: release-aab
           path: build/app/outputs/bundle/release/app-release.aab
 
-#      - name: Archive production artifacts
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: release-apk
-#          path: build/app/outputs/flutter-apk/app-release.apk
+      - name: Archive production artifacts
+        if: env.BUILD_TYPE == 'release'
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
 
       - name: Archive production artifacts
-        if: github.repository == 'Gio7/SYKJ_plant'
+        if: env.BUILD_TYPE == 'debug'
         uses: actions/upload-artifact@v4
         with:
           name: debug-apk
           path: build/app/outputs/flutter-apk/app-debug.apk
 
+      - name: Set PGYER upload file path
+        if: env.UPLOAD_TO_PGY == true
+        run: |
+          if [[ "${{ env.BUILD_TYPE }}" == "aab" ]]; then
+            echo "UPLOAD_FILE_PATH=build/app/outputs/bundle/release/app-release.aab" >> $GITHUB_ENV
+          elif [[ "${{ env.BUILD_TYPE }}" == "release" ]]; then
+            echo "UPLOAD_FILE_PATH=build/app/outputs/flutter-apk/app-release.apk" >> $GITHUB_ENV
+          else
+            echo "UPLOAD_FILE_PATH=build/app/outputs/flutter-apk/app-debug.apk" >> $GITHUB_ENV
+          fi
+
       - name: Upload PGYER File
-        if: github.repository == 'Gio7/SYKJ_plant'
+        if: env.UPLOAD_TO_PGY == true
         id: pgyer
         uses: xtayga/upload-pgyer-action@master
         with:
           url: https://www.pgyer.com/apiv2/app/upload
           forms: '{"_api_key":"${{ secrets.PGY_KEY }}","buildName":"RSS"}'
-          fileForms: '{"file":"build/app/outputs/flutter-apk/app-debug.apk"}'
+          fileForms: '{"file":"${{ env.UPLOAD_FILE_PATH }}"}'

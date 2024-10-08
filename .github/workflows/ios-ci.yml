@@ -1,0 +1,77 @@
+name: iOS_ci
+
+on:
+  workflow_dispatch:
+    inputs:
+      upload-to-testflight:
+        description: '上传到App Store Connect'
+        required: false
+        type: boolean
+      upload-to-pgy:
+        description: '上传到蒲公英'
+        required: false
+        type: boolean
+
+jobs:
+  build-ios:
+    name: build
+    runs-on: macos-latest
+    env:
+      UPLOAD_TO_TESTFLIGHT: ${{ inputs.upload-to-testflight }}
+      UPLOAD_TO_PGY: ${{ inputs.upload-to-pgy }}
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Install and set Flutter version
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.3'
+
+      - name: Restore packages
+        run: flutter pub get
+
+      - name: pod repo update
+        run: pod repo update
+
+      - name: flutter build ios release
+        if: github.repository == 'SuperInteractica/PlantIdentification'
+        uses: cedvdb/action-flutter-build-ios@v1
+        with:
+          build-cmd: flutter build ipa --release --export-options-plist=ios/ExportOptions.plist
+          certificate-base64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          certificate-password: ${{ secrets.P12_PASSWORD }}
+          provisioning-profile-base64: ${{ secrets.BUILD_PROVISION_PROFILE_BASE64 }}
+          keychain-password: ${{ secrets.KEYCHAIN_PASSWORD }}
+
+      - name: flutter build ios test
+        if: github.repository == 'Gio7/SYKJ_plant'
+        uses: cedvdb/action-flutter-build-ios@v1
+        with:
+          build-cmd: flutter build ipa --release --export-options-plist=ios/ExportOptions.plist
+          certificate-base64: ${{ secrets.P12_BASE64 }}
+          certificate-password: ${{ secrets.P12_PASSWORD }}
+          provisioning-profile-base64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
+          keychain-password: ${{ secrets.KEYCHAIN_PASSWORD }}
+
+      - name: Archive IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-ipa
+          path: build/ios/ipa/Plant Identifier.ipa
+
+      - name: 'Upload file to test flight using CLI'
+        if: env.UPLOAD_TO_TESTFLIGHT == true
+        run: |
+          echo "Starting upload."
+          xcrun altool --upload-app -t ios -f "build/ios/ipa/Plant Identifier.ipa" -u ${{ secrets.APPLE_USERNAME }} -p ${{ secrets.APPLE_PASSWORD }} --verbose
+
+      - name: Upload PGYER File
+        if: env.UPLOAD_TO_PGY == true
+        id: pgyer
+        uses: xtayga/upload-pgyer-action@master
+        with:
+          url: https://www.pgyer.com/apiv2/app/upload
+          forms: '{"_api_key":"${{ secrets.PGY_KEY }}","buildName":"RSS"}'
+          fileForms: '{"file":"build/ios/ipa/Plant Identifier.ipa"}'
