@@ -73,4 +73,4 @@ jobs:
         with:
           _api_key: ${{ secrets.PGY_KEY }}
           appFilePath: build/ios/ipa/Plant Identifier.ipa
-          buildUpdateDescription: '识别结果兼容第三方格式'
+          buildUpdateDescription: '识别结果兼容第三方格式 -- 正式环境地址'

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:advertising_id/advertising_id.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,34 +20,54 @@ import 'controllers/core_binding.dart';
 import 'language/language.dart';
 import 'pages/main_page.dart';
 
-Future<void> main() async {
-  bool isInit = true;
-  WidgetsFlutterBinding.ensureInitialized();
-  if (GetPlatform.isAndroid) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-    ));
-  }
-  await initMain();
-  Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) async {
-    // Get.log('network status list: ${result.length}');
-    // for (var element in result) {
-    //   Get.log('network status changed: ${element.name}');
-    // }
-    if (result.contains(ConnectivityResult.none)) {
-      Get.log('No network connection.', isError: true);
-    } else {
-      if (GlobalData.email.isEmpty) {
-        getConfig();
-      }
-      if (isInit) {
-        isInit = false;
-        WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((_) => getAdid());
-      }
+void main() {
+  // 拦截异步错误
+  runZonedGuarded(() async {
+    bool isInit = true;
+    WidgetsFlutterBinding.ensureInitialized();
+    if (GetPlatform.isAndroid) {
+      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+      ));
     }
+    await initMain();
+    Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) async {
+      // Get.log('network status list: ${result.length}');
+      // for (var element in result) {
+      //   Get.log('network status changed: ${element.name}');
+      // }
+      if (result.contains(ConnectivityResult.none)) {
+        Get.log('No network connection.', isError: true);
+      } else {
+        if (GlobalData.email.isEmpty) {
+          getConfig();
+        }
+        if (isInit) {
+          isInit = false;
+          WidgetsBinding.instance.addPostFrameCallback((_) => getAdid());
+        }
+      }
+    });
+
+    ErrorWidget.builder = (FlutterErrorDetails details) {
+      return Center(
+        child: Text(
+          '发生错误了！',
+          style: TextStyle(color: UIColor.c15221D),
+        ),
+      );
+    };
+
+    // 拦截同步错误
+    FlutterError.onError = (FlutterErrorDetails details) {
+      Get.log(" ----捕获到同步异常---- \n${details.exceptionAsString()}\n\nStack Trace:\n ${details.stack}", isError: true);
+    };
+
+    runApp(const MainApp());
+  }, (error, stackTrace) {
+    Get.log(" ----捕获到异步异常---- \n$error\n\nStack Trace:\n $stackTrace", isError: true);
   });
-  runApp(const MainApp());
 }
 
 Future<void> initMain() async {
