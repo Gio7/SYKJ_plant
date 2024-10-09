@@ -13,6 +13,7 @@ import 'package:plant/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'api/dio.dart';
+import 'common/common_util.dart';
 import 'common/firebase_util.dart';
 import 'common/ui_color.dart';
 import 'components/easy_refresh_custom.dart';
@@ -52,21 +53,31 @@ void main() {
 
     ErrorWidget.builder = (FlutterErrorDetails details) {
       return Center(
-        child: Text(
-          '发生错误了！',
-          style: TextStyle(color: UIColor.c15221D),
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            Image.asset('images/icon/unknow_error_bg.png'),
+            ElevatedButton.icon(
+              onPressed: () async{
+                await Clipboard.setData(ClipboardData(text: "${details.exceptionAsString()}\n\nStack Trace:\n${details.stack}"));
+                Common.skipUrl(GlobalData.telegramGroup);
+              },
+              label: const Text('Telegram'),
+              icon: Image.asset('images/icon/telegram.png', height: 24),
+            ),
+          ],
         ),
       );
     };
 
     // 拦截同步错误
     FlutterError.onError = (FlutterErrorDetails details) {
-      Get.log(" ----捕获到同步异常---- \n${details.exceptionAsString()}\n\nStack Trace:\n ${details.stack}", isError: true);
+      Get.log(" ----捕获到同步异常---- \n${details.exceptionAsString()}\n\nStack Trace:\n${details.stack}", isError: true);
     };
 
     runApp(const MainApp());
   }, (error, stackTrace) {
-    Get.log(" ----捕获到异步异常---- \n$error\n\nStack Trace:\n $stackTrace", isError: true);
+    Get.log(" ----捕获到异步异常---- \n$error\n\nStack Trace:\n$stackTrace", isError: true);
   });
 }
 
