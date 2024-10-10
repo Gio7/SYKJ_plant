@@ -17,10 +17,9 @@ class AwsUtils {
   static String accessKeyId = '';
   static String secretAccessKey = '';
 
-  static Future<String> uploadByFile(File file) async {
+  static Future<String> uploadByFile(File file, {Function(double)? onProgress}) async {
     try {
-      if (accessKeyId.isEmpty) {
-      }
+      if (accessKeyId.isEmpty) {}
       final tokenRes = await Request.getUploadToken();
       accessKeyId = tokenRes['accessKeyId'];
       secretAccessKey = tokenRes['secretAccessKey'];
@@ -29,9 +28,22 @@ class AwsUtils {
       final stream = http.ByteStream(Stream.castFrom(file.openRead()));
       final length = await file.length();
 
+      Stream<List<int>>? uploadStream;
+      if (onProgress != null) {
+        int bytesUploaded = 0;
+        uploadStream = stream.transform(StreamTransformer.fromHandlers(
+          handleData: (data, sink) {
+            bytesUploaded += data.length;
+            double progress = (bytesUploaded / length) * 100;
+            onProgress.call(progress);
+            sink.add(data);
+          },
+        ));
+      }
+
       final uri = Uri.parse('https://$bucketName.s3.$region.amazonaws.com');
       final req = http.MultipartRequest("POST", uri);
-      final multipartFile = http.MultipartFile('file', stream, length, filename: path.basename(file.path));
+      final multipartFile = http.MultipartFile('file', uploadStream ?? stream, length, filename: path.basename(file.path));
 
       final policy = Policy.fromS3PresignedPost(
         'plant/${DateTime.now().microsecondsSinceEpoch}.jpg',
@@ -65,7 +77,7 @@ class AwsUtils {
       }
     } catch (e) {
       Get.back();
-      Fluttertoast.showToast(msg: e.toString(), toastLength: Toast.LENGTH_LONG,timeInSecForIosWeb: 5,gravity: ToastGravity.CENTER);
+      Fluttertoast.showToast(msg: e.toString(), toastLength: Toast.LENGTH_LONG, timeInSecForIosWeb: 5, gravity: ToastGravity.CENTER);
       Get.log(e.toString(), isError: true);
       rethrow;
     }
