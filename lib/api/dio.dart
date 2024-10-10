@@ -28,7 +28,7 @@ class DioUtil {
     String language = dl?.languageCode ?? '';
     // if (dl?.scriptCode != null && dl!.scriptCode!.isNotEmpty) {
     if (dl?.scriptCode == 'Hant') {
-      language += '_Hant}';
+      language += '_${dl!.scriptCode}';
     }
     _dio = Dio(
       BaseOptions(
