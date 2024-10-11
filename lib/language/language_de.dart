@@ -118,7 +118,7 @@ class LanguageDe {
       'how-tos': 'Anleitungen',
       'pruning': 'Beschneiden',
       'propagation': 'Vermehrung',
-      'reporting': 'Berichten',
+      'repotting': 'Umtopfen',
       'funFacts': 'Interessante Fakten',
       'saveToMyGarden': 'In meinem Garten speichern',
       'plantInfo': 'Pflanzeninformationen',

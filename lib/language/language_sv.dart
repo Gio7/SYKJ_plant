@@ -118,7 +118,7 @@ class LanguageSv {
       'how-tos': 'Instruktioner',
       'pruning': 'Beskärning',
       'propagation': 'Förökning',
-      'reporting': 'Rapportering',
+      'repotting': 'Ompottning',
       'funFacts': 'Roliga fakta',
       'saveToMyGarden': 'Spara i min trädgård',
       'plantInfo': 'Växtinformation',

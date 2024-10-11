@@ -117,7 +117,7 @@ class LanguageJa {
       'how-tos': 'ハウツー',
       'pruning': '剪定',
       'propagation': '繁殖',
-      'reporting': '報告',
+      'repotting': '植え替え',
       'funFacts': '面白い事実',
       'saveToMyGarden': '私の庭に保存',
       'plantInfo': '植物情報',

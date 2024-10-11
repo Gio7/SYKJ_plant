@@ -119,7 +119,7 @@ class LanguageEl {
       'how-tos': 'Οδηγοί',
       'pruning': 'Κλάδεμα',
       'propagation': 'Πολλαπλασιασμός',
-      'reporting': 'Αναφορά',
+      'repotting': 'Μεταφύτευση',
       'funFacts': 'Διασκεδαστικά στοιχεία',
       'saveToMyGarden': 'Αποθήκευση στον κήπο μου',
       'plantInfo': 'Πληροφορίες φυτού',

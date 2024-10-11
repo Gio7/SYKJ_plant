@@ -119,7 +119,7 @@ class LanguageDa {
       'how-tos': 'Sådan gør du',
       'pruning': 'Beskæring',
       'propagation': 'Formering',
-      'reporting': 'Rapportering',
+      'repotting': 'Omplantning',
       'funFacts': 'Sjove fakta',
       'saveToMyGarden': 'Gem til min have',
       'plantInfo': 'Planteinformation',

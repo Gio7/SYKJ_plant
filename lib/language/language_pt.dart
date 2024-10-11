@@ -118,7 +118,7 @@ class LanguagePt {
       'how-tos': 'Instruções',
       'pruning': 'Poda',
       'propagation': 'Propagação',
-      'reporting': 'Relatórios',
+      'repotting': 'Transplante',
       'funFacts': 'Fatos Divertidos',
       'saveToMyGarden': 'Salvar no meu jardim',
       'plantInfo': 'Informações da Planta',

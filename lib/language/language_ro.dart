@@ -119,7 +119,7 @@ class LanguageRo {
       'how-tos': 'Cum să',
       'pruning': 'Tăiere',
       'propagation': 'Propagare',
-      'reporting': 'Raportare',
+      'repotting': 'Replantare',
       'funFacts': 'Fapte amuzante',
       'saveToMyGarden': 'Salvează în grădina mea',
       'plantInfo': 'Informații despre plantă',

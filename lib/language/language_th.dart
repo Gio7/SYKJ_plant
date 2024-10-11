@@ -118,7 +118,7 @@ class LanguageTh {
       'how-tos': 'วิธีทำ',
       'pruning': 'การตัดแต่ง',
       'propagation': 'การขยายพันธุ์',
-      'reporting': 'การรายงาน',
+      'repotting': 'การย้ายกระถาง',
       'funFacts': 'ข้อเท็จจริงสนุก ๆ',
       'saveToMyGarden': 'บันทึกลงในสวนของฉัน',
       'plantInfo': 'ข้อมูลพืช',

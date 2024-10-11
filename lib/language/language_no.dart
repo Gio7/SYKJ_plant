@@ -119,7 +119,7 @@ class LanguageNo {
       'how-tos': 'Hvordan gjøre',
       'pruning': 'Beskjæring',
       'propagation': 'Formering',
-      'reporting': 'Rapportering',
+      'repotting': 'Ompotting',
       'funFacts': 'Morsomme fakta',
       'saveToMyGarden': 'Lagre til min hage',
       'plantInfo': 'Planteinformasjon',

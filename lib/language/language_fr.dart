@@ -118,7 +118,7 @@ class LanguageFr {
       'how-tos': 'Instructions',
       'pruning': 'Taille',
       'propagation': 'Propagation',
-      'reporting': 'Signaler',
+      'repotting': 'Rempotage',
       'funFacts': 'Faits amusants',
       'saveToMyGarden': 'Sauvegarder dans mon jardin',
       'plantInfo': 'Infos sur la plante',

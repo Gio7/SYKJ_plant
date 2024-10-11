@@ -117,7 +117,7 @@ class LanguageKo {
       'how-tos': '방법',
       'pruning': '가지치기',
       'propagation': '번식',
-      'reporting': '보고',
+      'repotting': '분갈이',
       'funFacts': '재미있는 사실',
       'saveToMyGarden': '내 정원에 저장',
       'plantInfo': '식물 정보',

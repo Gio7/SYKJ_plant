@@ -117,7 +117,7 @@ class LanguageZhCn {
       'how-tos': '操作指南',
       'pruning': '修剪',
       'propagation': '繁殖',
-      'reporting': '报告',
+      'repotting': '换盆',
       'funFacts': '趣味事实',
       'saveToMyGarden': '保存到我的花园',
       'plantInfo': '植物信息',

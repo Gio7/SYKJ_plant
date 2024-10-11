@@ -118,7 +118,7 @@ class LanguageNl {
       'how-tos': 'Handleidingen',
       'pruning': 'Snoeien',
       'propagation': 'Voortplanting',
-      'reporting': 'Rapporteren',
+      'repotting': 'Verpotten',
       'funFacts': 'Leuke weetjes',
       'saveToMyGarden': 'Opslaan in mijn tuin',
       'plantInfo': 'Planteninformatie',

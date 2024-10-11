@@ -119,7 +119,7 @@ class LanguageHu {
       'how-tos': 'Útmutatók',
       'pruning': 'Metszés',
       'propagation': 'Szaporítás',
-      'reporting': 'Jelentés',
+      'repotting': 'Átültetés',
       'funFacts': 'Érdekes tények',
       'saveToMyGarden': 'Mentés a kertembe',
       'plantInfo': 'Növény információ',

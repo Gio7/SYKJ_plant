@@ -61,7 +61,7 @@ class InfoHowTos extends StatelessWidget {
           const SizedBox(height: 8),
           _buildItem(
             'images/icon/detail_repotting.png',
-            'reporting'.tr,
+            'repotting'.tr,
             howTos?.repotting ?? '',
           ),
         ],
