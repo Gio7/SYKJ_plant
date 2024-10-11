@@ -224,12 +224,12 @@ class SetPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            if (userCtr.isLogin.value && GetPlatform.isAndroid)
-              _buildListItem(
-                () => _onActivationCode(),
-                'images/icon/set_code.png',
-                'activationCode'.tr,
-              ),
+            // if (userCtr.isLogin.value && GetPlatform.isAndroid)
+            //   _buildListItem(
+            //     () => _onActivationCode(),
+            //     'images/icon/set_code.png',
+            //     'activationCode'.tr,
+            //   ),
             // _buildListItem(
             //   () {
             //     _onContact();
@@ -327,15 +327,15 @@ class SetPage extends StatelessWidget {
   }
 
   String _getWelcomeText(UserController userController) {
-    if (userController.userInfo.value.memberType == MemberType.normal) {
-      return 'getProTips'.tr;
-    }
-    if (userController.userInfo.value.memberType == MemberType.weekly) {
-      return 'weeklyMembership'.tr;
-    }
-    if (userController.userInfo.value.memberType == MemberType.yearly) {
-      return 'yearsMembership'.tr;
-    }
+    // if (userController.userInfo.value.memberType == MemberType.normal) {
+    //   return 'getProTips'.tr;
+    // }
+    // if (userController.userInfo.value.memberType == MemberType.weekly) {
+    //   return 'weeklyMembership'.tr;
+    // }
+    // if (userController.userInfo.value.memberType == MemberType.yearly) {
+    //   return 'yearsMembership'.tr;
+    // }
     return 'welcome'.tr;
   }
 
