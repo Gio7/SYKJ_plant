@@ -122,7 +122,7 @@ class LanguageCa {
       'how-tos': 'Com fer',
       'pruning': 'Poda',
       'propagation': 'Propagació',
-      'reporting': 'Informe',
+      'repotting': 'Transplantament',
       'funFacts': 'Dades divertides',
       'saveToMyGarden': 'Desa al meu jardí',
       'plantInfo': 'Informació de la planta',

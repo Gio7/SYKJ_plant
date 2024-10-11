@@ -120,7 +120,7 @@ class LanguageCs {
       'how-tos': 'Návody',
       'pruning': 'Prořezávání',
       'propagation': 'Množení',
-      'reporting': 'Hlášení',
+      'repotting': 'Přesazování',
       'funFacts': 'Zajímavosti',
       'saveToMyGarden': 'Uložit do mé zahrady',
       'plantInfo': 'Informace o rostlině',

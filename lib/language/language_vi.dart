@@ -119,7 +119,7 @@ class LanguageVi {
       'how-tos': 'Cách làm',
       'pruning': 'Tỉa cây',
       'propagation': 'Nhân giống',
-      'reporting': 'Báo cáo',
+      'repotting': 'Thay chậu',
       'funFacts': 'Sự thật thú vị',
       'saveToMyGarden': 'Lưu vào Vườn của tôi',
       'plantInfo': 'Thông tin cây',

@@ -118,7 +118,7 @@ class LanguageIt {
       'how-tos': 'Come fare',
       'pruning': 'Potatura',
       'propagation': 'Propagazione',
-      'reporting': 'Segnalazione',
+      'repotting': 'Rinvaso',
       'funFacts': 'Curiosità',
       'saveToMyGarden': 'Salva nel mio giardino',
       'plantInfo': 'Info sulla pianta',

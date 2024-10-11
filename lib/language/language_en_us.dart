@@ -118,7 +118,7 @@ class LanguageEnUs {
       'how-tos': 'How-tos',
       'pruning': 'Pruning',
       'propagation': 'Propagation',
-      'reporting': 'Reporting',
+      'repotting': 'Repotting',
       'funFacts': 'Fun Facts',
       'saveToMyGarden': 'Save to my garden',
       'plantInfo': 'Plant info',

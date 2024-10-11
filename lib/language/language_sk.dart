@@ -119,7 +119,7 @@ class LanguageSk {
       'how-tos': 'Návody',
       'pruning': 'Rez',
       'propagation': 'Množenie',
-      'reporting': 'Hlásenie',
+      'repotting': 'Presádzanie',
       'funFacts': 'Zábavné fakty',
       'saveToMyGarden': 'Uložiť do mojej záhrady',
       'plantInfo': 'Informácie o rastlinách',

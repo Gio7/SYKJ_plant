@@ -118,7 +118,7 @@ class LanguageEs {
       'how-tos': 'Cómo hacer',
       'pruning': 'Poda',
       'propagation': 'Propagación',
-      'reporting': 'Reportar',
+      'repotting': 'Trasplante',
       'funFacts': 'Datos Curiosos',
       'saveToMyGarden': 'Guardar en mi jardín',
       'plantInfo': 'Información de la Planta',

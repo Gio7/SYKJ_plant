@@ -118,7 +118,7 @@ class LanguageRu {
       'how-tos': 'Инструкции',
       'pruning': 'Обрезка',
       'propagation': 'Размножение',
-      'reporting': 'Сообщение',
+      'repotting': 'Пересадка',
       'funFacts': 'Интересные факты',
       'saveToMyGarden': 'Сохранить в мой сад',
       'plantInfo': 'Информация о растении',

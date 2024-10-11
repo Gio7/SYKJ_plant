@@ -117,7 +117,7 @@ class LanguageZhTw {
       'how-tos': '操作指南',
       'pruning': '修剪',
       'propagation': '繁殖',
-      'reporting': '報告',
+      'repotting': '換盆',
       'funFacts': '趣味事實',
       'saveToMyGarden': '保存到我的花園',
       'plantInfo': '植物信息',

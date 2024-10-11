@@ -119,7 +119,7 @@ class LanguageHr {
       'how-tos': 'Upute',
       'pruning': 'Obrezivanje',
       'propagation': 'Razmnožavanje',
-      'reporting': 'Izvještavanje',
+      'repotting': 'Presađivanje',
       'funFacts': 'Zabavne činjenice',
       'saveToMyGarden': 'Spremi u moj vrt',
       'plantInfo': 'Informacije o biljci',

@@ -119,7 +119,7 @@ class LanguageFi {
       'how-tos': 'Ohjeet',
       'pruning': 'Leikkaaminen',
       'propagation': 'Lisääntyminen',
-      'reporting': 'Raportointi',
+      'repotting': 'Uudelleenistutus',
       'funFacts': 'Hauskat faktat',
       'saveToMyGarden': 'Tallenna puutarhaani',
       'plantInfo': 'Kasvitiedot',

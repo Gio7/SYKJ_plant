@@ -118,7 +118,7 @@ class LanguageUk {
       'how-tos': 'Інструкції',
       'pruning': 'Обрізка',
       'propagation': 'Розмноження',
-      'reporting': 'Повідомлення',
+      'repotting': 'Пересадка',
       'funFacts': 'Цікаві факти',
       'saveToMyGarden': 'Зберегти у моєму саду',
       'plantInfo': 'Інформація про рослину',

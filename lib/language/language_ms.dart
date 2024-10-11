@@ -119,7 +119,7 @@ class LanguageMs {
       'how-tos': 'Panduan',
       'pruning': 'Pemangkasan',
       'propagation': 'Pembiakan',
-      'reporting': 'Pelaporan',
+      'repotting': 'Penggantian pasu',
       'funFacts': 'Fakta Menarik',
       'saveToMyGarden': 'Simpan ke Taman Saya',
       'plantInfo': 'Maklumat Tumbuhan',

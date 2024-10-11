@@ -119,7 +119,7 @@ class LanguageTr {
       'how-tos': 'Nasıl Yapılır',
       'pruning': 'Budama',
       'propagation': 'Üreme',
-      'reporting': 'Raporlama',
+      'repotting': 'Saksı değiştirme',
       'funFacts': 'Eğlenceli Bilgiler',
       'saveToMyGarden': 'Bahçeme Kaydet',
       'plantInfo': 'Bitki Bilgileri',

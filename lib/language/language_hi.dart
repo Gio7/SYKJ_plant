@@ -119,7 +119,7 @@ class LanguageHi {
       'how-tos': 'कैसे करें',
       'pruning': 'छँटाई',
       'propagation': 'प्रसार',
-      'reporting': 'रिपोर्टिंग',
+      'repotting': 'गमला बदलना',
       'funFacts': 'मज़ेदार तथ्य',
       'saveToMyGarden': 'मेरे बगीचे में सहेजें',
       'plantInfo': 'पौधे की जानकारी',

@@ -118,7 +118,7 @@ class LanguagePl {
       'how-tos': 'Jak zrobić',
       'pruning': 'Przycinanie',
       'propagation': 'Rozmnażanie',
-      'reporting': 'Raportowanie',
+      'repotting': 'Przesadzanie',
       'funFacts': 'Ciekawostki',
       'saveToMyGarden': 'Zapisz do mojego ogrodu',
       'plantInfo': 'Informacje o roślinie',

@@ -118,7 +118,7 @@ class LanguageId {
       'how-tos': 'Cara',
       'pruning': 'Pemangkasan',
       'propagation': 'Perbanyakan',
-      'reporting': 'Pelaporan',
+      'repotting': 'Pemindahan pot',
       'funFacts': 'Fakta Menarik',
       'saveToMyGarden': 'Simpan ke kebun saya',
       'plantInfo': 'Info tanaman',
