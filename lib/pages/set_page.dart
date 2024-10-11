@@ -15,8 +15,6 @@ import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/userinfo_model.dart';
 import 'package:plant/pages/login/login_page.dart';
 
-import 'shop/shop_view.dart';
-
 class SetPage extends StatelessWidget {
   const SetPage({super.key});
 
@@ -232,13 +230,13 @@ class SetPage extends StatelessWidget {
                 'images/icon/set_code.png',
                 'activationCode'.tr,
               ),
-            _buildListItem(
-              () {
-                _onContact();
-              },
-              'images/icon/set_contact.png',
-              'contactUs'.tr,
-            ),
+            // _buildListItem(
+            //   () {
+            //     _onContact();
+            //   },
+            //   'images/icon/set_contact.png',
+            //   'contactUs'.tr,
+            // ),
             // _buildListItem(
             //   () {},
             //   'images/icon/set_share.png',
@@ -380,18 +378,6 @@ class SetPage extends StatelessWidget {
         text: 'logIn'.tr,
         textColor: UIColor.c00997A,
         bgColor: UIColor.cAEE9CD,
-      );
-    }
-    if (userController.userInfo.value.memberType == MemberType.normal) {
-      return NormalButton(
-        onTap: () {
-          FireBaseUtil.subscribePageEvent(Get.currentRoute);
-          Get.to(() => ShopPage());
-        },
-        text: 'getPro'.tr,
-        textColor: UIColor.c00997A,
-        bgColors: const [UIColor.cD7FF38, UIColor.cAAFFD6],
-        bgColor: UIColor.cAAFFD6,
       );
     }
     return NormalButton(

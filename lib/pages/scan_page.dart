@@ -3,14 +3,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/components/show_dialog.dart';
 import 'package:plant/controllers/plant_controller.dart';
-import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/sdk/scanning_effect/scanning_effect.dart';
-
-import 'shop/shop_view.dart';
 
 class ScanPage extends StatelessWidget {
   const ScanPage({super.key, required this.cropFile, required this.image400File});
@@ -18,15 +14,6 @@ class ScanPage extends StatelessWidget {
   final File image400File;
 
   void _requestNetwork(PlantController ctr, Completer<void> completer) async {
-    if (!(Get.find<UserController>().userInfo.value.isRealVip)) {
-      await Future.delayed(const Duration(milliseconds: 800));
-      FireBaseUtil.subscribePageEvent(Get.currentRoute);
-      await Get.to(() => ShopPage());
-      if (!(Get.find<UserController>().userInfo.value.isRealVip)) {
-        Get.until((route) => Get.currentRoute == '/');
-        return;
-      }
-    }
     ctr.requestInfo(completer, cropFile, image400File).then((isSuccess) => {
       if (!isSuccess && !(completer.isCompleted))
         {
