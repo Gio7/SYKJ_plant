@@ -11,7 +11,6 @@ class LanguageIt {
       'diagnose': 'Diagnosi',
       'youHaveNoPlants': 'Non hai piante',
       'addPlant': 'Aggiungi pianta',
-      'weScanForYou': 'Scansioniamo per te',
       'scanTips': 'Cerchiamo di identificare la pianta in base alla foto che hai scattato',
       'analyzingImage': 'Analizzando l\'immagine',
       'detectingLeaves': 'Rilevamento delle foglie',
@@ -61,8 +60,6 @@ class LanguageIt {
       'appVersion': 'Versione App',
       'getPro': 'Ottieni Pro',
       'getProTips': 'Non sei ancora un membro Pro',
-      'weeklyMembership': 'Abbonamento Settimanale',
-      'yearsMembership': 'Abbonamento Annuale',
       'logOut': 'Esci',
       'no.': 'No.',
       'deleteAccountTips':
@@ -98,7 +95,6 @@ class LanguageIt {
       'scientificName': 'Nome scientifico:',
       'description': 'Descrizione',
       'characteristics': 'Caratteristiche',
-      'maturePlant': 'Pianta Adulta',
       'plantHeight': 'Altezza della Pianta',
       'spread': 'Ampiezza',
       'leafColor': 'Colore delle Foglie',
@@ -141,6 +137,10 @@ class LanguageIt {
       'paymentHasBeenCanceled': 'Il pagamento è stato annullato.',
       'restoreTips': 'Nessun contenuto da ripristinare.',
       'soil': 'Suolo',
+      'weeklyMembership': 'Abbonamento Settimanale',
+      'yearsMembership': 'Abbonamento Annuale',
+      'weScanForYou': 'Scansione in corso...',
+      'maturePlant': 'Pianta Matura',
     };
   }
 }

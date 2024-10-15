@@ -12,7 +12,6 @@ class LanguageFi {
       'diagnose': 'Diagnosoi',
       'youHaveNoPlants': 'Sinulla ei ole kasveja',
       'addPlant': 'Lisää kasvi',
-      'weScanForYou': 'Me skannaamme puolestasi',
       'scanTips': 'Yritämme tunnistaa kasvin ottamasi valokuvan perusteella',
       'analyzingImage': 'Analysoidaan kuvaa',
       'detectingLeaves': 'Tunnistetaan lehtiä',
@@ -62,8 +61,6 @@ class LanguageFi {
       'appVersion': 'Sovellusversio',
       'getPro': 'Hanki Pro',
       'getProTips': 'Et ole vielä Pro-jäsen',
-      'weeklyMembership': 'Viikkotilaus',
-      'yearsMembership': 'Vuositilaus',
       'logOut': 'Kirjaudu ulos',
       'no.': 'Nro',
       'deleteAccountTips':
@@ -99,7 +96,6 @@ class LanguageFi {
       'scientificName': 'Tieteellinen nimi:',
       'description': 'Kuvaus',
       'characteristics': 'Ominaisuudet',
-      'maturePlant': 'Kypsä kasvi',
       'plantHeight': 'Kasvin korkeus',
       'spread': 'Leveys',
       'leafColor': 'Lehtien väri',
@@ -141,6 +137,10 @@ class LanguageFi {
       'paymentHasBeenCanceled': 'Maksu on peruutettu。',
       'restoreTips': 'Ei sisältöä palautettavaksi.',
       'soil': 'Maa',
+      'weeklyMembership': 'Viikoittainen jäsenyys',
+      'yearsMembership': 'Vuosijäsenyys',
+      'weScanForYou': 'Skannaus käynnissä...',
+      'maturePlant': 'Kypsä kasvi',
     };
   }
 }

@@ -11,7 +11,6 @@ class LanguagePl {
       'diagnose': 'Diagnoza',
       'youHaveNoPlants': 'Nie masz roślin',
       'addPlant': 'Dodaj roślinę',
-      'weScanForYou': 'Skanujemy dla Ciebie',
       'scanTips': 'Próbujemy zidentyfikować roślinę na podstawie zdjęcia, które wykonałeś',
       'analyzingImage': 'Analiza obrazu',
       'detectingLeaves': 'Wykrywanie liści',
@@ -61,8 +60,6 @@ class LanguagePl {
       'appVersion': 'Wersja aplikacji',
       'getPro': 'Uzyskaj Pro',
       'getProTips': 'Nie jesteś jeszcze członkiem Pro',
-      'weeklyMembership': 'Członkostwo tygodniowe',
-      'yearsMembership': 'Członkostwo roczne',
       'logOut': 'Wyloguj się',
       'no.': 'Nr',
       'deleteAccountTips':
@@ -98,7 +95,6 @@ class LanguagePl {
       'scientificName': 'Nazwa naukowa:',
       'description': 'Opis',
       'characteristics': 'Cechy',
-      'maturePlant': 'Dorosła roślina',
       'plantHeight': 'Wysokość rośliny',
       'spread': 'Rozpiętość',
       'leafColor': 'Kolor liści',
@@ -141,6 +137,10 @@ class LanguagePl {
       'paymentHasBeenCanceled': 'Płatność została anulowana.',
       'restoreTips': 'Brak treści do przywrócenia.',
       'soil': 'Gleba',
+      'weeklyMembership': 'Cotygodniowe Członkostwo',
+      'yearsMembership': 'Coroczne Członkostwo',
+      'weScanForYou': 'Trwa skanowanie...',
+      'maturePlant': 'Dojrzała Roślina',
     };
   }
 }

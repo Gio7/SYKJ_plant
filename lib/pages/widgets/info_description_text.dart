@@ -17,7 +17,7 @@ class _InfoDescriptionTextState extends State<InfoDescriptionText> {
   bool _showMore = false;
   final _textStyle = TextStyle(
     color: UIColor.c8E8B8B,
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: FontWeightExt.medium,
   );
   bool _isTextHeightExceed = false;

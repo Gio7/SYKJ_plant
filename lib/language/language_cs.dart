@@ -12,7 +12,6 @@ class LanguageCs {
       'diagnose': 'Diagnostikovat',
       'youHaveNoPlants': 'Nemáte žádné rostliny',
       'addPlant': 'Přidat rostlinu',
-      'weScanForYou': 'Skenujeme pro vás',
       'scanTips': 'Snažíme se identifikovat rostlinu na základě fotografie, kterou jste pořídili',
       'analyzingImage': 'Analýza obrázku',
       'detectingLeaves': 'Detekce listů',
@@ -62,8 +61,6 @@ class LanguageCs {
       'appVersion': 'Verze aplikace',
       'getPro': 'Získat Pro',
       'getProTips': 'Nejste ještě členem Pro',
-      'weeklyMembership': 'Týdenní členství',
-      'yearsMembership': 'Roční členství',
       'logOut': 'Odhlásit se',
       'no.': 'Č.',
       'deleteAccountTips':
@@ -86,8 +83,7 @@ class LanguageCs {
       'pwdError': 'Heslo musí být 6–12 znaků dlouhé',
       'pwdNotMatch': 'Hesla se neshodují. Zkuste to znovu',
       'emailVerification': 'Poslali jsme vám e-mail pro ověření účtu',
-      'confirmEmailAddress':
-          'Chcete-li potvrdit svou e-mailovou adresu, postupujte podle odkazu v e-mailu, který jsme poslali na ',
+      'confirmEmailAddress': 'Chcete-li potvrdit svou e-mailovou adresu, postupujte podle odkazu v e-mailu, který jsme poslali na ',
       'didNotReceive': 'Nepřijali jste?',
       'resendEmail': 'Znovu odeslat e-mail',
       'refreshTips': 'Ověření může být ve zpracování.\nZkuste obnovit stránku',
@@ -100,7 +96,6 @@ class LanguageCs {
       'scientificName': 'Vědecký název:',
       'description': 'Popis',
       'characteristics': 'Charakteristiky',
-      'maturePlant': 'Dospělá rostlina',
       'plantHeight': 'Výška rostliny',
       'spread': 'Šířka',
       'leafColor': 'Barva listů',
@@ -143,6 +138,10 @@ class LanguageCs {
       'paymentHasBeenCanceled': 'Platba byla zrušena.',
       'restoreTips': 'Žádný obsah k obnovení.',
       'soil': 'Půda',
+      'weeklyMembership': 'Týdenní členství',
+      'yearsMembership': 'Roční členství',
+      'weScanForYou': 'Probíhá skenování...',
+      'maturePlant': 'Zralá rostlina',
     };
   }
 }

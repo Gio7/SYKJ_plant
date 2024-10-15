@@ -12,7 +12,6 @@ class LanguageHu {
       'diagnose': 'Diagnosztizálás',
       'youHaveNoPlants': 'Nincsenek növényei',
       'addPlant': 'Növény hozzáadása',
-      'weScanForYou': 'Mi szkennelünk ön helyett',
       'scanTips': 'Megpróbáljuk azonosítani a növényt az ön által készített fotó alapján',
       'analyzingImage': 'Kép elemzése',
       'detectingLeaves': 'Levél érzékelése',
@@ -62,8 +61,6 @@ class LanguageHu {
       'appVersion': 'App verzió',
       'getPro': 'Szerezze meg a Pro-t',
       'getProTips': 'Még nem tagja a Pro-nak',
-      'weeklyMembership': 'Heti tagság',
-      'yearsMembership': 'Éves tagság',
       'logOut': 'Kijelentkezés',
       'no.': 'Szám',
       'deleteAccountTips':
@@ -99,7 +96,6 @@ class LanguageHu {
       'scientificName': 'Tudományos név:',
       'description': 'Leírás',
       'characteristics': 'Jellemzők',
-      'maturePlant': 'Érett növény',
       'plantHeight': 'Növény magassága',
       'spread': 'Terjedés',
       'leafColor': 'Levél színe',
@@ -142,6 +138,10 @@ class LanguageHu {
       'paymentHasBeenCanceled': 'A fizetés lemondva.',
       'restoreTips': 'Nincs visszaállítható tartalom.',
       'soil': 'Talaj',
+      'weeklyMembership': 'Heti Tagság',
+      'yearsMembership': 'Éves Tagság',
+      'weScanForYou': 'Szkennelés folyamatban...',
+      'maturePlant': 'Érett növény',
     };
   }
 }

@@ -12,7 +12,6 @@ class LanguageHr {
       'diagnose': 'Dijagnosticiraj',
       'youHaveNoPlants': 'Nemate biljaka',
       'addPlant': 'Dodaj biljku',
-      'weScanForYou': 'Skeniramo za vas',
       'scanTips': 'Pokušavamo identificirati biljku na temelju fotografije koju ste snimili',
       'analyzingImage': 'Analiziramo sliku',
       'detectingLeaves': 'Otkrivamo lišće',
@@ -62,8 +61,6 @@ class LanguageHr {
       'appVersion': 'Verzija aplikacije',
       'getPro': 'Dobijte Pro',
       'getProTips': 'Još niste Pro član',
-      'weeklyMembership': 'Tjedna članarina',
-      'yearsMembership': 'Godišnja članarina',
       'logOut': 'Odjavi se',
       'no.': 'Br.',
       'deleteAccountTips':
@@ -99,7 +96,6 @@ class LanguageHr {
       'scientificName': 'Znanstveni naziv:',
       'description': 'Opis',
       'characteristics': 'Karakteristike',
-      'maturePlant': 'Zrela biljka',
       'plantHeight': 'Visina biljke',
       'spread': 'Širenje',
       'leafColor': 'Boja lišća',
@@ -141,6 +137,10 @@ class LanguageHr {
       'paymentHasBeenCanceled': 'Plaćanje je otkazano.',
       'restoreTips': 'Nema sadržaja za vraćanje.',
       'soil': 'Tlo',
+      'weeklyMembership': 'Tjedna Članarina',
+      'yearsMembership': 'Godišnja Članarina',
+      'weScanForYou': 'Skeniranje u tijeku...',
+      'maturePlant': 'Zrela biljka',
     };
   }
 }

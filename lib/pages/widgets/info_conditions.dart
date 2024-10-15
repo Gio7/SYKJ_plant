@@ -96,7 +96,7 @@ class InfoConditions extends StatelessWidget {
                   title,
                   style: TextStyle(
                     color: UIColor.c8E8B8B,
-                    fontSize: 12,
+                    fontSize: 14,
                     fontWeight: FontWeightExt.medium,
                   ),
                 ),
@@ -104,7 +104,7 @@ class InfoConditions extends StatelessWidget {
                   content,
                   style: TextStyle(
                     color: UIColor.c15221D,
-                    fontSize: 12,
+                    fontSize: 14,
                     fontWeight: FontWeightExt.medium,
                   ),
                 ),

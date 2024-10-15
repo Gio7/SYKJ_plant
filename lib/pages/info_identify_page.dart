@@ -163,11 +163,12 @@ class InfoIdentifyPage extends StatelessWidget {
                   Get.dialog(const LoadingDialog());
                   await ctr.savePlant(ctr.plantInfo!.scanRecordId!);
                   Get.back();
-                  Get.until((route) => Get.currentRoute == '/');
-                  Get.find<MainController>().tabController.index = 2;
-                  if (Get.isRegistered<MyPlantsController>() == true) {
+                  if (Get.find<MainController>().tabController.index == 2) {
                     Get.find<MyPlantsController>().onRefresh();
+                  } else {
+                    Get.find<MainController>().tabController.index = 2;
                   }
+                  Get.until((route) => Get.currentRoute == '/');
                 }, 500),
                 text: 'saveToMyGarden'.tr,
                 textColor: UIColor.white,
@@ -203,7 +204,7 @@ class InfoIdentifyPage extends StatelessWidget {
                 text: '${'scientificName'.tr} ',
                 style: const TextStyle(
                   color: UIColor.c00997A,
-                  fontSize: 12,
+                  fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -211,7 +212,7 @@ class InfoIdentifyPage extends StatelessWidget {
                 text: ctr.plantInfo?.plant?.scientificName ?? '',
                 style: const TextStyle(
                   color: UIColor.c15221D,
-                  fontSize: 12,
+                  fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -225,7 +226,7 @@ class InfoIdentifyPage extends StatelessWidget {
           ctr.plantInfo?.plant?.mainCharacteristics ?? '',
           style: TextStyle(
             color: UIColor.c15221D,
-            fontSize: 12,
+            fontSize: 14,
             fontWeight: FontWeightExt.medium,
           ),
         ),

@@ -11,7 +11,6 @@ class LanguageRu {
       'diagnose': 'Диагностировать',
       'youHaveNoPlants': 'У вас нет растений',
       'addPlant': 'Добавить растение',
-      'weScanForYou': 'Мы сканируем для вас',
       'scanTips': 'Мы пытаемся определить растение по фотографии, которую вы сделали',
       'analyzingImage': 'Анализ изображения',
       'detectingLeaves': 'Обнаружение листьев',
@@ -61,8 +60,6 @@ class LanguageRu {
       'appVersion': 'Версия приложения',
       'getPro': 'Получить Pro',
       'getProTips': 'Вы еще не являетесь участником Pro',
-      'weeklyMembership': 'Еженедельная подписка',
-      'yearsMembership': 'Годовая подписка',
       'logOut': 'Выйти',
       'no.': '№',
       'deleteAccountTips':
@@ -98,7 +95,6 @@ class LanguageRu {
       'scientificName': 'Научное название:',
       'description': 'Описание',
       'characteristics': 'Характеристики',
-      'maturePlant': 'Зрелое растение',
       'plantHeight': 'Высота растения',
       'spread': 'Ширина',
       'leafColor': 'Цвет листьев',
@@ -141,6 +137,10 @@ class LanguageRu {
       'paymentHasBeenCanceled': 'Платеж был отменен.',
       'restoreTips': 'Нет содержимого для восстановления.',
       'soil': 'Почва',
+      'weeklyMembership': 'Еженедельное членство',
+      'yearsMembership': 'Годовое членство',
+      'weScanForYou': 'Сканирование в процессе...',
+      'maturePlant': 'Зрелое растение',
     };
   }
 }

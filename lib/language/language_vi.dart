@@ -12,7 +12,6 @@ class LanguageVi {
       'diagnose': 'Chẩn đoán',
       'youHaveNoPlants': 'Bạn không có cây',
       'addPlant': 'Thêm cây',
-      'weScanForYou': 'Chúng tôi quét cho bạn',
       'scanTips': 'Chúng tôi cố gắng nhận diện cây dựa trên bức ảnh bạn đã chụp',
       'analyzingImage': 'Phân tích hình ảnh',
       'detectingLeaves': 'Phát hiện lá',
@@ -62,8 +61,6 @@ class LanguageVi {
       'appVersion': 'Phiên bản ứng dụng',
       'getPro': 'Nhận Pro',
       'getProTips': 'Bạn chưa là thành viên Pro',
-      'weeklyMembership': 'Thành viên hàng tuần',
-      'yearsMembership': 'Thành viên hàng năm',
       'logOut': 'Đăng xuất',
       'no.': 'Số',
       'deleteAccountTips':
@@ -99,7 +96,6 @@ class LanguageVi {
       'scientificName': 'Tên khoa học:',
       'description': 'Mô tả',
       'characteristics': 'Đặc điểm',
-      'maturePlant': 'Cây trưởng thành',
       'plantHeight': 'Chiều cao cây',
       'spread': 'Lan rộng',
       'leafColor': 'Màu lá',
@@ -142,6 +138,10 @@ class LanguageVi {
       'paymentHasBeenCanceled': 'Thanh toán đã bị hủy.',
       'restoreTips': 'Không có nội dung để khôi phục.',
       'soil': 'Đất',
+      'weeklyMembership': 'Thành viên hàng tuần',
+      'yearsMembership': 'Thành viên hàng năm',
+      'weScanForYou': 'Đang quét...',
+      'maturePlant': 'Cây trưởng thành',
     };
   }
 }

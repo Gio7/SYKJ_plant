@@ -36,6 +36,7 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
   @override
   void initState() {
     super.initState();
+    Get.log("initState:${Get.find<UserController>().isLogin.value}");
     if (Get.find<UserController>().isLogin.value) {
       repository.isLoading.value = true;
       controller.onRefresh();

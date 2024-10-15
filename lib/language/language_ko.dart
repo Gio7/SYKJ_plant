@@ -11,7 +11,6 @@ class LanguageKo {
       'diagnose': '진단하기',
       'youHaveNoPlants': '식물이 없습니다',
       'addPlant': '식물 추가',
-      'weScanForYou': '우리가 스캔해 드립니다',
       'scanTips': '촬영한 사진을 기반으로 식물을 식별하려고 합니다',
       'analyzingImage': '이미지 분석 중',
       'detectingLeaves': '잎을 감지 중',
@@ -61,8 +60,6 @@ class LanguageKo {
       'appVersion': '앱 버전',
       'getPro': 'Pro 받기',
       'getProTips': '아직 Pro 멤버가 아닙니다',
-      'weeklyMembership': '주간 멤버십',
-      'yearsMembership': '연간 멤버십',
       'logOut': '로그아웃',
       'no.': '번호',
       'deleteAccountTips': '계정을 삭제하시겠습니까? 계정을 삭제하면 모든 데이터가 영구적으로 삭제됩니다. 멤버십에 가입한 경우 불필요한 비용을 방지하기 위해 App Store에서 구독을 취소하세요.',
@@ -97,7 +94,6 @@ class LanguageKo {
       'scientificName': '학명:',
       'description': '설명',
       'characteristics': '특징',
-      'maturePlant': '성숙한 식물',
       'plantHeight': '식물 높이',
       'spread': '넓이',
       'leafColor': '잎 색깔',
@@ -139,6 +135,10 @@ class LanguageKo {
       'paymentHasBeenCanceled': '결제가 취소되었습니다.',
       'restoreTips': '복원할 내용이 없습니다.',
       'soil': '토양',
+      'weeklyMembership': '주간 멤버십',
+      'yearsMembership': '연간 멤버십',
+      'weScanForYou': '스캔 중...',
+      'maturePlant': '성숙한 식물',
     };
   }
 }

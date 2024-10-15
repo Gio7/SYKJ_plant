@@ -11,7 +11,6 @@ class LanguageJa {
       'diagnose': '診断する',
       'youHaveNoPlants': '植物がありません',
       'addPlant': '植物を追加',
-      'weScanForYou': '私たちがスキャンします',
       'scanTips': '撮影した写真に基づいて植物を識別しようとします',
       'analyzingImage': '画像を分析中',
       'detectingLeaves': '葉を検出中',
@@ -61,8 +60,6 @@ class LanguageJa {
       'appVersion': 'アプリバージョン',
       'getPro': 'Proを取得',
       'getProTips': 'まだProメンバーではありません',
-      'weeklyMembership': '週次メンバーシップ',
-      'yearsMembership': '年次メンバーシップ',
       'logOut': 'ログアウト',
       'no.': '番号',
       'deleteAccountTips': 'アカウントを削除してもよろしいですか？アカウントの削除は永久的で、すべてのデータが削除されます。メンバーシップに登録している場合は、不要な請求を避けるためにApp Storeでサブスクリプションをキャンセルしてください。',
@@ -97,7 +94,6 @@ class LanguageJa {
       'scientificName': '学名：',
       'description': '説明',
       'characteristics': '特徴',
-      'maturePlant': '成熟した植物',
       'plantHeight': '植物の高さ',
       'spread': '広がり',
       'leafColor': '葉の色',
@@ -139,6 +135,10 @@ class LanguageJa {
       'paymentHasBeenCanceled': '支払いがキャンセルされました。',
       'restoreTips': '復元するコンテンツがありません。',
       'soil': 'どじょう',
+      'weeklyMembership': '週間メンバーシップ',
+      'yearsMembership': '年間メンバーシップ',
+      'weScanForYou': 'スキャン中…',
+      'maturePlant': '成熟した植物',
     };
   }
 }

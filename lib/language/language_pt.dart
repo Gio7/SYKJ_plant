@@ -11,7 +11,6 @@ class LanguagePt {
       'diagnose': 'Diagnosticar',
       'youHaveNoPlants': 'Você não tem plantas',
       'addPlant': 'Adicionar Planta',
-      'weScanForYou': 'Nós escaneamos para você',
       'scanTips': 'Tentamos identificar a planta com base na foto que você tirou',
       'analyzingImage': 'Analisando imagem',
       'detectingLeaves': 'Detectando folhas',
@@ -61,8 +60,6 @@ class LanguagePt {
       'appVersion': 'Versão do App',
       'getPro': 'Obtenha Pro',
       'getProTips': 'Você ainda não é um membro Pro',
-      'weeklyMembership': 'Assinatura Semanal',
-      'yearsMembership': 'Assinatura Anual',
       'logOut': 'Sair',
       'no.': 'Nº',
       'deleteAccountTips':
@@ -98,7 +95,6 @@ class LanguagePt {
       'scientificName': 'Nome científico:',
       'description': 'Descrição',
       'characteristics': 'Características',
-      'maturePlant': 'Planta Adulta',
       'plantHeight': 'Altura da Planta',
       'spread': 'Expansão',
       'leafColor': 'Cor das Folhas',
@@ -141,6 +137,10 @@ class LanguagePt {
       'paymentHasBeenCanceled': 'O pagamento foi cancelado.',
       'restoreTips': 'Nenhum conteúdo para restaurar.',
       'soil': 'Solo',
+      'weeklyMembership': 'Assinatura Semanal',
+      'yearsMembership': 'Assinatura Anual',
+      'weScanForYou': 'Escaneando em andamento...',
+      'maturePlant': 'Planta Maduro',
     };
   }
 }

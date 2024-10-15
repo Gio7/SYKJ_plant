@@ -12,7 +12,6 @@ class LanguageRo {
       'diagnose': 'Diagnostică',
       'youHaveNoPlants': 'Nu ai plante',
       'addPlant': 'Adaugă plantă',
-      'weScanForYou': 'Scanăm pentru tine',
       'scanTips': 'Încercăm să identificăm planta pe baza fotografiei făcute de tine',
       'analyzingImage': 'Analizăm imaginea',
       'detectingLeaves': 'Detectăm frunze',
@@ -62,8 +61,6 @@ class LanguageRo {
       'appVersion': 'Versiunea aplicației',
       'getPro': 'Obține Pro',
       'getProTips': 'Încă nu ești membru Pro',
-      'weeklyMembership': 'Abonament săptămânal',
-      'yearsMembership': 'Abonament anual',
       'logOut': 'Deconectează-te',
       'no.': 'Nr.',
       'deleteAccountTips':
@@ -99,7 +96,6 @@ class LanguageRo {
       'scientificName': 'Nume științific:',
       'description': 'Descriere',
       'characteristics': 'Caracteristici',
-      'maturePlant': 'Plantă matură',
       'plantHeight': 'Înălțimea plantei',
       'spread': 'Răspândire',
       'leafColor': 'Culoarea frunzelor',
@@ -141,6 +137,10 @@ class LanguageRo {
       'paymentHasBeenCanceled': 'Plata a fost anulată.',
       'restoreTips': 'Nu există conținut de restaurat.',
       'soil': 'Sol',
+      'weeklyMembership': 'Abonament Săptămânal',
+      'yearsMembership': 'Abonament Anual',
+      'weScanForYou': 'Se scanează...',
+      'maturePlant': 'Plantă matură',
     };
   }
 }

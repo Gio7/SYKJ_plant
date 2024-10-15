@@ -12,7 +12,6 @@ class LanguageSk {
       'diagnose': 'Diagnostikovať',
       'youHaveNoPlants': 'Nemáte žiadne rastliny',
       'addPlant': 'Pridať rastlinu',
-      'weScanForYou': 'Skenujeme pre vás',
       'scanTips': 'Snažíme sa identifikovať rastlinu na základe fotografie, ktorú ste nasnímali',
       'analyzingImage': 'Analyzujeme obrázok',
       'detectingLeaves': 'Detekujeme listy',
@@ -62,8 +61,6 @@ class LanguageSk {
       'appVersion': 'Verzia aplikácie',
       'getPro': 'Získať Pro',
       'getProTips': 'Ešte nie ste členom Pro',
-      'weeklyMembership': 'Týždenné členstvo',
-      'yearsMembership': 'Ročné členstvo',
       'logOut': 'Odhlásiť sa',
       'no.': 'č.',
       'deleteAccountTips':
@@ -99,7 +96,6 @@ class LanguageSk {
       'scientificName': 'Vedecký názov:',
       'description': 'Popis',
       'characteristics': 'Charakteristiky',
-      'maturePlant': 'Dospelá rastlina',
       'plantHeight': 'Výška rastliny',
       'spread': 'Rozšírenie',
       'leafColor': 'Farba listov',
@@ -142,6 +138,10 @@ class LanguageSk {
       'paymentHasBeenCanceled': 'Platba bola zrušená.',
       'restoreTips': 'Žiadny obsah na obnovenie.',
       'soil': 'Pôda',
+      'weeklyMembership': 'Týždenné členstvo',
+      'yearsMembership': 'Ročné členstvo',
+      'weScanForYou': 'Prebieha skenovanie...',
+      'maturePlant': 'Zrelá rastlina',
     };
   }
 }

@@ -11,7 +11,6 @@ class LanguageZhTw {
       'diagnose': '診斷',
       'youHaveNoPlants': '你沒有植物',
       'addPlant': '添加植物',
-      'weScanForYou': '我們為你掃描',
       'scanTips': '我們根據你拍攝的照片嘗試識別植物',
       'analyzingImage': '分析圖片中',
       'detectingLeaves': '檢測葉子中',
@@ -61,8 +60,6 @@ class LanguageZhTw {
       'appVersion': '應用版本',
       'getPro': '獲取 Pro 版本',
       'getProTips': '你還不是 Pro 會員',
-      'weeklyMembership': '每週會員',
-      'yearsMembership': '每年會員',
       'logOut': '登出',
       'no.': '編號',
       'deleteAccountTips': '你確定要刪除你的帳戶嗎？刪除帳戶是永久的，並將刪除所有數據。如果你已訂閱會員，請前往 App Store 取消訂閱以避免不必要的收費。',
@@ -97,7 +94,6 @@ class LanguageZhTw {
       'scientificName': '學名：',
       'description': '描述',
       'characteristics': '特徵',
-      'maturePlant': '成熟植物',
       'plantHeight': '植物高度',
       'spread': '擴展範圍',
       'leafColor': '葉子顏色',
@@ -139,6 +135,10 @@ class LanguageZhTw {
       'paymentHasBeenCanceled': '支付已取消。',
       'restoreTips': '無可恢復的內容。',
       'soil': '土壤',
+      'weeklyMembership': '週會員',
+      'yearsMembership': '年會員',
+      'weScanForYou': '正在掃描...',
+      'maturePlant': '成熟植株',
     };
   }
 }

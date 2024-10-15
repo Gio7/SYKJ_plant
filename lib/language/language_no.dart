@@ -12,7 +12,6 @@ class LanguageNo {
       'diagnose': 'Diagnose',
       'youHaveNoPlants': 'Du har ingen planter',
       'addPlant': 'Legg til plante',
-      'weScanForYou': 'Vi skanner for deg',
       'scanTips': 'Vi prøver å identifisere planten basert på bildet du tok',
       'analyzingImage': 'Analyserer bilde',
       'detectingLeaves': 'Oppdager blader',
@@ -62,8 +61,6 @@ class LanguageNo {
       'appVersion': 'Appversjon',
       'getPro': 'Få Pro',
       'getProTips': 'Du er ikke Pro-medlem ennå',
-      'weeklyMembership': 'Ukentlig medlemskap',
-      'yearsMembership': 'Årlig medlemskap',
       'logOut': 'Logg ut',
       'no.': 'Nr.',
       'deleteAccountTips':
@@ -99,7 +96,6 @@ class LanguageNo {
       'scientificName': 'Vitenskapelig navn:',
       'description': 'Beskrivelse',
       'characteristics': 'Kjennetegn',
-      'maturePlant': 'Moden plante',
       'plantHeight': 'Planthøyde',
       'spread': 'Spre',
       'leafColor': 'Bladfarge',
@@ -142,6 +138,10 @@ class LanguageNo {
       'paymentHasBeenCanceled': 'Betalingen ble avbrutt.',
       'restoreTips': 'Ingen innhold å gjenopprette.',
       'soil': 'Jord',
+      'weeklyMembership': 'Ukentlig medlemskap',
+      'yearsMembership': 'Årlig medlemskap',
+      'weScanForYou': 'Skanning pågår...',
+      'maturePlant': 'Moden plante',
     };
   }
 }

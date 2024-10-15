@@ -12,7 +12,6 @@ class LanguageCa {
       'diagnose': 'Diagnostica',
       'youHaveNoPlants': 'No tens plantes',
       'addPlant': 'Afegeix Planta',
-      'weScanForYou': 'Escanegem per tu',
       'scanTips': 'Intentem identificar la planta basant-nos en la foto que has fet',
       'analyzingImage': 'Analitzant imatge',
       'detectingLeaves': 'Detectant fulles',
@@ -62,8 +61,6 @@ class LanguageCa {
       'appVersion': 'Versió de l\'aplicació',
       'getPro': 'Obtenir Pro',
       'getProTips': 'Encara no ets membre de Pro',
-      'weeklyMembership': 'Subscripció setmanal',
-      'yearsMembership': 'Subscripció anual',
       'logOut': 'Tanca la sessió',
       'no.': 'Núm.',
       'deleteAccountTips':
@@ -86,23 +83,19 @@ class LanguageCa {
       'pwdError': 'La contrasenya ha de tenir entre 6 i 12 caràcters',
       'pwdNotMatch': 'Les contrasenyes no coincideixen. Si us plau, intenta-ho de nou',
       'emailVerification': 'T\'hem enviat un correu electrònic per verificar el teu compte',
-      'confirmEmailAddress':
-          'Per confirmar la teva adreça de correu electrònic, segueix l\'enllaç del correu electrònic que t\'hem enviat a ',
+      'confirmEmailAddress': 'Per confirmar la teva adreça de correu electrònic, segueix l\'enllaç del correu electrònic que t\'hem enviat a ',
       'didNotReceive': 'No ho has rebut?',
       'resendEmail': 'Torna a enviar el correu electrònic',
       'refreshTips': 'La verificació pot estar pendent.\nSi us plau, intenta refrescar',
       'refresh': 'Refresca',
       'forgotPassword': 'Has oblidat la contrasenya?',
       'resetPassword': 'Restableix la contrasenya',
-      'resetPasswordTips':
-          'Per restablir la teva contrasenya, introdueix l\'adreça de correu electrònic associada amb el teu compte de Plant Identifier',
+      'resetPasswordTips': 'Per restablir la teva contrasenya, introdueix l\'adreça de correu electrònic associada amb el teu compte de Plant Identifier',
       'done': 'Fet',
-      'resetPasswordDone':
-          'El correu electrònic per restablir la teva contrasenya s\'ha enviat amb èxit. Comprova la teva safata d\'entrada',
+      'resetPasswordDone': 'El correu electrònic per restablir la teva contrasenya s\'ha enviat amb èxit. Comprova la teva safata d\'entrada',
       'scientificName': 'Nom científic:',
       'description': 'Descripció',
       'characteristics': 'Característiques',
-      'maturePlant': 'Planta madura',
       'plantHeight': 'Alçada de la planta',
       'spread': 'Ample',
       'leafColor': 'Color de les fulles',
@@ -145,6 +138,10 @@ class LanguageCa {
       'paymentHasBeenCanceled': 'El pagament ha estat cancel·lat.',
       'restoreTips': 'No hi ha contingut per restaurar.',
       'soil': 'Sòl',
+      'weeklyMembership': 'Subscripció Setmanal',
+      'yearsMembership': 'Subscripció Anual',
+      'weScanForYou': 'Escanejant en procés...',
+      'maturePlant': 'Planta Madura',
     };
   }
 }

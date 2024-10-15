@@ -12,7 +12,6 @@ class LanguageHi {
       'diagnose': 'निदान करें',
       'youHaveNoPlants': 'आपके पास कोई पौधे नहीं हैं',
       'addPlant': 'पौधा जोड़ें',
-      'weScanForYou': 'हम आपके लिए स्कैन करते हैं',
       'scanTips': 'हम आपके द्वारा खींची गई तस्वीर के आधार पर पौधे की पहचान करने का प्रयास करते हैं',
       'analyzingImage': 'छवि का विश्लेषण हो रहा है',
       'detectingLeaves': 'पत्तियों का पता लगाना',
@@ -62,8 +61,6 @@ class LanguageHi {
       'appVersion': 'ऐप संस्करण',
       'getPro': 'प्रो प्राप्त करें',
       'getProTips': 'आप अभी प्रो सदस्य नहीं हैं',
-      'weeklyMembership': 'साप्ताहिक सदस्यता',
-      'yearsMembership': 'वार्षिक सदस्यता',
       'logOut': 'लॉग आउट करें',
       'no.': 'नं.',
       'deleteAccountTips':
@@ -99,7 +96,6 @@ class LanguageHi {
       'scientificName': 'वैज्ञानिक नाम:',
       'description': 'विवरण',
       'characteristics': 'विशेषताएं',
-      'maturePlant': 'परिपक्व पौधा',
       'plantHeight': 'पौधे की ऊंचाई',
       'spread': 'फैलाव',
       'leafColor': 'पत्ते का रंग',
@@ -141,6 +137,10 @@ class LanguageHi {
       'paymentHasBeenCanceled': 'भुगतान रद्द कर दिया गया है।',
       'restoreTips': 'पुनर्स्थापित करने के लिए कोई सामग्री नहीं है।',
       'soil': 'मिट्टी',
+      'weeklyMembership': 'साप्ताहिक सदस्यता',
+      'yearsMembership': 'सालाना सदस्यता',
+      'weScanForYou': 'स्कैन चल रहा है...',
+      'maturePlant': 'परिपक्व पौधा',
     };
   }
 }

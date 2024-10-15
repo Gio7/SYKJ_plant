@@ -11,7 +11,6 @@ class LanguageTh {
       'diagnose': 'วินิจฉัย',
       'youHaveNoPlants': 'คุณไม่มีพืช',
       'addPlant': 'เพิ่มพืช',
-      'weScanForYou': 'เราสแกนให้คุณ',
       'scanTips': 'เราพยายามระบุพืชจากภาพถ่ายที่คุณถ่าย',
       'analyzingImage': 'กำลังวิเคราะห์ภาพ',
       'detectingLeaves': 'กำลังตรวจจับใบไม้',
@@ -61,8 +60,6 @@ class LanguageTh {
       'appVersion': 'เวอร์ชันแอป',
       'getPro': 'รับ Pro',
       'getProTips': 'คุณยังไม่ได้เป็นสมาชิก Pro',
-      'weeklyMembership': 'สมาชิกแบบรายสัปดาห์',
-      'yearsMembership': 'สมาชิกแบบรายปี',
       'logOut': 'ออกจากระบบ',
       'no.': 'เลขที่',
       'deleteAccountTips':
@@ -98,7 +95,6 @@ class LanguageTh {
       'scientificName': 'ชื่อวิทยาศาสตร์:',
       'description': 'คำอธิบาย',
       'characteristics': 'ลักษณะเฉพาะ',
-      'maturePlant': 'พืชเจริญเต็มที่',
       'plantHeight': 'ความสูงของพืช',
       'spread': 'การแพร่กระจาย',
       'leafColor': 'สีของใบ',
@@ -140,6 +136,10 @@ class LanguageTh {
       'paymentHasBeenCanceled': 'การชำระเงินถูกยกเลิก.',
       'restoreTips': 'ไม่มีเนื้อหาที่จะกู้คืน',
       'soil': 'ดิน',
+      'weeklyMembership': 'สมาชิกรายสัปดาห์',
+      'yearsMembership': 'สมาชิกรายปี',
+      'weScanForYou': 'กำลังสแกน...',
+      'maturePlant': 'พืชโตเต็มวัย',
     };
   }
 }

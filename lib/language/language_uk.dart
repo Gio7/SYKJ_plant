@@ -11,7 +11,6 @@ class LanguageUk {
       'diagnose': 'Діагностувати',
       'youHaveNoPlants': 'У вас немає рослин',
       'addPlant': 'Додати рослину',
-      'weScanForYou': 'Ми скануємо для вас',
       'scanTips': 'Ми намагаємося визначити рослину на основі вашого фото',
       'analyzingImage': 'Аналіз зображення',
       'detectingLeaves': 'Виявлення листя',
@@ -61,8 +60,6 @@ class LanguageUk {
       'appVersion': 'Версія програми',
       'getPro': 'Отримати Pro',
       'getProTips': 'Ви ще не є учасником Pro',
-      'weeklyMembership': 'Тижнева підписка',
-      'yearsMembership': 'Річна підписка',
       'logOut': 'Вийти',
       'no.': '№',
       'deleteAccountTips':
@@ -98,7 +95,6 @@ class LanguageUk {
       'scientificName': 'Наукова назва:',
       'description': 'Опис',
       'characteristics': 'Характеристики',
-      'maturePlant': 'Зріла рослина',
       'plantHeight': 'Висота рослини',
       'spread': 'Розмір',
       'leafColor': 'Колір листя',
@@ -140,6 +136,10 @@ class LanguageUk {
       'paymentHasBeenCanceled': 'Платіж скасовано.',
       'restoreTips': 'Немає вмісту для відновлення.',
       'soil': 'Ґрунт',
+      'weeklyMembership': 'Щотижнева членство',
+      'yearsMembership': 'Річне членство',
+      'weScanForYou': 'Сканування в процесі...',
+      'maturePlant': 'Зріла рослина',
     };
   }
 }

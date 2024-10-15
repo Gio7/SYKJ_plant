@@ -25,7 +25,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
 
   @override
   void initState() {
-    mainController.tabController = TabController(length: 3, vsync: this);
+    mainController.tabController = TabController(length: 3, vsync: this)..addListener(() => setState(() {}));
     super.initState();
     userController.getUserInfo();
     // WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((_) => getAdID());

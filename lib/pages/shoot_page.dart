@@ -4,6 +4,7 @@ import 'package:app_settings/app_settings.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
@@ -63,7 +64,17 @@ class _ShootPageState extends State<ShootPage> {
       enableAudio: false,
       imageFormatGroup: ImageFormatGroup.jpeg,
     );
-
+//  on PlatformException catch (e) {
+//       switch (e.code) {
+//         case 'photo_access_denied':
+//           showPermissionDialog();
+//           break;
+//         default:
+//           Fluttertoast.showToast(msg: e.toString());
+//           break;
+//       }
+//       rethrow;
+//     }
     _controller!.initialize().then((_) {
       if (mounted) {
         setState(() {});
@@ -71,42 +82,52 @@ class _ShootPageState extends State<ShootPage> {
     }).catchError((Object e) {
       Get.log(e.toString(), isError: true);
       if (e is CameraException) {
-        Get.dialog(
-          NormalDialog(
-            title: 'photoPermissionTitle'.tr,
-            subText: 'photoPermissionTips'.tr,
-            icon: Image.asset('images/icon/picture.png', height: 70),
-            confirmText: 'goToSettings'.tr,
-            onConfirm: () {
-              Get.back();
-              AppSettings.openAppSettings();
-            },
-          ),
-        );
         switch (e.code) {
           case 'CameraAccessDenied':
             // 当用户拒绝相机访问权限时抛出
+            showPermissionDialog();
             break;
           case 'CameraAccessDeniedWithoutPrompt':
             // 目前仅限 iOS。当用户先前拒绝权限时抛出。iOS 不允许第二次提示警报对话框。用户必须转到“设置”>“隐私”>“相机”才能启用相机访问权限
+            showPermissionDialog();
             break;
           case 'CameraAccessRestricted':
             // 目前仅限 iOS。当相机访问受到限制且用户无法授予权限（家长控制）时抛出。
+            showPermissionDialog();
             break;
           case 'AudioAccessDenied':
             // 当用户拒绝音频访问权限时抛出
+            showPermissionDialog();
             break;
           case 'AudioAccessDeniedWithoutPrompt':
             // 目前仅限 iOS。当用户先前拒绝权限时抛出。iOS 不允许第二次提示警报对话框。用户必须转到“设置”>“隐私”>“麦克风”才能启用音频访问。
+            showPermissionDialog();
             break;
           case 'AudioAccessRestricted':
             // 目前仅限 iOS。当音频访问受到限制且用户无法授予权限（家长控制）时抛出。
+            showPermissionDialog();
             break;
           default:
+            Fluttertoast.showToast(msg: e.toString());
             break;
         }
       }
     });
+  }
+
+  void showPermissionDialog() {
+    Get.dialog(
+      NormalDialog(
+        title: 'photoPermissionTitle'.tr,
+        subText: 'photoPermissionTips'.tr,
+        icon: Image.asset('images/icon/picture.png', height: 70),
+        confirmText: 'goToSettings'.tr,
+        onConfirm: () {
+          Get.back();
+          AppSettings.openAppSettings();
+        },
+      ),
+    );
   }
 
   Future<void> _didShootPhoto() async {
@@ -139,7 +160,7 @@ class _ShootPageState extends State<ShootPage> {
           return;
         }
         Get.back();
-        
+
         Get.to(
           () => ScanPage(
             cropFile: cropFile,
@@ -174,22 +195,13 @@ class _ShootPageState extends State<ShootPage> {
         // Get.off(() => PlantCropImage(imageData: photoImage));
       }
     } on PlatformException catch (e) {
-      Get.dialog(
-        NormalDialog(
-          title: 'photoPermissionTitle'.tr,
-          subText: 'photoPermissionTips'.tr,
-          icon: Image.asset('images/icon/picture.png', height: 70),
-          confirmText: 'goToSettings'.tr,
-          onConfirm: () {
-            Get.back();
-            AppSettings.openAppSettings();
-          },
-        ),
-      );
       switch (e.code) {
         case 'photo_access_denied':
+          showPermissionDialog();
           break;
         default:
+          Fluttertoast.showToast(msg: e.message ?? 'error', gravity: ToastGravity.CENTER, timeInSecForIosWeb: 5);
+          break;
       }
       rethrow;
     } catch (e) {

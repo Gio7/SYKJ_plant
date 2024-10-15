@@ -12,7 +12,6 @@ class LanguageMs {
       'diagnose': 'Mendiagnosis',
       'youHaveNoPlants': 'Anda tiada tumbuhan',
       'addPlant': 'Tambah Tumbuhan',
-      'weScanForYou': 'Kami mengimbas untuk anda',
       'scanTips': 'Kami cuba mengenal pasti tumbuhan berdasarkan foto yang anda ambil',
       'analyzingImage': 'Menganalisis imej',
       'detectingLeaves': 'Mengesan daun',
@@ -62,8 +61,6 @@ class LanguageMs {
       'appVersion': 'Versi Aplikasi',
       'getPro': 'Dapatkan Pro',
       'getProTips': 'Anda belum menjadi ahli Pro',
-      'weeklyMembership': 'Keahlian Mingguan',
-      'yearsMembership': 'Keahlian Tahunan',
       'logOut': 'Log Keluar',
       'no.': 'No.',
       'deleteAccountTips':
@@ -99,7 +96,6 @@ class LanguageMs {
       'scientificName': 'Nama saintifik:',
       'description': 'Penerangan',
       'characteristics': 'Ciri-ciri',
-      'maturePlant': 'Tumbuhan Matang',
       'plantHeight': 'Ketinggian Tumbuhan',
       'spread': 'Sebar',
       'leafColor': 'Warna Daun',
@@ -141,6 +137,10 @@ class LanguageMs {
       'paymentHasBeenCanceled': 'Pembayaran telah dibatalkan.',
       'restoreTips': 'Tiada kandungan untuk dipulihkan.',
       'soil': 'Tanah',
+      'weeklyMembership': 'Keanggotaan Mingguan',
+      'yearsMembership': 'Keanggotaan Tahunan',
+      'weScanForYou': 'Sedang mengimbas...',
+      'maturePlant': 'Tumbuhan Matang',
     };
   }
 }

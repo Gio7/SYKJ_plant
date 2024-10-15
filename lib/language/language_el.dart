@@ -12,7 +12,6 @@ class LanguageEl {
       'diagnose': 'Διαγνώστε',
       'youHaveNoPlants': 'Δεν έχετε φυτά',
       'addPlant': 'Προσθήκη Φυτού',
-      'weScanForYou': 'Σαρώσουμε για εσάς',
       'scanTips': 'Προσπαθούμε να αναγνωρίσουμε το φυτό με βάση τη φωτογραφία που τραβήξατε',
       'analyzingImage': 'Ανάλυση εικόνας',
       'detectingLeaves': 'Ανίχνευση φύλλων',
@@ -62,8 +61,6 @@ class LanguageEl {
       'appVersion': 'Έκδοση Εφαρμογής',
       'getPro': 'Αποκτήστε Pro',
       'getProTips': 'Δεν είστε ακόμα μέλος Pro',
-      'weeklyMembership': 'Εβδομαδιαία Συνδρομή',
-      'yearsMembership': 'Ετήσια Συνδρομή',
       'logOut': 'Αποσύνδεση',
       'no.': 'Αρ.',
       'deleteAccountTips':
@@ -99,7 +96,6 @@ class LanguageEl {
       'scientificName': 'Επιστημονική ονομασία:',
       'description': 'Περιγραφή',
       'characteristics': 'Χαρακτηριστικά',
-      'maturePlant': 'Ώριμο φυτό',
       'plantHeight': 'Ύψος φυτού',
       'spread': 'Διάμετρος',
       'leafColor': 'Χρώμα φύλλων',
@@ -142,6 +138,10 @@ class LanguageEl {
       'paymentHasBeenCanceled': 'Η πληρωμή ακυρώθηκε.',
       'restoreTips': 'Δεν υπάρχει περιεχόμενο για επαναφορά.',
       'soil': 'Έδαφος',
+      'weeklyMembership': 'Εβδομαδιαία Συνδρομή',
+      'yearsMembership': 'Ετήσια Συνδρομή',
+      'weScanForYou': 'Γίνεται σάρωση...',
+      'maturePlant': 'Ωριόφυτο',
     };
   }
 }

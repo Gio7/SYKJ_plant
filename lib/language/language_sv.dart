@@ -11,7 +11,6 @@ class LanguageSv {
       'diagnose': 'Diagnos',
       'youHaveNoPlants': 'Du har inga växter',
       'addPlant': 'Lägg till Växt',
-      'weScanForYou': 'Vi skannar åt dig',
       'scanTips': 'Vi försöker identifiera växten baserat på fotot du tog',
       'analyzingImage': 'Analyserar bild',
       'detectingLeaves': 'Upptäcker löv',
@@ -61,8 +60,6 @@ class LanguageSv {
       'appVersion': 'Appversion',
       'getPro': 'Skaffa Pro',
       'getProTips': 'Du är ännu inte Pro-medlem',
-      'weeklyMembership': 'Veckoprenumeration',
-      'yearsMembership': 'Årsprenumeration',
       'logOut': 'Logga ut',
       'no.': 'Nr.',
       'deleteAccountTips':
@@ -98,7 +95,6 @@ class LanguageSv {
       'scientificName': 'Vetenskapligt namn:',
       'description': 'Beskrivning',
       'characteristics': 'Egenskaper',
-      'maturePlant': 'Mogen växt',
       'plantHeight': 'Växthöjd',
       'spread': 'Spridning',
       'leafColor': 'Bladfärg',
@@ -141,6 +137,10 @@ class LanguageSv {
       'paymentHasBeenCanceled': 'Betalningen har avbrutits.',
       'restoreTips': 'Inget innehåll att återställa.',
       'soil': 'Jord',
+      'weeklyMembership': 'Veckomedlemskap',
+      'yearsMembership': 'Årsmedlemskap',
+      'weScanForYou': 'Skannar pågår...',
+      'maturePlant': 'Mogen växt',
     };
   }
 }

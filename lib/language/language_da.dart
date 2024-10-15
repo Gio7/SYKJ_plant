@@ -12,7 +12,6 @@ class LanguageDa {
       'diagnose': 'Diagnosér',
       'youHaveNoPlants': 'Du har ingen planter',
       'addPlant': 'Tilføj Plante',
-      'weScanForYou': 'Vi scanner for dig',
       'scanTips': 'Vi forsøger at identificere planten ud fra det billede, du tog',
       'analyzingImage': 'Analyserer billede',
       'detectingLeaves': 'Registrerer blade',
@@ -62,8 +61,6 @@ class LanguageDa {
       'appVersion': 'App-version',
       'getPro': 'Få Pro',
       'getProTips': 'Du er endnu ikke Pro-medlem',
-      'weeklyMembership': 'Ugentligt medlemskab',
-      'yearsMembership': 'Årligt medlemskab',
       'logOut': 'Log ud',
       'no.': 'Nr.',
       'deleteAccountTips':
@@ -99,7 +96,6 @@ class LanguageDa {
       'scientificName': 'Videnskabeligt navn:',
       'description': 'Beskrivelse',
       'characteristics': 'Karakteristika',
-      'maturePlant': 'Moden plante',
       'plantHeight': 'Plantehøjde',
       'spread': 'Udbredelse',
       'leafColor': 'Bladfarve',
@@ -141,6 +137,10 @@ class LanguageDa {
       'paymentHasBeenCanceled': 'Betalingen er annulleret.',
       'restoreTips': 'Intet indhold at gendanne.',
       'soil': 'Jord',
+      'weeklyMembership': 'Ugentligt Medlemskab',
+      'yearsMembership': 'Årligt Medlemskab',
+      'weScanForYou': 'Scanner i gang...',
+      'maturePlant': 'Moden Plante',
     };
   }
 }

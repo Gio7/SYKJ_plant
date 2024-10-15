@@ -11,7 +11,6 @@ class LanguageNl {
       'diagnose': 'Diagnose',
       'youHaveNoPlants': 'Je hebt geen planten',
       'addPlant': 'Plant toevoegen',
-      'weScanForYou': 'Wij scannen voor jou',
       'scanTips': 'We proberen de plant te identificeren op basis van de foto die je hebt gemaakt',
       'analyzingImage': 'Afbeelding analyseren',
       'detectingLeaves': 'Bladeren detecteren',
@@ -61,8 +60,6 @@ class LanguageNl {
       'appVersion': 'App-versie',
       'getPro': 'Pro krijgen',
       'getProTips': 'Je bent nog geen Pro-lid',
-      'weeklyMembership': 'Wekelijks lidmaatschap',
-      'yearsMembership': 'Jaarlijks lidmaatschap',
       'logOut': 'Uitloggen',
       'no.': 'Nr.',
       'deleteAccountTips':
@@ -98,7 +95,6 @@ class LanguageNl {
       'scientificName': 'Wetenschappelijke naam:',
       'description': 'Beschrijving',
       'characteristics': 'Kenmerken',
-      'maturePlant': 'Volgroeide plant',
       'plantHeight': 'Plantenhoogte',
       'spread': 'Verspreiding',
       'leafColor': 'Bladkleur',
@@ -141,6 +137,10 @@ class LanguageNl {
       'paymentHasBeenCanceled': 'Betaling is geannuleerd.',
       'restoreTips': 'Geen inhoud om te herstellen.',
       'soil': 'Grond',
+      'weeklyMembership': 'Wekelijkse Lidmaatschap',
+      'yearsMembership': 'Jaarlijkse Lidmaatschap',
+      'weScanForYou': 'Bezig met scannen...',
+      'maturePlant': 'Volwassen Plant',
     };
   }
 }

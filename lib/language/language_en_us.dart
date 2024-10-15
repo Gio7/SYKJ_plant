@@ -11,7 +11,6 @@ class LanguageEnUs {
       'diagnose': 'Diagnose',
       'youHaveNoPlants': 'You Have No Plants',
       'addPlant': 'Add Plant',
-      'weScanForYou': 'We Scan For You',
       'scanTips': 'We try to identify the plant based on the photo you took',
       'analyzingImage': 'Analyzing image',
       'detectingLeaves': 'Detecting leaves',
@@ -61,8 +60,6 @@ class LanguageEnUs {
       'appVersion': 'App Version',
       'getPro': 'Get Pro',
       'getProTips': 'You\'re not a Pro member yet',
-      'weeklyMembership': 'Weekly Membership',
-      'yearsMembership': 'Years Membership',
       'logOut': 'Log out',
       'no.': 'No.',
       'deleteAccountTips':
@@ -98,7 +95,6 @@ class LanguageEnUs {
       'scientificName': 'Scientific name:',
       'description': 'Description',
       'characteristics': 'Characteristics',
-      'maturePlant': 'Mature Plant',
       'plantHeight': 'Plant Height',
       'spread': 'Spread',
       'leafColor': 'Leaf Color',
@@ -141,6 +137,10 @@ class LanguageEnUs {
       'paymentHasBeenCanceled': 'Payment has been canceled.',
       'restoreTips': "No content to restore.",
       'soil': 'Soil',
+      'weeklyMembership': 'Weekly Membership',
+      'yearsMembership': 'Years Membership',
+      'weScanForYou': 'Scanning in progress...',
+      'maturePlant': 'Mature Plant',
     };
   }
 }

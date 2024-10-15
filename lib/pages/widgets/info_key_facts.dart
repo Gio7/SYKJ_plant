@@ -56,7 +56,7 @@ class InfoKeyFacts extends StatelessWidget {
             item.item ?? '',
             style: TextStyle(
               color: UIColor.c8E8B8B,
-              fontSize: 12,
+              fontSize: 14,
               fontWeight: FontWeightExt.medium,
             ),
           ),
@@ -66,7 +66,7 @@ class InfoKeyFacts extends StatelessWidget {
               item.content ?? '',
               style: TextStyle(
                 color: UIColor.c15221D,
-                fontSize: 12,
+                fontSize: 14,
                 fontWeight: FontWeightExt.medium,
               ),
               textAlign: TextAlign.right,

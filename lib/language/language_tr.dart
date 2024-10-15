@@ -12,7 +12,6 @@ class LanguageTr {
       'diagnose': 'Teşhis Et',
       'youHaveNoPlants': 'Bitkiniz yok',
       'addPlant': 'Bitki Ekle',
-      'weScanForYou': 'Sizin için tarıyoruz',
       'scanTips': 'Çektiğiniz fotoğraf üzerinden bitkiyi tanımlamaya çalışıyoruz',
       'analyzingImage': 'Görüntü analiz ediliyor',
       'detectingLeaves': 'Yapraklar tespit ediliyor',
@@ -62,8 +61,6 @@ class LanguageTr {
       'appVersion': 'Uygulama Sürümü',
       'getPro': 'Pro Ol',
       'getProTips': 'Henüz bir Pro üye değilsiniz',
-      'weeklyMembership': 'Haftalık Üyelik',
-      'yearsMembership': 'Yıllık Üyelik',
       'logOut': 'Çıkış Yap',
       'no.': 'No.',
       'deleteAccountTips':
@@ -99,7 +96,6 @@ class LanguageTr {
       'scientificName': 'Bilimsel isim:',
       'description': 'Açıklama',
       'characteristics': 'Özellikler',
-      'maturePlant': 'Olgun Bitki',
       'plantHeight': 'Bitki Yüksekliği',
       'spread': 'Yayılma',
       'leafColor': 'Yaprak Rengi',
@@ -141,6 +137,10 @@ class LanguageTr {
       'paymentHasBeenCanceled': 'Ödeme iptal edildi.',
       'restoreTips': 'Geri yüklenecek içerik yok.',
       'soil': 'Toprak',
+      'weeklyMembership': 'Haftalık Üyelik',
+      'yearsMembership': 'Yıllık Üyelik',
+      'weScanForYou': 'Tarama devam ediyor...',
+      'maturePlant': 'Olgun Bitki',
     };
   }
 }

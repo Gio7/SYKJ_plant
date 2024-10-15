@@ -11,7 +11,6 @@ class LanguageZhCn {
       'diagnose': '诊断',
       'youHaveNoPlants': '你没有植物',
       'addPlant': '添加植物',
-      'weScanForYou': '我们为你扫描',
       'scanTips': '我们根据你拍摄的照片尝试识别植物',
       'analyzingImage': '分析图片中',
       'detectingLeaves': '检测叶子中',
@@ -61,8 +60,6 @@ class LanguageZhCn {
       'appVersion': '应用版本',
       'getPro': '获取 Pro 版本',
       'getProTips': '你还不是 Pro 会员',
-      'weeklyMembership': '每周会员',
-      'yearsMembership': '每年会员',
       'logOut': '登出',
       'no.': '编号',
       'deleteAccountTips': '你确定要删除你的账户吗？删除账户是永久的，并将删除所有数据。如果你已订阅会员，请前往 App Store 取消订阅以避免不必要的收费。',
@@ -97,7 +94,6 @@ class LanguageZhCn {
       'scientificName': '学名：',
       'description': '描述',
       'characteristics': '特征',
-      'maturePlant': '成熟植物',
       'plantHeight': '植物高度',
       'spread': '扩展范围',
       'leafColor': '叶子颜色',
@@ -139,6 +135,10 @@ class LanguageZhCn {
       'paymentHasBeenCanceled': '支付已取消。',
       'restoreTips': '无可恢复的内容。',
       'soil': '土壤',
+      'weeklyMembership': '周会员',
+      'yearsMembership': '年会员',
+      'weScanForYou': '正在扫描...',
+      'maturePlant': '成熟植株',
     };
   }
 }
