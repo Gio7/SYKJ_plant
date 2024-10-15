@@ -1,17 +1,11 @@
 import 'package:get/get.dart';
 
-import 'language_ca.dart';
-import 'language_cs.dart';
 import 'language_da.dart';
 import 'language_de.dart';
-import 'language_el.dart';
 import 'language_en_us.dart';
 import 'language_es.dart';
 import 'language_fi.dart';
 import 'language_fr.dart';
-import 'language_hi.dart';
-import 'language_hr.dart';
-import 'language_hu.dart';
 import 'language_id.dart';
 import 'language_it.dart';
 import 'language_ja.dart';
@@ -23,12 +17,9 @@ import 'language_pl.dart';
 import 'language_pt.dart';
 import 'language_ro.dart';
 import 'language_ru.dart';
-import 'language_sk.dart';
 import 'language_sv.dart';
 import 'language_th.dart';
 import 'language_tr.dart';
-import 'language_uk.dart';
-import 'language_vi.dart';
 import 'language_zh_cn.dart';
 import 'language_zh_tw.dart';
 
@@ -59,20 +50,8 @@ class Language extends Translations {
       'tr': LanguageTr.language,
       // 丹麦
       'da': LanguageDa.language,
-      // 加泰罗尼亚
-      'ca': LanguageCa.language,
-      // 捷克
-      'cs': LanguageCs.language,
-      // 希腊
-      'el': LanguageEl.language,
       // 芬兰语
       'fi': LanguageFi.language,
-      // 印地语
-      'hi': LanguageHi.language,
-      // 克罗地亚
-      'hr': LanguageHr.language,
-      // 匈牙利
-      'hu': LanguageHu.language,
       // 印尼语
       'id': LanguageId.language,
       // 马来西亚
@@ -85,16 +64,10 @@ class Language extends Translations {
       'ro': LanguageRo.language,
       // 俄语Ï
       'ru': LanguageRu.language,
-      // 斯洛伐克
-      'sk': LanguageSk.language,
       // 瑞典语
       'sv': LanguageSv.language,
       // 泰语
       'th': LanguageTh.language,
-      // 乌克兰
-      'uk': LanguageUk.language,
-      // 越南
-      'vi': LanguageVi.language,
     };
   }
 }
