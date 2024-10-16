@@ -63,10 +63,10 @@ class DioUtil {
       });
       UserController().showLogin();
     } else if (response?.statusCode == 500) {
-      Get.log(response?.statusMessage ?? response!.statusCode!.toString());
-      // Get.snackbar('network error', response?.statusMessage ?? response!.statusCode!.toString());
+      // Get.log(response?.statusMessage ?? response!.statusCode!.toString());
+      Get.snackbar('Network error', response?.statusMessage ?? response!.statusCode!.toString());
     } else {
-      Get.snackbar('network error', message ?? response?.statusMessage ?? response?.statusCode?.toString() ?? 'unknown error');
+      Get.snackbar('Network error', message ?? response?.statusMessage ?? response?.statusCode?.toString() ?? 'unknown error');
     }
   }
 
@@ -95,7 +95,7 @@ class DioUtil {
           if (Get.isDialogOpen ?? false) {
             Get.back();
           }
-          Get.snackbar('network error', responseData['msg'] ?? responseData['state'] ?? responseData['code'].toString());
+          Get.snackbar('Network error', responseData['msg'] ?? responseData['state'] ?? responseData['code'].toString());
         }
       } else {
         _exceptionHandling(null, response);
@@ -135,7 +135,7 @@ class DioUtil {
           if (Get.isDialogOpen ?? false) {
             Get.back();
           }
-          Get.snackbar('network error', responseData['msg'] ?? responseData['state'] ?? responseData['code'].toString());
+          Get.snackbar('Network error', responseData['msg'] ?? responseData['state'] ?? responseData['code'].toString());
         }
       } else {
         _exceptionHandling(null, response);
