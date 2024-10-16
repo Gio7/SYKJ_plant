@@ -5,6 +5,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:plant/api/request.dart';
@@ -25,7 +26,9 @@ void main() {
   // 拦截异步错误
   runZonedGuarded(() async {
     bool isInit = true;
-    WidgetsFlutterBinding.ensureInitialized();
+    // WidgetsFlutterBinding.ensureInitialized();
+    WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
     if (GetPlatform.isAndroid) {
       SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -74,7 +77,7 @@ void main() {
     FlutterError.onError = (FlutterErrorDetails details) {
       Get.log(" ----捕获到同步异常---- \n${details.exceptionAsString()}\n\nStack Trace:\n${details.stack}", isError: true);
     };
-
+    FlutterNativeSplash.remove();
     runApp(const MainApp());
   }, (error, stackTrace) {
     Get.log(" ----捕获到异步异常---- \n$error\n\nStack Trace:\n$stackTrace", isError: true);
