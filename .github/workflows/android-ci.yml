@@ -42,15 +42,15 @@ jobs:
 
       - name: Build AAB
         if: env.BUILD_TYPE == 'aab'
-        run: flutter build appbundle --release --obfuscate --split-debug-info=tmp/
+        run: flutter build appbundle --release --split-debug-info=tmp/
 
       - name: Build release-apk
         if: env.BUILD_TYPE == 'release'
-        run: flutter build apk --release --obfuscate --split-debug-info=tmp/
+        run: flutter build apk --release --split-debug-info=tmp/
 
       - name: Build debug-apk
         if: env.BUILD_TYPE == 'debug'
-        run: flutter build apk --debug --obfuscate --split-debug-info=tmp/
+        run: flutter build apk --debug --split-debug-info=tmp/
 
       - name: Archive production artifacts
         if: env.BUILD_TYPE == 'aab'
