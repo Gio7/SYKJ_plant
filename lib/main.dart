@@ -122,7 +122,7 @@ Future<void> getAdid() async {
       DioUtil.resetDio();
     }
   } catch (e) {
-    Get.log(e.toString(), isError: true);
+    Get.log("adid error: $e", isError: true);
     // advertisingId = 'Failed to get platform version.';
   }
 }

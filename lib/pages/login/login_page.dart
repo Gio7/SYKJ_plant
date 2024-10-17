@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:plant/common/firebase_util.dart';
@@ -28,6 +29,7 @@ class LoginPage extends StatelessWidget {
       );
     } on SignInWithAppleAuthorizationException catch (e) {
       Get.log(e.toString(), isError: true);
+      Fluttertoast.showToast(msg: e.message, gravity: ToastGravity.CENTER);
       rethrow;
     } catch (e) {
       Get.log(e.toString(), isError: true);
@@ -54,6 +56,7 @@ class LoginPage extends StatelessWidget {
       return await FirebaseAuth.instance.signInWithCredential(credential);
     } on PlatformException catch (e) {
       Get.log(e.toString(), isError: true);
+      Fluttertoast.showToast(msg: e.message ?? 'login error', gravity: ToastGravity.CENTER);
       rethrow;
     } catch (e) {
       Get.log(e.toString(), isError: true);

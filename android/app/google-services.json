@@ -1,45 +1,44 @@
 {
   "project_info": {
-    "project_number": "300865795740",
-    "project_id": "plant-identifier-scanner",
-    "storage_bucket": "plant-identifier-scanner.appspot.com"
+    "project_number": "631136567042",
+    "project_id": "plant-identifier-android",
+    "storage_bucket": "plant-identifier-android.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:300865795740:android:179281265d5142334b5f59",
+        "mobilesdk_app_id": "1:631136567042:android:5cd91b8b015d65fc92cc1b",
         "android_client_info": {
           "package_name": "com.plant.identifier.diagnosis.scanner.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "631136567042-fgbou0p34bavnok88cuopnfgctgh4qmk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.plant.identifier.diagnosis.scanner.app",
+            "certificate_hash": "f66d8d4192364ff727b6c80c54994336f96f3aa4"
+          }
+        },
+        {
+          "client_id": "631136567042-emsfktmffemvpjfojebmf4f51s1nu2t5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyAgX-CPjGk7BvYy51hlnZomWMIekbrUB0U"
+          "current_key": "AIzaSyBkb6CLE1K8Qs6UzuIGBfguXJ6clKfvax4"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:300865795740:android:179281265d5142334b5f59",
-        "android_client_info": {
-          "package_name": "com.plant.identifier.diagnosis.scanner.app"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAgX-CPjGk7BvYy51hlnZomWMIekbrUB0U"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "631136567042-emsfktmffemvpjfojebmf4f51s1nu2t5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
