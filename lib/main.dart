@@ -51,24 +51,24 @@ void main() {
       }
     });
 
-    ErrorWidget.builder = (FlutterErrorDetails details) {
-      return Center(
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            Image.asset('images/icon/unknow_error_bg.png'),
-            ElevatedButton.icon(
-              onPressed: () async{
-                await Clipboard.setData(ClipboardData(text: "${details.exceptionAsString()}\n\nStack Trace:\n${details.stack}"));
-                Common.skipUrl(GlobalData.telegramGroup);
-              },
-              label: const Text('Telegram'),
-              icon: Image.asset('images/icon/telegram.png', height: 24),
-            ),
-          ],
-        ),
-      );
-    };
+    // ErrorWidget.builder = (FlutterErrorDetails details) {
+    //   return Center(
+    //     child: Stack(
+    //       alignment: Alignment.bottomCenter,
+    //       children: [
+    //         Image.asset('images/icon/unknow_error_bg.png'),
+    //         ElevatedButton.icon(
+    //           onPressed: () async{
+    //             await Clipboard.setData(ClipboardData(text: "${details.exceptionAsString()}\n\nStack Trace:\n${details.stack}"));
+    //             Common.skipUrl(GlobalData.telegramGroup);
+    //           },
+    //           label: const Text('Telegram'),
+    //           icon: Image.asset('images/icon/telegram.png', height: 24),
+    //         ),
+    //       ],
+    //     ),
+    //   );
+    // };
 
     // 拦截同步错误
     FlutterError.onError = (FlutterErrorDetails details) {
