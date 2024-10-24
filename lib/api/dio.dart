@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:plant/common/global_data.dart';
 import 'package:plant/controllers/user_controller.dart';
+import 'package:plant/language/language.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DioUtil {
@@ -26,6 +27,13 @@ class DioUtil {
   DioUtil._init() {
     final dl = Get.deviceLocale;
     String language = dl?.languageCode ?? '';
+    final currentLanguage = Language().keys.keys.firstWhere(
+          (element) => element.contains(language),
+          orElse: () => '',
+        );
+    if (currentLanguage.isEmpty) {
+      language = 'en';
+    }
     // if (dl?.scriptCode != null && dl!.scriptCode!.isNotEmpty) {
     if (dl?.scriptCode == 'Hant') {
       language += '_${dl!.scriptCode}';
