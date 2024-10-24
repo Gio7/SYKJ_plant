@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/pages/login/login_page.dart';
-import 'package:plant/pages/set_page.dart';
+import 'package:plant/pages/set/set_page.dart';
 import 'package:plant/pages/shop/shop_view.dart';
 
 class UserNavBar extends StatelessWidget {

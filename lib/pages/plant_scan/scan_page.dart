@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/components/show_dialog.dart';
-import 'package:plant/controllers/plant_controller.dart';
+import 'package:plant/widgets/show_dialog.dart';
+import 'package:plant/pages/plant_scan/plant_controller.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/sdk/scanning_effect/scanning_effect.dart';
 
-import 'shop/shop_view.dart';
+import '../shop/shop_view.dart';
 
 class ScanPage extends StatelessWidget {
   const ScanPage({super.key, required this.cropFile, required this.image400File});

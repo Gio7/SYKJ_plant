@@ -4,10 +4,10 @@ import 'package:get/get.dart';
 import 'package:plant/common/common_util.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/components/btn.dart';
-import 'package:plant/components/loading_dialog.dart';
+import 'package:plant/widgets/btn.dart';
+import 'package:plant/widgets/loading_dialog.dart';
 import 'package:plant/controllers/main_controller.dart';
-import 'package:plant/controllers/plant_controller.dart';
+import 'package:plant/pages/plant_scan/plant_controller.dart';
 import 'package:plant/pages/my_plants/my_plants_controller.dart';
 
 import 'widgets/info_characteristics.dart';

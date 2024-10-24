@@ -7,9 +7,9 @@ import 'package:get/get.dart';
 import 'package:image/image.dart' as img;
 import 'package:plant/common/file_utils.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/components/loading_dialog.dart';
-import 'package:plant/components/nav_bar.dart';
-import 'package:plant/pages/scan_page.dart';
+import 'package:plant/widgets/loading_dialog.dart';
+import 'package:plant/widgets/nav_bar.dart';
+import 'package:plant/pages/plant_scan/scan_page.dart';
 
 class PlantCropImage extends StatelessWidget {
   const PlantCropImage({super.key, required this.originalFile});

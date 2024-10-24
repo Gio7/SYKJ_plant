@@ -17,7 +17,7 @@ import 'api/dio.dart';
 import 'common/common_util.dart';
 import 'common/firebase_util.dart';
 import 'common/ui_color.dart';
-import 'components/easy_refresh_custom.dart';
+import 'widgets/easy_refresh_custom.dart';
 import 'controllers/core_binding.dart';
 import 'language/language.dart';
 import 'pages/main_page.dart';

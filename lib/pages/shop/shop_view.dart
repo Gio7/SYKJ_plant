@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/components/btn.dart';
-import 'package:plant/components/loading_dialog.dart';
-import 'package:plant/components/nav_bar.dart';
+import 'package:plant/widgets/btn.dart';
+import 'package:plant/widgets/loading_dialog.dart';
+import 'package:plant/widgets/nav_bar.dart';
 
 import 'shop_controller.dart';
 

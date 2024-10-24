@@ -11,16 +11,16 @@ import 'package:image_picker/image_picker.dart';
 import 'package:plant/common/file_utils.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/components/btn.dart';
-import 'package:plant/components/loading_dialog.dart';
-import 'package:plant/components/show_dialog.dart';
-import 'package:plant/controllers/plant_controller.dart';
-import 'package:plant/components/nav_bar.dart';
+import 'package:plant/widgets/btn.dart';
+import 'package:plant/widgets/loading_dialog.dart';
+import 'package:plant/widgets/show_dialog.dart';
+import 'package:plant/pages/plant_scan/plant_controller.dart';
+import 'package:plant/widgets/nav_bar.dart';
 import 'package:plant/controllers/user_controller.dart';
-import 'package:plant/pages/scan_page.dart';
-import 'package:plant/pages/widgets/help_example.dart';
+import 'package:plant/pages/plant_scan/scan_page.dart';
+import 'package:plant/pages/plant_scan/widgets/help_example.dart';
 
-import 'login/login_page.dart';
+import '../login/login_page.dart';
 import 'widgets/plant_crop_image.dart';
 
 class ShootPage extends StatefulWidget {

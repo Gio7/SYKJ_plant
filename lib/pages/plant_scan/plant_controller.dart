@@ -7,8 +7,8 @@ import 'package:plant/api/request.dart';
 import 'package:plant/common/aws_utils.dart';
 import 'package:plant/models/plant_diagnosis_model.dart';
 import 'package:plant/models/plant_info_model.dart';
-import 'package:plant/pages/info_diagnose_page.dart';
-import 'package:plant/pages/info_identify_page.dart';
+import 'package:plant/pages/plant_scan/info_diagnose_page.dart';
+import 'package:plant/pages/plant_scan/info_identify_page.dart';
 
 class PlantController extends GetxController {
   /// 识别类型 identify diagnose

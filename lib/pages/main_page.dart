@@ -3,14 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/components/custom_bottom_nav_bar.dart';
-import 'package:plant/components/page_bg.dart';
+import 'package:plant/widgets/custom_bottom_nav_bar.dart';
+import 'package:plant/widgets/page_bg.dart';
 import 'package:plant/controllers/main_controller.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/pages/my_plants/my_plants_page.dart';
 
-import 'home_page.dart';
-import 'shoot_page.dart';
+import 'home/home_page.dart';
+import 'plant_scan/shoot_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

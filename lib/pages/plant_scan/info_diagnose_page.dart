@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/components/btn.dart';
-import 'package:plant/components/loading_dialog.dart';
-import 'package:plant/controllers/plant_controller.dart';
-import 'package:plant/pages/info_identify_page.dart';
+import 'package:plant/widgets/btn.dart';
+import 'package:plant/widgets/loading_dialog.dart';
+import 'package:plant/pages/plant_scan/plant_controller.dart';
+import 'package:plant/pages/plant_scan/info_identify_page.dart';
 
 class InfoDiagnosePage extends StatelessWidget {
   InfoDiagnosePage({super.key});

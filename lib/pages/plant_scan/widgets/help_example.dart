@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/components/btn.dart';
+import 'package:plant/widgets/btn.dart';
 
 class HelpExample extends StatelessWidget {
   const HelpExample({super.key});

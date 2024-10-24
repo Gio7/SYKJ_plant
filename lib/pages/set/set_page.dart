@@ -7,15 +7,15 @@ import 'package:plant/common/common_util.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/global_data.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/components/btn.dart';
-import 'package:plant/components/loading_dialog.dart';
-import 'package:plant/components/show_dialog.dart';
-import 'package:plant/components/nav_bar.dart';
+import 'package:plant/widgets/btn.dart';
+import 'package:plant/widgets/loading_dialog.dart';
+import 'package:plant/widgets/show_dialog.dart';
+import 'package:plant/widgets/nav_bar.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/userinfo_model.dart';
 import 'package:plant/pages/login/login_page.dart';
 
-import 'shop/shop_view.dart';
+import '../shop/shop_view.dart';
 
 class SetPage extends StatelessWidget {
   const SetPage({super.key});

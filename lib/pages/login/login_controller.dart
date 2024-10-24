@@ -5,7 +5,7 @@ import 'package:plant/api/dio.dart';
 import 'package:plant/api/request.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/rsa.dart';
-import 'package:plant/components/loading_dialog.dart';
+import 'package:plant/widgets/loading_dialog.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/userinfo_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/string_utils.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/components/btn.dart';
+import 'package:plant/widgets/btn.dart';
 
 class InfoDescriptionText extends StatefulWidget {
   const InfoDescriptionText({super.key, required this.text});

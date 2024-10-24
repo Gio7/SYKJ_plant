@@ -8,17 +8,17 @@ import 'package:get/get.dart';
 import 'package:plant/api/request.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/components/btn.dart';
-import 'package:plant/components/loading_dialog.dart';
-import 'package:plant/components/show_dialog.dart';
-import 'package:plant/controllers/plant_controller.dart';
+import 'package:plant/widgets/btn.dart';
+import 'package:plant/widgets/loading_dialog.dart';
+import 'package:plant/widgets/show_dialog.dart';
+import 'package:plant/pages/plant_scan/plant_controller.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/plant_info_model.dart';
 import 'package:plant/models/plant_model.dart';
-import 'package:plant/pages/info_identify_page.dart';
+import 'package:plant/pages/plant_scan/info_identify_page.dart';
 
-import '../shoot_page.dart';
-import '../../components/user_nav_bar.dart';
+import '../plant_scan/shoot_page.dart';
+import '../../widgets/user_nav_bar.dart';
 import 'my_plants_controller.dart';
 
 class MyPlantsPage extends StatefulWidget {

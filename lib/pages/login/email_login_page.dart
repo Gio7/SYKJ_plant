@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/components/btn.dart';
-import 'package:plant/components/page_bg.dart';
-import 'package:plant/controllers/login_controller.dart';
-import 'package:plant/components/nav_bar.dart';
+import 'package:plant/widgets/btn.dart';
+import 'package:plant/widgets/page_bg.dart';
+import 'package:plant/pages/login/login_controller.dart';
+import 'package:plant/widgets/nav_bar.dart';
 import 'package:plant/pages/login/reset_pwd_page.dart';
 
 import 'widgets.dart';
