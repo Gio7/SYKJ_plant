@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:easy_refresh/easy_refresh.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:plant/api/request.dart';
 import 'package:plant/common/firebase_util.dart';
@@ -36,7 +34,6 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
   @override
   void initState() {
     super.initState();
-    Get.log("initState:${Get.find<UserController>().isLogin.value}");
     if (Get.find<UserController>().isLogin.value) {
       repository.isLoading.value = true;
       controller.onRefresh();

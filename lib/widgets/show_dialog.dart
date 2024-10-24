@@ -1,9 +1,26 @@
+import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/widgets/btn.dart';
 
 class NormalDialog extends StatelessWidget {
+  /// 展示权限弹窗
+  static Future<void> showPermission() {
+    return Get.dialog(
+      NormalDialog(
+        title: 'photoPermissionTitle'.tr,
+        subText: 'photoPermissionTips'.tr,
+        icon: Image.asset('images/icon/picture.png', height: 70),
+        confirmText: 'goToSettings'.tr,
+        onConfirm: () {
+          Get.back();
+          AppSettings.openAppSettings();
+        },
+      ),
+    );
+  }
+
   const NormalDialog({
     super.key,
     required this.title,

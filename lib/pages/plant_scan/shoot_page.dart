@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:app_settings/app_settings.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -85,27 +84,27 @@ class _ShootPageState extends State<ShootPage> {
         switch (e.code) {
           case 'CameraAccessDenied':
             // 当用户拒绝相机访问权限时抛出
-            showPermissionDialog();
+            NormalDialog.showPermission();
             break;
           case 'CameraAccessDeniedWithoutPrompt':
             // 目前仅限 iOS。当用户先前拒绝权限时抛出。iOS 不允许第二次提示警报对话框。用户必须转到“设置”>“隐私”>“相机”才能启用相机访问权限
-            showPermissionDialog();
+            NormalDialog.showPermission();
             break;
           case 'CameraAccessRestricted':
             // 目前仅限 iOS。当相机访问受到限制且用户无法授予权限（家长控制）时抛出。
-            showPermissionDialog();
+            NormalDialog.showPermission();
             break;
           case 'AudioAccessDenied':
             // 当用户拒绝音频访问权限时抛出
-            showPermissionDialog();
+            NormalDialog.showPermission();
             break;
           case 'AudioAccessDeniedWithoutPrompt':
             // 目前仅限 iOS。当用户先前拒绝权限时抛出。iOS 不允许第二次提示警报对话框。用户必须转到“设置”>“隐私”>“麦克风”才能启用音频访问。
-            showPermissionDialog();
+            NormalDialog.showPermission();
             break;
           case 'AudioAccessRestricted':
             // 目前仅限 iOS。当音频访问受到限制且用户无法授予权限（家长控制）时抛出。
-            showPermissionDialog();
+            NormalDialog.showPermission();
             break;
           default:
             Fluttertoast.showToast(msg: e.toString());
@@ -113,21 +112,6 @@ class _ShootPageState extends State<ShootPage> {
         }
       }
     });
-  }
-
-  void showPermissionDialog() {
-    Get.dialog(
-      NormalDialog(
-        title: 'photoPermissionTitle'.tr,
-        subText: 'photoPermissionTips'.tr,
-        icon: Image.asset('images/icon/picture.png', height: 70),
-        confirmText: 'goToSettings'.tr,
-        onConfirm: () {
-          Get.back();
-          AppSettings.openAppSettings();
-        },
-      ),
-    );
   }
 
   Future<void> _didShootPhoto() async {
@@ -197,7 +181,7 @@ class _ShootPageState extends State<ShootPage> {
     } on PlatformException catch (e) {
       switch (e.code) {
         case 'photo_access_denied':
-          showPermissionDialog();
+          NormalDialog.showPermission();
           break;
         default:
           Fluttertoast.showToast(msg: e.message ?? 'error', gravity: ToastGravity.CENTER, timeInSecForIosWeb: 5);

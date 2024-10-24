@@ -69,6 +69,7 @@ dependencies:
   equatable: ^2.0.5
   connectivity_plus: ^6.0.5
   flutter_native_splash: ^2.4.1
+  light_sensor: ^3.0.0
 
 dev_dependencies:
   flutter_test:
