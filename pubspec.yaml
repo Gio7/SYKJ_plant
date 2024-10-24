@@ -96,8 +96,6 @@ flutter:
   assets:
   - images/icon/
   - images/tabbar/
-  - keys/public_key.pem
-  - keys/buy_private_key.pem
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
