@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Common {
@@ -32,8 +33,8 @@ class Common {
         throw Exception('fail');
       }
     } catch (e) {
+      Fluttertoast.showToast(msg:  'open error', gravity: ToastGravity.CENTER);
       rethrow;
-      // Get.snackbar('error', e.toString());
     }
   }
 }
