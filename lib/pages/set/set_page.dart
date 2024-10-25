@@ -18,7 +18,8 @@ import 'package:plant/pages/login/login_page.dart';
 import '../shop/shop_view.dart';
 
 class SetPage extends StatelessWidget {
-  const SetPage({super.key});
+  const SetPage({super.key, this.hasNavBar = true});
+  final bool hasNavBar;
 
   void _onContact() {
     Get.dialog(
@@ -146,7 +147,8 @@ class SetPage extends StatelessWidget {
     var userCtr = Get.find<UserController>();
 
     return Scaffold(
-      appBar: NavBar(title: 'settings'.tr),
+      backgroundColor: hasNavBar ? null : UIColor.transparent,
+      appBar: hasNavBar ? NavBar(title: 'settings'.tr) : null,
       body: Obx(
         () => ListView(
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),

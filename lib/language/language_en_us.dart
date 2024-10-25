@@ -141,6 +141,8 @@ class LanguageEnUs {
       'yearsMembership': 'Years Membership',
       'weScanForYou': 'Scanning in progress...',
       'maturePlant': 'Mature Plant',
+      // 1.0.3
+      'profile': 'Profile',
     };
   }
 }

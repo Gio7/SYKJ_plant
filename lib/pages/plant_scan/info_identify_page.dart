@@ -163,10 +163,10 @@ class InfoIdentifyPage extends StatelessWidget {
                   Get.dialog(const LoadingDialog());
                   await ctr.savePlant(ctr.plantInfo!.scanRecordId!);
                   Get.back();
-                  if (Get.find<MainController>().tabController.index == 2) {
+                  if (Get.find<MainController>().tabController.index == 3) {
                     Get.find<MyPlantsController>().onRefresh();
                   } else {
-                    Get.find<MainController>().tabController.index = 2;
+                    Get.find<MainController>().tabController.index = 3;
                   }
                   Get.until((route) => Get.currentRoute == '/');
                 }, 500),

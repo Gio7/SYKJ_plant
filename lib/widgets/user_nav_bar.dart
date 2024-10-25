@@ -34,7 +34,8 @@ class UserNavBar extends StatelessWidget {
                 },
                 child: Image.asset(
                   'images/icon/pro.png',
-                  height: 30,
+                  width: 87,
+                  // height: 32,
                 ),
               )
             else
@@ -47,7 +48,7 @@ class UserNavBar extends StatelessWidget {
                 },
                 child: Image.asset(
                   'images/icon/user.png',
-                  height: 32,
+                  height: 38,
                 ),
               ),
           ],
