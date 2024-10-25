@@ -3,25 +3,12 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:image/image.dart' as img;
-import 'package:image_picker/image_picker.dart';
-import 'package:plant/common/file_utils.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/widgets/btn.dart';
-import 'package:plant/widgets/loading_dialog.dart';
-import 'package:plant/widgets/show_dialog.dart';
 import 'package:plant/pages/plant_scan/plant_controller.dart';
 import 'package:plant/widgets/nav_bar.dart';
-import 'package:plant/controllers/user_controller.dart';
-import 'package:plant/pages/plant_scan/scan_page.dart';
-import 'package:plant/pages/plant_scan/widgets/help_example.dart';
-
-import '../login/login_page.dart';
-import 'widgets/plant_crop_image.dart';
 
 class ShootPage extends StatefulWidget {
   const ShootPage({super.key, this.shootType = ShootType.identify});
@@ -33,182 +20,28 @@ class ShootPage extends StatefulWidget {
 }
 
 class _ShootPageState extends State<ShootPage> {
-  CameraController? _controller;
-
-  FlashMode _flashMode = FlashMode.off;
-
-  final ImagePicker _picker = ImagePicker();
-
   final ctr = Get.put(PlantController());
 
   @override
   void initState() {
     ctr.repository.shootType.value = widget.shootType;
     super.initState();
-    initCamera();
-  }
-
-  @override
-  void dispose() {
-    _controller?.dispose();
-    super.dispose();
-  }
-
-  Future<void> initCamera() async {
-    final cameras = await availableCameras();
-    final firstCamera = cameras.first;
-
-    _controller = CameraController(
-      firstCamera,
-      ResolutionPreset.veryHigh,
-      enableAudio: false,
-      imageFormatGroup: ImageFormatGroup.jpeg,
-    );
-//  on PlatformException catch (e) {
-//       switch (e.code) {
-//         case 'photo_access_denied':
-//           showPermissionDialog();
-//           break;
-//         default:
-//           Fluttertoast.showToast(msg: e.toString());
-//           break;
-//       }
-//       rethrow;
-//     }
-    _controller!.initialize().then((_) {
-      if (mounted) {
-        setState(() {});
-      }
-    }).catchError((Object e) {
-      Get.log(e.toString(), isError: true);
-      if (e is CameraException) {
-        switch (e.code) {
-          case 'CameraAccessDenied':
-            // 当用户拒绝相机访问权限时抛出
-            NormalDialog.showPermission();
-            break;
-          case 'CameraAccessDeniedWithoutPrompt':
-            // 目前仅限 iOS。当用户先前拒绝权限时抛出。iOS 不允许第二次提示警报对话框。用户必须转到“设置”>“隐私”>“相机”才能启用相机访问权限
-            NormalDialog.showPermission();
-            break;
-          case 'CameraAccessRestricted':
-            // 目前仅限 iOS。当相机访问受到限制且用户无法授予权限（家长控制）时抛出。
-            NormalDialog.showPermission();
-            break;
-          case 'AudioAccessDenied':
-            // 当用户拒绝音频访问权限时抛出
-            NormalDialog.showPermission();
-            break;
-          case 'AudioAccessDeniedWithoutPrompt':
-            // 目前仅限 iOS。当用户先前拒绝权限时抛出。iOS 不允许第二次提示警报对话框。用户必须转到“设置”>“隐私”>“麦克风”才能启用音频访问。
-            NormalDialog.showPermission();
-            break;
-          case 'AudioAccessRestricted':
-            // 目前仅限 iOS。当音频访问受到限制且用户无法授予权限（家长控制）时抛出。
-            NormalDialog.showPermission();
-            break;
-          default:
-            Fluttertoast.showToast(msg: e.toString());
-            break;
-        }
-      }
-    });
-  }
-
-  Future<void> _didShootPhoto() async {
-    if (!(Get.find<UserController>().isLogin.value)) {
-      FireBaseUtil.loginPageEvent(Get.currentRoute);
-      Get.to(() => const LoginPage(), fullscreenDialog: true);
-      return;
-    }
-    Get.dialog(const LoadingDialog());
-    try {
-      // 设置对焦，提高拍照效率
-      // await _controller?.setFocusMode(FocusMode.locked);
-      // await _controller?.setExposureMode(ExposureMode.locked);
-      if (_controller?.value.isInitialized ?? false) {
-        final XFile imageFile = await _controller!.takePicture();
-        img.Image image = (await FileUtils.xFileToImage(imageFile))!;
-
-///////////// 计算需要裁剪的区域
-        final showSize = Get.width - 116;
-        double scaleFactor = image.width / Get.width;
-        double cropWidth = scaleFactor * showSize;
-        double x = (image.width - cropWidth) / 2;
-        double y = (image.height - cropWidth) / 2;
-////////////
-        final cropImage = img.copyCrop(image, x: x.toInt(), y: y.toInt(), width: cropWidth.toInt(), height: cropWidth.toInt());
-        final imageThumbnailFile = await FileUtils.imageToFile(cropImage);
-        final image400 = img.copyResize(cropImage, width: 400, height: 400);
-        final image400File = await FileUtils.imageToFile(image400);
-        if (imageThumbnailFile == null || image400File == null) {
-          return;
-        }
-        Get.back();
-
-        Get.to(
-          () => ScanPage(
-            imageThumbnailFile: imageThumbnailFile,
-            image400File: image400File,
-          ),
-        );
-      }
-    } catch (e) {
-      Get.back();
-      Get.log(e.toString(), isError: true);
-    }
-  }
-
-  Future<void> _didPickerPhoto() async {
-    if (!(Get.find<UserController>().isLogin.value)) {
-      FireBaseUtil.loginPageEvent(Get.currentRoute);
-      Get.to(() => const LoginPage(), fullscreenDialog: true);
-      return;
-    }
-    try {
-      final XFile? pickedFile = await _picker.pickImage(
-        source: ImageSource.gallery,
-        imageQuality: 60,
-      );
-      if (pickedFile != null) {
-        Get.dialog(
-          PlantCropImage(
-            originalFile: File(pickedFile.path),
-          ),
-          useSafeArea: false,
-        );
-        // Get.off(() => PlantCropImage(imageData: photoImage));
-      }
-    } on PlatformException catch (e) {
-      switch (e.code) {
-        case 'photo_access_denied':
-          NormalDialog.showPermission();
-          break;
-        default:
-          Fluttertoast.showToast(msg: e.message ?? 'error', gravity: ToastGravity.CENTER, timeInSecForIosWeb: 5);
-          break;
-      }
-      rethrow;
-    } catch (e) {
-      Get.log(e.toString(), isError: true);
-      rethrow;
-    }
-  }
-
-  void _didShowHelp() {
-    Get.dialog(const HelpExample(), useSafeArea: false);
   }
 
   @override
   Widget build(BuildContext context) {
     final width = Get.width - 116;
 
+    final repository = ctr.repository;
+
     return Container(
       color: UIColor.black,
       child: Stack(
         children: [
-          Positioned.fill(
-            child: (_controller?.value.isInitialized ?? false) ? CameraPreview(_controller!) : const Center(child: CircularProgressIndicator()),
+          Obx(
+            () => Positioned.fill(
+              child: (repository.isCameraReady.value) ? CameraPreview(repository.cameraController!) : const Center(child: CircularProgressIndicator()),
+            ),
           ),
           Center(
             child: Image.asset(
@@ -216,43 +49,18 @@ class _ShootPageState extends State<ShootPage> {
               width: width,
             ),
           ),
-          Obx(() {
-            if (ctr.repository.shootType.value == ShootType.diagnose) {
-              return Positioned(
-                left: 0,
-                top: (Get.height / 2) - (width / 2) - 112,
-                right: 0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _buildImageContainer(ctr.repository.diagnoseImageFile1.value),
-                    const SizedBox(width: 4),
-                    _buildImageContainer(ctr.repository.diagnoseImageFile2.value),
-                    const SizedBox(width: 4),
-                    _buildImageContainer(ctr.repository.diagnoseImageFile3.value),
-                  ],
-                ),
-              );
-            }
-            return const SizedBox.shrink();
-          }),
           Scaffold(
             backgroundColor: Colors.transparent,
             appBar: NavBar(
-              leftWidget: IconButton(
-                onPressed: () async {
-                  if (_flashMode == FlashMode.off) {
-                    await _controller?.setFlashMode(FlashMode.torch);
-                  } else {
-                    await _controller?.setFlashMode(FlashMode.off);
-                  }
-                  setState(() {
-                    _flashMode = (_flashMode == FlashMode.off ? FlashMode.torch : FlashMode.off);
-                  });
-                },
-                icon: Image.asset(
-                  _flashMode == FlashMode.off ? 'images/icon/flash_close.png' : 'images/icon/flash_open.png',
-                  width: 32,
+              leftWidget: Obx(
+                () => IconButton(
+                  onPressed: () async {
+                    ctr.toggleFlashMode();
+                  },
+                  icon: Image.asset(
+                    repository.flashMode.value == FlashMode.off ? 'images/icon/flash_close.png' : 'images/icon/flash_open.png',
+                    width: 32,
+                  ),
                 ),
               ),
               rightWidget: IconButton(
@@ -315,7 +123,7 @@ class _ShootPageState extends State<ShootPage> {
                         GestureDetector(
                           onTap: () {
                             FireBaseUtil.logEvent(EventName.shootAlbum);
-                            _didPickerPhoto();
+                            ctr.didPickerPhoto();
                           },
                           child: Image.asset(
                             'images/icon/image_picker.png',
@@ -324,7 +132,7 @@ class _ShootPageState extends State<ShootPage> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            _didShootPhoto();
+                            ctr.didShootPhoto();
                           },
                           child: Obx(
                             () => Image.asset(
@@ -336,7 +144,7 @@ class _ShootPageState extends State<ShootPage> {
                         GestureDetector(
                           onTap: () {
                             FireBaseUtil.logEvent(EventName.shootHelp);
-                            _didShowHelp();
+                            ctr.didShowHelp();
                           },
                           child: Image.asset(
                             'images/icon/help.png',
@@ -350,12 +158,41 @@ class _ShootPageState extends State<ShootPage> {
               ),
             ),
           ),
+          Obx(() {
+            if (ctr.repository.shootType.value == ShootType.diagnose) {
+              return Positioned(
+                left: 0,
+                top: (Get.height / 2) - (width / 2) - 112,
+                right: 0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _buildImageContainer(
+                      ctr.repository.diagnoseImageFile1.value,
+                      onDeleteTap: () => ctr.diagnoseDeletePhoto(0),
+                    ),
+                    const SizedBox(width: 4),
+                    _buildImageContainer(
+                      ctr.repository.diagnoseImageFile2.value,
+                      onDeleteTap: () => ctr.diagnoseDeletePhoto(1),
+                    ),
+                    const SizedBox(width: 4),
+                    _buildImageContainer(
+                      ctr.repository.diagnoseImageFile3.value,
+                      onDeleteTap: () => ctr.diagnoseDeletePhoto(2),
+                    ),
+                  ],
+                ),
+              );
+            }
+            return const SizedBox.shrink();
+          }),
         ],
       ),
     );
   }
 
-  SizedBox _buildImageContainer(File? imageFile) {
+  SizedBox _buildImageContainer(File? imageFile, {Function()? onDeleteTap}) {
     return SizedBox(
       width: 80,
       height: 72,
@@ -379,7 +216,12 @@ class _ShootPageState extends State<ShootPage> {
                   dash: const <int>[2, 2],
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: imageFile == null ? const SizedBox.shrink() : Image.file(imageFile),
+                child: imageFile == null
+                    ? const SizedBox.shrink()
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.file(imageFile, fit: BoxFit.cover),
+                      ),
               ),
             ),
           ),
@@ -389,7 +231,9 @@ class _ShootPageState extends State<ShootPage> {
               right: 0,
               width: 24,
               height: 24,
-              child: Image.asset('images/icon/close_circle.png', width: 24, height: 24),
+              child: GestureDetector(
+                  onTap: onDeleteTap,
+                  child: Image.asset('images/icon/close_circle.png', width: 24, height: 24)),
             ),
         ],
       ),

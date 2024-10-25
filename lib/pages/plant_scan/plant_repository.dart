@@ -6,6 +6,13 @@ class PlantRepository {
   /// 识别类型 identify diagnose
   Rx<ShootType> shootType = ShootType.identify.obs;
 
+  CameraController? cameraController;
+  final ImagePicker imagePicker = ImagePicker();
+
+  Rx<FlashMode> flashMode = FlashMode.off.obs;
+
+  RxBool isCameraReady = false.obs;
+
   /// 压缩到 400* 400
   String? identifyImage400Url;
   /// 需要压缩质量
