@@ -10,48 +10,37 @@ import 'package:plant/models/plant_info_model.dart';
 import 'package:plant/pages/plant_scan/info_diagnose_page.dart';
 import 'package:plant/pages/plant_scan/info_identify_page.dart';
 
+part 'plant_repository.dart';
+
 class PlantController extends GetxController {
-  /// 识别类型 identify diagnose
-  RxString shootType = 'identify'.obs;
+  final PlantRepository repository = PlantRepository();
 
-  /// 压缩到 400* 400
-  String? image400Url;
-
-  /// 需要压缩质量
-  String? thumbnailUrl;
-  RxBool isAnalyzingImage = false.obs;
-  RxBool isDetectingLeaves = false.obs;
-  RxBool isIdentifyingPlant = false.obs;
-
-  PlantInfoModel? plantInfo;
-  PlantDiagnosisModel? diagnoseInfo;
-
-  Future<bool> requestInfo(Completer<void> completer, File cropFile, File image400File) async {
-    plantInfo = null;
-    diagnoseInfo = null;
-    await uploadFile(completer, cropFile, image400File);
+  Future<bool> requestInfo(Completer<void> completer, File imageThumbnailFile, File image400File) async {
+    repository.plantInfo = null;
+    repository.diagnoseInfo = null;
+    await uploadFile(completer, imageThumbnailFile, image400File);
     if (completer.isCompleted) return false;
-    if (image400Url == null || thumbnailUrl == null) {
+    if (repository.identifyImage400Url == null || repository.identifyThumbnailUrl == null) {
       Fluttertoast.showToast(msg: '图片上传失败', gravity: ToastGravity.CENTER);
       return false;
     }
     dynamic res;
-    if (shootType.value == 'identify') {
-      res = await Request.plantScan(image400Url!, thumbnailUrl!);
+    if (repository.shootType.value == ShootType.identify) {
+      res = await Request.plantScan(repository.identifyImage400Url!, repository.identifyThumbnailUrl!);
     } else {
-      res = await Request.plantDiagnosis(image400Url!, thumbnailUrl!);
+      res = await Request.plantDiagnosis(repository.identifyImage400Url!, repository.identifyThumbnailUrl!);
     }
     if (completer.isCompleted) return false;
     if (res.statusCode == 200) {
       final responseData = res.data;
       if (responseData['code'] == 200 || responseData['code'] == 0) {
-        isIdentifyingPlant.value = true;
+        repository.isIdentifyingPlant.value = true;
         try {
-          if (shootType.value == 'identify') {
-            plantInfo = PlantInfoModel.fromJson(responseData['data']);
+          if (repository.shootType.value == ShootType.identify) {
+            repository.plantInfo = PlantInfoModel.fromJson(responseData['data']);
             Get.off(() => InfoIdentifyPage());
           } else {
-            diagnoseInfo = PlantDiagnosisModel.fromJson(responseData['data']);
+            repository.diagnoseInfo = PlantDiagnosisModel.fromJson(responseData['data']);
             Get.off(() => InfoDiagnosePage());
           }
           // 成功
@@ -65,27 +54,27 @@ class PlantController extends GetxController {
     return false;
   }
 
-  Future<void> uploadFile(Completer<void> completer, File cropFile, File image400File) async {
-    image400Url = null;
-    thumbnailUrl = null;
-    isAnalyzingImage.value = false;
-    isDetectingLeaves.value = false;
-    isIdentifyingPlant.value = false;
-    image400Url = await AwsUtils.uploadByFile(image400File);
+  Future<void> uploadFile(Completer<void> completer, File imageThumbnailFile, File image400File) async {
+    repository.identifyImage400Url = null;
+    repository.identifyThumbnailUrl = null;
+    repository.isAnalyzingImage.value = false;
+    repository.isDetectingLeaves.value = false;
+    repository.isIdentifyingPlant.value = false;
+    repository.identifyImage400Url = await AwsUtils.uploadByFile(image400File);
     if (completer.isCompleted) return;
-    thumbnailUrl = await AwsUtils.uploadByFile(cropFile);
+    repository.identifyThumbnailUrl = await AwsUtils.uploadByFile(imageThumbnailFile);
     if (completer.isCompleted) return;
-    isAnalyzingImage.value = true;
+    repository.isAnalyzingImage.value = true;
     Future.delayed(const Duration(seconds: 3), () {
       if (completer.isCompleted) return;
-      isDetectingLeaves.value = true;
+      repository.isDetectingLeaves.value = true;
     });
   }
 
   Future<void> scanByScientificName(int id) async {
     try {
       final res = await Request.getPlantDetailByRecord(id);
-      plantInfo = PlantInfoModel.fromJson(res);
+      repository.plantInfo = PlantInfoModel.fromJson(res);
     } catch (e) {
       Get.log(e.toString(), isError: true);
       rethrow;

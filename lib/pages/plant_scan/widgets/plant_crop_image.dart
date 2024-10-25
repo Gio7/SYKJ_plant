@@ -32,8 +32,8 @@ class PlantCropImage extends StatelessWidget {
                   onCropped: (data) async {
                     List<int> jpegBytes = img.encodeJpg(img.decodeImage(data)!, quality: 60);
                     final croppedData = Uint8List.fromList(jpegBytes);
-                    final cropFile = await FileUtils.listToFile(croppedData);
-                    if (cropFile == null) {
+                    final imageThumbnailFile = await FileUtils.listToFile(croppedData);
+                    if (imageThumbnailFile == null) {
                       Get.back();
                       return;
                     }
@@ -51,7 +51,7 @@ class PlantCropImage extends StatelessWidget {
                     if (Get.isDialogOpen == true) {
                       Get.back();
                     }
-                    Get.off(() => ScanPage(cropFile: cropFile, image400File: image400File));
+                    Get.off(() => ScanPage(imageThumbnailFile: imageThumbnailFile, image400File: image400File));
                   },
                   withCircleUi: false,
                   onStatusChanged: (status) {

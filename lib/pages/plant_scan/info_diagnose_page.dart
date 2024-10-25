@@ -64,13 +64,13 @@ class InfoDiagnosePage extends StatelessWidget {
             Expanded(
               child: NormalButton(
                 onTap: () async {
-                  if (ctr.plantInfo == null) {
-                    if (ctr.diagnoseInfo?.scanRecordId == null) {
+                  if (ctr.repository.plantInfo == null) {
+                    if (ctr.repository.diagnoseInfo?.scanRecordId == null) {
                       return;
                     }
                     FireBaseUtil.logEvent(EventName.dianoseInfoPlantinfo);
                     Get.dialog(const LoadingDialog(), barrierDismissible: false);
-                    await ctr.scanByScientificName(ctr.diagnoseInfo!.scanRecordId!);
+                    await ctr.scanByScientificName(ctr.repository.diagnoseInfo!.scanRecordId!);
                     Get.back();
                   }
                   Get.to(() => InfoIdentifyPage());
@@ -152,9 +152,9 @@ class InfoDiagnosePage extends StatelessWidget {
                                 ),
                               ),
                               TextSpan(
-                                text: ' ${(ctr.diagnoseInfo?.plant?.healthy ?? false) ? 'healthy'.tr : 'notHealthy'.tr}',
+                                text: ' ${(ctr.repository.diagnoseInfo?.plant?.healthy ?? false) ? 'healthy'.tr : 'notHealthy'.tr}',
                                 style: TextStyle(
-                                  color: (ctr.diagnoseInfo?.plant?.healthy ?? false) ? UIColor.primary : UIColor.cFD5050,
+                                  color: (ctr.repository.diagnoseInfo?.plant?.healthy ?? false) ? UIColor.primary : UIColor.cFD5050,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
                                   decoration: TextDecoration.none,
@@ -189,7 +189,7 @@ class InfoDiagnosePage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 24),
-              for (final item in ctr.diagnoseInfo?.plant?.diseaseDetail ?? []) ...[
+              for (final item in ctr.repository.diagnoseInfo?.plant?.diseaseDetail ?? []) ...[
                 Text(
                   item.displayTitle,
                   style: const TextStyle(
@@ -225,7 +225,8 @@ class InfoDiagnosePage extends StatelessWidget {
       right: 0,
       height: 290,
       child: CachedNetworkImage(
-        imageUrl: ctr.thumbnailUrl ?? '',
+        // TODO 这里需要换成诊断的图
+        imageUrl: ctr.repository.identifyThumbnailUrl ?? '',
         fit: BoxFit.cover,
         fadeInDuration: Duration.zero,
       ),

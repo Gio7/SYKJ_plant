@@ -46,7 +46,7 @@ class InfoIdentifyPage extends StatelessWidget {
       right: 0,
       height: 290,
       child: CachedNetworkImage(
-        imageUrl: ctr.thumbnailUrl ?? '',
+        imageUrl: ctr.repository.identifyThumbnailUrl ?? '',
         fit: BoxFit.cover,
         fadeInDuration: Duration.zero,
       ),
@@ -78,18 +78,18 @@ class InfoIdentifyPage extends StatelessWidget {
             children: [
               ..._buildTitle(),
               const SizedBox(height: 24),
-              InfoKeyFacts(descriptionList: ctr.plantInfo?.plant?.description),
+              InfoKeyFacts(descriptionList: ctr.repository.plantInfo?.plant?.description),
               const SizedBox(height: 16),
-              InfoCharacteristics(characteristics: ctr.plantInfo?.plant?.characteristics),
+              InfoCharacteristics(characteristics: ctr.repository.plantInfo?.plant?.characteristics),
               const SizedBox(height: 16),
-              InfoDescriptionText(text: ctr.plantInfo?.plant?.culturalSignificance ?? ''),
+              InfoDescriptionText(text: ctr.repository.plantInfo?.plant?.culturalSignificance ?? ''),
               const SizedBox(height: 16),
-              InfoConditions(conditions: ctr.plantInfo?.plant?.conditions),
+              InfoConditions(conditions: ctr.repository.plantInfo?.plant?.conditions),
               const SizedBox(height: 16),
-              InfoHowTos(howTos: ctr.plantInfo?.plant?.howTos),
+              InfoHowTos(howTos: ctr.repository.plantInfo?.plant?.howTos),
               const SizedBox(height: 16),
-              if (ctr.plantInfo?.plant?.littleStory != null && ctr.plantInfo?.plant?.littleStory != '')
-                InfoFunFacts(littleStory: ctr.plantInfo!.plant!.littleStory!),
+              if (ctr.repository.plantInfo?.plant?.littleStory != null && ctr.repository.plantInfo?.plant?.littleStory != '')
+                InfoFunFacts(littleStory: ctr.repository.plantInfo!.plant!.littleStory!),
             ],
           ),
         ),
@@ -156,12 +156,12 @@ class InfoIdentifyPage extends StatelessWidget {
             Expanded(
               child: NormalButton(
                 onTap: Common.debounce(() async {
-                  if (ctr.plantInfo?.scanRecordId == null) {
+                  if (ctr.repository.plantInfo?.scanRecordId == null) {
                     return;
                   }
                   FireBaseUtil.logEvent(EventName.infoSave);
                   Get.dialog(const LoadingDialog());
-                  await ctr.savePlant(ctr.plantInfo!.scanRecordId!);
+                  await ctr.savePlant(ctr.repository.plantInfo!.scanRecordId!);
                   Get.back();
                   if (Get.find<MainController>().tabController.index == 3) {
                     Get.find<MyPlantsController>().onRefresh();
@@ -186,7 +186,7 @@ class InfoIdentifyPage extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.only(left: 10),
         child: Text(
-          ctr.plantInfo?.plant?.plantName ?? '',
+          ctr.repository.plantInfo?.plant?.plantName ?? '',
           style: const TextStyle(
             color: UIColor.c15221D,
             fontSize: 20,
@@ -209,7 +209,7 @@ class InfoIdentifyPage extends StatelessWidget {
                 ),
               ),
               TextSpan(
-                text: ctr.plantInfo?.plant?.scientificName ?? '',
+                text: ctr.repository.plantInfo?.plant?.scientificName ?? '',
                 style: const TextStyle(
                   color: UIColor.c15221D,
                   fontSize: 14,
@@ -223,7 +223,7 @@ class InfoIdentifyPage extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.only(left: 10, top: 4),
         child: Text(
-          ctr.plantInfo?.plant?.mainCharacteristics ?? '',
+          ctr.repository.plantInfo?.plant?.mainCharacteristics ?? '',
           style: TextStyle(
             color: UIColor.c15221D,
             fontSize: 14,

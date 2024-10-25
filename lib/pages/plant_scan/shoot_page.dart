@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -23,9 +24,9 @@ import '../login/login_page.dart';
 import 'widgets/plant_crop_image.dart';
 
 class ShootPage extends StatefulWidget {
-  const ShootPage({super.key, this.shootType = 'identify'});
+  const ShootPage({super.key, this.shootType = ShootType.identify});
 
-  final String shootType;
+  final ShootType shootType;
 
   @override
   State<ShootPage> createState() => _ShootPageState();
@@ -42,7 +43,7 @@ class _ShootPageState extends State<ShootPage> {
 
   @override
   void initState() {
-    ctr.shootType.value = widget.shootType;
+    ctr.repository.shootType.value = widget.shootType;
     super.initState();
     initCamera();
   }
@@ -137,17 +138,17 @@ class _ShootPageState extends State<ShootPage> {
         double y = (image.height - cropWidth) / 2;
 ////////////
         final cropImage = img.copyCrop(image, x: x.toInt(), y: y.toInt(), width: cropWidth.toInt(), height: cropWidth.toInt());
-        final cropFile = await FileUtils.imageToFile(cropImage);
+        final imageThumbnailFile = await FileUtils.imageToFile(cropImage);
         final image400 = img.copyResize(cropImage, width: 400, height: 400);
         final image400File = await FileUtils.imageToFile(image400);
-        if (cropFile == null || image400File == null) {
+        if (imageThumbnailFile == null || image400File == null) {
           return;
         }
         Get.back();
 
         Get.to(
           () => ScanPage(
-            cropFile: cropFile,
+            imageThumbnailFile: imageThumbnailFile,
             image400File: image400File,
           ),
         );
@@ -215,6 +216,26 @@ class _ShootPageState extends State<ShootPage> {
               width: width,
             ),
           ),
+          Obx(() {
+            if (ctr.repository.shootType.value == ShootType.diagnose) {
+              return Positioned(
+                left: 0,
+                top: (Get.height / 2) - (width / 2) - 112,
+                right: 0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _buildImageContainer(ctr.repository.diagnoseImageFile1.value),
+                    const SizedBox(width: 4),
+                    _buildImageContainer(ctr.repository.diagnoseImageFile2.value),
+                    const SizedBox(width: 4),
+                    _buildImageContainer(ctr.repository.diagnoseImageFile3.value),
+                  ],
+                ),
+              );
+            }
+            return const SizedBox.shrink();
+          }),
           Scaffold(
             backgroundColor: Colors.transparent,
             appBar: NavBar(
@@ -261,11 +282,11 @@ class _ShootPageState extends State<ShootPage> {
                             child: NormalButton(
                               onTap: () {
                                 FireBaseUtil.logEvent(EventName.shootIdentify);
-                                ctr.shootType.value = 'identify';
+                                ctr.repository.shootType.value = ShootType.identify;
                               },
                               text: 'identify'.tr,
-                              textColor: ctr.shootType.value == 'identify' ? UIColor.primary : UIColor.white,
-                              bgColor: ctr.shootType.value == 'identify' ? UIColor.white : UIColor.transparent,
+                              textColor: ctr.repository.shootType.value == ShootType.identify ? UIColor.primary : UIColor.white,
+                              bgColor: ctr.repository.shootType.value == ShootType.identify ? UIColor.white : UIColor.transparent,
                             ),
                           ),
                           const SizedBox(width: 8),
@@ -273,11 +294,11 @@ class _ShootPageState extends State<ShootPage> {
                             child: NormalButton(
                               onTap: () {
                                 FireBaseUtil.logEvent(EventName.shootDianose);
-                                ctr.shootType.value = 'diagnose';
+                                ctr.repository.shootType.value = ShootType.diagnose;
                               },
                               text: 'diagnose'.tr,
-                              textColor: ctr.shootType.value == 'diagnose' ? UIColor.primary : UIColor.white,
-                              bgColor: ctr.shootType.value == 'diagnose' ? UIColor.white : UIColor.transparent,
+                              textColor: ctr.repository.shootType.value == ShootType.diagnose ? UIColor.primary : UIColor.white,
+                              bgColor: ctr.repository.shootType.value == ShootType.diagnose ? UIColor.white : UIColor.transparent,
                             ),
                           ),
                         ],
@@ -307,7 +328,7 @@ class _ShootPageState extends State<ShootPage> {
                           },
                           child: Obx(
                             () => Image.asset(
-                              ctr.shootType.value == 'identify' ? 'images/icon/camera_search.png' : 'images/icon/camera_diagnose.png',
+                              ctr.repository.shootType.value == ShootType.identify ? 'images/icon/camera_search.png' : 'images/icon/camera_diagnose.png',
                               width: 70,
                             ),
                           ),
@@ -329,6 +350,47 @@ class _ShootPageState extends State<ShootPage> {
               ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  SizedBox _buildImageContainer(File? imageFile) {
+    return SizedBox(
+      width: 80,
+      height: 72,
+      child: Stack(
+        children: [
+          Center(
+            child: Container(
+              width: 60,
+              height: 60,
+              decoration: ShapeDecoration(
+                color: UIColor.white.withOpacity(0.5),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+              ),
+              child: Container(
+                decoration: DottedDecoration(
+                  shape: Shape.box,
+                  color: UIColor.white,
+                  strokeWidth: 1,
+                  dash: const <int>[2, 2],
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: imageFile == null ? const SizedBox.shrink() : Image.file(imageFile),
+              ),
+            ),
+          ),
+          if (imageFile != null)
+            Positioned(
+              top: 0,
+              right: 0,
+              width: 24,
+              height: 24,
+              child: Image.asset('images/icon/close_circle.png', width: 24, height: 24),
+            ),
         ],
       ),
     );

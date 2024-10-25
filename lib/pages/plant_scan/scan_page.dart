@@ -13,8 +13,8 @@ import 'package:plant/sdk/scanning_effect/scanning_effect.dart';
 import '../shop/shop_view.dart';
 
 class ScanPage extends StatelessWidget {
-  const ScanPage({super.key, required this.cropFile, required this.image400File});
-  final File cropFile;
+  const ScanPage({super.key, required this.imageThumbnailFile, required this.image400File});
+  final File imageThumbnailFile;
   final File image400File;
 
   void _requestNetwork(PlantController ctr, Completer<void> completer) async {
@@ -27,7 +27,7 @@ class ScanPage extends StatelessWidget {
         return;
       }
     }
-    ctr.requestInfo(completer, cropFile, image400File).then((isSuccess) => {
+    ctr.requestInfo(completer, imageThumbnailFile, image400File).then((isSuccess) => {
       if (!isSuccess && !(completer.isCompleted))
         {
           Get.dialog(
@@ -113,7 +113,7 @@ class ScanPage extends StatelessWidget {
                 enableBorder: false,
                 scanningLinePadding: EdgeInsets.zero,
                 delay: Duration.zero,
-                child: Image.file(cropFile),
+                child: Image.file(imageThumbnailFile),
               ),
             ),
             const SizedBox(height: 50),
@@ -121,14 +121,14 @@ class ScanPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Obx(() => _buildRow(ctr.isAnalyzingImage.value, 'analyzingImage'.tr)),
+                  Obx(() => _buildRow(ctr.repository.isAnalyzingImage.value, 'analyzingImage'.tr)),
                   const SizedBox(height: 16),
-                  Obx(() => _buildRow(ctr.isDetectingLeaves.value, 'detectingLeaves'.tr)),
+                  Obx(() => _buildRow(ctr.repository.isDetectingLeaves.value, 'detectingLeaves'.tr)),
                   const SizedBox(height: 16),
                   Obx(
                     () => _buildRow(
-                      ctr.isIdentifyingPlant.value,
-                      ctr.shootType.value == 'identify' ? 'identifyingPlant'.tr : 'diagnosingPlant'.tr,
+                      ctr.repository.isIdentifyingPlant.value,
+                      ctr.repository.shootType.value == ShootType.identify ? 'identifyingPlant'.tr : 'diagnosingPlant'.tr,
                     ),
                   ),
                 ],
