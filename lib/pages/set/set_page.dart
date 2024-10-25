@@ -347,28 +347,28 @@ class SetPage extends StatelessWidget {
     if (userController.userInfo.value.memberType == MemberType.normal) {
       return Positioned(
         right: -6,
-        bottom: 12,
-        child: Image.asset('images/icon/have_logged_in.png', height: 142),
+        top: -32.5,
+        child: Image.asset('images/icon/have_logged_in.png', width: 142),
       );
     }
     if (userController.userInfo.value.memberType == MemberType.weekly) {
       return Positioned(
-        right: 5,
-        bottom: 15,
-        child: Image.asset('images/icon/week_vip.png', height: 120),
+        right: 8,
+        top: -17,
+        child: Image.asset('images/icon/week_vip.png', width: 126),
       );
     }
     if (userController.userInfo.value.memberType == MemberType.yearly) {
       return Positioned(
-        right: 5,
-        bottom: 15,
-        child: Image.asset('images/icon/year_vip.png', height: 120),
+        right: 8,
+        top: -17,
+        child: Image.asset('images/icon/year_vip.png', width: 126),
       );
     }
     return Positioned(
       right: -6,
-      bottom: 12,
-      child: Image.asset('images/icon/not_logged_in.png', height: 142),
+      top: -32.5,
+      child: Image.asset('images/icon/not_logged_in.png', width: 142),
     );
   }
 
