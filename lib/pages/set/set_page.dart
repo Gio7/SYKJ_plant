@@ -362,7 +362,7 @@ class SetPage extends StatelessWidget {
       return Positioned(
         right: 5,
         bottom: 15,
-        child: Image.asset('images/icon/week_vip.png', height: 120),
+        child: Image.asset('images/icon/year_vip.png', height: 120),
       );
     }
     return Positioned(
