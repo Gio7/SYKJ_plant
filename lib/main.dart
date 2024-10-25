@@ -14,7 +14,6 @@ import 'package:plant/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'api/dio.dart';
-import 'common/common_util.dart';
 import 'common/firebase_util.dart';
 import 'common/ui_color.dart';
 import 'widgets/easy_refresh_custom.dart';

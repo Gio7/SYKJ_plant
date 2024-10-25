@@ -51,6 +51,7 @@ class BuyShop {
           if (Get.isDialogOpen ?? false) {
             Get.back();
           }
+          Get.log("支付出错:${purchaseDetails.error?.toString()}");
           Fluttertoast.showToast(msg: purchaseDetails.error?.message ?? 'pay error', toastLength: Toast.LENGTH_LONG,timeInSecForIosWeb: 5,gravity: ToastGravity.CENTER);
         } else if (purchaseDetails.status == PurchaseStatus.canceled) {
           if (Get.isDialogOpen ?? false) {
@@ -141,8 +142,7 @@ class BuyShop {
       return;
     }
     try {
-      late PurchaseParam purchaseParam;
-      purchaseParam = PurchaseParam(productDetails: currentItem.productDetails!, applicationUserName: orderNum);
+      final purchaseParam = PurchaseParam(productDetails: currentItem.productDetails!);
       if (buyNonConsumable) {
         await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
       } else {
