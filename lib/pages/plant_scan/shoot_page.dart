@@ -4,32 +4,20 @@ import 'package:camera/camera.dart';
 import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plant/common/common_util.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/widgets/btn.dart';
 import 'package:plant/pages/plant_scan/plant_controller.dart';
 import 'package:plant/widgets/nav_bar.dart';
 
-class ShootPage extends StatefulWidget {
+class ShootPage extends StatelessWidget {
   const ShootPage({super.key, this.shootType = ShootType.identify});
-
   final ShootType shootType;
 
   @override
-  State<ShootPage> createState() => _ShootPageState();
-}
-
-class _ShootPageState extends State<ShootPage> {
-  final ctr = Get.put(PlantController());
-
-  @override
-  void initState() {
-    ctr.repository.shootType.value = widget.shootType;
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final ctr = Get.put(PlantController(shootType));
     final width = Get.width - 116;
 
     final repository = ctr.repository;
@@ -117,41 +105,52 @@ class _ShootPageState extends State<ShootPage> {
                   Container(
                     height: 70,
                     padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            FireBaseUtil.logEvent(EventName.shootAlbum);
-                            ctr.didPickerPhoto();
-                          },
-                          child: Image.asset(
-                            'images/icon/image_picker.png',
-                            width: 50,
+                    child: Obx(
+                      () => Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              FireBaseUtil.logEvent(EventName.shootAlbum);
+                              ctr.didPickerPhoto();
+                            },
+                            child: Image.asset(
+                              'images/icon/image_picker.png',
+                              width: 50,
+                            ),
                           ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            ctr.didShootPhoto();
-                          },
-                          child: Obx(
-                            () => Image.asset(
+                          GestureDetector(
+                            onTap: () {
+                              ctr.didShootPhoto();
+                            },
+                            child: Image.asset(
                               ctr.repository.shootType.value == ShootType.identify ? 'images/icon/camera_search.png' : 'images/icon/camera_diagnose.png',
                               width: 70,
                             ),
                           ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            FireBaseUtil.logEvent(EventName.shootHelp);
-                            ctr.didShowHelp();
-                          },
-                          child: Image.asset(
-                            'images/icon/help.png',
-                            width: 50,
-                          ),
-                        ),
-                      ],
+                          if (ctr.repository.shootType.value == ShootType.identify)
+                            GestureDetector(
+                              onTap: () {
+                                FireBaseUtil.logEvent(EventName.shootHelp);
+                                ctr.didShowHelp();
+                              },
+                              child: Image.asset(
+                                'images/icon/help.png',
+                                width: 50,
+                              ),
+                            )
+                          else
+                            GestureDetector(
+                              onTap: Common.debounce(() {
+                                ctr.diagnoseScanPhoto();
+                              }),
+                              child: Image.asset(
+                                'images/icon/diagnose_ok.png',
+                                width: 50,
+                              ),
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -232,8 +231,9 @@ class _ShootPageState extends State<ShootPage> {
               width: 24,
               height: 24,
               child: GestureDetector(
-                  onTap: onDeleteTap,
-                  child: Image.asset('images/icon/close_circle.png', width: 24, height: 24)),
+                onTap: onDeleteTap,
+                child: Image.asset('images/icon/close_circle.png', width: 24, height: 24),
+              ),
             ),
         ],
       ),

@@ -27,12 +27,18 @@ import 'widgets/plant_crop_image.dart';
 part 'plant_repository.dart';
 
 class PlantController extends GetxController {
-  final PlantRepository repository = PlantRepository();
+  final ShootType shootType;
+  final bool hasCamera;
+  PlantController(this.shootType, {this.hasCamera = true});
+  late final PlantRepository repository;
 
   @override
   void onInit() {
     super.onInit();
-    initCamera();
+    repository = PlantRepository(shootType);
+    if (hasCamera) {
+      initCamera();
+    }
   }
 
   @override
@@ -41,55 +47,114 @@ class PlantController extends GetxController {
     super.onClose();
   }
 
-  Future<bool> requestInfo(Completer<void> completer, File imageThumbnailFile, File image400File) async {
+  Future<bool> requestIdentifyInfo(Completer<void> completer) async {
     repository.plantInfo = null;
     repository.diagnoseInfo = null;
-    await uploadFile(completer, imageThumbnailFile, image400File);
+    await uploadFile(completer);
     if (completer.isCompleted) return false;
     if (repository.identifyImage400Url == null || repository.identifyThumbnailUrl == null) {
       Fluttertoast.showToast(msg: '图片上传失败', gravity: ToastGravity.CENTER);
       return false;
     }
-    dynamic res;
-    if (repository.shootType.value == ShootType.identify) {
-      res = await Request.plantScan(repository.identifyImage400Url!, repository.identifyThumbnailUrl!);
-    } else {
-      res = await Request.plantDiagnosis(repository.identifyImage400Url!, repository.identifyThumbnailUrl!);
-    }
-    if (completer.isCompleted) return false;
-    if (res.statusCode == 200) {
-      final responseData = res.data;
-      if (responseData['code'] == 200 || responseData['code'] == 0) {
-        repository.isIdentifyingPlant.value = true;
-        try {
-          if (repository.shootType.value == ShootType.identify) {
-            repository.plantInfo = PlantInfoModel.fromJson(responseData['data']);
-            Get.off(() => InfoIdentifyPage());
-          } else {
-            repository.diagnoseInfo = PlantDiagnosisModel.fromJson(responseData['data']);
-            Get.off(() => InfoDiagnosePage());
-          }
+    try {
+      final res = await Request.plantScan(repository.identifyImage400Url!, repository.identifyThumbnailUrl!);
+      if (completer.isCompleted) return false;
+      if (res.statusCode == 200) {
+        final responseData = res.data;
+        if (responseData['code'] == 200 || responseData['code'] == 0) {
+          repository.isIdentifyingPlant.value = true;
+          repository.plantInfo = PlantInfoModel.fromJson(responseData['data']);
+          Get.off(() => InfoIdentifyPage());
           // 成功
           return true;
-        } catch (e) {
-          Get.log(e.toString(), isError: true);
-          return false;
         }
       }
+    } catch (e) {
+      Get.log('识别错误：$e', isError: true);
+      return false;
     }
     return false;
   }
 
-  Future<void> uploadFile(Completer<void> completer, File imageThumbnailFile, File image400File) async {
-    repository.identifyImage400Url = null;
-    repository.identifyThumbnailUrl = null;
+  Future<bool> requestDiagnoseInfo(Completer<void> completer) async {
+    repository.plantInfo = null;
+    repository.diagnoseInfo = null;
+    await uploadFile(completer);
+    if (completer.isCompleted) return false;
+
+    if (repository.diagnoseImageUrls.isEmpty) {
+      Fluttertoast.showToast(msg: '图片上传失败', gravity: ToastGravity.CENTER);
+      return false;
+    }
+    try {
+      final res = await Request.plantDiagnosis(repository.diagnoseImageUrls);
+      if (completer.isCompleted) return false;
+      if (res.statusCode == 200) {
+        final responseData = res.data;
+        if (responseData['code'] == 200 || responseData['code'] == 0) {
+          repository.isIdentifyingPlant.value = true;
+          
+          repository.diagnoseInfo = PlantDiagnosisModel.fromJson(responseData['data']);
+          Get.off(() => InfoDiagnosePage());
+          // 成功
+          return true;
+        }
+      }
+    } catch (e) {
+      Get.log('识别错误：$e', isError: true);
+      return false;
+    }
+
+    return false;
+  }
+
+  Future<void> uploadFile(Completer<void> completer) async {
     repository.isAnalyzingImage.value = false;
     repository.isDetectingLeaves.value = false;
     repository.isIdentifyingPlant.value = false;
-    repository.identifyImage400Url = await AwsUtils.uploadByFile(image400File);
-    if (completer.isCompleted) return;
-    repository.identifyThumbnailUrl = await AwsUtils.uploadByFile(imageThumbnailFile);
-    if (completer.isCompleted) return;
+
+    if (repository.shootType.value == ShootType.identify) {
+      repository.identifyImage400Url = null;
+      repository.identifyThumbnailUrl = null;
+      repository.identifyImage400Url = await AwsUtils.uploadByFile(repository.identifyImage400File!);
+      if (completer.isCompleted) return;
+      repository.identifyThumbnailUrl = await AwsUtils.uploadByFile(repository.identifyThumbnailFile!);
+      if (completer.isCompleted) return;
+    } else {
+      repository.diagnoseImageUrls.clear();
+
+      if (repository.diagnoseImageFile1.value != null) {
+        final file1 = await _resizeImage(repository.diagnoseImageFile1.value!);
+        if (file1 == null) {
+          return;
+        }
+        repository.diagnoseImageUrls.add(await AwsUtils.uploadByFile(file1));
+        if (completer.isCompleted) return;
+      }
+
+      if (repository.diagnoseImageFile2.value != null) {
+        final file2 = await _resizeImage(repository.diagnoseImageFile2.value!);
+        if (file2 == null) {
+          return;
+        }
+        repository.diagnoseImageUrls.add(await AwsUtils.uploadByFile(file2));
+        if (completer.isCompleted) return;
+      }
+
+      if (repository.diagnoseImageFile3.value != null) {
+        final file3 = await _resizeImage(repository.diagnoseImageFile3.value!);
+        if (file3 == null) {
+          return;
+        }
+        repository.diagnoseImageUrls.add(await AwsUtils.uploadByFile(file3));
+        if (completer.isCompleted) return;
+      }
+
+      repository.diagnoseImageFile1.value = null;
+      repository.diagnoseImageFile2.value = null;
+      repository.diagnoseImageFile3.value = null;
+    }
+
     repository.isAnalyzingImage.value = true;
     Future.delayed(const Duration(seconds: 3), () {
       if (completer.isCompleted) return;
@@ -207,12 +272,12 @@ class PlantController extends GetxController {
       if (repository.shootType.value == ShootType.identify) {
         _identifyPickerPhoto();
       } else {
-        // _diagnosePickerPhoto();
+        _diagnosePickerPhoto();
       }
     }
   }
 
-  void _identifyShootPhoto() async {
+  Future<void> _identifyShootPhoto() async {
     Get.dialog(const LoadingDialog());
     try {
       // 设置对焦，提高拍照效率
@@ -236,14 +301,11 @@ class PlantController extends GetxController {
         if (imageThumbnailFile == null || image400File == null) {
           return;
         }
+        repository.identifyImage400File = image400File;
+        repository.identifyThumbnailFile = imageThumbnailFile;
         Get.back();
 
-        Get.to(
-          () => ScanPage(
-            imageThumbnailFile: imageThumbnailFile,
-            image400File: image400File,
-          ),
-        );
+        Get.to(() => const ScanPage());
       }
     } catch (e) {
       Get.back();
@@ -251,7 +313,7 @@ class PlantController extends GetxController {
     }
   }
 
-  void _identifyPickerPhoto() async {
+  Future<void> _identifyPickerPhoto() async {
     try {
       final XFile? pickedFile = await repository.imagePicker.pickImage(
         source: ImageSource.gallery,
@@ -280,6 +342,25 @@ class PlantController extends GetxController {
       Get.log(e.toString(), isError: true);
       rethrow;
     }
+  }
+
+  Future<List?> identifyCropImage(Uint8List data) async {
+    List<int> jpegBytes = img.encodeJpg(img.decodeImage(data)!, quality: 60);
+    final croppedData = Uint8List.fromList(jpegBytes);
+    final imageThumbnailFile = await FileUtils.listToFile(croppedData);
+    if (imageThumbnailFile == null) {
+      return null;
+    }
+    final cropImage = img.decodeImage(croppedData);
+    if (cropImage == null) {
+      return null;
+    }
+    final image400 = img.copyResize(cropImage, width: 400, height: 400);
+    final image400File = await FileUtils.imageToFile(image400);
+    if (image400File == null) {
+      return null;
+    }
+    return [imageThumbnailFile, image400File];
   }
 
   void diagnoseDeletePhoto(int index) {
@@ -311,15 +392,98 @@ class PlantController extends GetxController {
       }
       if (repository.diagnoseImageFile3.value == null) {
         repository.diagnoseImageFile3.value = File(imageFile.path);
+        diagnoseScanPhoto();
+      }
+    }
+  }
+
+  _diagnosePickerPhoto() async {
+    try {
+      int limit = 0;
+      if (repository.diagnoseImageFile1.value == null) {
+        limit += 1;
+      }
+      if (repository.diagnoseImageFile2.value == null) {
+        limit += 1;
+      }
+      if (repository.diagnoseImageFile3.value == null) {
+        limit += 1;
+      }
+      if (limit == 0) {
         return;
       }
-      // TODO 扫描页面改版
-      // Get.to(
-      //   () => ScanPage(
-      //     imageThumbnailFile: imageThumbnailFile,
-      //     image400File: image400File,
-      //   ),
-      // );
+      List<XFile> pickedFiles = [];
+      if (limit == 1) {
+        final pickedFile = await repository.imagePicker.pickImage(imageQuality: 60, source: ImageSource.gallery);
+        if (pickedFile != null) {
+          pickedFiles = [pickedFile];
+        }
+      } else {
+        pickedFiles = await repository.imagePicker.pickMultiImage(imageQuality: 60, limit: limit);
+      }
+      for (final file in pickedFiles) {
+        if (repository.diagnoseImageFile1.value == null) {
+          repository.diagnoseImageFile1.value = File(file.path);
+          continue;
+        }
+        if (repository.diagnoseImageFile2.value == null) {
+          repository.diagnoseImageFile2.value = File(file.path);
+          continue;
+        }
+        if (repository.diagnoseImageFile3.value == null) {
+          repository.diagnoseImageFile3.value = File(file.path);
+          continue;
+        }
+      }
+      if (repository.diagnoseImageFile3.value != null) {
+        diagnoseScanPhoto();
+      }
+    } on PlatformException catch (e) {
+      switch (e.code) {
+        case 'photo_access_denied':
+          NormalDialog.showPermission();
+          break;
+        default:
+          Fluttertoast.showToast(msg: e.message ?? 'error', gravity: ToastGravity.CENTER, timeInSecForIosWeb: 5);
+          break;
+      }
+      rethrow;
+    } catch (e) {
+      Get.log(e.toString(), isError: true);
+      rethrow;
     }
+  }
+
+  void diagnoseScanPhoto() {
+    if (repository.diagnoseImageFile1.value == null && repository.diagnoseImageFile2.value == null && repository.diagnoseImageFile3.value == null) {
+      return;
+    }
+    Get.to(
+      () => const ScanPage(),
+    );
+  }
+
+  Future<File?> _resizeImage(File file) async {
+    final originalImage = img.decodeImage(file.readAsBytesSync());
+    if (originalImage == null) {
+      return null;
+    }
+    // 计算等比缩放后的尺寸
+    int maxSize = 1920;
+    int newWidth = originalImage.width;
+    int newHeight = originalImage.height;
+
+    if (newWidth > maxSize || newHeight > maxSize) {
+      if (newWidth > newHeight) {
+        newHeight = (originalImage.height * maxSize / originalImage.width).round();
+        newWidth = maxSize;
+      } else {
+        newWidth = (originalImage.width * maxSize / originalImage.height).round();
+        newHeight = maxSize;
+      }
+    }
+
+    // 等比缩放图片
+    return await FileUtils.imageToFile(img.copyResize(originalImage, width: newWidth, height: newHeight));
   }
 }

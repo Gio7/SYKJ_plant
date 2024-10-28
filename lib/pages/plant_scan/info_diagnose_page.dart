@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
@@ -7,6 +8,8 @@ import 'package:plant/widgets/btn.dart';
 import 'package:plant/widgets/loading_dialog.dart';
 import 'package:plant/pages/plant_scan/plant_controller.dart';
 import 'package:plant/pages/plant_scan/info_identify_page.dart';
+
+import 'widgets/diagnose_rect.dart';
 
 class InfoDiagnosePage extends StatelessWidget {
   InfoDiagnosePage({super.key});
@@ -109,7 +112,7 @@ class InfoDiagnosePage extends StatelessWidget {
       child: SingleChildScrollView(
         // physics: const ClampingScrollPhysics(),
         child: Container(
-          margin: EdgeInsets.only(top: 256, bottom: 70 + Get.mediaQuery.padding.bottom),
+          margin: EdgeInsets.only(top: 245/* 256 */, bottom: 70 + Get.mediaQuery.padding.bottom),
           padding: const EdgeInsets.only(top: 60, left: 16, right: 16),
           decoration: const ShapeDecoration(
             color: UIColor.cF3F4F3,
@@ -209,7 +212,7 @@ class InfoDiagnosePage extends StatelessWidget {
                     decoration: TextDecoration.none,
                   ),
                 ),
-                const SizedBox(height: 24),
+                ..._buildArticle(),
               ],
             ],
           ),
@@ -218,18 +221,113 @@ class InfoDiagnosePage extends StatelessWidget {
     );
   }
 
+  List<Widget> _buildArticle() {
+    final article = ctr.repository.diagnoseInfo?.plant?.article ?? [];
+    final List<Widget> widgets = [];
+    for (int i = 0; i < article.length; i++) {
+      final item = article[i];
+      // widgets.add(const SizedBox(height: 24));
+      if (item.title.isNotEmpty) {
+        widgets.add(
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Text(
+              item.title,
+              style: const TextStyle(
+                color: UIColor.c15221D,
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                decoration: TextDecoration.none,
+              ),
+            ),
+          ),
+        );
+      }
+      if (item.contents != null) {
+        for (int j = 0; j < item.contents!.length; j++) {
+          final content = item.contents![j];
+          if (content.type == 0) {
+            widgets.add(Padding(
+              padding: const EdgeInsets.only(bottom: 24),
+              child: Markdown(
+                padding: EdgeInsets.zero,
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                data: content.content ?? '',
+                // style: TextStyle(
+                //   color: UIColor.c8E8B8B,
+                //   fontSize: 12,
+                //   fontWeight: FontWeightExt.medium,
+                //   decoration: TextDecoration.none,
+                // ),
+              ),
+            ));
+          } else if (content.type == 1) {
+            widgets.add(Padding(
+              padding: const EdgeInsets.only(bottom: 4),
+              child: Text(
+                content.contentPart?.title ?? '',
+                style: const TextStyle(
+                  color: UIColor.c15221D,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  decoration: TextDecoration.none,
+                ),
+              ),
+            ));
+            widgets.add(Padding(
+              padding: const EdgeInsets.only(bottom: 24),
+              child: Markdown(
+                padding: EdgeInsets.zero,
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                data: content.contentPart?.content ?? '',
+                // style: TextStyle(
+                //   color: UIColor.c8E8B8B,
+                //   fontSize: 12,
+                //   fontWeight: FontWeightExt.medium,
+                //   decoration: TextDecoration.none,
+                // ),
+              ),
+            ));
+          } else if (content.type == 2) {
+            if (content.imageUrl != null && content.imageUrl!.isNotEmpty) {
+              widgets.add(Padding(
+                padding: const EdgeInsets.only(bottom: 24),
+                child: CachedNetworkImage(imageUrl: content.imageUrl!, fit: BoxFit.cover),
+              ));
+            }
+          }
+        }
+      }
+    }
+    return widgets;
+  }
+
   Positioned _buildHeadImage() {
+    final url = ctr.repository.diagnoseInfo?.plant?.diagnoseImage ?? '';
     return Positioned(
+      left: 0,
+      top: 0,
+      right: 0,
+      // height: 290,
+      child: url.isEmpty
+          ? const SizedBox()
+          : DiagnoseRectPage(
+              url: url,
+              regions: ctr.repository.diagnoseInfo?.plant?.diagnoseDetect?.regions,
+            ),
+    );
+    /* return Positioned(
       left: 0,
       top: 0,
       right: 0,
       height: 290,
       child: CachedNetworkImage(
-        // TODO 这里需要换成诊断的图
-        imageUrl: ctr.repository.identifyThumbnailUrl ?? '',
+        imageUrl: ctr.repository.diagnoseInfo?.plant?.diagnoseImage ?? '',
         fit: BoxFit.cover,
         fadeInDuration: Duration.zero,
       ),
-    );
+    ); */
   }
 }

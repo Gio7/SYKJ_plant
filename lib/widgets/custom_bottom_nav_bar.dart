@@ -11,8 +11,9 @@ class CustomBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 78 + Get.mediaQuery.padding.bottom,
+      height: 63 + Get.mediaQuery.padding.bottom, //78 + Get.mediaQuery.padding.bottom,
       child: Stack(
+        clipBehavior: Clip.none,
         children: [
           Positioned(
             left: 0,
@@ -100,12 +101,16 @@ class CustomBottomNavBar extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(top: 0, left: Get.width / 2 - 35),
-            color: UIColor.transparent,
-            child: GestureDetector(
-              onTap: centerOnTap,
-              child: Image.asset('images/icon/bottom_camera.png', width: 70),
+          Positioned(
+            left: Get.width / 2 - 35,
+            top: -15,
+            child: Container(
+              // margin: EdgeInsets.only(top: 0, left: Get.width / 2 - 35),
+              color: UIColor.transparent,
+              child: GestureDetector(
+                onTap: centerOnTap,
+                child: Image.asset('images/icon/bottom_camera.png', width: 70),
+              ),
             ),
           ),
         ],

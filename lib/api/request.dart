@@ -52,8 +52,8 @@ class Request {
   }
 
   /// 200 正确， 201 不是植物  404 失败
-  static Future<dynamic> plantDiagnosis(String url, String thumbnail) async {
-    return await DioUtil.httpPost(_plantDiagnosis, data: {'url': url, 'thumbnail': thumbnail}, ignoreAll: true);
+  static Future<dynamic> plantDiagnosis(List<String?> imageUrls) async {
+    return await DioUtil.httpPost(_plantDiagnosis, data: {'url': imageUrls}, ignoreAll: true);
   }
 
   static Future<dynamic> getPlantScanHistory(int pageNum, [int pageSize = 20]) async {

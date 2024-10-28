@@ -27,7 +27,6 @@ class MyPlantsPage extends StatefulWidget {
 }
 
 class _MyPlantsPageState extends State<MyPlantsPage> {
-  
   final controller = Get.put(MyPlantsController());
   final repository = Get.find<MyPlantsController>().repository;
 
@@ -45,7 +44,7 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
     try {
       final res = await Request.getPlantDetailByRecord(model.id!);
       final p = PlantInfoModel.fromJson(res);
-      final ctr = Get.put(PlantController());
+      final ctr = Get.put(PlantController(ShootType.identify, hasCamera: false));
       ctr.repository.identifyThumbnailUrl = model.thumbnail;
       ctr.repository.plantInfo = p;
       Get.back();
@@ -62,43 +61,43 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const UserNavBar(needUser: true),
-        Container(
-          margin: const EdgeInsets.only(left: 24, top: 16),
-          child: Text(
-            'myPlants'.tr,
-            style: const TextStyle(
-              color: UIColor.c15221D,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-        repository.dataList.isEmpty
-            ? _empty
-            : Expanded(
-                child: EasyRefresh(
-                  onRefresh: () {
-                    controller.onRefresh();
-                  },
-                  onLoad: () {
-                    controller.onLoad();
-                  },
-                  child: ListView.separated(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
-                    itemBuilder: (_, i) {
-                      final p = repository.dataList[i];
-                      return _buildItem(p);
-                    },
-                    separatorBuilder: (_, __) => const SizedBox(height: 16),
-                    itemCount: repository.dataList.length,
-                  ),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const UserNavBar(needUser: true),
+            Container(
+              margin: const EdgeInsets.only(left: 24, top: 16),
+              child: Text(
+                'myPlants'.tr,
+                style: const TextStyle(
+                  color: UIColor.c15221D,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-      ],
-    ));
+            ),
+            repository.dataList.isEmpty
+                ? _empty
+                : Expanded(
+                    child: EasyRefresh(
+                      onRefresh: () {
+                        controller.onRefresh();
+                      },
+                      onLoad: () {
+                        controller.onLoad();
+                      },
+                      child: ListView.separated(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
+                        itemBuilder: (_, i) {
+                          final p = repository.dataList[i];
+                          return _buildItem(p);
+                        },
+                        separatorBuilder: (_, __) => const SizedBox(height: 16),
+                        itemCount: repository.dataList.length,
+                      ),
+                    ),
+                  ),
+          ],
+        ));
   }
 
   Widget _buildItem(PlantModel model) {
@@ -260,7 +259,7 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
                       FireBaseUtil.logEvent(EventName.listRemoveAgree);
                       Get.back();
                       Request.plantScanDelete(model.id!);
-                        repository.dataList.removeWhere((element) => element.id == model.id);
+                      repository.dataList.removeWhere((element) => element.id == model.id);
                       // setState(() {
                       // });
                     },

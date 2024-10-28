@@ -1,12 +1,10 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:crop_your_image/crop_your_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image/image.dart' as img;
-import 'package:plant/common/file_utils.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/pages/plant_scan/plant_controller.dart';
 import 'package:plant/widgets/loading_dialog.dart';
 import 'package:plant/widgets/nav_bar.dart';
 import 'package:plant/pages/plant_scan/scan_page.dart';
@@ -30,28 +28,18 @@ class PlantCropImage extends StatelessWidget {
                   controller: controller,
                   image: originalFile.readAsBytesSync(),
                   onCropped: (data) async {
-                    List<int> jpegBytes = img.encodeJpg(img.decodeImage(data)!, quality: 60);
-                    final croppedData = Uint8List.fromList(jpegBytes);
-                    final imageThumbnailFile = await FileUtils.listToFile(croppedData);
-                    if (imageThumbnailFile == null) {
-                      Get.back();
-                      return;
-                    }
-                    final cropImage = img.decodeImage(croppedData);
-                    if (cropImage == null) {
-                      Get.back();
-                      return;
-                    }
-                    final image400 = img.copyResize(cropImage, width: 400, height: 400);
-                    final image400File = await FileUtils.imageToFile(image400);
-                    if (image400File == null) {
+                    final ctr = Get.find<PlantController>();
+                    final image = await ctr.identifyCropImage(data);
+                    if (image == null) {
                       Get.back();
                       return;
                     }
                     if (Get.isDialogOpen == true) {
                       Get.back();
                     }
-                    Get.off(() => ScanPage(imageThumbnailFile: imageThumbnailFile, image400File: image400File));
+                    ctr.repository.identifyThumbnailFile = image[0];
+                    ctr.repository.identifyImage400File = image[1];
+                    Get.off(() => const ScanPage());
                   },
                   withCircleUi: false,
                   onStatusChanged: (status) {

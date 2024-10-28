@@ -15,7 +15,7 @@ enum MemberType {
   const MemberType(this.value);
   final int value;
 
-  static MemberType fromValue(int value) {
+  static MemberType fromValue(int? value) {
     switch (value) {
       case 1:
         return MemberType.normal;

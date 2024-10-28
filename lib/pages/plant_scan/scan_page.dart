@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,9 +12,7 @@ import 'package:plant/sdk/scanning_effect/scanning_effect.dart';
 import '../shop/shop_view.dart';
 
 class ScanPage extends StatelessWidget {
-  const ScanPage({super.key, required this.imageThumbnailFile, required this.image400File});
-  final File imageThumbnailFile;
-  final File image400File;
+  const ScanPage({super.key});
 
   void _requestNetwork(PlantController ctr, Completer<void> completer) async {
     if (!(Get.find<UserController>().userInfo.value.isRealVip)) {
@@ -27,27 +24,30 @@ class ScanPage extends StatelessWidget {
         return;
       }
     }
-    ctr.requestInfo(completer, imageThumbnailFile, image400File).then((isSuccess) => {
-      if (!isSuccess && !(completer.isCompleted))
-        {
-          Get.dialog(
-            NormalDialog(
-              title: 'noPlantDetected'.tr,
-              subText: 'noPlantDetectedTips'.tr,
-              icon: Image.asset('images/icon/plant.png', height: 70),
-              confirmText: 'retakePhoto'.tr,
-              cancelText: 'cancel'.tr,
-              onConfirm: () {
-                Get.back(closeOverlays: true);
-              },
-              onCancel: () {
-                Get.back(closeOverlays: true);
-                Get.until((route) => Get.currentRoute == '/');
-              },
-            ),
-          )
-        }
-    });
+    bool isSuccess = false;
+    if (ctr.repository.shootType.value == ShootType.identify) {
+      isSuccess = await ctr.requestIdentifyInfo(completer);
+    } else {
+      isSuccess = await ctr.requestDiagnoseInfo(completer);
+    }
+    if (!isSuccess && !(completer.isCompleted)) {
+      Get.dialog(
+        NormalDialog(
+          title: 'noPlantDetected'.tr,
+          subText: 'noPlantDetectedTips'.tr,
+          icon: Image.asset('images/icon/plant.png', height: 70),
+          confirmText: 'retakePhoto'.tr,
+          cancelText: 'cancel'.tr,
+          onConfirm: () {
+            Get.back(closeOverlays: true);
+          },
+          onCancel: () {
+            Get.back(closeOverlays: true);
+            Get.until((route) => Get.currentRoute == '/');
+          },
+        ),
+      );
+    }
   }
 
   @override
@@ -113,7 +113,10 @@ class ScanPage extends StatelessWidget {
                 enableBorder: false,
                 scanningLinePadding: EdgeInsets.zero,
                 delay: Duration.zero,
-                child: Image.file(imageThumbnailFile),
+                child: Image.file(
+                  ctr.repository.identifyImage400File ?? ctr.repository.diagnoseImageFile1.value ?? ctr.repository.diagnoseImageFile2.value ?? ctr.repository.diagnoseImageFile3.value!,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(height: 50),
