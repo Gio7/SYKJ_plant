@@ -159,7 +159,7 @@ class ShopPage extends StatelessWidget {
           color: UIColor.cBDBDBD,
           fontSize: 10,
           fontWeight: FontWeightExt.medium,
-          decoration: TextDecoration.underline,
+          // decoration: TextDecoration.underline,
           decorationColor: UIColor.cBDBDBD,
         ),
       ),
@@ -244,6 +244,7 @@ class ShopPage extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(bottom: 16),
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        constraints: const BoxConstraints(minHeight: 67),
         decoration: ShapeDecoration(
           color: isSelected ? null : Colors.white,
           gradient: isSelected
@@ -262,17 +263,21 @@ class ShopPage extends StatelessWidget {
           children: [
             Expanded(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      color: titleColor,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
+                  if (GetPlatform.isIOS)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 4),
+                      child: Text(
+                        title,
+                        style: TextStyle(
+                          color: titleColor,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 4),
                   Row(
                     children: [
                       Text(
