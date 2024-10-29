@@ -63,6 +63,8 @@ class UIColor {
 
   static const Color c8FCCB9 = Color(0xFF8FCCB9);
 
+  static const Color c9C9999 = Color(0xFF9C9999);
+
   static Color hexToColor(String s) {
     if (s.length != 7 || int.tryParse(s.substring(1, 7), radix: 16) == null) {
       return primary;

@@ -6,7 +6,7 @@ import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/pages/plant_scan/plant_controller.dart';
 import 'package:plant/widgets/user_nav_bar.dart';
-import 'package:plant/controllers/user_controller.dart';
+import 'package:plant/widgets/welcome_widget.dart';
 
 import '../plant_scan/shoot_page.dart';
 
@@ -18,54 +18,7 @@ class HomePage extends StatelessWidget {
     return Column(
       children: [
         const UserNavBar(needUser: true),
-        Container(
-          width: double.infinity,
-          margin: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
-          decoration: ShapeDecoration(
-            color: UIColor.transparent40,
-            shape: RoundedRectangleBorder(
-              side: const BorderSide(width: 1, color: UIColor.white),
-              borderRadius: BorderRadius.circular(16),
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 24,
-                child: Obx(
-                  () => Text(
-                    '${'hi'.tr}${Get.find<UserController>().userInfo.value.nickname ?? 'plantLover'.tr}',
-                    style: TextStyle(
-                      color: UIColor.c15221D,
-                      fontSize: 14,
-                      fontWeight: FontWeightExt.medium,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 2),
-              SizedBox(
-                height: 24,
-                child: Row(
-                  children: [
-                    Text(
-                      'welcome'.tr,
-                      style: const TextStyle(
-                        color: UIColor.c15221D,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Image.asset('images/icon/sun.png', height: 24),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
+        const WelcomeWidget(),
         const SizedBox(height: 24),
         Container(
           height: 24,

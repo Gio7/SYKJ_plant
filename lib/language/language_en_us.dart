@@ -143,6 +143,9 @@ class LanguageEnUs {
       'maturePlant': 'Mature Plant',
       // 1.0.3
       'profile': 'Profile',
+      'startDiagnose': 'Start Diagnose',
+      'diagnoseDiseases': 'Diagnose plant diseases and learn',
+      'takeAPhoto': 'Take a Photo',
     };
   }
 }
