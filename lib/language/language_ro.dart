@@ -141,6 +141,14 @@ class LanguageRo {
       'yearsMembership': 'Abonament Anual',
       'weScanForYou': 'Se scanează...',
       'maturePlant': 'Plantă matură',
+      "profile": "Profil",
+      "startDiagnose": "Începe diagnosticul",
+      "diagnoseDiseases": "Diagnosticați bolile plantelor și învățați",
+      "takeAPhoto": "Faceți o fotografie",
+      "exploreDiseases": "Explorați bolile",
+      "noData": "Fără date",
+      "diagnosisHistory": "Istoric diagnostic",
+      "diagnosisHistoryListTips": "Sistemul va reține istoricul diagnosticului timp de 12 luni"
     };
   }
 }

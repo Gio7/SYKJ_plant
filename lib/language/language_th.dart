@@ -140,6 +140,14 @@ class LanguageTh {
       'yearsMembership': 'สมาชิกรายปี',
       'weScanForYou': 'กำลังสแกน...',
       'maturePlant': 'พืชโตเต็มวัย',
+      "profile": "โปรไฟล์",
+      "startDiagnose": "เริ่มการวินิจฉัย",
+      "diagnoseDiseases": "วินิจฉัยโรคพืชและเรียนรู้",
+      "takeAPhoto": "ถ่ายภาพ",
+      "exploreDiseases": "สำรวจโรค",
+      "noData": "ไม่มีข้อมูล",
+      "diagnosisHistory": "ประวัติการวินิจฉัย",
+      "diagnosisHistoryListTips": "ระบบจะเก็บประวัติการวินิจฉัยไว้ 12 เดือน"
     };
   }
 }

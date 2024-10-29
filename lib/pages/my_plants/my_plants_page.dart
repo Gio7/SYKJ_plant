@@ -45,7 +45,6 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
       final res = await Request.getPlantDetailByRecord(model.id!);
       final p = PlantInfoModel.fromJson(res);
       final ctr = Get.put(PlantController(ShootType.identify, hasCamera: false));
-      ctr.repository.identifyThumbnailUrl = model.thumbnail;
       ctr.repository.plantInfo = p;
       Get.back();
 

@@ -141,6 +141,14 @@ class LanguageRu {
       'yearsMembership': 'Годовое членство',
       'weScanForYou': 'Сканирование в процессе...',
       'maturePlant': 'Зрелое растение',
+      "profile": "Профиль",
+      "startDiagnose": "Начать диагностику",
+      "diagnoseDiseases": "Диагностировать болезни растений и учиться",
+      "takeAPhoto": "Сделать фото",
+      "exploreDiseases": "Исследовать болезни",
+      "noData": "Нет данных",
+      "diagnosisHistory": "История диагностики",
+      "diagnosisHistoryListTips": "Система будет хранить историю диагностики в течение 12 месяцев"
     };
   }
 }

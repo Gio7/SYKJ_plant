@@ -141,6 +141,14 @@ class LanguageId {
       'yearsMembership': 'Keanggotaan Tahunan',
       'weScanForYou': 'Memindai sedang berlangsung...',
       'maturePlant': 'Tanaman Matang',
+      "profile": "Profil",
+      "startDiagnose": "Mulai Diagnosis",
+      "diagnoseDiseases": "Diagnosa penyakit tanaman dan belajar",
+      "takeAPhoto": "Ambil Foto",
+      "exploreDiseases": "Jelajahi penyakit",
+      "noData": "Tidak Ada Data",
+      "diagnosisHistory": "Riwayat Diagnosis",
+      "diagnosisHistoryListTips": "Sistem akan menyimpan riwayat diagnosis selama 12 bulan"
     };
   }
 }

@@ -20,6 +20,8 @@ class Request {
   static const String _verifyOrder = '/Plant/shop/verifyOrder';
   static const String _exchangeGift = '/Plant/shop/exchangeGift';
   static const String _getOrderKey = '/Plant/shop/getOrderKey';
+  static const String _diagnosisHistory = '/Plant/plant/diagnosisHistory';
+  static const String _diagnosisHistoryDetail = '/Plant/plant/diagnosisHistoryDetail';
 
   /// telegram_group\email
   static Future<void> getConfig([List<String> conKey = const ['telegram_group', 'email']]) async {
@@ -103,5 +105,13 @@ class Request {
 
   static Future<String> getOrderKey() async {
     return await DioUtil.httpGet(_getOrderKey);
+  }
+
+  static Future<dynamic> diagnosisHistory(int pageNum, [int pageSize = 30]) async {
+    return await DioUtil.httpGet(_diagnosisHistory, parameters: {'pageNum': pageNum, 'pageSize': pageSize}, allData: true);
+  }
+
+  static Future<dynamic> diagnosisHistoryDetailById(int id) async {
+    return await DioUtil.httpGet(_diagnosisHistoryDetail, parameters: {'id': id});
   }
 }

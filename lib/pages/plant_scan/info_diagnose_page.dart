@@ -12,7 +12,8 @@ import 'package:plant/pages/plant_scan/info_identify_page.dart';
 import 'widgets/diagnose_rect.dart';
 
 class InfoDiagnosePage extends StatelessWidget {
-  InfoDiagnosePage({super.key});
+  InfoDiagnosePage({super.key, this.hideBottom = false});
+  final bool hideBottom;
 
   final ctr = Get.find<PlantController>();
 
@@ -24,7 +25,7 @@ class InfoDiagnosePage extends StatelessWidget {
         children: [
           _buildHeadImage(),
           _buildBody(),
-          _buildBottomBtn(),
+          if (!hideBottom) _buildBottomBtn(),
           _buildNav(),
         ],
       ),
@@ -112,7 +113,7 @@ class InfoDiagnosePage extends StatelessWidget {
       child: SingleChildScrollView(
         // physics: const ClampingScrollPhysics(),
         child: Container(
-          margin: EdgeInsets.only(top: 245/* 256 */, bottom: 70 + Get.mediaQuery.padding.bottom),
+          margin: EdgeInsets.only(top: 245 /* 256 */, bottom: 70 + Get.mediaQuery.padding.bottom),
           padding: const EdgeInsets.only(top: 60, left: 16, right: 16),
           decoration: const ShapeDecoration(
             color: UIColor.cF3F4F3,

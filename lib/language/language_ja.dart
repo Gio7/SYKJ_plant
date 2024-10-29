@@ -139,6 +139,14 @@ class LanguageJa {
       'yearsMembership': '年間メンバーシップ',
       'weScanForYou': 'スキャン中…',
       'maturePlant': '成熟した植物',
+      "profile": "プロフィール",
+      "startDiagnose": "診断を開始",
+      "diagnoseDiseases": "植物の病気を診断して学ぶ",
+      "takeAPhoto": "写真を撮る",
+      "exploreDiseases": "病気を探索",
+      "noData": "データなし",
+      "diagnosisHistory": "診断履歴",
+      "diagnosisHistoryListTips": "システムは診断履歴を12ヶ月間保持します"
     };
   }
 }

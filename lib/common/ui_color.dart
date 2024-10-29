@@ -4,6 +4,7 @@ import 'dart:ui';
 class UIColor {
   /// 用于禁用遮罩
   static const Color transparentWhite20 = Color(0x33FFFFFF);
+  static const Color transparentWhite50 = Color(0x80FFFFFF);
   static const Color transparent = Color(0x00FFFFFF);
   static const Color transparent40 = Color(0x66FFFFFF);
   static const Color transparent60 = Color(0x99FFFFFF);
@@ -64,6 +65,8 @@ class UIColor {
   static const Color c8FCCB9 = Color(0xFF8FCCB9);
 
   static const Color c9C9999 = Color(0xFF9C9999);
+
+  static const Color c85B9A8 = Color(0xFF85B9A8);
 
   static Color hexToColor(String s) {
     if (s.length != 7 || int.tryParse(s.substring(1, 7), radix: 16) == null) {

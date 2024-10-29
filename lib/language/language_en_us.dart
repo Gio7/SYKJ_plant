@@ -142,10 +142,14 @@ class LanguageEnUs {
       'weScanForYou': 'Scanning in progress...',
       'maturePlant': 'Mature Plant',
       // 1.0.3
-      'profile': 'Profile',
-      'startDiagnose': 'Start Diagnose',
-      'diagnoseDiseases': 'Diagnose plant diseases and learn',
-      'takeAPhoto': 'Take a Photo',
+      "profile": "Profile",
+      "startDiagnose": "Start Diagnose",
+      "diagnoseDiseases": "Diagnose plant diseases and learn",
+      "takeAPhoto": "Take a Photo",
+      "exploreDiseases": "Explore diseases",
+      "noData": "No Data",
+      "diagnosisHistory": "Diagnosis History",
+      "diagnosisHistoryListTips": "The system will retain diagnosis history for 12 months"
     };
   }
 }

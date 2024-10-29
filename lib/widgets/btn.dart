@@ -13,6 +13,7 @@ class NormalButton extends StatelessWidget {
     this.width,
     this.iconWidget,
     this.borderRadius,
+    this.paddingHorizontal = 16,
   });
 
   final List<Color>? bgColors;
@@ -25,6 +26,7 @@ class NormalButton extends StatelessWidget {
   final double? width;
   final Function()? onTap;
   final double? borderRadius;
+  final double paddingHorizontal;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class NormalButton extends StatelessWidget {
       child: Container(
         height: 48,
         width: width,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: paddingHorizontal),
         decoration: BoxDecoration(
           color: bgColors != null ? null : bgColor,
           gradient: bgColors == null

@@ -141,6 +141,14 @@ class LanguageFr {
       'yearsMembership': 'Abonnement Annuel',
       'weScanForYou': 'Analyse en cours...',
       'maturePlant': 'Plante Mature',
+      "profile": "Profil",
+      "startDiagnose": "Démarrer le diagnostic",
+      "diagnoseDiseases": "Diagnostiquer les maladies des plantes et apprendre",
+      "takeAPhoto": "Prendre une photo",
+      "exploreDiseases": "Explorer les maladies",
+      "noData": "Pas de données",
+      "diagnosisHistory": "Historique des diagnostics",
+      "diagnosisHistoryListTips": "Le système conservera l'historique des diagnostics pendant 12 mois"
     };
   }
 }

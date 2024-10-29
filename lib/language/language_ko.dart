@@ -139,6 +139,14 @@ class LanguageKo {
       'yearsMembership': '연간 멤버십',
       'weScanForYou': '스캔 중...',
       'maturePlant': '성숙한 식물',
+      "profile": "프로필",
+      "startDiagnose": "진단 시작",
+      "diagnoseDiseases": "식물 질병을 진단하고 배우기",
+      "takeAPhoto": "사진 찍기",
+      "exploreDiseases": "질병 탐색",
+      "noData": "데이터 없음",
+      "diagnosisHistory": "진단 기록",
+      "diagnosisHistoryListTips": "시스템은 진단 기록을 12개월 동안 보관합니다"
     };
   }
 }

@@ -141,6 +141,14 @@ class LanguagePt {
       'yearsMembership': 'Assinatura Anual',
       'weScanForYou': 'Escaneando em andamento...',
       'maturePlant': 'Planta Maduro',
+      "profile": "Perfil",
+      "startDiagnose": "Iniciar diagnóstico",
+      "diagnoseDiseases": "Diagnosticar doenças de plantas e aprender",
+      "takeAPhoto": "Tirar uma foto",
+      "exploreDiseases": "Explorar doenças",
+      "noData": "Sem dados",
+      "diagnosisHistory": "Histórico de diagnósticos",
+      "diagnosisHistoryListTips": "O sistema reterá o histórico de diagnósticos por 12 meses"
     };
   }
 }

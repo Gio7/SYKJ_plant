@@ -141,6 +141,14 @@ class LanguageSv {
       'yearsMembership': 'Årsmedlemskap',
       'weScanForYou': 'Skannar pågår...',
       'maturePlant': 'Mogen växt',
+      "profile": "Profil",
+      "startDiagnose": "Starta diagnos",
+      "diagnoseDiseases": "Diagnosera växtsjukdomar och lär dig",
+      "takeAPhoto": "Ta ett foto",
+      "exploreDiseases": "Utforska sjukdomar",
+      "noData": "Inga data",
+      "diagnosisHistory": "Diagnoshistorik",
+      "diagnosisHistoryListTips": "Systemet kommer att behålla diagnoshistoriken i 12 månader"
     };
   }
 }

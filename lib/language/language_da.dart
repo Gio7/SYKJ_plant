@@ -141,6 +141,14 @@ class LanguageDa {
       'yearsMembership': 'Årligt Medlemskab',
       'weScanForYou': 'Scanner i gang...',
       'maturePlant': 'Moden Plante',
+      "profile": "Profil",
+      "startDiagnose": "Start diagnose",
+      "diagnoseDiseases": "Diagnosticer plantesygdomme og lær",
+      "takeAPhoto": "Tag et billede",
+      "exploreDiseases": "Udforsk sygdomme",
+      "noData": "Ingen data",
+      "diagnosisHistory": "Diagnosehistorik",
+      "diagnosisHistoryListTips": "Systemet vil gemme diagnosehistorik i 12 måneder"
     };
   }
 }

@@ -139,6 +139,14 @@ class LanguageZhTw {
       'yearsMembership': '年會員',
       'weScanForYou': '正在掃描...',
       'maturePlant': '成熟植株',
+      "profile": "個人資料",
+      "startDiagnose": "開始診斷",
+      "diagnoseDiseases": "診斷植物疾病並學習",
+      "takeAPhoto": "拍照",
+      "exploreDiseases": "探索疾病",
+      "noData": "無數據",
+      "diagnosisHistory": "診斷歷史",
+      "diagnosisHistoryListTips": "系統將保留診斷記錄12個月"
     };
   }
 }

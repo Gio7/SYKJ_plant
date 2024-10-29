@@ -141,6 +141,14 @@ class LanguageFi {
       'yearsMembership': 'Vuosijäsenyys',
       'weScanForYou': 'Skannaus käynnissä...',
       'maturePlant': 'Kypsä kasvi',
+      "profile": "Profiili",
+      "startDiagnose": "Aloita diagnosointi",
+      "diagnoseDiseases": "Diagnosoi kasvisairaudet ja opi",
+      "takeAPhoto": "Ota valokuva",
+      "exploreDiseases": "Tutki sairauksia",
+      "noData": "Ei tietoja",
+      "diagnosisHistory": "Diagnoosihistoria",
+      "diagnosisHistoryListTips": "Järjestelmä säilyttää diagnoosihistorian 12 kuukauden ajan"
     };
   }
 }

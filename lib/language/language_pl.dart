@@ -141,6 +141,14 @@ class LanguagePl {
       'yearsMembership': 'Coroczne Członkostwo',
       'weScanForYou': 'Trwa skanowanie...',
       'maturePlant': 'Dojrzała Roślina',
+      "profile": "Profil",
+      "startDiagnose": "Rozpocznij diagnostykę",
+      "diagnoseDiseases": "Diagnozuj choroby roślin i ucz się",
+      "takeAPhoto": "Zrób zdjęcie",
+      "exploreDiseases": "Odkrywaj choroby",
+      "noData": "Brak danych",
+      "diagnosisHistory": "Historia diagnoz",
+      "diagnosisHistoryListTips": "System będzie przechowywał historię diagnoz przez 12 miesięcy"
     };
   }
 }

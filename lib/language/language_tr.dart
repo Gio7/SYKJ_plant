@@ -141,6 +141,14 @@ class LanguageTr {
       'yearsMembership': 'Yıllık Üyelik',
       'weScanForYou': 'Tarama devam ediyor...',
       'maturePlant': 'Olgun Bitki',
+      "profile": "Profil",
+      "startDiagnose": "Teşhise Başla",
+      "diagnoseDiseases": "Bitki hastalıklarını teşhis edin ve öğrenin",
+      "takeAPhoto": "Fotoğraf Çek",
+      "exploreDiseases": "Hastalıkları Keşfet",
+      "noData": "Veri Yok",
+      "diagnosisHistory": "Teşhis Geçmişi",
+      "diagnosisHistoryListTips": "Sistem teşhis geçmişini 12 ay boyunca saklayacaktır"
     };
   }
 }

@@ -46,7 +46,7 @@ class InfoIdentifyPage extends StatelessWidget {
       right: 0,
       height: 290,
       child: CachedNetworkImage(
-        imageUrl: ctr.repository.identifyThumbnailUrl ?? '',
+        imageUrl: ctr.repository.plantInfo?.plant?.thumbnail ?? '',
         fit: BoxFit.cover,
         fadeInDuration: Duration.zero,
       ),

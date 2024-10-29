@@ -141,6 +141,14 @@ class LanguageNl {
       'yearsMembership': 'Jaarlijkse Lidmaatschap',
       'weScanForYou': 'Bezig met scannen...',
       'maturePlant': 'Volwassen Plant',
+      "profile": "Profiel",
+      "startDiagnose": "Start diagnose",
+      "diagnoseDiseases": "Diagnose plantenziekten en leer",
+      "takeAPhoto": "Maak een foto",
+      "exploreDiseases": "Verken ziektes",
+      "noData": "Geen gegevens",
+      "diagnosisHistory": "Diagnosegeschiedenis",
+      "diagnosisHistoryListTips": "Het systeem bewaart de diagnosegeschiedenis gedurende 12 maanden"
     };
   }
 }

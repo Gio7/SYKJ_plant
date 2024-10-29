@@ -141,6 +141,14 @@ class LanguageDe {
       'yearsMembership': 'Jahresmitgliedschaft',
       'weScanForYou': 'Scanvorgang läuft...',
       'maturePlant': 'Reife Pflanze',
+      "profile": "Profil",
+      "startDiagnose": "Diagnose starten",
+      "diagnoseDiseases": "Pflanzenkrankheiten diagnostizieren und lernen",
+      "takeAPhoto": "Foto machen",
+      "exploreDiseases": "Krankheiten erkunden",
+      "noData": "Keine Daten",
+      "diagnosisHistory": "Diagnoseverlauf",
+      "diagnosisHistoryListTips": "Das System speichert den Diagnoseverlauf für 12 Monate"
     };
   }
 }
