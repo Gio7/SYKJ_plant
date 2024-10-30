@@ -65,6 +65,7 @@ class BuyShop {
           }
           sign ??= await Request.getOrderKey();
           await _checkPayInfo(purchaseDetails);
+          FireBaseUtil.subscribeSuccess(purchaseDetails.productID);
           await Get.find<UserController>().getUserInfo();
           Get.back(closeOverlays: Get.currentRoute != '/');
         }
@@ -121,6 +122,7 @@ class BuyShop {
   }
 
   void submit(MemberProductModel currentItem, bool buyNonConsumable) async {
+    FireBaseUtil.subscribeCreate(currentItem.productDetails?.id);
     if (currentItem.productDetails?.id == null) {
       return;
     }

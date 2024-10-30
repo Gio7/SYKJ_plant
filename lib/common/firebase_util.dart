@@ -44,6 +44,40 @@ class FireBaseUtil {
       parameters: {'from_event': fromPage},
     );
   }
+
+  /// 创建订阅 weekly，year 
+  static void subscribeCreate(String? id) {
+    _analytics.logEvent(
+      name: EventName.subscribeSelect,
+      parameters: {'member_type': subscribeType(id)},
+    );
+  }
+
+  /// 订阅成功 weekly，year 
+  static void subscribeSuccess(String? id) {
+    _analytics.logEvent(
+      name: EventName.subscribeSuccess,
+      parameters: {'member_type': subscribeType(id)},
+    );
+  }
+
+  /// 点击疾病百科
+  static void didNormalDisease(String diseaseType) {
+    _analytics.logEvent(
+      name: EventName.normalDisease,
+      parameters: {'disease_type': diseaseType},
+    );
+  }
+
+  static String subscribeType(String? id) {
+    // weekly，year
+    if (id == 'plant_sub_vip_plan_weekly' || id == 'sub_vip_plan_weekly' || id == 'vip_plan_weekly_sub') {
+      return 'weekly';
+    } else if (id == 'sub_vip_plan_yearly' || id == 'plant_sub_vip_plan_yearly' || id == 'vip_plan_yearly_sub') {
+      return 'year';
+    }
+    return '';
+  }
 }
 
 /// 事件名称
@@ -149,4 +183,16 @@ class EventName {
 
   /// 设置界面分享app
   static const String settingShareApp = 'setting_share_app';
+
+  /// 发起订阅会员付款上报
+  static const String subscribeSelect = 'subscribe_select';
+
+  /// 常见诊断百科点击
+  static const String normalDisease = 'normal_disease';
+
+  /// 订阅会员付款成功上报
+  static const String subscribeSuccess = 'subscribe_success';
+
+  /// 诊断记录点击
+  static const String diagnoseHistory = 'diagnose_history';
 }

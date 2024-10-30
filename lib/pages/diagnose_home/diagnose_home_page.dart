@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/pages/diagnose_history/diagnose_history_page.dart';
@@ -79,7 +80,10 @@ class DiagnosePage extends StatelessWidget {
                     width: 40,
                     height: 40,
                     child: GestureDetector(
-                      onTap: () => Get.to(() => const DiagnoseHistoryPage()),
+                      onTap: () {
+                        FireBaseUtil.logEvent(EventName.diagnoseHistory);
+                        Get.to(() => const DiagnoseHistoryPage());
+                      },
                       child: Image.asset('images/icon/diagnose_history.png'),
                     ),
                   ),
@@ -122,9 +126,9 @@ class DiagnosePage extends StatelessWidget {
   Widget _buildItem() {
     return GestureDetector(
       onTap: () {
-        Get.to(() => DiseasesCasePage(
-              title: '123',
-            ));
+        // TODO 更换类型
+        FireBaseUtil.didNormalDisease('type');
+        Get.to(() => DiseasesCasePage(title: '123'));
       },
       child: Container(
         width: 230,
