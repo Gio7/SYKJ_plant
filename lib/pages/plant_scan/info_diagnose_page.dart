@@ -305,30 +305,15 @@ class InfoDiagnosePage extends StatelessWidget {
     return widgets;
   }
 
-  Positioned _buildHeadImage() {
+  Widget _buildHeadImage() {
     final url = ctr.repository.diagnoseInfo?.plant?.diagnoseImage ?? '';
-    return Positioned(
-      left: 0,
-      top: 0,
-      right: 0,
-      // height: 290,
-      child: url.isEmpty
-          ? const SizedBox()
-          : DiagnoseRectPage(
-              url: url,
-              regions: ctr.repository.diagnoseInfo?.plant?.diagnoseDetect?.regions,
-            ),
+    final reginos = ctr.repository.diagnoseInfo?.plant?.diagnoseDetect?.regions ?? [];
+    if (url.isEmpty) {
+      return const SizedBox();
+    }
+    return DiagnoseRectPage(
+      url: url,
+      regions: reginos,
     );
-    /* return Positioned(
-      left: 0,
-      top: 0,
-      right: 0,
-      height: 290,
-      child: CachedNetworkImage(
-        imageUrl: ctr.repository.diagnoseInfo?.plant?.diagnoseImage ?? '',
-        fit: BoxFit.cover,
-        fadeInDuration: Duration.zero,
-      ),
-    ); */
   }
 }

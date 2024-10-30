@@ -53,10 +53,9 @@ class DiagnoseHistoryPage extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           separator: const SizedBox(height: 16),
                           groupItemBuilder: (_, model,__,groupEnd) {
-                            final p = controller.repository.dataList[0];
                             return Padding(
                               padding: EdgeInsets.only(bottom: groupEnd ? 4 : 0),
-                              child: _buildItem(p, controller),
+                              child: _buildItem(model, controller),
                             );
                           },
                           elements: repository.dataList,
