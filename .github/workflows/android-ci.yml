@@ -90,7 +90,7 @@ jobs:
         with:
           _api_key: ${{ secrets.PGY_KEY }}
           appFilePath: ${{ env.UPLOAD_FILE_PATH }}
-          buildUpdateDescription: '我开了个洗脚城，地点就在金盆岭'
+          buildUpdateDescription: 'v1.0.3开发完结'
 #        uses: xtayga/upload-pgyer-action@master
 #        with:
 #          url: https://www.pgyer.com/apiv2/app/upload
