@@ -129,6 +129,7 @@ class PlantController extends GetxController {
           return;
         }
         repository.diagnoseImageUrls.add(await AwsUtils.uploadByFile(file1));
+        repository.diagnoseImageFile1.value = null;
         if (completer.isCompleted) return;
       }
 
@@ -138,6 +139,7 @@ class PlantController extends GetxController {
           return;
         }
         repository.diagnoseImageUrls.add(await AwsUtils.uploadByFile(file2));
+        repository.diagnoseImageFile2.value = null;
         if (completer.isCompleted) return;
       }
 
@@ -147,12 +149,9 @@ class PlantController extends GetxController {
           return;
         }
         repository.diagnoseImageUrls.add(await AwsUtils.uploadByFile(file3));
+        repository.diagnoseImageFile3.value = null;
         if (completer.isCompleted) return;
       }
-
-      repository.diagnoseImageFile1.value = null;
-      repository.diagnoseImageFile2.value = null;
-      repository.diagnoseImageFile3.value = null;
     }
 
     repository.isAnalyzingImage.value = true;

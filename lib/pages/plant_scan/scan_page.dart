@@ -114,7 +114,9 @@ class ScanPage extends StatelessWidget {
                 scanningLinePadding: EdgeInsets.zero,
                 delay: Duration.zero,
                 child: Image.file(
-                  ctr.repository.identifyImage400File ?? ctr.repository.diagnoseImageFile1.value ?? ctr.repository.diagnoseImageFile2.value ?? ctr.repository.diagnoseImageFile3.value!,
+                  ctr.repository.shootType.value == ShootType.identify
+                      ? ctr.repository.identifyThumbnailFile!
+                      : ctr.repository.diagnoseImageFile1.value ?? ctr.repository.diagnoseImageFile2.value ?? ctr.repository.diagnoseImageFile3.value!,
                   fit: BoxFit.cover,
                 ),
               ),
