@@ -45,7 +45,7 @@ class DiseasesCasePage extends StatelessWidget {
         Get.to(
           () => CommonWebview(
             url: model.resourceUrl!,
-            title: model.heading,
+            title: 'symptomDetails'.tr,
             thumbnail: model.thumbnailUrl,
           ),
         );
