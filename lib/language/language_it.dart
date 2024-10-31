@@ -148,7 +148,8 @@ class LanguageIt {
       "exploreDiseases": "Esplora le malattie",
       "noData": "Nessun dato",
       "diagnosisHistory": "Cronologia delle diagnosi",
-      "diagnosisHistoryListTips": "Il sistema conserverà la cronologia delle diagnosi per 12 mesi"
+      "diagnosisHistoryListTips": "Il sistema conserverà la cronologia delle diagnosi per 12 mesi",
+      "symptomDetails": "Dettagli dei sintomi",
     };
   }
 }

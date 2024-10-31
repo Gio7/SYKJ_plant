@@ -148,7 +148,8 @@ class LanguageRu {
       "exploreDiseases": "Исследовать болезни",
       "noData": "Нет данных",
       "diagnosisHistory": "История диагностики",
-      "diagnosisHistoryListTips": "Система будет хранить историю диагностики в течение 12 месяцев"
+      "diagnosisHistoryListTips": "Система будет хранить историю диагностики в течение 12 месяцев",
+      "symptomDetails": "Подробности симптомов",
     };
   }
 }

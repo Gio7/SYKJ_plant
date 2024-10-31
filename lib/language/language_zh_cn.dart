@@ -146,7 +146,8 @@ class LanguageZhCn {
       "exploreDiseases": "探索疾病",
       "noData": "无数据",
       "diagnosisHistory": "诊断历史",
-      "diagnosisHistoryListTips": "系统将保留诊断记录12个月"
+      "diagnosisHistoryListTips": "系统将保留诊断记录12个月",
+      "symptomDetails": "症状详情",
     };
   }
 }

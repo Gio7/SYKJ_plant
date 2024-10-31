@@ -146,7 +146,8 @@ class LanguageJa {
       "exploreDiseases": "病気を探索",
       "noData": "データなし",
       "diagnosisHistory": "診断履歴",
-      "diagnosisHistoryListTips": "システムは診断履歴を12ヶ月間保持します"
+      "diagnosisHistoryListTips": "システムは診断履歴を12ヶ月間保持します",
+      "symptomDetails": "症状の詳細",
     };
   }
 }

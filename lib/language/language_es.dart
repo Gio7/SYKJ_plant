@@ -148,7 +148,8 @@ class LanguageEs {
       "exploreDiseases": "Explorar enfermedades",
       "noData": "Sin datos",
       "diagnosisHistory": "Historial de diagnósticos",
-      "diagnosisHistoryListTips": "El sistema retendrá el historial de diagnósticos por 12 meses"
+      "diagnosisHistoryListTips": "El sistema retendrá el historial de diagnósticos por 12 meses",
+      "symptomDetails": "Detalles de los síntomas",
     };
   }
 }

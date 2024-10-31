@@ -146,7 +146,8 @@ class LanguageZhTw {
       "exploreDiseases": "探索疾病",
       "noData": "無數據",
       "diagnosisHistory": "診斷歷史",
-      "diagnosisHistoryListTips": "系統將保留診斷記錄12個月"
+      "diagnosisHistoryListTips": "系統將保留診斷記錄12個月",
+      "symptomDetails": "症狀詳情",
     };
   }
 }

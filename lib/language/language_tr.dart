@@ -148,7 +148,8 @@ class LanguageTr {
       "exploreDiseases": "Hastalıkları Keşfet",
       "noData": "Veri Yok",
       "diagnosisHistory": "Teşhis Geçmişi",
-      "diagnosisHistoryListTips": "Sistem teşhis geçmişini 12 ay boyunca saklayacaktır"
+      "diagnosisHistoryListTips": "Sistem teşhis geçmişini 12 ay boyunca saklayacaktır",
+      "symptomDetails": "Semptom Detayları",
     };
   }
 }

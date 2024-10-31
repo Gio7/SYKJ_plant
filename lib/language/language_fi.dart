@@ -148,7 +148,8 @@ class LanguageFi {
       "exploreDiseases": "Tutki sairauksia",
       "noData": "Ei tietoja",
       "diagnosisHistory": "Diagnoosihistoria",
-      "diagnosisHistoryListTips": "Järjestelmä säilyttää diagnoosihistorian 12 kuukauden ajan"
+      "diagnosisHistoryListTips": "Järjestelmä säilyttää diagnoosihistorian 12 kuukauden ajan",
+      "symptomDetails": "Oireiden tiedot",
     };
   }
 }

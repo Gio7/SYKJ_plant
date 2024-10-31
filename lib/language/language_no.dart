@@ -149,7 +149,8 @@ class LanguageNo {
       "exploreDiseases": "Utforsk sykdommer",
       "noData": "Ingen data",
       "diagnosisHistory": "Diagnosehistorikk",
-      "diagnosisHistoryListTips": "Systemet vil beholde diagnosehistorikk i 12 måneder"
+      "diagnosisHistoryListTips": "Systemet vil beholde diagnosehistorikk i 12 måneder",
+      "symptomDetails": "Symptomer detaljer",
     };
   }
 }

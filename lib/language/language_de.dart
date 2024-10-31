@@ -148,7 +148,8 @@ class LanguageDe {
       "exploreDiseases": "Krankheiten erkunden",
       "noData": "Keine Daten",
       "diagnosisHistory": "Diagnoseverlauf",
-      "diagnosisHistoryListTips": "Das System speichert den Diagnoseverlauf für 12 Monate"
+      "diagnosisHistoryListTips": "Das System speichert den Diagnoseverlauf für 12 Monate",
+      "symptomDetails": "Symptomdetails",
     };
   }
 }

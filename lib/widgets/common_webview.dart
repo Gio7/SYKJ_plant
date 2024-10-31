@@ -4,9 +4,10 @@ import 'package:plant/widgets/nav_bar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class CommonWebview extends StatefulWidget {
-  const CommonWebview({super.key, this.title, required this.url});
+  const CommonWebview({super.key, this.title, required this.url, this.thumbnail});
   final String? title;
   final String url;
+  final String? thumbnail;
 
   @override
   State<CommonWebview> createState() => _CommonWebviewState();
@@ -30,6 +31,7 @@ class _CommonWebviewState extends State<CommonWebview> {
       ..setBackgroundColor(const Color(0xFFF3F4F3))
       ..setNavigationDelegate(navigationDelegate())
       ..loadRequest(Uri.parse(widget.url));
+    // ..addJavaScriptChannel(name, onMessageReceived: onMessageReceived)
 
     _webViewController = controller;
   }
@@ -56,6 +58,18 @@ class _CommonWebviewState extends State<CommonWebview> {
               setState(() => _title = value);
             }
           });
+        }
+        if (widget.thumbnail != null) {
+          _webViewController.runJavaScript('''
+                (function() {
+                  var img = document.createElement('img');
+                  img.src = '${widget.thumbnail}';
+                  img.style.width = '100%';
+                  img.style.height = '100%';
+                  img.style.objectFit = 'cover';
+                  document.body.insertBefore(img, document.body.firstChild);
+                })();
+              ''');
         }
       },
       onWebResourceError: (WebResourceError error) {

@@ -148,7 +148,8 @@ class LanguageMs {
       "exploreDiseases": "Teroka penyakit",
       "noData": "Tiada Data",
       "diagnosisHistory": "Sejarah Diagnosis",
-      "diagnosisHistoryListTips": "Sistem akan menyimpan sejarah diagnosis selama 12 bulan"
+      "diagnosisHistoryListTips": "Sistem akan menyimpan sejarah diagnosis selama 12 bulan",
+      "symptomDetails": "Butiran Gejala",
     };
   }
 }

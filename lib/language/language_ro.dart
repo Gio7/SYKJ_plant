@@ -148,7 +148,8 @@ class LanguageRo {
       "exploreDiseases": "Explorați bolile",
       "noData": "Fără date",
       "diagnosisHistory": "Istoric diagnostic",
-      "diagnosisHistoryListTips": "Sistemul va reține istoricul diagnosticului timp de 12 luni"
+      "diagnosisHistoryListTips": "Sistemul va reține istoricul diagnosticului timp de 12 luni",
+      "symptomDetails": "Detalii simptome",
     };
   }
 }

@@ -146,7 +146,8 @@ class LanguageKo {
       "exploreDiseases": "질병 탐색",
       "noData": "데이터 없음",
       "diagnosisHistory": "진단 기록",
-      "diagnosisHistoryListTips": "시스템은 진단 기록을 12개월 동안 보관합니다"
+      "diagnosisHistoryListTips": "시스템은 진단 기록을 12개월 동안 보관합니다",
+      "symptomDetails": "증상 세부 정보",
     };
   }
 }

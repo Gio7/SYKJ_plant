@@ -148,7 +148,8 @@ class LanguageId {
       "exploreDiseases": "Jelajahi penyakit",
       "noData": "Tidak Ada Data",
       "diagnosisHistory": "Riwayat Diagnosis",
-      "diagnosisHistoryListTips": "Sistem akan menyimpan riwayat diagnosis selama 12 bulan"
+      "diagnosisHistoryListTips": "Sistem akan menyimpan riwayat diagnosis selama 12 bulan",
+      "symptomDetails": "Rincian Gejala",
     };
   }
 }

@@ -149,7 +149,8 @@ class LanguageEnUs {
       "exploreDiseases": "Explore diseases",
       "noData": "No Data",
       "diagnosisHistory": "Diagnosis History",
-      "diagnosisHistoryListTips": "The system will retain diagnosis history for 12 months"
+      "diagnosisHistoryListTips": "The system will retain diagnosis history for 12 months",
+      "symptomDetails": "Symptom Details",
     };
   }
 }

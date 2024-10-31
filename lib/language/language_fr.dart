@@ -148,7 +148,8 @@ class LanguageFr {
       "exploreDiseases": "Explorer les maladies",
       "noData": "Pas de données",
       "diagnosisHistory": "Historique des diagnostics",
-      "diagnosisHistoryListTips": "Le système conservera l'historique des diagnostics pendant 12 mois"
+      "diagnosisHistoryListTips": "Le système conservera l'historique des diagnostics pendant 12 mois",
+      "symptomDetails": "Détails des symptômes",
     };
   }
 }

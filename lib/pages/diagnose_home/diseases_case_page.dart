@@ -42,7 +42,13 @@ class DiseasesCasePage extends StatelessWidget {
         if (model.resourceUrl == null || model.resourceUrl!.isEmpty) {
           return;
         }
-        Get.to(() => CommonWebview(url: model.resourceUrl!, title: model.heading));
+        Get.to(
+          () => CommonWebview(
+            url: model.resourceUrl!,
+            title: model.heading,
+            thumbnail: model.thumbnailUrl,
+          ),
+        );
       },
       child: Container(
         height: 90,

@@ -147,7 +147,8 @@ class LanguageTh {
       "exploreDiseases": "สำรวจโรค",
       "noData": "ไม่มีข้อมูล",
       "diagnosisHistory": "ประวัติการวินิจฉัย",
-      "diagnosisHistoryListTips": "ระบบจะเก็บประวัติการวินิจฉัยไว้ 12 เดือน"
+      "diagnosisHistoryListTips": "ระบบจะเก็บประวัติการวินิจฉัยไว้ 12 เดือน",
+      "symptomDetails": "รายละเอียดอาการ",
     };
   }
 }

@@ -148,7 +148,8 @@ class LanguageSv {
       "exploreDiseases": "Utforska sjukdomar",
       "noData": "Inga data",
       "diagnosisHistory": "Diagnoshistorik",
-      "diagnosisHistoryListTips": "Systemet kommer att behålla diagnoshistoriken i 12 månader"
+      "diagnosisHistoryListTips": "Systemet kommer att behålla diagnoshistoriken i 12 månader",
+      "symptomDetails": "Symptomdetaljer",
     };
   }
 }

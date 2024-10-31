@@ -148,7 +148,8 @@ class LanguageDa {
       "exploreDiseases": "Udforsk sygdomme",
       "noData": "Ingen data",
       "diagnosisHistory": "Diagnosehistorik",
-      "diagnosisHistoryListTips": "Systemet vil gemme diagnosehistorik i 12 måneder"
+      "diagnosisHistoryListTips": "Systemet vil gemme diagnosehistorik i 12 måneder",
+      "symptomDetails": "Symptomer detaljer",
     };
   }
 }

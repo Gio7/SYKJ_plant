@@ -148,7 +148,8 @@ class LanguageNl {
       "exploreDiseases": "Verken ziektes",
       "noData": "Geen gegevens",
       "diagnosisHistory": "Diagnosegeschiedenis",
-      "diagnosisHistoryListTips": "Het systeem bewaart de diagnosegeschiedenis gedurende 12 maanden"
+      "diagnosisHistoryListTips": "Het systeem bewaart de diagnosegeschiedenis gedurende 12 maanden",
+      "symptomDetails": "Symptoomdetails",
     };
   }
 }
