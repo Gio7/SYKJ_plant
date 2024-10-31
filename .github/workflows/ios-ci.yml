@@ -73,4 +73,4 @@ jobs:
         with:
           _api_key: ${{ secrets.PGY_KEY }}
           appFilePath: build/ios/ipa/Plant Identifier.ipa
-          buildUpdateDescription: '我开了个洗脚城，地点就在金盆岭'
+          buildUpdateDescription: 'iOS v1.0.3'
