@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/pages/diseases_case/diseases_case_controller.dart';
+import 'package:plant/widgets/common_webview.dart';
 import 'package:plant/widgets/empty_widget.dart';
 import 'package:plant/widgets/nav_bar.dart';
 import 'package:plant/widgets/page_bg.dart';
@@ -51,6 +52,7 @@ class DiseasesCasePage extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         // TODO : 跳转H5落地页
+        Get.to(() => const CommonWebview(url: 'https://zh.hinative.com/questions/16945340', title: 'Youtube'));
       },
       child: Container(
         height: 90,
