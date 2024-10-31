@@ -22,6 +22,7 @@ class Request {
   static const String _getOrderKey = '/Plant/shop/getOrderKey';
   static const String _diagnosisHistory = '/Plant/plant/diagnosisHistory';
   static const String _diagnosisHistoryDetail = '/Plant/plant/diagnosisHistoryDetail';
+  static const String _getDiseaseHome = '/Plant/plant/getDiseaseHome';
 
   /// telegram_group\email
   static Future<void> getConfig([List<String> conKey = const ['telegram_group', 'email']]) async {
@@ -113,5 +114,10 @@ class Request {
 
   static Future<dynamic> diagnosisHistoryDetailById(int id) async {
     return await DioUtil.httpGet(_diagnosisHistoryDetail, parameters: {'id': id});
+  }
+
+  static Future<List<dynamic>> getDiseaseHome() async {
+    final res = await DioUtil.httpGet(_getDiseaseHome);
+    return res['categorizedFeeds'];
   }
 }

@@ -50,11 +50,13 @@ class _CommonWebviewState extends State<CommonWebview> {
       },
       onPageFinished: (String url) {
         debugPrint('Page finished loading: $url');
-        _webViewController.getTitle().then((value) {
-          if (mounted) {
-            setState(() => _title = value);
-          }
-        });
+        if (widget.title == null) {
+          _webViewController.getTitle().then((value) {
+            if (mounted) {
+              setState(() => _title = value);
+            }
+          });
+        }
       },
       onWebResourceError: (WebResourceError error) {
         debugPrint('''

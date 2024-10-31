@@ -4,9 +4,11 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/controllers/main_controller.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/pages/diagnose_history/diagnose_history_page.dart';
-import 'package:plant/pages/diseases_case/diseases_case_page.dart';
+import 'package:plant/pages/diagnose_home/categorized_feed_model.dart';
+import 'package:plant/pages/diagnose_home/diseases_case_page.dart';
 import 'package:plant/pages/plant_scan/plant_controller.dart';
 import 'package:plant/pages/plant_scan/shoot_page.dart';
 import 'package:plant/widgets/btn.dart';
@@ -18,6 +20,8 @@ class DiagnosePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mainCtr = Get.find<MainController>();
+    mainCtr.getDiseaseHome();
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -106,16 +110,18 @@ class DiagnosePage extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 24),
-          SizedBox(
-            height: 156,
-            child: ListView.separated(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (_, __) {
-                return _buildItem();
-              },
-              separatorBuilder: (_, __) => const SizedBox(width: 12),
-              itemCount: 7,
+          Obx(
+            () => SizedBox(
+              height: 156,
+              child: ListView.separated(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (_, i) {
+                  return _buildItem(mainCtr.categorizedFeedList[i]);
+                },
+                separatorBuilder: (_, __) => const SizedBox(width: 12),
+                itemCount: mainCtr.categorizedFeedList.length,
+              ),
             ),
           ),
         ],
@@ -123,19 +129,22 @@ class DiagnosePage extends StatelessWidget {
     );
   }
 
-  Widget _buildItem() {
+  Widget _buildItem(CategorizedFeedModel model) {
     return GestureDetector(
       onTap: () {
-        // TODO 更换类型
-        FireBaseUtil.didNormalDisease('type');
-        Get.to(() => DiseasesCasePage(title: '123'));
+        FireBaseUtil.didNormalDisease(model.categoryName);
+        Get.to(
+          () => DiseasesCasePage(
+            categorizedFeedModel: model,
+          ),
+        );
       },
       child: Container(
         width: 230,
         height: 156,
         decoration: ShapeDecoration(
-          image: const DecorationImage(
-            image: CachedNetworkImageProvider("https://p0.ssl.qhimgs1.com/sdr/400__/t01f300a31f8cb3a504.jpg"),
+          image: DecorationImage(
+            image: CachedNetworkImageProvider(model.imageUrl),
             fit: BoxFit.cover,
           ),
           shape: RoundedRectangleBorder(
@@ -144,7 +153,7 @@ class DiagnosePage extends StatelessWidget {
         ),
         alignment: Alignment.bottomCenter,
         child: Container(
-          height: 48,
+          height: 36,
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 14),
           decoration: const ShapeDecoration(
@@ -156,12 +165,20 @@ class DiagnosePage extends StatelessWidget {
               ),
             ),
           ),
-          child: Column(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            model.categoryName,
+            style: const TextStyle(
+              color: UIColor.white,
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          ) /* Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Diseases in',
+                model.categoryName,
                 style: TextStyle(
                   color: UIColor.transparentWhite50,
                   fontSize: 12,
@@ -169,7 +186,7 @@ class DiagnosePage extends StatelessWidget {
                 ),
               ),
               Text(
-                'Anthracnose',
+                model.categoryName,
                 style: TextStyle(
                   color: UIColor.white,
                   fontSize: 14,
@@ -177,7 +194,8 @@ class DiagnosePage extends StatelessWidget {
                 ),
               ),
             ],
-          ),
+          ) */
+          ,
         ),
       ),
     );
