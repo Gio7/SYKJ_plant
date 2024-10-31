@@ -14,8 +14,6 @@ import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/plant_diagnosis_model.dart';
 import 'package:plant/models/plant_info_model.dart';
 import 'package:plant/pages/login/login_page.dart';
-import 'package:plant/pages/plant_scan/info_diagnose_page.dart';
-import 'package:plant/pages/plant_scan/info_identify_page.dart';
 import 'package:plant/widgets/loading_dialog.dart';
 import 'package:image/image.dart' as img;
 import 'package:plant/widgets/show_dialog.dart';
@@ -64,7 +62,6 @@ class PlantController extends GetxController {
         if (responseData['code'] == 200 || responseData['code'] == 0) {
           repository.isIdentifyingPlant.value = true;
           repository.plantInfo = PlantInfoModel.fromJson(responseData['data']);
-          Get.off(() => InfoIdentifyPage());
           // 成功
           return true;
         }
@@ -90,12 +87,15 @@ class PlantController extends GetxController {
       final res = await Request.plantDiagnosis(repository.diagnoseImageUrls);
       if (completer.isCompleted) return false;
       if (res.statusCode == 200) {
+        print('------${res.data}');
         final responseData = res.data;
         if (responseData['code'] == 200 || responseData['code'] == 0) {
+          repository.diagnoseImageFile1.value = null;
+          repository.diagnoseImageFile2.value = null;
+          repository.diagnoseImageFile3.value = null;
+
           repository.isIdentifyingPlant.value = true;
-          
           repository.diagnoseInfo = PlantDiagnosisModel.fromJson(responseData['data']);
-          Get.off(() => InfoDiagnosePage());
           // 成功
           return true;
         }
@@ -129,7 +129,6 @@ class PlantController extends GetxController {
           return;
         }
         repository.diagnoseImageUrls.add(await AwsUtils.uploadByFile(file1));
-        repository.diagnoseImageFile1.value = null;
         if (completer.isCompleted) return;
       }
 
@@ -139,7 +138,6 @@ class PlantController extends GetxController {
           return;
         }
         repository.diagnoseImageUrls.add(await AwsUtils.uploadByFile(file2));
-        repository.diagnoseImageFile2.value = null;
         if (completer.isCompleted) return;
       }
 
@@ -149,7 +147,6 @@ class PlantController extends GetxController {
           return;
         }
         repository.diagnoseImageUrls.add(await AwsUtils.uploadByFile(file3));
-        repository.diagnoseImageFile3.value = null;
         if (completer.isCompleted) return;
       }
     }
@@ -259,9 +256,9 @@ class PlantController extends GetxController {
   Future<void> didShootPhoto() async {
     if (checkLogin()) {
       if (repository.shootType.value == ShootType.identify) {
-        _identifyShootPhoto();
+        await _identifyShootPhoto();
       } else {
-        _diagnoseShootPhoto();
+        await _diagnoseShootPhoto();
       }
     }
   }
@@ -302,12 +299,16 @@ class PlantController extends GetxController {
         }
         repository.identifyImage400File = image400File;
         repository.identifyThumbnailFile = imageThumbnailFile;
-        Get.back();
+        if (Get.isDialogOpen ?? false) {
+          Get.back();
+        }
 
         Get.to(() => const ScanPage());
       }
     } catch (e) {
-      Get.back();
+      if (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
       Get.log(e.toString(), isError: true);
     }
   }
@@ -378,7 +379,7 @@ class PlantController extends GetxController {
     }
   }
 
-  void _diagnoseShootPhoto() async {
+  Future<void> _diagnoseShootPhoto() async {
     if (repository.cameraController?.value.isInitialized ?? false) {
       final XFile imageFile = await repository.cameraController!.takePicture();
       if (repository.diagnoseImageFile1.value == null) {
@@ -389,10 +390,8 @@ class PlantController extends GetxController {
         repository.diagnoseImageFile2.value = File(imageFile.path);
         return;
       }
-      if (repository.diagnoseImageFile3.value == null) {
-        repository.diagnoseImageFile3.value = File(imageFile.path);
-        diagnoseScanPhoto();
-      }
+      repository.diagnoseImageFile3.value ??= File(imageFile.path);
+      diagnoseScanPhoto();
     }
   }
 

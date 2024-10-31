@@ -309,7 +309,7 @@ class InfoDiagnosePage extends StatelessWidget {
     final url = ctr.repository.diagnoseInfo?.plant?.diagnoseImage ?? '';
     final reginos = ctr.repository.diagnoseInfo?.plant?.diagnoseDetect?.regions ?? [];
     if (url.isEmpty) {
-      return const SizedBox();
+      return Container();
     }
     return DiagnoseRectPage(
       url: url,

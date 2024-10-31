@@ -120,8 +120,8 @@ class ShootPage extends StatelessWidget {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {
-                              ctr.didShootPhoto();
+                            onTap: () async {
+                              await ctr.didShootPhoto();
                             },
                             child: Image.asset(
                               ctr.repository.shootType.value == ShootType.identify ? 'images/icon/camera_search.png' : 'images/icon/camera_diagnose.png',

@@ -10,6 +10,8 @@ import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/sdk/scanning_effect/scanning_effect.dart';
 
 import '../shop/shop_view.dart';
+import 'info_diagnose_page.dart';
+import 'info_identify_page.dart';
 
 class ScanPage extends StatelessWidget {
   const ScanPage({super.key});
@@ -27,8 +29,14 @@ class ScanPage extends StatelessWidget {
     bool isSuccess = false;
     if (ctr.repository.shootType.value == ShootType.identify) {
       isSuccess = await ctr.requestIdentifyInfo(completer);
+      if (isSuccess) {
+        Get.off(() => InfoIdentifyPage());
+      }
     } else {
       isSuccess = await ctr.requestDiagnoseInfo(completer);
+      if (isSuccess) {
+        Get.off(() => InfoDiagnosePage());
+      }
     }
     if (!isSuccess && !(completer.isCompleted)) {
       Get.dialog(

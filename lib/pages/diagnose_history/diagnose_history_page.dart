@@ -60,6 +60,7 @@ class DiagnoseHistoryPage extends StatelessWidget {
                           },
                           elements: repository.dataList,
                           groupBy: (element) => element.createTimeLocal,
+                          order: GroupedListOrder.DESC,
                           groupSeparatorBuilder: (String value) => Container(
                             height: 20.0,
                             margin: const EdgeInsets.symmetric(vertical: 16),

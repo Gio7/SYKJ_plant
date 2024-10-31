@@ -35,8 +35,26 @@ class _DiagnoseRectPageState extends State<DiagnoseRectPage> {
     _getImageSize(widget.url);
   }
 
+  Widget get _buildImage {
+    return CachedNetworkImage(
+      imageUrl: widget.url,
+      fit: BoxFit.cover,
+      fadeInDuration: Duration.zero,
+      placeholder: (context, url) => const CircularProgressIndicator(),
+      errorWidget: (context, url, error) => const Icon(Icons.error),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (widget.regions.isEmpty) {
+      return Positioned(
+        left: 0,
+        top: 0,
+        right: 0,
+        child: _buildImage,
+      );
+    }
     if (_croppedImageData != null) {
       return Positioned(
         left: 0,
@@ -61,15 +79,7 @@ class _DiagnoseRectPageState extends State<DiagnoseRectPage> {
                     height: _imageHeight,
                     child: Stack(
                       children: [
-                        Positioned.fill(
-                          child: CachedNetworkImage(
-                            imageUrl: widget.url,
-                            fit: BoxFit.cover,
-                            fadeInDuration: Duration.zero,
-                            placeholder: (context, url) => const CircularProgressIndicator(),
-                            errorWidget: (context, url, error) => const Icon(Icons.error),
-                          ),
-                        ),
+                        Positioned.fill(child: _buildImage),
                         if (widget.regions.isNotEmpty)
                           for (var i = 0; i < widget.regions.length; i++)
                             CustomPaint(
