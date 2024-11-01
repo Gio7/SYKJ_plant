@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,6 +6,7 @@ import 'package:plant/api/request.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/widgets/btn.dart';
+import 'package:plant/widgets/custom_segmented.dart';
 import 'package:plant/widgets/loading_dialog.dart';
 import 'package:plant/widgets/show_dialog.dart';
 import 'package:plant/pages/plant_scan/plant_controller.dart';
@@ -18,6 +18,7 @@ import 'package:plant/pages/plant_scan/info_identify_page.dart';
 import '../plant_scan/shoot_page.dart';
 import '../../widgets/user_nav_bar.dart';
 import 'my_plants_controller.dart';
+import 'widgets/plant_empty_widget.dart';
 
 class MyPlantsPage extends StatefulWidget {
   const MyPlantsPage({super.key});
@@ -63,15 +64,12 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const UserNavBar(needUser: true),
-            Container(
-              margin: const EdgeInsets.only(left: 24, top: 16),
-              child: Text(
-                'myPlants'.tr,
-                style: const TextStyle(
-                  color: UIColor.c15221D,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: CustomSegmented(
+                data: repository.customSegmentedValues,
+                selected: repository.currentTab.value,
+                onChange: (e) => controller.onSegmentChange(e),
               ),
             ),
             repository.dataList.isEmpty
@@ -162,48 +160,13 @@ class _MyPlantsPageState extends State<MyPlantsPage> {
 
   Widget get _empty {
     if (repository.isLoading.value) return const LoadingDialog();
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
-      decoration: BoxDecoration(
-        color: UIColor.transparent40,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 24),
-        width: double.infinity,
-        decoration: DottedDecoration(
-          shape: Shape.box,
-          color: UIColor.cAEE9CD,
-          strokeWidth: 1,
-          dash: const <int>[2, 2],
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset('images/icon/plants.png', height: 70),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 24),
-              child: Text(
-                'youHaveNoPlants'.tr,
-                style: const TextStyle(
-                  color: UIColor.c15221D,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-            NormalButton(
-              onTap: () {
-                Get.to(() => const ShootPage());
-              },
-              bgColor: UIColor.transparentPrimary40,
-              text: 'addPlant'.tr,
-              textColor: UIColor.primary,
-            ),
-          ],
-        ),
-      ),
+    return PlantEmptyWidget(
+      text: 'youHaveNoPlants'.tr,
+      iconImage: 'images/icon/plants.png',
+      btnText: 'addPlant'.tr,
+      onBtnTap: () {
+        Get.to(() => const ShootPage());
+      },
     );
   }
 

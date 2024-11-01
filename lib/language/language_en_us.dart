@@ -168,6 +168,7 @@ class LanguageEnUs {
       "previous": "Previous",
       "next": "Next",
       "watering": "Watering",
+      "allPlants": "All Plants",
     };
   }
 }

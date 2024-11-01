@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
 import 'package:plant/api/request.dart';
 import 'package:plant/models/plant_model.dart';
+import 'package:plant/widgets/custom_segmented.dart';
 
-import 'my_plants_repository.dart';
+part 'my_plants_repository.dart';
 
 class MyPlantsController extends GetxController {
   final MyPlantsRepository repository = MyPlantsRepository();
@@ -24,5 +25,13 @@ class MyPlantsController extends GetxController {
     repository.isLastPage = res['lastPage'];
     final rows = (res['rows'] as List).map((plant) => PlantModel.fromJson(plant)).toList();
     repository.dataList.addAll(rows);
+  }
+
+  void onSegmentChange(CustomSegmentedValue value) {
+    if (value == repository.currentTab.value) {
+      return;
+    }
+    repository.currentTab.value = value;
+    // TODO 刷新
   }
 }
