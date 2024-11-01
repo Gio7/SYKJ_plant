@@ -208,6 +208,7 @@ class PlantController extends GetxController {
 //     }
     repository.cameraController!.initialize().then((_) {
       repository.isCameraReady.value = true;
+      repository.cameraController!.lockCaptureOrientation();
     }).catchError((Object e) {
       Get.log(e.toString(), isError: true);
       if (e is CameraException) {

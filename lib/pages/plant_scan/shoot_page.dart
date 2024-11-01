@@ -26,9 +26,15 @@ class ShootPage extends StatelessWidget {
       color: UIColor.black,
       child: Stack(
         children: [
-          Obx(
-            () => Positioned.fill(
-              child: (repository.isCameraReady.value) ? CameraPreview(repository.cameraController!) : const Center(child: CircularProgressIndicator()),
+          Positioned.fill(
+            child: Obx(
+              () {
+                if (repository.isCameraReady.value) {
+                  final scale = 1 / (repository.cameraController!.value.aspectRatio * Get.size.aspectRatio);
+                  return Transform.scale(scale: scale, child: Center(child: CameraPreview(repository.cameraController!)));
+                }
+                return const Center(child: CircularProgressIndicator());
+              },
             ),
           ),
           Center(
