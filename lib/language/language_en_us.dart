@@ -151,6 +151,23 @@ class LanguageEnUs {
       "diagnosisHistory": "Diagnosis History",
       "diagnosisHistoryListTips": "The system will retain diagnosis history for 12 months",
       "symptomDetails": "Symptom Details",
+      // 104
+      'search': 'Search for plants',
+      'plantSearch': "Plant Search",
+      "careTools": "Care Tools",
+      "reminders": "Reminders",
+      "lightMeter": "Light Meter",
+      "categories": "Categories",
+      "setReminder": "Set Reminder",
+      "chosePlants": "Chose plants",
+      "youHaveNoReminders": "You Have No Reminders",
+      "confirm": "Confirm",
+      "remindMe": "Remind Me",
+      "repeatEvery": "Repeat Every",
+      "notificationTime": "Notification Time",
+      "previous": "Previous",
+      "next": "Next",
+      "watering": "Watering",
     };
   }
 }

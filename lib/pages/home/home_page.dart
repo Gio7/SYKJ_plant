@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/pages/plant_scan/plant_controller.dart';
+import 'package:plant/pages/plant_search/widgets/plant_categries_list.dart';
 import 'package:plant/widgets/user_nav_bar.dart';
 import 'package:plant/widgets/welcome_widget.dart';
 
@@ -15,59 +16,62 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const UserNavBar(needUser: true),
-        const WelcomeWidget(),
-        const SizedBox(height: 24),
-        Container(
-          height: 24,
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            children: [
-              Image.asset('images/icon/camera2.png', width: 24),
-              const SizedBox(width: 8),
-              Text(
-                'getStarted'.tr,
-                style: const TextStyle(
-                  color: UIColor.c15221D,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const UserNavBar(needUser: true),
+          const WelcomeWidget(),
+          const SizedBox(height: 24),
+          Container(
+            height: 24,
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                Image.asset('images/icon/camera2.png', width: 24),
+                const SizedBox(width: 8),
+                Text(
+                  'getStarted'.tr,
+                  style: const TextStyle(
+                    color: UIColor.c15221D,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        const SizedBox(height: 40),
-        SizedBox(
-          height: 160,
-          child: Row(
-            children: [
-              const SizedBox(width: 20),
-              _buildItem(
-                'images/icon/camera_search_1.png',
-                'identify'.tr,
-                'images/icon/identify.png',
-                () {
-                  FireBaseUtil.logEvent(EventName.homeIdentify);
-                  Get.to(() => const ShootPage());
-                },
-              ),
-              const SizedBox(width: 12),
-              _buildItem(
-                'images/icon/shop_diagnosis.png',
-                'diagnose'.tr,
-                'images/icon/diagnose.png',
-                () {
-                  FireBaseUtil.logEvent(EventName.homeDianose);
-                  Get.to(() => const ShootPage(shootType: ShootType.diagnose));
-                },
-              ),
-              const SizedBox(width: 20),
-            ],
+          const SizedBox(height: 40),
+          SizedBox(
+            height: 160,
+            child: Row(
+              children: [
+                const SizedBox(width: 20),
+                _buildItem(
+                  'images/icon/camera_search_1.png',
+                  'identify'.tr,
+                  'images/icon/identify.png',
+                  () {
+                    FireBaseUtil.logEvent(EventName.homeIdentify);
+                    Get.to(() => const ShootPage());
+                  },
+                ),
+                const SizedBox(width: 12),
+                _buildItem(
+                  'images/icon/shop_diagnosis.png',
+                  'diagnose'.tr,
+                  'images/icon/diagnose.png',
+                  () {
+                    FireBaseUtil.logEvent(EventName.homeDianose);
+                    Get.to(() => const ShootPage(shootType: ShootType.diagnose));
+                  },
+                ),
+                const SizedBox(width: 20),
+              ],
+            ),
           ),
-        ),
-      ],
+          const PlantCategriesWidget()
+        ],
+      ),
     );
   }
 
