@@ -331,38 +331,42 @@ class SetPage extends StatelessWidget {
   }
 
   String _getWelcomeText(UserController userController) {
+    if (userController.userInfo.value.isRealVip) {
+      if (userController.userInfo.value.memberType == MemberType.weekly) {
+        return 'weeklyMembership'.tr;
+      }
+      if (userController.userInfo.value.memberType == MemberType.yearly) {
+        return 'yearsMembership'.tr;
+      }
+    }
     if (userController.userInfo.value.memberType == MemberType.normal) {
       return 'getProTips'.tr;
-    }
-    if (userController.userInfo.value.memberType == MemberType.weekly) {
-      return 'weeklyMembership'.tr;
-    }
-    if (userController.userInfo.value.memberType == MemberType.yearly) {
-      return 'yearsMembership'.tr;
     }
     return 'welcome'.tr;
   }
 
   Positioned _buildImage(UserController userController) {
+    if (userController.userInfo.value.isRealVip) {
+      if (userController.userInfo.value.memberType == MemberType.weekly) {
+        return Positioned(
+          right: 8,
+          top: -17,
+          child: Image.asset('images/icon/week_vip.png', width: 126),
+        );
+      }
+      if (userController.userInfo.value.memberType == MemberType.yearly) {
+        return Positioned(
+          right: 8,
+          top: -17,
+          child: Image.asset('images/icon/year_vip.png', width: 126),
+        );
+      }
+    }
     if (userController.userInfo.value.memberType == MemberType.normal) {
       return Positioned(
         right: -6,
         top: -32.5,
         child: Image.asset('images/icon/have_logged_in.png', width: 142),
-      );
-    }
-    if (userController.userInfo.value.memberType == MemberType.weekly) {
-      return Positioned(
-        right: 8,
-        top: -17,
-        child: Image.asset('images/icon/week_vip.png', width: 126),
-      );
-    }
-    if (userController.userInfo.value.memberType == MemberType.yearly) {
-      return Positioned(
-        right: 8,
-        top: -17,
-        child: Image.asset('images/icon/year_vip.png', width: 126),
       );
     }
     return Positioned(
@@ -373,7 +377,7 @@ class SetPage extends StatelessWidget {
   }
 
   NormalButton _buildBtn(UserController userController) {
-    if (userController.userInfo.value.memberType == null) {
+    if (!userController.isLogin.value) {
       return NormalButton(
         onTap: () {
           FireBaseUtil.loginPageEvent(Get.currentRoute);
@@ -384,25 +388,25 @@ class SetPage extends StatelessWidget {
         bgColor: UIColor.cAEE9CD,
       );
     }
-    if (userController.userInfo.value.memberType == MemberType.normal) {
+    if (userController.userInfo.value.isRealVip) {
       return NormalButton(
         onTap: () {
-          FireBaseUtil.subscribePageEvent(Get.currentRoute);
-          Get.to(() => ShopPage());
+          _copy('${userController.userInfo.value.userid}');
         },
-        text: 'getPro'.tr,
+        text: '${'no.'.tr}${userController.userInfo.value.userid}',
         textColor: UIColor.c00997A,
-        bgColors: const [UIColor.cD7FF38, UIColor.cAAFFD6],
-        bgColor: UIColor.cAAFFD6,
+        bgColor: UIColor.cAEE9CD,
       );
     }
     return NormalButton(
       onTap: () {
-        _copy('${userController.userInfo.value.userid}');
+        FireBaseUtil.subscribePageEvent(Get.currentRoute);
+        Get.to(() => ShopPage());
       },
-      text: '${'no.'.tr}${userController.userInfo.value.userid}',
+      text: 'getPro'.tr,
       textColor: UIColor.c00997A,
-      bgColor: UIColor.cAEE9CD,
+      bgColors: const [UIColor.cD7FF38, UIColor.cAAFFD6],
+      bgColor: UIColor.cAAFFD6,
     );
   }
 
