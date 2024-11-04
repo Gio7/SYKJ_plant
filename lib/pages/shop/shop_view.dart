@@ -266,18 +266,17 @@ class ShopPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (GetPlatform.isIOS)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 4),
-                      child: Text(
-                        title,
-                        style: TextStyle(
-                          color: titleColor,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 4),
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        color: titleColor,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
+                  ),
                   Row(
                     children: [
                       Text(

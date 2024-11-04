@@ -151,7 +151,7 @@ class BuyShop {
       //obfuscatedExternalProfileId == orderNum
       // obfuscatedExternalAccountId == uidGet.find<UserController>().getUserInfo();
       final applicationUserName = '$orderNum,$uid';
-      Get.log('applicationUserName: $applicationUserName');
+      // Get.log('applicationUserName: $applicationUserName');
       final purchaseParam = PurchaseParam(productDetails: currentItem.productDetails!, applicationUserName: applicationUserName);
       if (buyNonConsumable) {
         await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
