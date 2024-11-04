@@ -19,6 +19,7 @@ class IdentifyHistoryController extends GetxController {
   }
 
   Future<void> onRefresh() async {
+    // TODO 更换接口
     repository.isLastPage = false;
     repository.pageNum = 1;
     final res = await Request.getPlantScanHistory(repository.pageNum);
@@ -29,6 +30,7 @@ class IdentifyHistoryController extends GetxController {
   }
 
   Future<void> onLoad() async {
+    // TODO 更换接口
     if (repository.isLastPage) return;
     repository.pageNum++;
     final res = await Request.getPlantScanHistory(repository.pageNum);

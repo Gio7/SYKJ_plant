@@ -52,6 +52,7 @@ class _DiagnoseRectPageState extends State<DiagnoseRectPage> {
         left: 0,
         top: 0,
         right: 0,
+        height: _widgetHeight,
         child: _buildImage,
       );
     }

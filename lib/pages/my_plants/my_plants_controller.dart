@@ -36,7 +36,10 @@ class MyPlantsController extends GetxController {
         onPlantRefresh();
       }
     } else {
-      // TODO 刷新
+      if (repository.reminderDataList.isEmpty) {
+        repository.reminderIsLoading.value = true;
+        onReminderRefresh();
+      }
     }
   }
 
@@ -89,5 +92,30 @@ class MyPlantsController extends GetxController {
   Future<void> plantScanDelete(int id) async {
     Request.plantScanDelete(id);
     repository.plantDataList.removeWhere((element) => element.id == id);
+  }
+
+  // MARK: - 提醒相关逻辑
+
+  Future<void> onReminderRefresh() async {
+    repository.reminderIsLoading.value = true;
+    // TODO 更换接口
+    repository.reminderIsLastPage = false;
+    repository.reminderPageNum = 1;
+    final res = await Request.getPlantScanHistory(repository.reminderPageNum);
+    repository.reminderIsLastPage = res['lastPage'];
+    final rows = (res['rows'] as List).map((plant) => PlantModel.fromJson(plant)).toList();
+    repository.reminderIsLoading.value = false;
+    // repository.reminderDataList.value = rows;
+    repository.reminderIsLastPage = true;
+  }
+
+  Future<void> onReminderLoad() async {
+    // TODO 更换接口
+    if (repository.reminderIsLastPage) return;
+    repository.reminderPageNum++;
+    final res = await Request.getPlantScanHistory(repository.reminderPageNum);
+    repository.reminderIsLastPage = res['lastPage'];
+    final rows = (res['rows'] as List).map((plant) => PlantModel.fromJson(plant)).toList();
+    // repository.reminderDataList.addAll(rows);
   }
 }

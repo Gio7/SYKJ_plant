@@ -13,7 +13,7 @@ import 'package:plant/widgets/show_dialog.dart';
 
 import 'my_plants_controller.dart';
 import 'widgets/plant_empty_widget.dart';
-import 'widgets/plant_item_reminders.dart';
+import 'widgets/plant_item_reminder.dart';
 
 class PlantsPage extends StatelessWidget {
   PlantsPage({super.key});
@@ -79,7 +79,7 @@ class PlantsPage extends StatelessWidget {
                   groupItemBuilder: (_, model, __, groupEnd) {
                     return Padding(
                       padding: EdgeInsets.only(bottom: groupEnd ? 4 : 0),
-                      child: PlantItemReminders(
+                      child: PlantItemReminder(
                         model: model,
                         onTap: () => controller.getPlantDetailByRecord(model),
                         onMore: () => _onMore(model),

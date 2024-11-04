@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/models/plant_model.dart';
 
-class PlantItemReminders extends StatelessWidget {
-  const PlantItemReminders({super.key, this.onTap, this.onMore, required this.model, this.onSetReminder});
+class PlantItemReminder extends StatelessWidget {
+  const PlantItemReminder({super.key, this.onTap, this.onMore, required this.model, this.onSetReminder});
 
   final Function()? onTap;
   final Function()? onMore;
