@@ -157,6 +157,7 @@ class LoginController extends GetxController {
       final userCtr = Get.find<UserController>();
       userCtr.isLogin.value = true;
       userCtr.userInfo.value = UserInfoModel.fromJson(res);
+      // TODO 获取我的植物
       SharedPreferences.getInstance().then((prefs) {
         prefs.setString('token', token);
       });

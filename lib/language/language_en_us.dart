@@ -149,7 +149,7 @@ class LanguageEnUs {
       "exploreDiseases": "Explore diseases",
       "noData": "No Data",
       "diagnosisHistory": "Diagnosis History",
-      "diagnosisHistoryListTips": "The system will retain diagnosis history for 12 months",
+      "diagnosisHistoryListTips": "The system will retain diagnosis history for 12 months.",
       "symptomDetails": "Symptom Details",
       // 104
       'search': 'Search for plants',
@@ -169,6 +169,11 @@ class LanguageEnUs {
       "next": "Next",
       "watering": "Watering",
       "allPlants": "All Plants",
+      "snapHistory": "Snap History",
+      "noReminder": "No reminder",
+      "reminderSet": "reminder set",
+      "addReminder": "Add Reminder",
+      "identifyHistoryListTips": "The system will retain snapshot recognition records for 12 months.",
     };
   }
 }

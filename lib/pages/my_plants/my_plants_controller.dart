@@ -18,7 +18,7 @@ class MyPlantsController extends GetxController {
     super.onInit();
     if (Get.find<UserController>().isLogin.value) {
       repository.plantIsLoading.value = true;
-      onRefresh();
+      onPlantRefresh();
     }
   }
 
@@ -27,10 +27,20 @@ class MyPlantsController extends GetxController {
       return;
     }
     repository.currentTab.value = value;
-    // TODO 刷新
+    if (!Get.find<UserController>().isLogin.value) {
+      return;
+    }
+    if (value.value == '1') {
+      if (repository.plantDataList.isEmpty) {
+        repository.plantIsLoading.value = true;
+        onPlantRefresh();
+      }
+    } else {
+      // TODO 刷新
+    }
   }
 
-  Future<void> onRefresh() async {
+  Future<void> onPlantRefresh() async {
     repository.plantIsLastPage = false;
     repository.plantPageNum = 1;
     final res = await Request.getPlantScanHistory(repository.plantPageNum);
@@ -40,7 +50,7 @@ class MyPlantsController extends GetxController {
     repository.plantDataList.value = rows;
   }
 
-  Future<void> onLoad() async {
+  Future<void> onPlantLoad() async {
     if (repository.plantIsLastPage) return;
     repository.plantPageNum++;
     final res = await Request.getPlantScanHistory(repository.plantPageNum);

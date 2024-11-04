@@ -1,10 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:grouped_list/grouped_list.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/models/plant_model.dart';
+import 'package:plant/pages/identify_history/identify_history_page.dart';
 import 'package:plant/pages/plant_scan/shoot_page.dart';
 import 'package:plant/widgets/btn.dart';
 import 'package:plant/widgets/loading_dialog.dart';
@@ -12,9 +13,11 @@ import 'package:plant/widgets/show_dialog.dart';
 
 import 'my_plants_controller.dart';
 import 'widgets/plant_empty_widget.dart';
+import 'widgets/plant_item_reminders.dart';
 
 class PlantsPage extends StatelessWidget {
   PlantsPage({super.key});
+
   final controller = Get.find<MyPlantsController>();
 
   @override
@@ -28,25 +31,64 @@ class PlantsPage extends StatelessWidget {
       return Expanded(
         child: Column(
           children: [
-            // NormalButton(text: text, textColor: textColor, bgColor: bgColor),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              width: double.infinity,
+              child: NormalButton(
+                text: 'snapHistory'.tr,
+                bgColor: UIColor.transparentPrimary40,
+                textColor: UIColor.c00997A,
+                iconWidget: Image.asset('images/icon/camera_histroy.png', width: 24),
+                borderRadius: 12,
+                onTap: () {
+                  Get.to(() => const IdentifyHistoryPage());
+                },
+              ),
+            ),
             Expanded(
               child: EasyRefresh(
                 onRefresh: () {
-                  controller.onRefresh();
+                  controller.onPlantRefresh();
                 },
                 onLoad: () {
-                  controller.onLoad();
+                  controller.onPlantLoad();
                 },
-                child: Obx(
-                  () => ListView.separated(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
-                    itemBuilder: (_, i) {
-                      final p = repository.plantDataList[i];
-                      return _buildItem(p);
-                    },
-                    separatorBuilder: (_, __) => const SizedBox(height: 16),
-                    itemCount: repository.plantDataList.length,
+                child: GroupedListView(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  groupBy: (element) => element.createTimeLocal,
+                  order: GroupedListOrder.DESC,
+                  groupSeparatorBuilder: (String value) => Container(
+                    height: 20.0,
+                    margin: const EdgeInsets.only(bottom: 10),
+                    alignment: Alignment.centerLeft,
+                    child: Row(
+                      children: [
+                        Image.asset('images/icon/time.png', width: 20),
+                        const SizedBox(width: 8),
+                        Text(
+                          value,
+                          style: TextStyle(
+                            color: UIColor.c85B9A8,
+                            fontSize: 12,
+                            fontWeight: FontWeightExt.medium,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+                  groupItemBuilder: (_, model, __, groupEnd) {
+                    return Padding(
+                      padding: EdgeInsets.only(bottom: groupEnd ? 4 : 0),
+                      child: PlantItemReminders(
+                        model: model,
+                        onTap: () => controller.getPlantDetailByRecord(model),
+                        onMore: () => _onMore(model),
+                        onSetReminder: () => _onSetReminder(model),
+                      ),
+                    );
+                  },
+                  separator: const SizedBox(height: 10),
+                  elements: repository.plantDataList,
                 ),
               ),
             ),
@@ -64,67 +106,6 @@ class PlantsPage extends StatelessWidget {
       onBtnTap: () {
         Get.to(() => const ShootPage());
       },
-    );
-  }
-
-  Widget _buildItem(PlantModel model) {
-    return GestureDetector(
-      onTap: () => controller.getPlantDetailByRecord(model),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-        decoration: ShapeDecoration(
-          color: UIColor.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-        child: Row(
-          children: [
-            ClipOval(
-              child: CachedNetworkImage(
-                imageUrl: model.thumbnail ?? '',
-                width: 50,
-                height: 50,
-                fit: BoxFit.cover,
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    model.plantName ?? '',
-                    style: const TextStyle(
-                      color: UIColor.c15221D,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    '${'addedAt'.tr} ${model.createTimeLocal}',
-                    style: TextStyle(
-                      color: UIColor.c8E8B8B,
-                      fontSize: 12,
-                      fontWeight: FontWeightExt.medium,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                _onMore(model);
-              },
-              child: Image.asset(
-                'images/icon/more.png',
-                width: 24,
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -161,6 +142,19 @@ class PlantsPage extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: NormalButton(
+              onTap: () {
+                // TODO 设置提醒
+              },
+              text: 'setReminder'.tr,
+              textColor: UIColor.c15221D,
+              bgColor: UIColor.white,
+              iconWidget: Image.asset('images/icon/alarmClock3.png', width: 28),
+            ),
+          ),
+          const SizedBox(height: 16),
+          SizedBox(
+            width: double.infinity,
+            child: NormalButton(
               onTap: () async {
                 FireBaseUtil.logEvent(EventName.listRemove);
                 Get.back();
@@ -181,7 +175,7 @@ class PlantsPage extends StatelessWidget {
                 );
               },
               text: 'removeBtn'.tr,
-              textColor: UIColor.c15221D,
+              textColor: UIColor.cFD5050,
               bgColor: UIColor.white,
               iconWidget: Image.asset('images/icon/delete_red.png', width: 28),
             ),
@@ -189,5 +183,10 @@ class PlantsPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _onSetReminder(PlantModel model) {
+    // TODO 设置提醒
+    Get.log('设置提醒');
   }
 }

@@ -8,8 +8,10 @@ class EmptyWidget extends StatelessWidget {
   const EmptyWidget({
     super.key,
     required this.isLoading,
+    this.icon = 'images/icon/no_data.png',
   });
   final bool isLoading;
+  final String icon;
 
   @override
   Widget build(BuildContext context) {

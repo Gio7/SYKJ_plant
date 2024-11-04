@@ -4,6 +4,7 @@ import 'package:plant/widgets/custom_segmented.dart';
 import '../../widgets/user_nav_bar.dart';
 import 'my_plants_controller.dart';
 import 'plants_page.dart';
+import 'reminders_page.dart';
 
 class MyPlantsPage extends StatelessWidget {
   const MyPlantsPage({super.key});
@@ -24,7 +25,7 @@ class MyPlantsPage extends StatelessWidget {
                 onChange: (e) => controller.onSegmentChange(e),
               ),
             ),
-            PlantsPage(),
+            repository.currentTab.value.value == '1' ? PlantsPage() : RemindersPage(),
           ],
         ));
   }
