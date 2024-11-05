@@ -24,6 +24,11 @@ class Request {
   static const String _diagnosisHistoryDetail = '/Plant/plant/diagnosisHistoryDetail';
   static const String _getDiseaseHome = '/Plant/plant/getDiseaseHome';
 
+  /// 获取搜索分类列表
+  static const String _getSearchList = '/Plant/home/getSearchList';
+  static const String _plantSearch = '/Plant/home/search';
+  static const String _getPlantByUniqueId = '/Plant/plant/getPlantByUniqueId';
+
   /// telegram_group\email
   static Future<void> getConfig([List<String> conKey = const ['telegram_group', 'email']]) async {
     return await DioUtil.httpPost(_getConfig, data: {'conKey': conKey});
@@ -119,5 +124,32 @@ class Request {
   static Future<List<dynamic>> getDiseaseHome() async {
     final res = await DioUtil.httpGet(_getDiseaseHome);
     return res['categorizedFeeds'];
+  }
+
+  /// 获取搜索分类列表
+  static Future<List<dynamic>> getSearchList() async {
+    final res = await DioUtil.httpGet(_getSearchList);
+    return res;
+  }
+
+  /// 搜索植物
+  /// "content": "apple", //全局搜索内容
+  /// "categoryId": "bk6cyz53", //分类ID
+  /// "type": 1 //0=分类搜索 1=全局
+  static Future<List<dynamic>> plantSearch(String content, {String? categoryId, int type = 1}) async {
+    try {
+      final res = await DioUtil.httpPost(_plantSearch, data: {"content": content, "categoryId": categoryId, "type": type});
+      if (res is List) {
+        return res;
+      }
+      return [];
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// 通过uniqueId获取植物信息
+  static Future<dynamic> getPlantByUniqueId(String uniqueId) async {
+    return await DioUtil.httpPost(_getPlantByUniqueId, data: {"uniqueId": uniqueId});
   }
 }

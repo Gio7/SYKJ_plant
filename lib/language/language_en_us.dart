@@ -174,6 +174,8 @@ class LanguageEnUs {
       "reminderSet": "reminder set",
       "addReminder": "Add Reminder",
       "identifyHistoryListTips": "The system will retain snapshot recognition records for 12 months.",
+      "noResults": "No Results",
+      "noResultsTips": "We could not find anything according to the result you were looking for.",
     };
   }
 }

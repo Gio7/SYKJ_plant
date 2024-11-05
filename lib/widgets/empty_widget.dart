@@ -9,9 +9,13 @@ class EmptyWidget extends StatelessWidget {
     super.key,
     required this.isLoading,
     this.icon = 'images/icon/no_data.png',
+    this.text,
+    this.subText,
   });
   final bool isLoading;
   final String icon;
+  final String? text;
+  final String? subText;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +30,7 @@ class EmptyWidget extends StatelessWidget {
           Image.asset('images/icon/no_data.png', height: 70),
           const SizedBox(height: 16),
           Text(
-            'noData'.tr,
+            text ?? 'noData'.tr,
             textAlign: TextAlign.center,
             style: const TextStyle(
               color: UIColor.c15221D,
@@ -34,6 +38,19 @@ class EmptyWidget extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
+          if (subText != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 10,left: 50,right: 50),
+              child: Text(
+                subText!,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: UIColor.c8E8B8B,
+                  fontSize: 14,
+                  fontWeight: FontWeightExt.medium,
+                ),
+              ),
+            )
         ],
       ),
     );

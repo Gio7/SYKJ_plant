@@ -10,12 +10,13 @@ import 'widgets/plant_categries_list.dart';
 import 'widgets/plant_search_result_list.dart';
 
 class SearchPage extends StatelessWidget {
-  const SearchPage({super.key, required this.isActiveSearch});
+  const SearchPage({super.key, required this.isActiveSearch, this.categoryId});
   final bool isActiveSearch;
+  final String? categoryId;
 
   @override
   Widget build(BuildContext context) {
-    final plantSearchCtr = Get.put(PlantSearchController(isActiveSearch));
+    final plantSearchCtr = Get.put(PlantSearchController(isActiveSearch, categoryId));
     final repository = plantSearchCtr.repository;
     return PageBG(
       child: Scaffold(

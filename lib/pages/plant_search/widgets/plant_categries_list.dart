@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/controllers/main_controller.dart';
 import 'package:plant/pages/plant_search/plant_search_controller.dart';
 import 'package:plant/pages/plant_search/plant_search_page.dart';
 
@@ -10,6 +11,7 @@ class PlantCategriesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mainCtr = Get.find<MainController>();
     return Column(
       children: [
         Container(
@@ -34,19 +36,21 @@ class PlantCategriesWidget extends StatelessWidget {
             ],
           ),
         ),
-        GridView.count(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-          crossAxisCount: 2,
-          childAspectRatio: 154 / 170,
-          mainAxisSpacing: 12.0,
-          crossAxisSpacing: 12.0,
-          children: [1, 2, 3, 3, 3, 3, 3, 3, 3, 32, 2]
-              .map(
-                (e) => _buildItem(e),
-              )
-              .toList(),
+        Obx(
+          () => GridView.count(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+            crossAxisCount: 2,
+            childAspectRatio: 154 / 170,
+            mainAxisSpacing: 12.0,
+            crossAxisSpacing: 12.0,
+            children: mainCtr.plantTypeList
+                .map(
+                  (e) => _buildItem(e),
+                )
+                .toList(),
+          ),
         ),
       ],
     );
@@ -56,9 +60,12 @@ class PlantCategriesWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         if (Get.isRegistered<PlantSearchController>()) {
-          Get.find<PlantSearchController>().repository.activeSearch.value = true;
+          final ctr = Get.find<PlantSearchController>();
+          ctr.repository.activeSearch.value = true;
+          ctr.repository.categoryId = item.categoryId;
+          ctr.didSearch('', categoryId: item.categoryId, type: 0);
         } else {
-          await Get.to(() => const SearchPage(isActiveSearch: true));
+          await Get.to(() => SearchPage(isActiveSearch: true, categoryId: item.categoryId));
         }
       },
       child: Stack(
@@ -67,7 +74,7 @@ class PlantCategriesWidget extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: CachedNetworkImage(
-                imageUrl: 'https://p0.ssl.qhimgs1.com/t03ba55714bfa2dcb64.jpg',
+                imageUrl: item.thumbnailUrl ?? '',
                 fit: BoxFit.cover,
               ),
             ),
@@ -84,13 +91,13 @@ class PlantCategriesWidget extends StatelessWidget {
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             left: 14,
             right: 0,
             bottom: 16,
             child: Text(
-              'categoryName',
-              style: TextStyle(
+              item.title ?? '',
+              style: const TextStyle(
                 color: UIColor.white,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,

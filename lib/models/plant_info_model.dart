@@ -13,6 +13,8 @@ class PlantInfoModel {
         scanRecordId: json["scanRecordId"],
         plant: json["plant"] == null ? null : Plant.fromJson(json["plant"]),
       );
+
+  factory PlantInfoModel.fromJsonBySearch(Map<String, dynamic> json) => PlantInfoModel(plant: Plant.fromJson(json));
 }
 
 class Plant {
@@ -181,20 +183,20 @@ class Detail {
   });
 
   factory Detail.fromJson(Map<String, dynamic> json) => Detail(
-    type: json["type"],
-    title: json["title"],
-    value: json["value"],
-    originEnumValue: json["originEnumValue"],
-    colors: json["colors"],
-  );
+        type: json["type"],
+        title: json["title"],
+        value: json["value"],
+        originEnumValue: json["originEnumValue"],
+        colors: json["colors"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "type": type,
-    "title": title,
-    "value": value,
-    "originEnumValue": originEnumValue,
-    "colors": colors,
-  };
+        "type": type,
+        "title": title,
+        "value": value,
+        "originEnumValue": originEnumValue,
+        "colors": colors,
+      };
 }
 
 class Conditions {

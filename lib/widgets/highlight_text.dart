@@ -33,10 +33,14 @@ class HighlightText extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
       );
     }
+
+    String lowerText = text.toLowerCase();
+    String lowerKeyword = keyword.toLowerCase();
+
     // 分割文本，将包含关键词的部分高亮显示
     List<TextSpan> spans = [];
     int start = 0;
-    int indexOfKeyword = text.indexOf(keyword, start);
+    int indexOfKeyword = lowerText.indexOf(lowerKeyword, start);
 
     while (indexOfKeyword != -1) {
       // 普通文本
@@ -49,13 +53,13 @@ class HighlightText extends StatelessWidget {
 
       // 高亮文本
       spans.add(TextSpan(
-        text: keyword,
+        text: text.substring(indexOfKeyword, indexOfKeyword + keyword.length),
         style: TextStyle(color: highlightColor),
       ));
 
       // 更新起始位置并查找下一个关键词
       start = indexOfKeyword + keyword.length;
-      indexOfKeyword = text.indexOf(keyword, start);
+      indexOfKeyword = lowerText.indexOf(lowerKeyword, start);
     }
 
     // 添加剩余文本

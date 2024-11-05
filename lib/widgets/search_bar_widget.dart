@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plant/common/common_util.dart';
 import 'package:plant/common/ui_color.dart';
 
 class SearchWidget extends StatefulWidget {
@@ -45,6 +46,7 @@ class _SearchWidgetState extends State<SearchWidget> {
         constraints: const BoxConstraints(maxHeight: 40),
       ),
       child: SearchBar(
+        textInputAction: TextInputAction.search,
         onSubmitted: widget.onSubmitted,
         onChanged: (value) => setState(() {}),
         leading: Image.asset('images/icon/search.png', height: 18),
@@ -61,7 +63,9 @@ class _SearchWidgetState extends State<SearchWidget> {
               iconSize: 16,
             ),
           ElevatedButton(
-            onPressed: () => widget.onSubmitted?.call(ctr.text),
+            onPressed: Common.debounce(() {
+              widget.onSubmitted?.call(ctr.text);
+            }, 1000),
             style: const ButtonStyle(
               backgroundColor: WidgetStatePropertyAll(UIColor.c40BD95),
               maximumSize: WidgetStatePropertyAll(Size(44, 32)),
