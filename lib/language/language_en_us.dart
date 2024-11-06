@@ -167,7 +167,6 @@ class LanguageEnUs {
       "notificationTime": "Notification Time",
       "previous": "Previous",
       "next": "Next",
-      "watering": "Watering",
       "allPlants": "All Plants",
       "snapHistory": "Snap History",
       "noReminder": "No reminder",
@@ -176,6 +175,16 @@ class LanguageEnUs {
       "identifyHistoryListTips": "The system will retain snapshot recognition records for 12 months.",
       "noResults": "No Results",
       "noResultsTips": "We could not find anything according to the result you were looking for.",
+      "watering": "Watering",
+      "misting": "Misting",
+      "fertilizing": "Fertilizing",
+      "rotating": "Rotating",
+      "days": "Days",
+      "weeks": "Weeks",
+      "months": "Months",
+      "repeat": "Repeat",
+      "careNotification": "Care Notification",
+      "noticeTime": "Notice Time",
     };
   }
 }

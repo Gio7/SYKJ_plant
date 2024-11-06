@@ -3,11 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/models/plant_model.dart';
+import 'package:plant/pages/reminder_edit/reminder_edit_controller.dart';
 import 'package:plant/widgets/btn.dart';
 
+import 'widgets/bottomsheet_notification.dart';
+import 'widgets/bottomsheet_previous.dart';
+import 'widgets/bottomsheet_remind_me.dart';
+import 'widgets/bottomsheet_repeat.dart';
+
 class ReminderEditPage extends StatelessWidget {
-  const ReminderEditPage({super.key, required this.plantModel});
+  ReminderEditPage({super.key, required this.plantModel});
   final PlantModel plantModel;
+  final reminderEditCtr = Get.put(ReminderEditController());
 
   @override
   Widget build(BuildContext context) {
@@ -24,56 +31,66 @@ class ReminderEditPage extends StatelessWidget {
     );
   }
 
-  Widget _buildItem() {
-    return Container(
-      height: 60,
-      margin: const EdgeInsets.only(bottom: 10),
-      width: double.infinity,
-      padding: const EdgeInsets.only(
-        top: 16,
-        left: 10,
-        right: 4,
-        bottom: 16,
-      ),
-      decoration: ShapeDecoration(
-        color: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      ),
-      child: Row(
-        children: [
-          Image.asset(
-            'images/icon/fertilizer.png',
-            width: 20,
-          ),
-          const SizedBox(width: 8),
-          Text(
-            'fertilizer'.tr,
-            style: const TextStyle(
-              color: UIColor.c15221D,
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
+  Widget _buildItem({
+    required String icon,
+    required String title,
+    String? valueIcon,
+    String? value,
+    required Function()? onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 60,
+        margin: const EdgeInsets.only(bottom: 10),
+        width: double.infinity,
+        padding: const EdgeInsets.only(
+          top: 16,
+          left: 10,
+          right: 4,
+          bottom: 16,
+        ),
+        decoration: ShapeDecoration(
+          color: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+        child: Row(
+          children: [
+            Image.asset(
+              icon,
+              width: 20,
             ),
-          ),
-          const Spacer(),
-          Row(
-            children: [
-              Image.asset(
-                'images/icon/fertilizer.png',
-                width: 20,
+            const SizedBox(width: 8),
+            Text(
+              title,
+              style: const TextStyle(
+                color: UIColor.c15221D,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
               ),
-              const SizedBox(width: 6),
-              Text(
-                'fertilizer'.tr,
-                style: const TextStyle(
-                  color: UIColor.c8E8B8B,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
+            ),
+            const Spacer(),
+            Row(
+              children: [
+                if (valueIcon != null)
+                  Image.asset(
+                    valueIcon,
+                    width: 20,
+                  ),
+                const SizedBox(width: 6),
+                Text(
+                  value ?? '',
+                  style: const TextStyle(
+                    color: UIColor.c8E8B8B,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const Icon(Icons.chevron_right, size: 24, color: UIColor.cBDBDBD),
-        ],
+              ],
+            ),
+            const Icon(Icons.chevron_right, size: 24, color: UIColor.cBDBDBD),
+          ],
+        ),
       ),
     );
   }
@@ -98,53 +115,76 @@ class ReminderEditPage extends StatelessWidget {
               ),
             ),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 6),
-                child: Text(
-                  plantModel.plantName ?? '',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: UIColor.c15221D,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
+          child: Obx(() {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 6),
+                  child: Text(
+                    plantModel.plantName ?? '',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: UIColor.c15221D,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 6),
-                child: Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: 'scientificName'.tr,
-                        style: const TextStyle(
-                          color: UIColor.c00997A,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
+                Padding(
+                  padding: const EdgeInsets.only(left: 6),
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'scientificName'.tr,
+                          style: const TextStyle(
+                            color: UIColor.c00997A,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                      TextSpan(
-                        text: plantModel.scientificName ?? '',
-                        style: const TextStyle(
-                          color: UIColor.c15221D,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
+                        TextSpan(
+                          text: plantModel.scientificName ?? '',
+                          style: const TextStyle(
+                            color: UIColor.c15221D,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 24),
-              _buildItem(),
-              _buildItem(),
-              _buildItem(),
-              _buildItem(),
-            ],
-          ),
+                const SizedBox(height: 24),
+                _buildItem(
+                  icon: 'images/icon/alarmClock2.png',
+                  title: 'remindMe'.tr,
+                  valueIcon: reminderEditCtr.repository.currentRemindType['icon'],
+                  value: reminderEditCtr.repository.currentRemindType['title'],
+                  onTap: () => BottomsheetRemindMe(reminderEditCtr: reminderEditCtr).show(),
+                ),
+                _buildItem(
+                  icon: 'images/icon/cycle.png',
+                  title: 'repeatEvery'.tr,
+                  value: '10:00',
+                  onTap: () => BottomsheetRepeat().show(),
+                ),
+                _buildItem(
+                  icon: 'images/icon/time.png',
+                  title: 'notificationTime'.tr,
+                  value: '10:00',
+                  onTap: () => BottomsheetNotification(reminderEditCtr: reminderEditCtr).show(),
+                ),
+                _buildItem(
+                  icon: 'images/icon/bell.png',
+                  title: 'previous'.tr,
+                  value: '10:00',
+                  onTap: () => BottomsheetPrevious().show(),
+                ),
+              ],
+            );
+          }),
         ),
       ),
     );
@@ -198,18 +238,22 @@ class ReminderEditPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.only(bottom: 16),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16),
               child: Text.rich(
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
                 TextSpan(
                   children: [
-                    TextSpan(text: 'Next Watering  '),
+                    TextSpan(text: 'next'.tr),
                     TextSpan(
+                      text: ' ${'watering'.tr}  ',
+                      style: const TextStyle(color: UIColor.c40BD95),
+                    ),
+                    const TextSpan(
                       text: '07/25/2024',
                       style: TextStyle(color: UIColor.c40BD95),
                     ),

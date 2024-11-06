@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:plant/api/request.dart';
 import 'package:plant/models/plant_info_model.dart';
 import 'package:plant/pages/plant_scan/info_identify_page.dart';

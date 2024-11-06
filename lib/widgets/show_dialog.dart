@@ -294,13 +294,17 @@ class TextFieldDialog extends StatelessWidget {
 ///)
 /// ```
 class BottomPopOptions extends StatelessWidget {
-  const BottomPopOptions({super.key, required this.children});
-  final List<Widget> children;
+  const BottomPopOptions({super.key, this.children, this.child, this.hasClose = true, this.title, this.hasBuoy = false});
+  final List<Widget>? children;
+  final Widget? child;
+  final bool hasClose;
+  final String? title;
+  final bool hasBuoy;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 20, left: 24, right: 24, bottom: 40),
+      padding: const EdgeInsets.only(top: 20, left: 24, right: 24, bottom: 20),
       decoration: const ShapeDecoration(
         color: UIColor.cF3F4F3,
         shape: RoundedRectangleBorder(
@@ -314,20 +318,54 @@ class BottomPopOptions extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              GestureDetector(
-                onTap: () => Get.back(),
-                child: const ImageIcon(
-                  AssetImage('images/icon/close.png'),
-                  size: 24,
-                  color: UIColor.black,
-                ),
-              ),
+              Container(width: 24),
+              if (hasBuoy)
+                Container(
+                  width: 60,
+                  height: 6,
+                  decoration: ShapeDecoration(
+                    color: UIColor.cD9D9D9,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(256),
+                    ),
+                  ),
+                )
+              else if (title != null)
+                Expanded(
+                  child: Text(
+                    title!,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: UIColor.c15221D,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                )
+              else
+                Container(width: 24),
+              if (hasClose)
+                GestureDetector(
+                  onTap: () => Get.back(),
+                  child: const ImageIcon(
+                    AssetImage('images/icon/close.png'),
+                    size: 24,
+                    color: UIColor.black,
+                  ),
+                )
+              else
+                Container(width: 24),
             ],
           ),
           const SizedBox(height: 16),
-          ...children,
+          if (children != null)
+            ...children!
+          else if (child != null)
+            child!,
         ],
       ),
     );
