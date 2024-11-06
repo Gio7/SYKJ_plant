@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:plant/api/dio.dart';
 import 'package:plant/api/request.dart';
 import 'package:plant/common/firebase_util.dart';
+import 'package:plant/common/global_data.dart';
 import 'package:plant/models/userinfo_model.dart';
 import 'package:plant/pages/login/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,6 +45,11 @@ class UserController extends GetxController {
       });
     }
     userInfo.value = UserInfoModel.fromJson(res);
+    if (!userInfo.value.pushToken && GlobalData.fcmToken != null) {
+      Future.delayed(const Duration(seconds: 5), () {
+        Request.updatePushToken(GlobalData.fcmToken!);
+      });
+    }
   }
 
   Future<void> userEdit(String nickname) async {

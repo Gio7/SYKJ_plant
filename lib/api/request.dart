@@ -28,6 +28,7 @@ class Request {
   static const String _getSearchList = '/Plant/home/getSearchList';
   static const String _plantSearch = '/Plant/home/search';
   static const String _getPlantByUniqueId = '/Plant/plant/getPlantByUniqueId';
+  static const String _updatePushToken = '/Plant/user/updatePushToken';
 
   /// telegram_group\email
   static Future<void> getConfig([List<String> conKey = const ['telegram_group', 'email']]) async {
@@ -38,8 +39,8 @@ class Request {
     return await DioUtil.httpGet(_uploadToken);
   }
 
-  static Future<dynamic> oneClickLogin(String uid, String? email) async {
-    return await DioUtil.httpPost(_oneClickLogin, data: {'uid': uid, 'email': email});
+  static Future<dynamic> oneClickLogin(String uid, String? email, String? pushToken) async {
+    return await DioUtil.httpPost(_oneClickLogin, data: {'uid': uid, 'email': email, 'pushToken': pushToken ?? ''});
   }
 
   static Future<dynamic> userinfo() async {
@@ -151,5 +152,9 @@ class Request {
   /// 通过uniqueId获取植物信息
   static Future<dynamic> getPlantByUniqueId(String uniqueId) async {
     return await DioUtil.httpPost(_getPlantByUniqueId, data: {"uniqueId": uniqueId});
+  }
+
+  static void updatePushToken(String pushToken) {
+    DioUtil.httpPost(_updatePushToken, data: {"pushToken": pushToken});
   }
 }

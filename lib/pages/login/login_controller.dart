@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:plant/api/dio.dart';
 import 'package:plant/api/request.dart';
 import 'package:plant/common/firebase_util.dart';
+import 'package:plant/common/global_data.dart';
 import 'package:plant/common/rsa.dart';
 import 'package:plant/widgets/loading_dialog.dart';
 import 'package:plant/controllers/user_controller.dart';
@@ -146,7 +147,7 @@ class LoginController extends GetxController {
       Get.dialog(const LoadingDialog());
       final uidEncode = await Rsa.encodeString(uid);
       final emailEncode = await Rsa.encodeString(email);
-      final res = await Request.oneClickLogin(uidEncode, emailEncode);
+      final res = await Request.oneClickLogin(uidEncode, emailEncode, GlobalData.fcmToken);
       final token = res['token'];
       if (token == null || token.isEmpty) {
         throw 'token 为空';
@@ -157,7 +158,7 @@ class LoginController extends GetxController {
       final userCtr = Get.find<UserController>();
       userCtr.isLogin.value = true;
       userCtr.userInfo.value = UserInfoModel.fromJson(res);
-      // TODO 获取我的植物
+      // TODO 获取我的植物列表
       SharedPreferences.getInstance().then((prefs) {
         prefs.setString('token', token);
       });

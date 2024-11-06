@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:advertising_id/advertising_id.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -48,7 +49,10 @@ void main() {
         }
         if (isInit) {
           isInit = false;
-          WidgetsBinding.instance.addPostFrameCallback((_) => getAdid());
+          WidgetsBinding.instance.addPostFrameCallback((_) async{
+            await getAdid();
+            getFCMToken();
+          });
         }
       }
     });
@@ -88,11 +92,11 @@ Future<void> initMain() async {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+    FireBaseUtil.initAnalyticsServices();
   } catch (e) {
     Get.log('Firebase initialization error: $e');
   }
   EasyRefreshCustom.setup();
-  FireBaseUtil.initAnalyticsServices();
   final info = await PackageInfo.fromPlatform();
   GlobalData.versionName = info.version;
   final prefs = await SharedPreferences.getInstance();
@@ -126,6 +130,17 @@ Future<void> getAdid() async {
   } catch (e) {
     Get.log("adid error: $e", isError: true);
     // advertisingId = 'Failed to get platform version.';
+  }
+}
+
+Future<void> getFCMToken() async {
+  try {
+    final fcmToken = await FirebaseMessaging.instance.getToken();
+    if (fcmToken != null) {
+      GlobalData.fcmToken = fcmToken;
+    }
+  } catch (e) {
+    Get.log("fcm error: $e", isError: true);
   }
 }
 

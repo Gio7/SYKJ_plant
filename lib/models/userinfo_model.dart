@@ -41,6 +41,8 @@ class UserInfoModel {
 
   final bool _isVip;
 
+  final bool pushToken;
+
   UserInfoModel({
     this.expireTimestamp,
     this.expireTime,
@@ -49,6 +51,7 @@ class UserInfoModel {
     this.userid,
     this.point,
     bool isVip = false,
+    this.pushToken = false,
   }) : _isVip = isVip;
 
   factory UserInfoModel.fromJson(Map<String, dynamic> json) => UserInfoModel(
@@ -59,6 +62,7 @@ class UserInfoModel {
         userid: json["userid"],
         point: json["point"],
         isVip: json["isVip"] ?? false,
+        pushToken: json["pushToken"] ?? false
       );
 
   toMap() => {
@@ -69,6 +73,7 @@ class UserInfoModel {
         "userid": userid,
         "point": point,
         "isVip": _isVip,
+        "pushToken": pushToken
       };
 
   bool get isRealVip {

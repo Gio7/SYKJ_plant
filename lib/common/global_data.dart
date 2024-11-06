@@ -26,6 +26,8 @@ class GlobalData {
   /// 唯一标识
   static String adId = '';
 
+  static String? fcmToken;
+
   static String telegramGroup = '';
 
   static String email = '';
