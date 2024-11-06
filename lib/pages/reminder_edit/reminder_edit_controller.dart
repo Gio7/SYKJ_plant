@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:plant/models/plant_model.dart';
+import 'package:plant/models/reminder_model.dart';
 
 part 'reminder_edit_repository.dart';
 

@@ -58,21 +58,24 @@ class _PlantsChosePageState extends State<PlantsChosePage> {
                 icon: 'images/icon/no_data_camera_histroy.png',
               )
             : EasyRefresh(
-                onRefresh: () async{
+                onRefresh: () async {
                   await onRefresh();
                 },
-                onLoad: () async{
+                onLoad: () async {
                   await onLoad();
                 },
                 child: ListView.separated(
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  separatorBuilder: (_,__) => const SizedBox(height: 16),
+                  separatorBuilder: (_, __) => const SizedBox(height: 16),
                   itemBuilder: (_, i) {
                     return PlantItemMore(
                       model: _dataList![i],
                       hasCreateTime: true,
                       onTap: () {
-                        Get.to(() => ReminderEditPage(plantModel: _dataList![i]));
+                        Get.to(
+                          () => ReminderEditPage(),
+                          arguments: {'plantModel': _dataList![i]},
+                        );
                       },
                     );
                   },

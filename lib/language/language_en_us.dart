@@ -170,7 +170,6 @@ class LanguageEnUs {
       "allPlants": "All Plants",
       "snapHistory": "Snap History",
       "noReminder": "No reminder",
-      "reminderSet": "reminder set",
       "addReminder": "Add Reminder",
       "identifyHistoryListTips": "The system will retain snapshot recognition records for 12 months.",
       "noResults": "No Results",
@@ -185,6 +184,11 @@ class LanguageEnUs {
       "repeat": "Repeat",
       "careNotification": "Care Notification",
       "noticeTime": "Notice Time",
+      "reminderSet": "9 reminder set",
+      "plants": "9 Plants",
+      "everyDays": "Every 9 days",
+      "everyWeeks": "Every 9 weeks",
+      "everyMonth": "Every 9 month",
     };
   }
 }

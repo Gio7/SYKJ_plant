@@ -3,6 +3,7 @@ import 'package:plant/api/request.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/plant_info_model.dart';
 import 'package:plant/models/plant_model.dart';
+import 'package:plant/models/reminder_model.dart';
 import 'package:plant/pages/plant_scan/info_identify_page.dart';
 import 'package:plant/pages/plant_scan/plant_controller.dart';
 import 'package:plant/widgets/custom_segmented.dart';
@@ -98,24 +99,29 @@ class MyPlantsController extends GetxController {
 
   Future<void> onReminderRefresh() async {
     repository.reminderIsLoading.value = true;
-    // TODO 更换接口
     repository.reminderIsLastPage = false;
     repository.reminderPageNum = 1;
-    final res = await Request.getPlantScanHistory(repository.reminderPageNum);
+    final res = await Request.getReminders(repository.reminderPageNum);
     repository.reminderIsLastPage = res['lastPage'];
-    final rows = (res['rows'] as List).map((plant) => PlantModel.fromJson(plant)).toList();
+    final rows = (res['rows'] as List).map((plant) => ReminderModel.fromJson(plant)).toList();
     repository.reminderIsLoading.value = false;
-    // repository.reminderDataList.value = rows;
+    repository.reminderDataList.value = rows;
     repository.reminderIsLastPage = true;
+    // repository.reminderDataList.value = List<ReminderModel>.generate(8, (int index) {
+    //   return ReminderModel(records: [
+    //     Record(type: 1, items: [Item()]),
+    //     Record(type: 2, items: [Item(),Item()]),
+    //     Record(type: 3, items: [Item(),Item(),Item()]),
+    //   ], date: '2022-09-2$index');
+    // });
   }
 
   Future<void> onReminderLoad() async {
-    // TODO 更换接口
     if (repository.reminderIsLastPage) return;
     repository.reminderPageNum++;
-    final res = await Request.getPlantScanHistory(repository.reminderPageNum);
+    final res = await Request.getReminders(repository.reminderPageNum);
     repository.reminderIsLastPage = res['lastPage'];
-    final rows = (res['rows'] as List).map((plant) => PlantModel.fromJson(plant)).toList();
-    // repository.reminderDataList.addAll(rows);
+    final rows = (res['rows'] as List).map((plant) => ReminderModel.fromJson(plant)).toList();
+    repository.reminderDataList.addAll(rows);
   }
 }

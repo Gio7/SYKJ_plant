@@ -9,7 +9,7 @@ class PlantItemReminder extends StatelessWidget {
 
   final Function()? onTap;
   final Function()? onMore;
-  final Function()? onSetReminder;
+  final Function(int?)? onSetReminder;
   final PlantModel model;
 
   @override
@@ -63,7 +63,7 @@ class PlantItemReminder extends StatelessWidget {
                         ),
                         // const SizedBox(height: 8),
                         Text(
-                          '${'noReminder'.tr}',
+                          model.getReminderSetText,
                           style: TextStyle(
                             color: UIColor.c8E8B8B,
                             fontSize: 12,
@@ -87,56 +87,48 @@ class PlantItemReminder extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             color: UIColor.transparent60,
-            child: _buildReminder(),
+            child: _buildReminder(model),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildReminder() {
+  Widget _buildReminder(PlantModel model) {
+    if (model.timedPlans == null || model.timedPlans!.isEmpty) {
+      return _buildEmptyReminder();
+    }
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Container(
-          height: 32,
-          width: 32,
-          margin: const EdgeInsets.only(left: 24),
-          decoration: ShapeDecoration(
-            color: UIColor.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-          ),
-          alignment: Alignment.center,
-          child: Image.asset(
-            'images/icon/fertilizer.png',
-            width: 22,
-          ),
-        ),
-        Container(
-          height: 32,
-          width: 32,
-          margin: const EdgeInsets.only(left: 24),
-          decoration: ShapeDecoration(
-            color: UIColor.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-          ),
-          alignment: Alignment.center,
-          child: Image.asset(
-            'images/icon/water.png',
-            width: 22,
-          ),
-        ),
-      ],
+      children: model.timedPlans!
+          .map((e) => GestureDetector(
+                onTap: () => onSetReminder?.call(e.type),
+                child: Container(
+                  height: 32,
+                  width: 32,
+                  margin: const EdgeInsets.only(left: 24),
+                  decoration: ShapeDecoration(
+                    color: UIColor.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                  ),
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    e.getTypeIcon,
+                    width: 22,
+                  ),
+                ),
+              ))
+          .toList(),
     );
   }
 
   Widget _buildEmptyReminder() {
     return GestureDetector(
-      onTap: onSetReminder,
+      onTap: () {
+        onSetReminder?.call(null);
+      },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [

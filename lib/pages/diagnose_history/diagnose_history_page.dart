@@ -25,7 +25,8 @@ class DiagnoseHistoryPage extends StatelessWidget {
         body: Column(
           children: [
             Container(
-              height: 40,
+              constraints: const BoxConstraints(minHeight: 40),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               width: double.infinity,
               decoration: const BoxDecoration(color: UIColor.transparentPrimary40),
               alignment: Alignment.center,

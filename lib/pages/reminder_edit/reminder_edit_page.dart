@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/models/plant_model.dart';
+import 'package:plant/models/reminder_model.dart';
 import 'package:plant/pages/reminder_edit/reminder_edit_controller.dart';
 import 'package:plant/widgets/btn.dart';
 
@@ -12,8 +12,7 @@ import 'widgets/bottomsheet_remind_me.dart';
 import 'widgets/bottomsheet_repeat.dart';
 
 class ReminderEditPage extends StatelessWidget {
-  ReminderEditPage({super.key, required this.plantModel});
-  final PlantModel plantModel;
+  ReminderEditPage({super.key});
   final reminderEditCtr = Get.put(ReminderEditController());
 
   @override
@@ -122,7 +121,7 @@ class ReminderEditPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 6),
                   child: Text(
-                    plantModel.plantName ?? '',
+                    reminderEditCtr.repository.plantName ?? '',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: UIColor.c15221D,
@@ -145,7 +144,7 @@ class ReminderEditPage extends StatelessWidget {
                           ),
                         ),
                         TextSpan(
-                          text: plantModel.scientificName ?? '',
+                          text: reminderEditCtr.repository.scientificName ?? '',
                           style: const TextStyle(
                             color: UIColor.c15221D,
                             fontSize: 12,
@@ -167,19 +166,21 @@ class ReminderEditPage extends StatelessWidget {
                 _buildItem(
                   icon: 'images/icon/cycle.png',
                   title: 'repeatEvery'.tr,
-                  value: '10:00',
+                  value: reminderEditCtr.repository.cycle.value == null
+                      ? ''
+                      : '${reminderEditCtr.repository.cycle.value!} ${TimedPlan.getUnitText(reminderEditCtr.repository.unit.value!)}',
                   onTap: () => BottomsheetRepeat().show(),
                 ),
                 _buildItem(
                   icon: 'images/icon/time.png',
                   title: 'notificationTime'.tr,
-                  value: '10:00',
+                  value: reminderEditCtr.repository.clock.value == null ? '' : reminderEditCtr.repository.clock.value!,
                   onTap: () => BottomsheetNotification(reminderEditCtr: reminderEditCtr).show(),
                 ),
                 _buildItem(
                   icon: 'images/icon/bell.png',
                   title: 'previous'.tr,
-                  value: '10:00',
+                  value: reminderEditCtr.repository.previousTime.value == null ? '' : reminderEditCtr.repository.previousTime.value!,
                   onTap: () => BottomsheetPrevious().show(),
                 ),
               ],
@@ -197,7 +198,7 @@ class ReminderEditPage extends StatelessWidget {
       right: 0,
       height: 290,
       child: CachedNetworkImage(
-        imageUrl: plantModel.thumbnail ?? '',
+        imageUrl: reminderEditCtr.repository.thumbnail ?? '',
         fit: BoxFit.cover,
         fadeInDuration: Duration.zero,
         placeholder: (context, url) => const CircularProgressIndicator(),

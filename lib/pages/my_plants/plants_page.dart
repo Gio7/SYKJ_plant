@@ -7,6 +7,7 @@ import 'package:plant/common/ui_color.dart';
 import 'package:plant/models/plant_model.dart';
 import 'package:plant/pages/identify_history/identify_history_page.dart';
 import 'package:plant/pages/plant_scan/shoot_page.dart';
+import 'package:plant/pages/reminder_edit/reminder_edit_page.dart';
 import 'package:plant/widgets/btn.dart';
 import 'package:plant/widgets/loading_dialog.dart';
 import 'package:plant/widgets/show_dialog.dart';
@@ -83,7 +84,7 @@ class PlantsPage extends StatelessWidget {
                         model: model,
                         onTap: () => controller.getPlantDetailByRecord(model),
                         onMore: () => _onMore(model),
-                        onSetReminder: () => _onSetReminder(model),
+                        onSetReminder: (int? type) => _onSetReminder(type, model),
                       ),
                     );
                   },
@@ -143,7 +144,8 @@ class PlantsPage extends StatelessWidget {
             width: double.infinity,
             child: NormalButton(
               onTap: () {
-                // TODO 设置提醒
+                Get.back();
+                _onSetReminder(null, model);
               },
               text: 'setReminder'.tr,
               textColor: UIColor.c15221D,
@@ -185,8 +187,10 @@ class PlantsPage extends StatelessWidget {
     );
   }
 
-  void _onSetReminder(PlantModel model) {
-    // TODO 设置提醒
-    Get.log('设置提醒');
+  void _onSetReminder(int? type, PlantModel model) {
+    Get.to(
+      () => ReminderEditPage(),
+      arguments: {'type': type, "plantModel": model},
+    );
   }
 }

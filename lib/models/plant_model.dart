@@ -1,5 +1,8 @@
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:plant/common/date_util.dart';
+
+import 'reminder_model.dart';
 
 class PlantModel {
   final dynamic createBy;
@@ -8,6 +11,7 @@ class PlantModel {
   final dynamic updateTime;
   final dynamic remark;
   final int? createTimestamp;
+  // 植物记录ID (植物列表返回的)
   final int? id;
   final int? uid;
   final String? thumbnail;
@@ -15,6 +19,7 @@ class PlantModel {
   String? plantName;
   final String? language;
   final int? status;
+  final List<TimedPlan>? timedPlans;
 
   PlantModel({
     required this.createBy,
@@ -30,6 +35,7 @@ class PlantModel {
     required this.plantName,
     required this.language,
     required this.status,
+    this.timedPlans,
   });
 
   factory PlantModel.fromJson(Map<String, dynamic> json) => PlantModel(
@@ -46,6 +52,7 @@ class PlantModel {
         plantName: json["plantName"],
         language: json["language"],
         status: json["status"],
+        timedPlans: json["timedPlans"] == null ? [] : List<TimedPlan>.from(json["timedPlans"]!.map((x) => TimedPlan.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -66,5 +73,11 @@ class PlantModel {
 
   String get createTimeLocal {
     return DateUtil.formatString(createTime, format: DateFormat.yMd());
+  }
+
+  String get getReminderSetText {
+    if (timedPlans == null || timedPlans!.isEmpty) return 'noReminder'.tr;
+    String text = "reminderSet".tr;
+    return text.replaceAll('9', timedPlans!.length.toString());
   }
 }

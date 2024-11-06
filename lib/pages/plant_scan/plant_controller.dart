@@ -87,7 +87,6 @@ class PlantController extends GetxController {
       final res = await Request.plantDiagnosis(repository.diagnoseImageUrls);
       if (completer.isCompleted) return false;
       if (res.statusCode == 200) {
-        print('------${res.data}');
         final responseData = res.data;
         if (responseData['code'] == 200 || responseData['code'] == 0) {
           repository.diagnoseImageFile1.value = null;

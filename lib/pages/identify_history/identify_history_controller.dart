@@ -19,10 +19,9 @@ class IdentifyHistoryController extends GetxController {
   }
 
   Future<void> onRefresh() async {
-    // TODO 更换接口
     repository.isLastPage = false;
     repository.pageNum = 1;
-    final res = await Request.getPlantScanHistory(repository.pageNum);
+    final res = await Request.getPlantScanHistory(repository.pageNum, type: "all");
     repository.isLastPage = res['lastPage'];
     final rows = (res['rows'] as List).map((plant) => PlantModel.fromJson(plant)).toList();
     repository.isLoading.value = false;
@@ -30,16 +29,15 @@ class IdentifyHistoryController extends GetxController {
   }
 
   Future<void> onLoad() async {
-    // TODO 更换接口
     if (repository.isLastPage) return;
     repository.pageNum++;
-    final res = await Request.getPlantScanHistory(repository.pageNum);
+    final res = await Request.getPlantScanHistory(repository.pageNum, type: "all");
     repository.isLastPage = res['lastPage'];
     final rows = (res['rows'] as List).map((plant) => PlantModel.fromJson(plant)).toList();
     repository.dataList.addAll(rows);
   }
 
-    Future<void> onDetailById(PlantModel model) async {
+  Future<void> onDetailById(PlantModel model) async {
     Get.dialog(const LoadingDialog(), barrierDismissible: false);
     try {
       final res = await Request.getPlantDetailByRecord(model.id!);

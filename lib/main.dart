@@ -15,6 +15,7 @@ import 'package:plant/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'api/dio.dart';
+import 'common/firebase_message.dart';
 import 'common/firebase_util.dart';
 import 'common/ui_color.dart';
 import 'widgets/easy_refresh_custom.dart';
@@ -138,6 +139,7 @@ Future<void> getFCMToken() async {
     final fcmToken = await FirebaseMessaging.instance.getToken();
     if (fcmToken != null) {
       GlobalData.fcmToken = fcmToken;
+      FirebaseMessage().init();
     }
   } catch (e) {
     Get.log("fcm error: $e", isError: true);

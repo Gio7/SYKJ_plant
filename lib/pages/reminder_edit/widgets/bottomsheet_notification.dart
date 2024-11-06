@@ -26,6 +26,7 @@ class BottomsheetNotification {
     Picker(
       height: 250,
       adapter: DateTimePickerAdapter(type: PickerDateTimeType.kHM),
+      // TODO 默认选项
       // selecteds: ,
       changeToFirst: false, // 切换选项后刷新下一级选项
       hideHeader: false,
@@ -52,7 +53,10 @@ class BottomsheetNotification {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton(
-                    onPressed: () => Get.back(),
+                    onPressed: () {
+                      reminderEditCtr.repository.tempClock.value = '';
+                      Get.back();
+                    },
                     child: Text(
                       'cancel'.tr,
                       style: headerTextStyle.copyWith(color: UIColor.c8E8B8B),
@@ -111,7 +115,7 @@ class BottomsheetNotification {
                       ),
                       const SizedBox(width: 10),
                       Text(
-                        reminderEditCtr.repository.currentNotificationTime.value,
+                        reminderEditCtr.repository.tempClock.value ?? '',
                         style: const TextStyle(
                           color: UIColor.c40BD95,
                           fontSize: 14,
@@ -124,9 +128,9 @@ class BottomsheetNotification {
                         height: 18,
                         toggleSize: 14,
                         padding: 2.0,
-                        value: reminderEditCtr.repository.isNotificationOn.value,
+                        value: reminderEditCtr.repository.tempStatus.value,
                         onToggle: (v) {
-                          reminderEditCtr.repository.isNotificationOn.value = v;
+                          reminderEditCtr.repository.tempStatus.value = v;
                         },
                         inactiveColor: UIColor.cE0E0E0,
                         activeColor: UIColor.primary,
@@ -141,7 +145,7 @@ class BottomsheetNotification {
       },
       onSelect: (picker, index, selected) {
         // reminderEditCtr.repository.currentNotificationTime.value,
-        reminderEditCtr.repository.currentNotificationTime.value = picker.adapter.text;
+        reminderEditCtr.repository.tempClock.value = picker.adapter.text;
       },
     ).showModal(Get.context!);
   }

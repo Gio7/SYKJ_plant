@@ -29,6 +29,9 @@ class Request {
   static const String _plantSearch = '/Plant/home/search';
   static const String _getPlantByUniqueId = '/Plant/plant/getPlantByUniqueId';
   static const String _updatePushToken = '/Plant/user/updatePushToken';
+  static const String _getReminders = '/Plant/plant/getReminders';
+  static const String _plantAlarmAdd = '/Plant/alarm/add';
+  static const String _plantAlarmUpdate = '/Plant/alarm/update';
 
   /// telegram_group\email
   static Future<void> getConfig([List<String> conKey = const ['telegram_group', 'email']]) async {
@@ -65,8 +68,12 @@ class Request {
     return await DioUtil.httpPost(_plantDiagnosis, data: {'url': imageUrls}, ignoreAll: true);
   }
 
-  static Future<dynamic> getPlantScanHistory(int pageNum, [int pageSize = 20]) async {
-    return await DioUtil.httpGet(_plantScanHistory, parameters: {'pageNum': pageNum, 'pageSize': pageSize}, allData: true);
+  static Future<dynamic> getPlantScanHistory(int pageNum, {int pageSize = 20, String type = "save"}) async {
+    return await DioUtil.httpGet(
+      _plantScanHistory,
+      parameters: {'pageNum': pageNum, 'pageSize': pageSize, 'type': type},
+      allData: true,
+    );
   }
 
   static Future<void> plantScanRename(int id, String plantName) async {
@@ -156,5 +163,9 @@ class Request {
 
   static void updatePushToken(String pushToken) {
     DioUtil.httpPost(_updatePushToken, data: {"pushToken": pushToken});
+  }
+
+  static Future<dynamic> getReminders(int pageNum, [int pageSize = 30]) async {
+    return await DioUtil.httpGet(_getReminders, parameters: {'pageNum': pageNum, 'pageSize': pageSize}, allData: true);
   }
 }
