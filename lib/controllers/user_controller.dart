@@ -66,7 +66,9 @@ class UserController extends GetxController {
 
   Future<void> userDelete() async {
     await Request.userDelete();
-    FirebaseAuth.instance.currentUser?.delete();
+    if (GetPlatform.isAndroid) {
+      FirebaseAuth.instance.currentUser?.delete();
+    }
     logout();
   }
 }
