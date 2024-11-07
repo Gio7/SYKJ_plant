@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:plant/api/dio.dart';
 import 'package:plant/api/request.dart';
@@ -5,6 +6,7 @@ import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/global_data.dart';
 import 'package:plant/models/userinfo_model.dart';
 import 'package:plant/pages/login/login_page.dart';
+import 'package:plant/pages/my_plants/my_plants_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserController extends GetxController {
@@ -16,10 +18,13 @@ class UserController extends GetxController {
     userInfo.value = UserInfoModel();
     DioUtil.token = '';
     DioUtil.resetDio();
+    if (Get.isRegistered<MyPlantsController>()) {
+      final myPlantsCtr = Get.find<MyPlantsController>();
+      myPlantsCtr.repository.plantDataList.value = [];
+      myPlantsCtr.repository.reminderDataList.value = [];
+    }
     SharedPreferences.getInstance().then((value) async {
       value.remove('token');
-      // await value.remove('draftList');
-      // mcc.getDraftData();
     });
   }
 
@@ -61,6 +66,7 @@ class UserController extends GetxController {
 
   Future<void> userDelete() async {
     await Request.userDelete();
+    FirebaseAuth.instance.currentUser?.delete();
     logout();
   }
 }

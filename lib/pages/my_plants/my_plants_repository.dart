@@ -9,7 +9,6 @@ class MyPlantsRepository {
 
   late Rx<CustomSegmentedValue> currentTab;
 
-  // TODO 更换类型
   RxList<ReminderModel> reminderDataList = <ReminderModel>[].obs;
   int reminderPageNum = 1;
   RxBool reminderIsLoading = false.obs;

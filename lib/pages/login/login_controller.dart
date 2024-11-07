@@ -6,6 +6,7 @@ import 'package:plant/api/request.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/global_data.dart';
 import 'package:plant/common/rsa.dart';
+import 'package:plant/pages/my_plants/my_plants_controller.dart';
 import 'package:plant/widgets/loading_dialog.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/userinfo_model.dart';
@@ -158,7 +159,14 @@ class LoginController extends GetxController {
       final userCtr = Get.find<UserController>();
       userCtr.isLogin.value = true;
       userCtr.userInfo.value = UserInfoModel.fromJson(res);
-      // TODO 获取我的植物列表
+      if (Get.isRegistered<MyPlantsController>()) {
+        final myPlantsCtr = Get.find<MyPlantsController>();
+        if (myPlantsCtr.repository.currentTab.value.value == "1") {
+          myPlantsCtr.onPlantRefresh();
+        } else {
+          myPlantsCtr.onReminderRefresh();
+        }
+      }
       SharedPreferences.getInstance().then((prefs) {
         prefs.setString('token', token);
       });
