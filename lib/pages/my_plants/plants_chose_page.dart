@@ -72,7 +72,7 @@ class _PlantsChosePageState extends State<PlantsChosePage> {
                       model: _dataList![i],
                       hasCreateTime: true,
                       onTap: () {
-                        Get.to(
+                        Get.off(
                           () => ReminderEditPage(),
                           arguments: {'plantModel': _dataList![i]},
                         );

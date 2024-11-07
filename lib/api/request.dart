@@ -31,6 +31,7 @@ class Request {
   static const String _updatePushToken = '/Plant/user/updatePushToken';
   static const String _getReminders = '/Plant/plant/getReminders';
   static const String _plantAlarmUpdate = '/Plant/alarm/update';
+  static const String _plantAlarmDelete = '/Plant/alarm/delete';
 
   /// telegram_group\email
   static Future<void> getConfig([List<String> conKey = const ['telegram_group', 'email']]) async {
@@ -179,5 +180,9 @@ class Request {
   }) async {
     final data = {"recordId": recordId, "type": type, "cycle": cycle, "unit": unit, "clock": clock, "previous": previous, "status": status};
     return await DioUtil.httpPost(_plantAlarmUpdate, data: data);
+  }
+
+  static Future<void> plantAlarmDelete(int recordId, int type) async{
+    return await DioUtil.httpPost(_plantAlarmDelete, data: {"recordId": recordId, "type": type});
   }
 }

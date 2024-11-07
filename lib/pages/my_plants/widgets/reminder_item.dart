@@ -4,11 +4,12 @@ import 'package:plant/common/ui_color.dart';
 import 'package:plant/models/reminder_model.dart';
 
 class ReminderItem extends StatelessWidget {
-  const ReminderItem({super.key, required this.model, this.onTap, this.onPlant});
+  const ReminderItem({super.key, required this.model, this.onTap, this.onPlant, this.onDeletePlan});
 
   final Record model;
   final Function()? onTap;
   final Function(TimedPlan)? onPlant;
+  final Function(TimedPlan)? onDeletePlan;
 
   @override
   Widget build(BuildContext context) {
@@ -115,6 +116,15 @@ class ReminderItem extends StatelessWidget {
                                     ),
                                   )
                                 ],
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                onDeletePlan?.call(e);
+                              },
+                              child: Image.asset(
+                                'images/icon/delete_grey.png',
+                                width: 28,
                               ),
                             ),
                           ],

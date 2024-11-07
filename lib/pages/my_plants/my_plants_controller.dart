@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:plant/api/request.dart';
 import 'package:plant/controllers/user_controller.dart';
@@ -8,6 +9,7 @@ import 'package:plant/pages/plant_scan/info_identify_page.dart';
 import 'package:plant/pages/plant_scan/plant_controller.dart';
 import 'package:plant/widgets/custom_segmented.dart';
 import 'package:plant/widgets/loading_dialog.dart';
+import 'package:plant/widgets/show_dialog.dart';
 
 part 'my_plants_repository.dart';
 
@@ -123,5 +125,38 @@ class MyPlantsController extends GetxController {
     repository.reminderIsLastPage = res['lastPage'];
     final rows = (res['rows'] as List).map((plant) => ReminderModel.fromJson(plant)).toList();
     repository.reminderDataList.addAll(rows);
+  }
+
+  Future<void> plantAlarmDelete(int? recordId, int? type,{required int index, required int index2}) async {
+    if (recordId == null || type == null) return;
+    Get.dialog(
+      NormalDialog(
+        title: 'warning'.tr,
+        confirmText: 'delete'.tr,
+        cancelText: 'cancel'.tr,
+        subText: 'deletePlanTips'.tr,
+        icon: Image.asset('images/icon/delete.png', height: 70),
+        confirmPositionLeft: false,
+        onConfirm: () async {
+          Get.back();
+          try {
+            Get.dialog(const LoadingDialog(), barrierDismissible: false);
+            await Request.plantAlarmDelete(recordId, type);
+            Get.back();
+            repository.reminderDataList[index].records[index2].items.removeWhere((item) => item.id == recordId);
+            repository.reminderDataList[index] = repository.reminderDataList[index];
+            final plantListIndex = repository.plantDataList.indexWhere((element) => element.id == recordId);
+            if (plantListIndex >= 0) {
+              repository.plantDataList[plantListIndex].timedPlans?.removeWhere((item) => item.type == type);
+              repository.plantDataList[plantListIndex] = repository.plantDataList[plantListIndex];
+            }
+          } catch (e) {
+            Get.back();
+            Get.log(e.toString(), isError: true);
+            rethrow;
+          }
+        },
+      ),
+    );
   }
 }

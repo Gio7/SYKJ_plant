@@ -13,6 +13,7 @@ import 'widgets/reminder_item.dart';
 
 class RemindersPage extends StatelessWidget {
   RemindersPage({super.key});
+
   final controller = Get.find<MyPlantsController>();
 
   @override
@@ -80,18 +81,22 @@ class RemindersPage extends StatelessWidget {
                           itemBuilder: (_, j) {
                             final recordModel = reminderModel.records[j];
                             return ReminderItem(
-                                model: recordModel,
-                                onTap: () {
-                                  recordModel.isExpanded = !recordModel.isExpanded;
-                                  reminderModel.records[j] = recordModel;
-                                  repository.reminderDataList[i] = reminderModel;
-                                },
-                                onPlant: (timedPlan) {
-                                  Get.to(
-                                    () => ReminderEditPage(),
-                                    arguments: {"timedPlanModel": timedPlan},
-                                  );
-                                });
+                              model: recordModel,
+                              onTap: () {
+                                recordModel.isExpanded = !recordModel.isExpanded;
+                                reminderModel.records[j] = recordModel;
+                                repository.reminderDataList[i] = reminderModel;
+                              },
+                              onPlant: (timedPlan) {
+                                Get.to(
+                                  () => ReminderEditPage(),
+                                  arguments: {"timedPlanModel": timedPlan},
+                                );
+                              },
+                              onDeletePlan: (timedPlan) {
+                                controller.plantAlarmDelete(timedPlan.id, timedPlan.type,index: i,index2: j);
+                              },
+                            );
                           },
                           separatorBuilder: (_, __) => const SizedBox(height: 10),
                           itemCount: reminderModel.records.length,

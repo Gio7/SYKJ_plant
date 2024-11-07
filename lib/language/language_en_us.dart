@@ -198,6 +198,7 @@ class LanguageEnUs {
       "family": "Family",
       "genus": "Genus",
       "lightTopTips": "Position your phone at the area where you want to place the plant",
+      "deletePlanTips": "Are your sure you want to delete the reminder?",
     };
   }
 }
