@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/controllers/main_controller.dart';
+import 'package:plant/pages/light_sensor/light_page.dart';
 import 'package:plant/pages/my_plants/my_plants_controller.dart';
 import 'package:plant/pages/plant_scan/plant_controller.dart';
 import 'package:plant/pages/plant_search/widgets/plant_categries_list.dart';
@@ -126,7 +127,7 @@ class HomePage extends StatelessWidget {
                   'lightMeter'.tr,
                   [const Color(0xFFF8EFD9), const Color(0xFFE9DFAE)],
                   () {
-                    // TODO 跳
+                    Get.to(() => LightPage());
                   },
                 ),
               ],

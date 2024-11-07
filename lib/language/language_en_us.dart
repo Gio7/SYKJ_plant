@@ -197,6 +197,7 @@ class LanguageEnUs {
       "order": "Order",
       "family": "Family",
       "genus": "Genus",
+      "lightTopTips": "Position your phone at the area where you want to place the plant",
     };
   }
 }
