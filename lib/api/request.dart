@@ -30,7 +30,6 @@ class Request {
   static const String _getPlantByUniqueId = '/Plant/plant/getPlantByUniqueId';
   static const String _updatePushToken = '/Plant/user/updatePushToken';
   static const String _getReminders = '/Plant/plant/getReminders';
-  static const String _plantAlarmAdd = '/Plant/alarm/add';
   static const String _plantAlarmUpdate = '/Plant/alarm/update';
 
   /// telegram_group\email
@@ -167,5 +166,18 @@ class Request {
 
   static Future<dynamic> getReminders(int pageNum, [int pageSize = 30]) async {
     return await DioUtil.httpGet(_getReminders, parameters: {'pageNum': pageNum, 'pageSize': pageSize}, allData: true);
+  }
+
+  static Future<void> plantAlarmUpdate({
+    required int recordId,
+    required int type,
+    required int cycle,
+    required String unit,
+    required String clock,
+    required String previous,
+    required bool status,
+  }) async {
+    final data = {"recordId": recordId, "type": type, "cycle": cycle, "unit": unit, "clock": clock, "previous": previous, "status": status};
+    return await DioUtil.httpPost(_plantAlarmUpdate, data: data);
   }
 }

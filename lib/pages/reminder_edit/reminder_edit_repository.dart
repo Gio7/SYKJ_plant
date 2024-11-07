@@ -11,6 +11,7 @@ class ReminderEditRepository {
 
   RxnString tempClock = RxnString();
   RxBool tempStatus = RxBool(false);
+  RxString nextPlanTime = "".obs;
 
   String? plantName;
   String? scientificName;
@@ -32,7 +33,8 @@ class ReminderEditRepository {
   RxnString clock = RxnString();
 
   /// 计划执行锚点时间 "2024-11-06"
-  RxnString previousTime = RxnString();
+  // RxnString previousTime = RxnString();
+  RxnInt previousTimestamp = RxnInt();
 
   /// 推送开关
   RxBool status = RxBool(false);
@@ -48,7 +50,9 @@ class ReminderEditRepository {
         scientificName = timedPlanModel.scientificName;
         thumbnail = timedPlanModel.thumbnail;
 
-        tempClock.value = timedPlanModel.clock;
+        if (timedPlanModel.clock != null) {
+          tempClock.value = DateFormat("HH:mm").format(DateFormat("HH:mm:ss").parse(timedPlanModel.clock!));
+        }
         tempStatus.value = timedPlanModel.status;
 
         recordId = timedPlanModel.id!;
@@ -56,8 +60,8 @@ class ReminderEditRepository {
 
         cycle.value = timedPlanModel.cycle;
         unit.value = timedPlanModel.unit;
-        clock.value = timedPlanModel.clock;
-        previousTime.value = timedPlanModel.previousTime;
+        clock.value = tempClock.value;
+        previousTimestamp.value = timedPlanModel.previousTimestamp;
         status.value = timedPlanModel.status;
       } else if (plantModel != null) {
         plantName = plantModel.plantName;
@@ -73,15 +77,18 @@ class ReminderEditRepository {
           timedPlanModel = plantModel.timedPlans!.reduce((a, b) => a.updateTime.isAfter(b.updateTime) ? a : b);
         }
         if (timedPlanModel != null) {
-          tempClock.value = timedPlanModel.clock;
+          if (timedPlanModel.clock != null) {
+            tempClock.value = DateFormat("HH:mm").format(DateFormat("HH:mm:ss").parse(timedPlanModel.clock!));
+          }
+
           tempStatus.value = timedPlanModel.status;
 
           currentRemindType.value = remindTypsList[timedPlanModel.type!];
 
           cycle.value = timedPlanModel.cycle;
           unit.value = timedPlanModel.unit;
-          clock.value = timedPlanModel.clock;
-          previousTime.value = timedPlanModel.previousTime;
+          clock.value = tempClock.value;
+          previousTimestamp.value = timedPlanModel.previousTimestamp;
           status.value = timedPlanModel.status;
         }
       }

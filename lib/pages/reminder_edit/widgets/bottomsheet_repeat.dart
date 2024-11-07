@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_picker_plus/picker.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/pages/reminder_edit/reminder_edit_controller.dart';
 
 class BottomsheetRepeat {
+  final ReminderEditController reminderEditCtr;
+
+  BottomsheetRepeat({required this.reminderEditCtr});
   void show() {
     List<PickerItem<String>> dayData = List.generate(
       31,
@@ -39,7 +43,6 @@ class BottomsheetRepeat {
         adapter: PickerDataAdapter<String>(
           data: typeData,
         ),
-        // TODO : 选项数据
         // selecteds: ,
         changeToFirst: true, // 切换选项后刷新下一级选项
         hideHeader: false,
@@ -98,12 +101,14 @@ class BottomsheetRepeat {
                     ),
                     TextButton(
                       onPressed: () {
-                        // TODO 选择周期
                         final picker = PickerWidget.of(context).data;
                         final selectedType = picker.getSelectedValues()[0];
                         final selectedValue = picker.getSelectedValues()[1];
-                        print("选择的类型: $selectedType");
-                        print("选择的值: $selectedValue");
+                        // print(picker.selecteds[0]);
+                        // print("选择的类型: $selectedType");
+                        // print("选择的值: $selectedValue");
+                        final unit = selectedType == 'days'.tr ? 'day' : selectedType == 'weeks'.tr ? 'week' : 'month';
+                        reminderEditCtr.setCycle(unit,int.tryParse(selectedValue));
                         Get.back();
                       },
                       child: Text(
@@ -116,6 +121,8 @@ class BottomsheetRepeat {
               ],
             ),
           );
-        }).showModal(Get.context!);
+        },onSelect: (picker, index, selected) {
+          
+        },).showModal(Get.context!);
   }
 }

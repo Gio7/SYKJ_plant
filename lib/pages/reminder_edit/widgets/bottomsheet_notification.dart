@@ -1,8 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_picker_plus/picker.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:plant/common/date_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/pages/reminder_edit/reminder_edit_controller.dart';
 
@@ -22,11 +23,11 @@ class BottomsheetNotification {
       fontSize: 16,
       fontWeight: FontWeight.w600,
     );
+    reminderEditCtr.repository.tempClock.value = DateUtil.formatString(DateTime.now().toString(), format: DateFormat.Hm());
 
     Picker(
       height: 250,
       adapter: DateTimePickerAdapter(type: PickerDateTimeType.kHM),
-      // TODO 默认选项
       // selecteds: ,
       changeToFirst: false, // 切换选项后刷新下一级选项
       hideHeader: false,
@@ -73,10 +74,10 @@ class BottomsheetNotification {
                   // ),
                   TextButton(
                     onPressed: () {
-                      // TODO 选择时间
-                      final picker = PickerWidget.of(context);
-                      print(picker.data.adapter.text);
-                      print(picker.data.selecteds);
+                      // final picker = PickerWidget.of(context);
+                      // print(picker.data.adapter.text);
+                      // print(picker.data.selecteds);
+                      reminderEditCtr.setClock(reminderEditCtr.repository.tempClock.value);
                       // print(isSwitchOn);
                       Get.back();
                     },
@@ -144,9 +145,12 @@ class BottomsheetNotification {
         );
       },
       onSelect: (picker, index, selected) {
-        // reminderEditCtr.repository.currentNotificationTime.value,
-        reminderEditCtr.repository.tempClock.value = picker.adapter.text;
+        reminderEditCtr.repository.tempClock.value = DateUtil.formatString(picker.adapter.text, format: DateFormat.Hm());
       },
-    ).showModal(Get.context!);
+    ).showModal(Get.context!).whenComplete(() {
+      if (reminderEditCtr.repository.status.value != reminderEditCtr.repository.tempStatus.value) {
+        reminderEditCtr.repository.tempStatus.value = reminderEditCtr.repository.status.value;
+      }
+    });
   }
 }

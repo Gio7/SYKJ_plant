@@ -169,7 +169,7 @@ class ReminderEditPage extends StatelessWidget {
                   value: reminderEditCtr.repository.cycle.value == null
                       ? ''
                       : '${reminderEditCtr.repository.cycle.value!} ${TimedPlan.getUnitText(reminderEditCtr.repository.unit.value!)}',
-                  onTap: () => BottomsheetRepeat().show(),
+                  onTap: () => BottomsheetRepeat(reminderEditCtr: reminderEditCtr).show(),
                 ),
                 _buildItem(
                   icon: 'images/icon/time.png',
@@ -180,8 +180,8 @@ class ReminderEditPage extends StatelessWidget {
                 _buildItem(
                   icon: 'images/icon/bell.png',
                   title: 'previous'.tr,
-                  value: reminderEditCtr.repository.previousTime.value == null ? '' : reminderEditCtr.repository.previousTime.value!,
-                  onTap: () => BottomsheetPrevious().show(),
+                  value: reminderEditCtr.repository.previousTimestamp.value == null ? '' : reminderEditCtr.getPreviousTime(reminderEditCtr.repository.previousTimestamp.value!),
+                  onTap: () => BottomsheetPrevious(reminderEditCtr: reminderEditCtr).show(),
                 ),
               ],
             );
@@ -237,41 +237,45 @@ class ReminderEditPage extends StatelessWidget {
       child: Container(
         color: UIColor.white,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: Text.rich(
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                ),
-                TextSpan(
-                  children: [
-                    TextSpan(text: 'next'.tr),
+        child: Obx(
+          () => Column(
+            children: [
+              if (reminderEditCtr.repository.nextPlanTime.value.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Text.rich(
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
                     TextSpan(
-                      text: ' ${'watering'.tr}  ',
-                      style: const TextStyle(color: UIColor.c40BD95),
+                      children: [
+                        TextSpan(text: 'next'.tr),
+                        TextSpan(
+                          text: ' ${reminderEditCtr.repository.currentRemindType["title"]}  ',
+                          style: const TextStyle(color: UIColor.c40BD95),
+                        ),
+                        TextSpan(
+                          text: reminderEditCtr.repository.nextPlanTime.value,
+                          style: const TextStyle(color: UIColor.c40BD95),
+                        ),
+                      ],
                     ),
-                    const TextSpan(
-                      text: '07/25/2024',
-                      style: TextStyle(color: UIColor.c40BD95),
-                    ),
-                  ],
+                  ),
+                ),
+              SizedBox(
+                width: double.infinity,
+                child: NormalButton(
+                  onTap: () => reminderEditCtr.plantAlarmUpdate(),
+                  text: 'confirm'.tr,
+                  textColor: UIColor.white,
+                  bgColor: reminderEditCtr.repository.nextPlanTime.value.isNotEmpty ? UIColor.primary : UIColor.cD1D1D1,
                 ),
               ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: NormalButton(
-                text: 'confirm'.tr,
-                textColor: UIColor.white,
-                bgColor: UIColor.primary,
-              ),
-            ),
-            SizedBox(height: Get.mediaQuery.padding.bottom),
-          ],
+              SizedBox(height: Get.mediaQuery.padding.bottom),
+            ],
+          ),
         ),
       ),
     );

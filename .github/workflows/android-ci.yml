@@ -90,7 +90,7 @@ jobs:
         with:
           _api_key: ${{ secrets.PGY_KEY }}
           appFilePath: ${{ env.UPLOAD_FILE_PATH }}
-          buildUpdateDescription: 'v1.0.4 搜索功能'
+          buildUpdateDescription: 'v1.0.4 提醒功能'
 #        uses: xtayga/upload-pgyer-action@master
 #        with:
 #          url: https://www.pgyer.com/apiv2/app/upload

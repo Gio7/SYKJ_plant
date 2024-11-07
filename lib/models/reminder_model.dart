@@ -89,8 +89,9 @@ class TimedPlan {
   /// 时间
   final String? clock;
   final String? previousTime;
-  final String? pushTime;
-  final String? lastTime;
+  final int? previousTimestamp;
+  final int? pushTime;
+  final int? lastTime;
   final bool status;
   final String? thumbnail;
   final String? scientificName;
@@ -106,6 +107,7 @@ class TimedPlan {
     this.unit,
     this.clock,
     this.previousTime,
+    this.previousTimestamp,
     this.pushTime,
     this.lastTime,
     required this.status,
@@ -124,6 +126,7 @@ class TimedPlan {
         unit: json["unit"],
         clock: json["clock"],
         previousTime: json["previousTime"],
+        previousTimestamp: json["previousTimestamp"],
         pushTime: json["pushTime"],
         lastTime: json["lastTime"],
         status: json["status"] ?? false,
