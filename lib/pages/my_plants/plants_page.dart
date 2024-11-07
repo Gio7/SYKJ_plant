@@ -79,7 +79,7 @@ class PlantsPage extends StatelessWidget {
                   ),
                   groupItemBuilder: (_, model, __, groupEnd) {
                     return Padding(
-                      padding: EdgeInsets.only(bottom: groupEnd ? 4 : 0),
+                      padding: EdgeInsets.only(bottom: groupEnd ? 16 : 0),
                       child: PlantItemReminder(
                         model: model,
                         onTap: () => controller.getPlantDetailByRecord(model),

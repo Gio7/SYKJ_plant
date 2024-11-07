@@ -76,6 +76,7 @@ class RemindersPage extends StatelessWidget {
                         ListView.separated(
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
+                          padding: const EdgeInsets.only(bottom: 6),
                           itemBuilder: (_, j) {
                             final recordModel = reminderModel.records[j];
                             return ReminderItem(
