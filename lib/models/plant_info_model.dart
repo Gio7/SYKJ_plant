@@ -205,6 +205,7 @@ class Conditions {
   final String? plantingSeason;
   final String? temperatureRange;
   final String? soilComposition;
+  final String? hardiness;
 
   Conditions({
     this.sunlight,
@@ -212,6 +213,7 @@ class Conditions {
     this.plantingSeason,
     this.temperatureRange,
     this.soilComposition,
+    this.hardiness,
   });
 
   factory Conditions.fromJson(Map<String, dynamic> json) => Conditions(
@@ -220,6 +222,7 @@ class Conditions {
         plantingSeason: json["plantingSeason"],
         temperatureRange: json["temperatureRange"],
         soilComposition: json["soilComposition"],
+        hardiness: json["hardiness"],
       );
 }
 

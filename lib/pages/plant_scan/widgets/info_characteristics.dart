@@ -137,14 +137,15 @@ class InfoCharacteristics extends StatelessWidget {
               children: colors
                   .map(
                     (e) => Container(
-                      width: 8,
+                      width: 10,
                       height: 8,
                       margin: const EdgeInsets.only(left: 8),
                       decoration: ShapeDecoration(
                         color: e,
-                        shape: const OvalBorder(
-                          side: BorderSide(width: 0.5, color: UIColor.cE1E1E1),
-                        ),
+                        shape: Border.all(
+                          width: 0.5,
+                          color: UIColor.cE1E1E1,
+                        )
                       ),
                     ),
                   )

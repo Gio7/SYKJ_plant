@@ -10,12 +10,12 @@ import 'package:plant/controllers/main_controller.dart';
 import 'package:plant/pages/plant_scan/plant_controller.dart';
 import 'package:plant/pages/my_plants/my_plants_controller.dart';
 
+import 'widgets/important_information.dart';
 import 'widgets/info_characteristics.dart';
-import 'widgets/info_conditions.dart';
 import 'widgets/info_key_facts.dart';
 import 'widgets/info_description_text.dart';
 import 'widgets/info_fun_facts.dart';
-import 'widgets/info_how_tos.dart';
+import 'widgets/plant_crare_requirements.dart';
 
 class InfoIdentifyPage extends StatelessWidget {
   InfoIdentifyPage({super.key, this.hideBottom = false});
@@ -31,8 +31,7 @@ class InfoIdentifyPage extends StatelessWidget {
         children: [
           _buildHeadImage(),
           _buildBody(),
-          if (!hideBottom)
-            _buildBottomBtn(),
+          if (!hideBottom) _buildBottomBtn(),
           _buildNav(),
         ],
       ),
@@ -78,15 +77,18 @@ class InfoIdentifyPage extends StatelessWidget {
             children: [
               ..._buildTitle(),
               const SizedBox(height: 24),
-              InfoKeyFacts(descriptionList: ctr.repository.plantInfo?.plant?.description),
+              ImportantInformation(scientificClassification: ctr.repository.plantInfo?.plant?.scientificClassification),
               const SizedBox(height: 16),
               InfoCharacteristics(characteristics: ctr.repository.plantInfo?.plant?.characteristics),
               const SizedBox(height: 16),
               InfoDescriptionText(text: ctr.repository.plantInfo?.plant?.culturalSignificance ?? ''),
               const SizedBox(height: 16),
-              InfoConditions(conditions: ctr.repository.plantInfo?.plant?.conditions),
+              InfoKeyFacts(descriptionList: ctr.repository.plantInfo?.plant?.description),
               const SizedBox(height: 16),
-              InfoHowTos(howTos: ctr.repository.plantInfo?.plant?.howTos),
+              PlantCrareRequirements(
+                conditions: ctr.repository.plantInfo?.plant?.conditions,
+                howTos: ctr.repository.plantInfo?.plant?.howTos,
+              ),
               const SizedBox(height: 16),
               if (ctr.repository.plantInfo?.plant?.littleStory != null && ctr.repository.plantInfo?.plant?.littleStory != '')
                 InfoFunFacts(littleStory: ctr.repository.plantInfo!.plant!.littleStory!),
@@ -182,6 +184,7 @@ class InfoIdentifyPage extends StatelessWidget {
   }
 
   List<Widget> _buildTitle() {
+    final mainCharacteristics = ctr.repository.plantInfo?.plant?.mainCharacteristics ?? '';
     return [
       Padding(
         padding: const EdgeInsets.only(left: 10),
@@ -220,17 +223,18 @@ class InfoIdentifyPage extends StatelessWidget {
           ),
         ),
       ),
-      Padding(
-        padding: const EdgeInsets.only(left: 10, top: 4),
-        child: Text(
-          ctr.repository.plantInfo?.plant?.mainCharacteristics ?? '',
-          style: TextStyle(
-            color: UIColor.c15221D,
-            fontSize: 14,
-            fontWeight: FontWeightExt.medium,
+      if (mainCharacteristics.isNotEmpty)
+        Padding(
+          padding: const EdgeInsets.only(left: 10, top: 4),
+          child: Text(
+            mainCharacteristics,
+            style: TextStyle(
+              color: UIColor.c15221D,
+              fontSize: 14,
+              fontWeight: FontWeightExt.medium,
+            ),
           ),
         ),
-      ),
     ];
   }
 }

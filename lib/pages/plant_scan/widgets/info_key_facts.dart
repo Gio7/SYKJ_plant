@@ -27,7 +27,7 @@ class InfoKeyFacts extends StatelessWidget {
                 ),
               ),
               Text(
-                'keyFacts'.tr,
+                'importantInformation'.tr,
                 style: const TextStyle(
                   color: UIColor.c15221D,
                   fontSize: 16,
@@ -45,7 +45,7 @@ class InfoKeyFacts extends StatelessWidget {
 
   Widget _buildItem(int i, Description item) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
       decoration: ShapeDecoration(
         color: i % 2 == 1 ? UIColor.white : UIColor.transparentPrimary20,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),

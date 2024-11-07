@@ -113,7 +113,7 @@ class RemindersPage extends StatelessWidget {
   Widget get _empty {
     return PlantEmptyWidget(
       text: 'youHaveNoReminders'.tr,
-      iconImage: 'images/icon/reminders2.png',
+      iconImage: 'images/icon/reminders.png',
       btnText: 'addReminder'.tr,
       onBtnTap: () {
         _onAddTap();

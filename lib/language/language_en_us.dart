@@ -189,6 +189,14 @@ class LanguageEnUs {
       "everyDays": "Every 9 days",
       "everyWeeks": "Every 9 weeks",
       "everyMonth": "Every 9 month",
+      "scientificClassification": "Scientific classification",
+      "importantInformation": "Important Information",
+      "plantCrareRequirements": "Plant Crare Requirements",
+      "phylum": "Phylum",
+      "class": "Class",
+      "order": "Order",
+      "family": "Family",
+      "genus": "Genus",
     };
   }
 }
