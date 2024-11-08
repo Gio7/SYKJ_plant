@@ -176,12 +176,16 @@ class SetPage extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Text(
-                            '${'hi'.tr}${userCtr.userInfo.value.nickname ?? 'plantLover'.tr}',
-                            style: const TextStyle(
-                              color: UIColor.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
+                          Flexible(
+                            child: Text(
+                              '${'hi'.tr}${userCtr.userInfo.value.nickname ?? 'plantLover'.tr}',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                color: UIColor.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
                           if (userCtr.isLogin.value)
@@ -205,6 +209,7 @@ class SetPage extends StatelessWidget {
                                 child: Image.asset('images/icon/edit2.png', width: 20),
                               ),
                             ),
+                          const SizedBox(width: 120),
                         ],
                       ),
                       const SizedBox(height: 4),
