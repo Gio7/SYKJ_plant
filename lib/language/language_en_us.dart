@@ -199,6 +199,11 @@ class LanguageEnUs {
       "genus": "Genus",
       "lightTopTips": "Position your phone at the area where you want to place the plant",
       "deletePlanTips": "Are your sure you want to delete the reminder?",
+      "appropriateLighting": "Appropriate lighting",
+      "insufficientLighting": "Insufficient lighting",
+      "lightTips": "Optimal Light Value:500~3000 LUX",
+      "lightHelpTitle": "How to Use Light Meter？",
+      "lightHelpTips": "1. Turn off all artificial light sources, as Light Meter is only able to measure natural light.\n\n2. Position your phone at the spot where you want to place the plant.\n\n3. Point the camera at the spot. To get the most accurate result, take the measurement with the plant placed in the spot or make sure the spot isn't too bright.\n\n4. Check if the measurement meets the light requirements for your plant.",
     };
   }
 }

@@ -159,7 +159,7 @@ class MainApp extends StatelessWidget {
       translations: Language(),
       locale: _parseLocale(Get.deviceLocale ?? const Locale('en', 'US')),
       fallbackLocale: const Locale('en', 'US'),
-      navigatorObservers: [FireBaseUtil.observer],
+      navigatorObservers: FireBaseUtil.observer == null ? [] : [FireBaseUtil.observer!],
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: UIColor.primary),
         useMaterial3: true,

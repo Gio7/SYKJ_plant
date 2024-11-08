@@ -1,29 +1,31 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 
 class FireBaseUtil {
-  static late FirebaseAnalytics _analytics;
+  static FirebaseAnalytics? _analytics;
 
-  static late FirebaseAnalyticsObserver observer;
+  static FirebaseAnalyticsObserver? observer;
 
   static void initAnalyticsServices() {
     _analytics = FirebaseAnalytics.instance;
-    observer = FirebaseAnalyticsObserver(analytics: _analytics);
+    if (_analytics != null) {
+      observer = FirebaseAnalyticsObserver(analytics: _analytics!);
+    }
   }
 
   // Firebase Analytics
-  static FirebaseAnalytics getFirebaseAnalytics() {
-    return _analytics;
-  }
+  // static FirebaseAnalytics getFirebaseAnalytics() {
+  //   return _analytics;
+  // }
 
   static void logCurrentScreen(String screenName) {
-    _analytics.logScreenView(screenName: screenName);
+    _analytics?.logScreenView(screenName: screenName);
   }
 
   /// 通用事件记录
   ///
   /// [eventName] 事件名称 [String]类型
   static void logEvent(String eventName, {Map<String, Object>? parameters}) {
-    _analytics.logEvent(
+    _analytics?.logEvent(
       name: eventName,
       parameters: parameters,
     );
@@ -31,7 +33,7 @@ class FireBaseUtil {
 
   /// 调起支付页面
   static void subscribePageEvent(String fromPage) {
-    _analytics.logEvent(
+    _analytics?.logEvent(
       name: EventName.subscribePage,
       parameters: {'from_event': fromPage},
     );
@@ -39,7 +41,7 @@ class FireBaseUtil {
 
   /// 调起登录页面
   static void loginPageEvent(String fromPage) {
-    _analytics.logEvent(
+    _analytics?.logEvent(
       name: EventName.loginPage,
       parameters: {'from_event': fromPage},
     );
@@ -47,7 +49,7 @@ class FireBaseUtil {
 
   /// 创建订阅 weekly，year 
   static void subscribeCreate(String? id) {
-    _analytics.logEvent(
+    _analytics?.logEvent(
       name: EventName.subscribeSelect,
       parameters: {'member_type': subscribeType(id)},
     );
@@ -55,7 +57,7 @@ class FireBaseUtil {
 
   /// 订阅成功 weekly，year 
   static void subscribeSuccess(String? id) {
-    _analytics.logEvent(
+    _analytics?.logEvent(
       name: EventName.subscribeSuccess,
       parameters: {'member_type': subscribeType(id)},
     );
@@ -63,7 +65,7 @@ class FireBaseUtil {
 
   /// 点击疾病百科
   static void didNormalDisease(String diseaseType) {
-    _analytics.logEvent(
+    _analytics?.logEvent(
       name: EventName.normalDisease,
       parameters: {'disease_type': diseaseType},
     );

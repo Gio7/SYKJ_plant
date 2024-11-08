@@ -8,10 +8,20 @@ import 'package:plant/widgets/show_dialog.dart';
 
 part 'light_repository.dart';
 
-class LightSensorController extends GetxController {
+class LightController extends GetxController {
   final LightRepository repository = LightRepository();
 
   StreamSubscription? _subscriptionAndroid;
+
+  @override
+  void onInit() {
+    super.onInit();
+    if(GetPlatform.isAndroid) {
+      startAndroidListening();
+    } else {
+      initCamera();
+    }
+  }
 
   @override
   void onClose() {

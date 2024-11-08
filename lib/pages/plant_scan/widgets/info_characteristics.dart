@@ -152,12 +152,15 @@ class InfoCharacteristics extends StatelessWidget {
                   .toList(),
             )
           else
-            Text(
-              "${detail.value ?? ''}",
-              style: TextStyle(
-                color: UIColor.c15221D,
-                fontSize: 14,
-                fontWeight: FontWeightExt.medium,
+            Expanded(
+              child: Text(
+                "${detail.value ?? ''}",
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                  color: UIColor.c15221D,
+                  fontSize: 14,
+                  fontWeight: FontWeightExt.medium,
+                ),
               ),
             ),
         ],

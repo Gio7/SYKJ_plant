@@ -1,4 +1,4 @@
-part of 'light_sensor_controller.dart';
+part of 'light_controller.dart';
 
 class LightRepository {
   late RxInt lux;
