@@ -13,6 +13,7 @@ class Request {
   static const String _plantScanRename = '/Plant/plant/scanRename';
   static const String _plantScanDelete = '/Plant/plant/scanDelete';
   static const String _getConfig = '/Plant/common/getConfig';
+
   // static const String _scanByScientificName = '/Plant/plant/scanByScientificName';
   static const String _getPlantDetailByRecord = '/Plant/plant/getPlantDetailByRecord';
   static const String _getShopList = '/Plant/shop/getShopList';
@@ -122,7 +123,11 @@ class Request {
   }
 
   static Future<dynamic> diagnosisHistory(int pageNum, [int pageSize = 30]) async {
-    return await DioUtil.httpGet(_diagnosisHistory, parameters: {'pageNum': pageNum, 'pageSize': pageSize}, allData: true);
+    return await DioUtil.httpGet(
+      _diagnosisHistory,
+      parameters: {'pageNum': pageNum, 'pageSize': pageSize},
+      allData: true,
+    );
   }
 
   static Future<dynamic> diagnosisHistoryDetailById(int id) async {
@@ -178,11 +183,19 @@ class Request {
     required String previous,
     required bool status,
   }) async {
-    final data = {"recordId": recordId, "type": type, "cycle": cycle, "unit": unit, "clock": clock, "previous": previous, "status": status};
+    final data = {
+      "recordId": recordId,
+      "type": type,
+      "cycle": cycle,
+      "unit": unit,
+      "clock": clock,
+      "previous": previous,
+      "status": status,
+    };
     return await DioUtil.httpPost(_plantAlarmUpdate, data: data);
   }
 
-  static Future<void> plantAlarmDelete(int recordId, int type) async{
+  static Future<void> plantAlarmDelete(int recordId, int type) async {
     return await DioUtil.httpPost(_plantAlarmDelete, data: {"recordId": recordId, "type": type});
   }
 }

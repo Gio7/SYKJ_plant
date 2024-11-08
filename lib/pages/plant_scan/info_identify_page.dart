@@ -90,7 +90,8 @@ class InfoIdentifyPage extends StatelessWidget {
                 howTos: ctr.repository.plantInfo?.plant?.howTos,
               ),
               const SizedBox(height: 16),
-              if (ctr.repository.plantInfo?.plant?.littleStory != null && ctr.repository.plantInfo?.plant?.littleStory != '')
+              if (ctr.repository.plantInfo?.plant?.littleStory != null &&
+                  ctr.repository.plantInfo?.plant?.littleStory != '')
                 InfoFunFacts(littleStory: ctr.repository.plantInfo!.plant!.littleStory!),
             ],
           ),
@@ -165,10 +166,12 @@ class InfoIdentifyPage extends StatelessWidget {
                   Get.dialog(const LoadingDialog());
                   await ctr.savePlant(ctr.repository.plantInfo!.scanRecordId!);
                   Get.back();
-                  if (Get.find<MainController>().tabController.index == 3) {
-                    Get.find<MyPlantsController>().onPlantRefresh();
-                  } else {
+                  if (Get.find<MainController>().tabController.index != 3) {
                     Get.find<MainController>().tabController.index = 3;
+                  }
+                  if (Get.isRegistered<MyPlantsController>()) {
+                    final c = Get.find<MyPlantsController>();
+                    c.onSegmentChange(c.repository.customSegmentedValues[0], forceRefresh: true);
                   }
                   Get.until((route) => Get.currentRoute == '/');
                 }, 500),

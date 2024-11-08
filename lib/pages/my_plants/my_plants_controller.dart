@@ -25,21 +25,21 @@ class MyPlantsController extends GetxController {
     }
   }
 
-  void onSegmentChange(CustomSegmentedValue value) {
-    if (value == repository.currentTab.value) {
-      return;
-    }
+  void onSegmentChange(CustomSegmentedValue value, {bool forceRefresh = false}) {
     repository.currentTab.value = value;
     if (!Get.find<UserController>().isLogin.value) {
       return;
     }
+    if (value == repository.currentTab.value && !forceRefresh) {
+      return;
+    }
     if (value.value == '1') {
-      if (repository.plantDataList.isEmpty) {
+      if (repository.plantDataList.isEmpty && !forceRefresh) {
         repository.plantIsLoading.value = true;
         onPlantRefresh();
       }
     } else {
-      if (repository.reminderDataList.isEmpty) {
+      if (repository.reminderDataList.isEmpty && !forceRefresh) {
         repository.reminderIsLoading.value = true;
         onReminderRefresh();
       }
@@ -95,6 +95,9 @@ class MyPlantsController extends GetxController {
   Future<void> plantScanDelete(int id) async {
     Request.plantScanDelete(id);
     repository.plantDataList.removeWhere((element) => element.id == id);
+    if (repository.reminderDataList.isNotEmpty) {
+      onReminderRefresh();
+    }
   }
 
   // MARK: - 提醒相关逻辑
