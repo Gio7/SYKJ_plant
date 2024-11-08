@@ -25,21 +25,19 @@ class MyPlantsController extends GetxController {
     }
   }
 
-  void onSegmentChange(CustomSegmentedValue value, {bool forceRefresh = false}) {
+  void onSegmentChange(CustomSegmentedValue value) {
+    if (value == repository.currentTab.value) {
+      return;
+    }
     repository.currentTab.value = value;
-    if (!Get.find<UserController>().isLogin.value) {
-      return;
-    }
-    if (value == repository.currentTab.value && !forceRefresh) {
-      return;
-    }
+
     if (value.value == '1') {
-      if (repository.plantDataList.isEmpty && !forceRefresh) {
+      if (repository.plantDataList.isEmpty) {
         repository.plantIsLoading.value = true;
         onPlantRefresh();
       }
     } else {
-      if (repository.reminderDataList.isEmpty && !forceRefresh) {
+      if (repository.reminderDataList.isEmpty) {
         repository.reminderIsLoading.value = true;
         onReminderRefresh();
       }
@@ -47,6 +45,9 @@ class MyPlantsController extends GetxController {
   }
 
   Future<void> onPlantRefresh() async {
+    if (!Get.find<UserController>().isLogin.value) {
+      return;
+    }
     repository.plantIsLastPage = false;
     repository.plantPageNum = 1;
     final res = await Request.getPlantScanHistory(repository.plantPageNum);
@@ -103,6 +104,9 @@ class MyPlantsController extends GetxController {
   // MARK: - 提醒相关逻辑
 
   Future<void> onReminderRefresh() async {
+    if (!Get.find<UserController>().isLogin.value) {
+      return;
+    }
     repository.reminderIsLoading.value = true;
     repository.reminderIsLastPage = false;
     repository.reminderPageNum = 1;
@@ -130,7 +134,7 @@ class MyPlantsController extends GetxController {
     repository.reminderDataList.addAll(rows);
   }
 
-  Future<void> plantAlarmDelete(int? recordId, int? type,{required int index, required int index2}) async {
+  Future<void> plantAlarmDelete(int? recordId, int? type, {required int index, required int index2}) async {
     if (recordId == null || type == null) return;
     Get.dialog(
       NormalDialog(

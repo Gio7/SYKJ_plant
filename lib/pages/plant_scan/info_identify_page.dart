@@ -171,7 +171,10 @@ class InfoIdentifyPage extends StatelessWidget {
                   }
                   if (Get.isRegistered<MyPlantsController>()) {
                     final c = Get.find<MyPlantsController>();
-                    c.onSegmentChange(c.repository.customSegmentedValues[0], forceRefresh: true);
+                    c.onSegmentChange(c.repository.customSegmentedValues[0]);
+                    if (!c.repository.plantIsLoading.value) {
+                      c.onPlantRefresh();
+                    }
                   }
                   Get.until((route) => Get.currentRoute == '/');
                 }, 500),
