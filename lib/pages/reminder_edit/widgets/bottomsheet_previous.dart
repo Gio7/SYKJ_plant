@@ -10,7 +10,7 @@ class BottomsheetPrevious {
   BottomsheetPrevious({required this.reminderEditCtr});
 
   void show() {
-    if (reminderEditCtr.repository.currentRemindType == {}) {
+    if (reminderEditCtr.repository.currentRemindType.isEmpty) {
       return;
     }
     final itemStyle = TextStyle(
@@ -109,7 +109,7 @@ class BottomsheetPrevious {
                     ),
                     const Spacer(),
                     Text(
-                      reminderEditCtr.repository.currentRemindType['title'],
+                      reminderEditCtr.repository.currentRemindType['title']??'',
                       style: const TextStyle(
                         color: UIColor.c40BD95,
                         fontSize: 14,

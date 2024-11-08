@@ -41,7 +41,7 @@ class ReminderEditController extends GetxController {
 
   void nextTimedPlan() {
     if (repository.previousTimestamp.value == null ||
-        repository.currentRemindType == {} ||
+        repository.currentRemindType.isEmpty ||
         repository.unit.value == null ||
         repository.cycle.value == null ||
         repository.clock.value == null) {
