@@ -133,7 +133,7 @@ class DialogContainer extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
         margin: const EdgeInsets.symmetric(horizontal: 20),
-        width: Get.width - 40,
+        width: MediaQuery.of(context).size.width - 40,
         decoration: ShapeDecoration(
           color: bgColor,
           shape: RoundedRectangleBorder(

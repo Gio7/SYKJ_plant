@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -284,8 +285,9 @@ class PlantController extends GetxController {
         img.Image image = (await FileUtils.xFileToImage(imageFile))!;
 
 ///////////// 计算需要裁剪的区域
-        final showSize = Get.width - 116;
-        double scaleFactor = image.width / Get.width;
+        final mediaSize = MediaQuery.of(Get.context!).size;
+        final showSize = mediaSize.width - 116;
+        double scaleFactor = image.width / mediaSize.width;
         double cropWidth = scaleFactor * showSize;
         double x = (image.width - cropWidth) / 2;
         double y = (image.height - cropWidth) / 2;

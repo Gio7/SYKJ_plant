@@ -18,7 +18,7 @@ class BottomsheetRemindMe {
           crossAxisCount: 2, // 每行显示的项目数量
           crossAxisSpacing: 16.0,
           mainAxisSpacing: 16.0,
-          childAspectRatio: ((Get.width - 64) / 2) / 60,
+          childAspectRatio: ((MediaQuery.of(Get.context!).size.width - 64) / 2) / 60,
           children: reminderEditCtr.repository.remindTypsList.map((remindType) {
             return GestureDetector(
               onTap: () {

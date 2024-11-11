@@ -102,10 +102,10 @@ class CustomBottomNavBar extends StatelessWidget {
             ),
           ),
           Positioned(
-            left: Get.width / 2 - 35,
+            left: MediaQuery.of(context).size.width / 2 - 35,
             top: -15,
             child: Container(
-              // margin: EdgeInsets.only(top: 0, left: Get.width / 2 - 35),
+              // margin: EdgeInsets.only(top: 0, left: MediaQuery.of(context).size.width / 2 - 35),
               color: UIColor.transparent,
               child: GestureDetector(
                 onTap: centerOnTap,

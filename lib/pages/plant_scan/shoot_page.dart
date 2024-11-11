@@ -18,7 +18,7 @@ class ShootPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ctr = Get.put(PlantController(shootType));
-    final width = Get.width - 116;
+    final width = MediaQuery.of(context).size.width - 116;
 
     final repository = ctr.repository;
 
@@ -30,7 +30,8 @@ class ShootPage extends StatelessWidget {
             child: Obx(
               () {
                 if (repository.isCameraReady.value) {
-                  final scale = 1 / (repository.cameraController!.value.aspectRatio * Get.size.aspectRatio);
+                  final mediaAspectRatio = MediaQuery.of(context).size.aspectRatio;
+                  final scale = 1 / (repository.cameraController!.value.aspectRatio * mediaAspectRatio);
                   return Transform.scale(scale: scale, child: Center(child: CameraPreview(repository.cameraController!)));
                 }
                 return const Center(child: CircularProgressIndicator());
@@ -167,7 +168,7 @@ class ShootPage extends StatelessWidget {
             if (ctr.repository.shootType.value == ShootType.diagnose) {
               return Positioned(
                 left: 0,
-                top: (Get.height / 2) - (width / 2) - 112,
+                top: (MediaQuery.of(context).size.height / 2) - (width / 2) - 112,
                 right: 0,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

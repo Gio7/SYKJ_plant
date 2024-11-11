@@ -26,12 +26,13 @@ class _DiagnoseRectPageState extends State<DiagnoseRectPage> {
   final GlobalKey _repaintBoundaryKey = GlobalKey(); // RepaintBoundary的Key
   Uint8List? _croppedImageData;
 
-  final double _widgetWidth = Get.width;
+  double _widgetWidth = Get.width;
   final double _widgetHeight = 290;
 
   @override
   void initState() {
     super.initState();
+    _widgetWidth = MediaQuery.of(context).size.width;
     _getImageSize(widget.url);
   }
 
