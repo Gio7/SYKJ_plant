@@ -202,7 +202,7 @@ class ReminderEditPage extends StatelessWidget {
         fit: BoxFit.cover,
         fadeInDuration: Duration.zero,
         placeholder: (context, url) => const CircularProgressIndicator(),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
+        errorWidget: (context, url, error) => Image.asset('images/icon/no_image.png'),
       ),
     );
   }
