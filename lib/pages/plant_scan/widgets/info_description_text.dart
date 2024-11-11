@@ -29,7 +29,7 @@ class _InfoDescriptionTextState extends State<InfoDescriptionText> {
       widget.text,
       _textStyle.fontSize!,
       _textStyle.fontWeight!,
-      MediaQuery.of(context).size.width - 72,
+      MediaQuery.of(Get.context!).size.width - 72,
     );
     _isTextHeightExceed = textHeight > 140;
     super.initState();
