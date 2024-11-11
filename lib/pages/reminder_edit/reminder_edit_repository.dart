@@ -10,7 +10,7 @@ class ReminderEditRepository {
   ];
 
   RxnString tempClock = RxnString();
-  RxBool tempStatus = RxBool(false);
+  RxBool tempStatus = RxBool(true);
   RxString nextPlanTime = "".obs;
 
   String? plantName;
@@ -37,7 +37,7 @@ class ReminderEditRepository {
   RxnInt previousTimestamp = RxnInt();
 
   /// 推送开关
-  RxBool status = RxBool(false);
+  RxBool status = RxBool(true);
 
   ReminderEditRepository() {
     final args = Get.arguments;
