@@ -37,6 +37,8 @@ void main() {
         statusBarIconBrightness: Brightness.dark,
       ));
     }
+    // 锁定竖屏
+    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     await initMain();
     Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) async {
       // Get.log('network status list: ${result.length}');
@@ -53,7 +55,7 @@ void main() {
         }
         if (isInit) {
           isInit = false;
-          WidgetsBinding.instance.addPostFrameCallback((_) async{
+          WidgetsBinding.instance.addPostFrameCallback((_) async {
             await getAdid();
             getFCMToken();
           });
