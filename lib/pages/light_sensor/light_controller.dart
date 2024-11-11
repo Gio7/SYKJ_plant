@@ -49,13 +49,14 @@ class LightController extends GetxController {
       );
       repository.cameraController = CameraController(
         frontCamera,
-        ResolutionPreset.medium,
+        ResolutionPreset.veryHigh,
         enableAudio: false,
       );
       await repository.cameraController!.initialize();
       repository.isCameraReady.value = true;
+      repository.cameraController!.lockCaptureOrientation();
       repository.cameraController?.startImageStream((CameraImage image) {
-        repository.lux.value = _calculateAverageBrightness(image);
+        // repository.lux.value = _calculateAverageBrightness(image);
       });
     } catch (e) {
       Get.log(e.toString(), isError: true);

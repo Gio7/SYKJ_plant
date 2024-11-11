@@ -40,7 +40,7 @@ class _DiagnoseRectPageState extends State<DiagnoseRectPage> {
       imageUrl: widget.url,
       fit: BoxFit.cover,
       fadeInDuration: Duration.zero,
-      placeholder: (context, url) => const CircularProgressIndicator(),
+      placeholder: (context, url) => const LoadingDialog(),
       errorWidget: (context, url, error) => const Icon(Icons.error),
     );
   }

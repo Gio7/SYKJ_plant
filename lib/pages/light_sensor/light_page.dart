@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,19 +25,39 @@ class LightPage extends StatelessWidget {
   Widget get _buildIos {
     return Stack(
       children: [
-        Positioned(
-          top: mediaQueryTop + 166,
-          left: 0,
-          right: 0,
-          child: Container(
-            width: 290,
-            height: 290,
-            alignment: Alignment.center,
-            child: lightController.repository.isCameraReady.value
-                ? CameraPreview(lightController.repository.cameraController!)
-                : const LoadingDialog(),
+        Positioned.fill(
+          child: Obx(
+            () {
+              if (lightController.repository.isCameraReady.value) {
+                final scale =
+                    1 / (lightController.repository.cameraController!.value.aspectRatio * Get.size.aspectRatio);
+                return Transform.scale(
+                  scale: scale,
+                  child: Center(
+                    child: CameraPreview(lightController.repository.cameraController!),
+                  ),
+                );
+              }
+              return const LoadingDialog();
+            },
           ),
         ),
+        Center(
+          child: ClipPath(
+            clipper: HoleClipper(),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: Container(
+                color: Colors.black.withOpacity(0.4), // 设置遮罩层颜色
+              ),
+            ),
+          ),
+        ),
+        _buildNav,
+        _buildLightTips2,
+        _buildLux(290, 166),
+        _buildSuitableLight,
+        _buildLightTips1,
       ],
     );
   }
@@ -57,7 +79,7 @@ class LightPage extends StatelessWidget {
             height: 310,
           ),
         ),
-        _buildLux,
+        _buildLux(),
         _buildSuitableLight,
         _buildLightTips1,
       ],
@@ -84,14 +106,14 @@ class LightPage extends StatelessWidget {
     );
   }
 
-  Widget get _buildLux {
+  Widget _buildLux([double size = 310, int top = 155]) {
     return Positioned(
-      top: mediaQueryTop + 155,
+      top: mediaQueryTop + top,
       left: 0,
       right: 0,
       child: SizedBox(
-        width: 310,
-        height: 310,
+        width: size,
+        height: size,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -264,4 +286,20 @@ class LightPage extends StatelessWidget {
       ),
     );
   }
+}
+
+class HoleClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    const holeRadius = 145.0;
+    final holeCenter = Offset(size.width / 2, Get.mediaQuery.padding.top + 166 + holeRadius);
+    final path = Path()
+      ..addRect(Rect.fromLTWH(0, 0, size.width, size.height)) // 覆盖整个区域
+      ..addOval(Rect.fromCircle(center: holeCenter, radius: holeRadius)) // 创建镂空的圆形区域
+      ..fillType = PathFillType.evenOdd; // 使用 evenOdd 以实现镂空效果
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }
