@@ -46,9 +46,9 @@ class LightPage extends StatelessWidget {
           child: ClipPath(
             clipper: HoleClipper(),
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
               child: Container(
-                color: Colors.black.withOpacity(0.4), // 设置遮罩层颜色
+                color: Colors.black.withOpacity(0.3), // 设置遮罩层颜色
               ),
             ),
           ),
@@ -153,7 +153,7 @@ class LightPage extends StatelessWidget {
             Color textColor = UIColor.cFD5050;
             String text = 'insufficientLighting'.tr;
             String icon = 'images/icon/light_warning.png';
-            if (lightController.repository.lux.value >= 500 && lightController.repository.lux.value <= 3000) {
+            if (lightController.repository.lux.value >= 300 && lightController.repository.lux.value <= 2000) {
               bgColor = const Color(0x66064432);
               borderColor = const Color(0xFF3B9E6F);
               textColor = UIColor.c40BD95;

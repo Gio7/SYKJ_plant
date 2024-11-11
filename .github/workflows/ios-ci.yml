@@ -73,4 +73,4 @@ jobs:
         with:
           _api_key: ${{ secrets.PGY_KEY }}
           appFilePath: build/ios/ipa/Plant Identifier.ipa
-          buildUpdateDescription: 'iOS v1.0.4'
+          buildUpdateDescription: 'iOS v1.0.4 光度计'

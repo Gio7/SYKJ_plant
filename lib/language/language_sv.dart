@@ -199,7 +199,7 @@ class LanguageSv {
       "deletePlanTips": "Är du säker på att du vill ta bort påminnelsen?",
       "appropriateLighting": "Lämplig belysning",
       "insufficientLighting": "Otillräcklig belysning",
-      "lightTips": "Optimal ljusnivå: 500~3000 LUX",
+      "lightTips": "Optimal ljusnivå: 300~2000 LUX",
       "lightHelpTitle": "Hur man använder ljusmätaren?",
       "lightHelpTips": "1. Stäng av alla konstgjorda ljuskällor, ljusmätaren kan bara mäta naturligt ljus.\n\n2. Placera din telefon på platsen där du vill ha växten.\n\n3. Rikta kameran mot platsen. För bästa resultat, mät med växten på plats eller säkerställ att platsen inte är för ljus.\n\n4. Kontrollera om mätningen uppfyller växtens ljuskrav."
     };

@@ -199,7 +199,7 @@ class LanguageFi {
       "deletePlanTips": "Haluatko varmasti poistaa muistutuksen?",
       "appropriateLighting": "Sopiva valaistus",
       "insufficientLighting": "Riittämätön valaistus",
-      "lightTips": "Optimaalinen valon arvo: 500~3000 LUX",
+      "lightTips": "Optimaalinen valon arvo: 300~2000 LUX",
       "lightHelpTitle": "Kuinka käyttää valomittaria?",
       "lightHelpTips": "1. Sammuta kaikki keinovalon lähteet, sillä valomittari voi mitata vain luonnonvaloa.\n\n2. Aseta puhelin siihen kohtaan, johon haluat kasvin laittaa.\n\n3. Kohdista kamera paikkaan. Tarkimman tuloksen saamiseksi mittaa kasvin kanssa tai varmista, että paikka ei ole liian kirkas.\n\n4. Tarkista, täyttääkö mittaus kasvisi valotarpeet."
     };

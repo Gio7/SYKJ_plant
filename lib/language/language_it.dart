@@ -199,7 +199,7 @@ class LanguageIt {
       "deletePlanTips": "Sei sicuro di voler eliminare il promemoria?",
       "appropriateLighting": "Illuminazione adeguata",
       "insufficientLighting": "Illuminazione insufficiente",
-      "lightTips": "Valore ottimale di luce: 500~3000 LUX",
+      "lightTips": "Valore ottimale di luce: 300~2000 LUX",
       "lightHelpTitle": "Come usare il misuratore di luce?",
       "lightHelpTips": "1. Spegni tutte le fonti di luce artificiale, poiché il misuratore di luce può misurare solo la luce naturale.\n\n2. Posiziona il telefono nel punto in cui vuoi mettere la pianta.\n\n3. Punta la fotocamera sul punto. Per ottenere il risultato più accurato, misura con la pianta sul posto o assicurati che il punto non sia troppo luminoso.\n\n4. Verifica se la misurazione soddisfa le esigenze di luce della tua pianta."
     };

@@ -199,7 +199,7 @@ class LanguageTr {
       "deletePlanTips": "Hatırlatıcıyı silmek istediğinizden emin misiniz?",
       "appropriateLighting": "Uygun Aydınlatma",
       "insufficientLighting": "Yetersiz Aydınlatma",
-      "lightTips": "Optimum Işık Değeri: 500~3000 LUX",
+      "lightTips": "Optimum Işık Değeri: 300~2000 LUX",
       "lightHelpTitle": "Işık Ölçer Nasıl Kullanılır?",
       "lightHelpTips": "1. Işık Ölçer sadece doğal ışığı ölçebildiğinden, tüm yapay ışık kaynaklarını kapatın.\n\n2. Telefonunuzu bitkiyi yerleştirmek istediğiniz yere konumlandırın.\n\n3. Kamerayı noktaya yönlendirin. En doğru sonucu elde etmek için ölçümü bitki yerindeyken veya alanın çok parlak olmadığından emin olun.\n\n4. Ölçümün bitkinizin ışık gereksinimlerini karşılayıp karşılamadığını kontrol edin."
     };

@@ -199,7 +199,7 @@ class LanguageRo {
       "deletePlanTips": "Sigur doriți să ștergeți mementoul?",
       "appropriateLighting": "Iluminare adecvată",
       "insufficientLighting": "Iluminare insuficientă",
-      "lightTips": "Valoare optimă a luminii: 500~3000 LUX",
+      "lightTips": "Valoare optimă a luminii: 300~2000 LUX",
       "lightHelpTitle": "Cum se folosește măsurătorul de lumină?",
       "lightHelpTips": "1. Opriți toate sursele de lumină artificială, deoarece măsurătorul de lumină poate măsura doar lumina naturală.\n\n2. Poziționați telefonul acolo unde doriți să puneți planta.\n\n3. Orientați camera către acel punct. Pentru cele mai precise rezultate, măsurați cu planta în locul dorit sau asigurați-vă că nu este prea luminos.\n\n4. Verificați dacă măsurarea îndeplinește cerințele de lumină pentru planta dvs."
     };

@@ -197,7 +197,7 @@ class LanguageZhTw {
       "deletePlanTips": "確定要刪除提醒嗎？",
       "appropriateLighting": "適當的光照",
       "insufficientLighting": "光照不足",
-      "lightTips": "最佳光照值：500~3000 LUX",
+      "lightTips": "最佳光照值：300~2000 LUX",
       "lightHelpTitle": "如何使用光度計？",
       "lightHelpTips": "1. 關閉所有人造光源，因為光度計只能測量自然光。\n\n2. 將手機放置在您想放置植物的位置。\n\n3. 將相機對準該點。為了獲得最準確的結果，請在植物放置的位置進行測量，或確保該點光線不過亮。\n\n4. 檢查測量結果是否符合您植物的光照要求。"
     };

@@ -199,7 +199,7 @@ class LanguagePl {
       "deletePlanTips": "Czy na pewno chcesz usunąć przypomnienie?",
       "appropriateLighting": "Odpowiednie oświetlenie",
       "insufficientLighting": "Niewystarczające oświetlenie",
-      "lightTips": "Optymalna wartość światła: 500~3000 LUX",
+      "lightTips": "Optymalna wartość światła: 300~2000 LUX",
       "lightHelpTitle": "Jak używać miernika światła?",
       "lightHelpTips": "1. Wyłącz wszystkie sztuczne źródła światła, ponieważ miernik światła mierzy tylko światło naturalne.\n\n2. Umieść telefon w miejscu, gdzie chcesz umieścić roślinę.\n\n3. Skieruj aparat na miejsce. Aby uzyskać najdokładniejsze wyniki, wykonaj pomiar z rośliną lub upewnij się, że miejsce nie jest zbyt jasne.\n\n4. Sprawdź, czy wynik spełnia wymagania świetlne twojej rośliny."
     };

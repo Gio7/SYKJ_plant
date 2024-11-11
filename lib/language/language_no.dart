@@ -200,7 +200,7 @@ class LanguageNo {
       "deletePlanTips": "Er du sikker på at du vil slette påminnelsen?",
       "appropriateLighting": "Egnet belysning",
       "insufficientLighting": "Utilstrekkelig belysning",
-      "lightTips": "Optimal lysverdi: 500~3000 LUX",
+      "lightTips": "Optimal lysverdi: 300~2000 LUX",
       "lightHelpTitle": "Hvordan bruke lysmåler?",
       "lightHelpTips": "1. Slå av alle kunstige lyskilder, da lysmåleren kun kan måle naturlig lys.\n\n2. Plasser telefonen der du ønsker å plassere planten.\n\n3. Rett kameraet mot stedet. For best resultat, ta målingen med planten på plass eller sørg for at stedet ikke er for lyst.\n\n4. Sjekk om målingen oppfyller plantens lyskrav."
     };

@@ -199,7 +199,7 @@ class LanguageFr {
       "deletePlanTips": "Êtes-vous sûr de vouloir supprimer le rappel ?",
       "appropriateLighting": "Éclairage approprié",
       "insufficientLighting": "Éclairage insuffisant",
-      "lightTips": "Valeur de lumière optimale : 500~3000 LUX",
+      "lightTips": "Valeur de lumière optimale : 300~2000 LUX",
       "lightHelpTitle": "Comment utiliser le luxmètre ?",
       "lightHelpTips": "1. Éteignez toutes les sources de lumière artificielle, car le luxmètre ne mesure que la lumière naturelle.\n\n2. Positionnez votre téléphone à l'endroit souhaité pour la plante.\n\n3. Pointez l'appareil photo vers cet endroit. Pour obtenir un résultat précis, prenez la mesure avec la plante en place ou assurez-vous que l'endroit n'est pas trop lumineux.\n\n4. Vérifiez si la mesure correspond aux besoins lumineux de votre plante."
     };

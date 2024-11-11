@@ -197,7 +197,7 @@ class LanguageKo {
       "deletePlanTips": "알림을 삭제하시겠습니까?",
       "appropriateLighting": "적절한 조명",
       "insufficientLighting": "부족한 조명",
-      "lightTips": "최적 조도 값: 500~3000 LUX",
+      "lightTips": "최적 조도 값: 300~2000 LUX",
       "lightHelpTitle": "광도계 사용 방법",
       "lightHelpTips": "1. 광도계는 자연광만 측정할 수 있으므로 모든 인공 조명을 끄십시오.\n\n2. 식물을 놓을 장소에 휴대폰을 위치시켜 주세요.\n\n3. 카메라를 해당 장소에 맞춥니다. 가장 정확한 결과를 얻으려면 식물을 놓고 측정하거나 너무 밝지 않도록 합니다.\n\n4. 측정값이 식물의 조명 요구 사항을 충족하는지 확인하세요."
     };

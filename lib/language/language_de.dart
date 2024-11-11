@@ -199,7 +199,7 @@ class LanguageDe {
       "deletePlanTips": "Möchten Sie die Erinnerung wirklich löschen?",
       "appropriateLighting": "Angemessene Beleuchtung",
       "insufficientLighting": "Unzureichende Beleuchtung",
-      "lightTips": "Optimale Lichtwerte: 500~3000 LUX",
+      "lightTips": "Optimale Lichtwerte: 300~2000 LUX",
       "lightHelpTitle": "Wie benutzt man das Lichtmessgerät?",
       "lightHelpTips": "1. Schalten Sie alle künstlichen Lichtquellen aus, da das Lichtmessgerät nur natürliches Licht messen kann.\n\n2. Positionieren Sie Ihr Telefon an der Stelle, an der Sie die Pflanze platzieren möchten.\n\n3. Richten Sie die Kamera auf die Stelle. Um ein genaues Ergebnis zu erhalten, messen Sie mit der Pflanze an Ort und Stelle oder stellen Sie sicher, dass es nicht zu hell ist.\n\n4. Überprüfen Sie, ob das Ergebnis den Lichtanforderungen Ihrer Pflanze entspricht."
     };

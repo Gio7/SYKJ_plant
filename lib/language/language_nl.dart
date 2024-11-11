@@ -199,7 +199,7 @@ class LanguageNl {
       "deletePlanTips": "Weet u zeker dat u de herinnering wilt verwijderen?",
       "appropriateLighting": "Geschikte verlichting",
       "insufficientLighting": "Onvoldoende verlichting",
-      "lightTips": "Optimale lichtwaarde: 500~3000 LUX",
+      "lightTips": "Optimale lichtwaarde: 300~2000 LUX",
       "lightHelpTitle": "Hoe gebruik ik de lichtmeter?",
       "lightHelpTips": "1. Schakel alle kunstmatige lichtbronnen uit, want de lichtmeter kan alleen natuurlijk licht meten.\n\n2. Plaats uw telefoon op de plek waar u de plant wilt plaatsen.\n\n3. Richt de camera op de plek. Voor het nauwkeurigste resultaat meet u met de plant op zijn plaats of zorgt u ervoor dat het niet te helder is.\n\n4. Controleer of de meting voldoet aan de lichtvereisten van uw plant."
     };

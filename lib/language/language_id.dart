@@ -199,7 +199,7 @@ class LanguageId {
       "deletePlanTips": "Apakah Anda yakin ingin menghapus pengingat?",
       "appropriateLighting": "Pencahayaan yang sesuai",
       "insufficientLighting": "Pencahayaan yang kurang",
-      "lightTips": "Nilai Cahaya Optimal: 500~3000 LUX",
+      "lightTips": "Nilai Cahaya Optimal: 300~2000 LUX",
       "lightHelpTitle": "Cara Menggunakan Meteran Cahaya",
       "lightHelpTips": "1. Matikan semua sumber cahaya buatan, karena Meteran Cahaya hanya bisa mengukur cahaya alami.\n\n2. Tempatkan ponsel Anda di lokasi di mana Anda ingin menempatkan tanaman.\n\n3. Arahkan kamera ke tempat tersebut. Untuk hasil yang paling akurat, lakukan pengukuran dengan tanaman di tempat atau pastikan lokasinya tidak terlalu terang.\n\n4. Periksa apakah pengukuran memenuhi kebutuhan cahaya tanaman Anda."
     };

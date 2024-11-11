@@ -199,7 +199,7 @@ class LanguageMs {
       "deletePlanTips": "Adakah anda pasti mahu memadam peringatan?",
       "appropriateLighting": "Pencahayaan yang sesuai",
       "insufficientLighting": "Pencahayaan tidak mencukupi",
-      "lightTips": "Nilai Cahaya Optimum: 500~3000 LUX",
+      "lightTips": "Nilai Cahaya Optimum: 300~2000 LUX",
       "lightHelpTitle": "Bagaimana untuk Menggunakan Meter Cahaya?",
       "lightHelpTips": "1. Matikan semua sumber cahaya tiruan, kerana Meter Cahaya hanya dapat mengukur cahaya semula jadi.\n\n2. Letakkan telefon anda di tempat yang anda ingin meletakkan tumbuhan.\n\n3. Arahkan kamera ke tempat tersebut. Untuk hasil yang paling tepat, ukur dengan tumbuhan ditempatkan atau pastikan tempat tidak terlalu terang.\n\n4. Periksa jika pengukuran memenuhi keperluan cahaya tumbuhan anda."
     };

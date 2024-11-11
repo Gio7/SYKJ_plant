@@ -199,7 +199,7 @@ class LanguagePt {
       "deletePlanTips": "Tem certeza de que deseja excluir o lembrete?",
       "appropriateLighting": "Iluminação apropriada",
       "insufficientLighting": "Iluminação insuficiente",
-      "lightTips": "Valor de luz ideal: 500~3000 LUX",
+      "lightTips": "Valor de luz ideal: 300~2000 LUX",
       "lightHelpTitle": "Como usar o medidor de luz?",
       "lightHelpTips": "1. Desligue todas as fontes de luz artificial, pois o medidor de luz só pode medir a luz natural.\n\n2. Posicione seu telefone no local onde você quer colocar a planta.\n\n3. Aponte a câmera para o local. Para obter o resultado mais preciso, faça a medição com a planta no local ou certifique-se de que o local não seja muito iluminado.\n\n4. Verifique se a medição atende aos requisitos de luz da sua planta."
     };

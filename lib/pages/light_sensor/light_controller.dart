@@ -17,7 +17,8 @@ class LightController extends GetxController {
   void onInit() {
     super.onInit();
     if(GetPlatform.isAndroid) {
-      startAndroidListening();
+      // startAndroidListening();
+      initCamera();
     } else {
       initCamera();
     }
@@ -45,7 +46,7 @@ class LightController extends GetxController {
     try {
       final cameras = await availableCameras();
       final frontCamera = cameras.firstWhere(
-        (camera) => camera.lensDirection == CameraLensDirection.front,
+        (camera) => camera.lensDirection == CameraLensDirection.back,
       );
       repository.cameraController = CameraController(
         frontCamera,
@@ -56,7 +57,7 @@ class LightController extends GetxController {
       repository.isCameraReady.value = true;
       repository.cameraController!.lockCaptureOrientation();
       repository.cameraController?.startImageStream((CameraImage image) {
-        // repository.lux.value = _calculateAverageBrightness(image);
+        repository.lux.value = _calculateLuxFromBrightness(image);
       });
     } catch (e) {
       Get.log(e.toString(), isError: true);
@@ -78,15 +79,15 @@ class LightController extends GetxController {
     }
   }
 
-  int _calculateAverageBrightness(CameraImage image) {
+  // 根据亮度估算 lux 值
+  int _calculateLuxFromBrightness(CameraImage image) {
     double totalBrightness = 0.0;
     int pixelCount = 0;
 
-    final plane = image.planes[0]; // 只处理 Y 平面 (亮度信息)
+    final plane = image.planes[0]; // YUV 图像的亮度平面
 
-    // 遍历 Y 平面的每个字节
     for (int i = 0; i < plane.bytes.length; i++) {
-      int brightnessValue = plane.bytes[i] & 0xFF; // 将无符号字节转为 int
+      int brightnessValue = plane.bytes[i] & 0xFF; // 确保亮度值在 0-255 范围内
 
       // 忽略亮度值为 255 的像素
       if (brightnessValue == 255) continue;
@@ -98,7 +99,10 @@ class LightController extends GetxController {
     // 防止除以0的情况
     if (pixelCount == 0) return 0;
 
-    // 返回亮度的平均值
-    return (totalBrightness / pixelCount).toInt();
+    final averageBrightness = totalBrightness / pixelCount;
+
+    // 使用一个比例常量来转换为 lux
+    const double brightnessToLuxRatio = 2.5; // 实验性常量，可调节以提高精度
+    return (averageBrightness * brightnessToLuxRatio).toInt();
   }
 }
