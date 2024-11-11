@@ -37,21 +37,21 @@ class InfoCharacteristics extends StatelessWidget {
               )
             ],
           ),
-          if (characteristics?.maturePlant?.details != null)
+          if (characteristics?.maturePlant?.details != null && characteristics!.maturePlant!.details!.isNotEmpty)
             _buildCharacteristicsListView(
               'images/icon/detail_mature.png',
               'maturePlant'.tr,
               characteristics?.maturePlant?.details,
               top: 16,
             ),
-          if (characteristics?.flower?.details != null)
+          if (characteristics?.flower?.details != null && characteristics!.flower!.details!.isNotEmpty)
             _buildCharacteristicsListView(
               'images/icon/detail_flower.png',
               'flower'.tr,
               characteristics?.flower?.details,
               top: 10,
             ),
-          if (characteristics?.fruit?.details != null)
+          if (characteristics?.fruit?.details != null && characteristics!.fruit!.details!.isNotEmpty)
             _buildCharacteristicsListView(
               'images/icon/detail_fruit.png',
               'fruit'.tr,

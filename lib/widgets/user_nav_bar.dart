@@ -4,9 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/controllers/user_controller.dart';
-import 'package:plant/pages/login/login_page.dart';
 import 'package:plant/pages/set/set_page.dart';
-import 'package:plant/pages/shop/shop_view.dart';
+import 'package:plant/router/app_pages.dart';
 
 class UserNavBar extends StatelessWidget {
   const UserNavBar({super.key, this.needUser = false});
@@ -26,11 +25,10 @@ class UserNavBar extends StatelessWidget {
                 onTap: () {
                   if (Get.find<UserController>().isLogin.value) {
                     FireBaseUtil.subscribePageEvent(Get.currentRoute);
-                    Get.to(() => ShopPage());
                   } else {
                     FireBaseUtil.loginPageEvent(Get.currentRoute);
-                    Get.to(() => const LoginPage(), fullscreenDialog: true, routeName: 'login_page');
                   }
+                  Get.toNamed(AppRoutes.shop);
                 },
                 child: Image.asset(
                   'images/icon/pro.png',

@@ -11,6 +11,8 @@ class DioUtil {
 
   static Dio? _dio;
 
+  static bool hasNetwork = true;
+
   static bool resetDio() {
     _dio = null;
     DioUtil._init();
@@ -70,9 +72,9 @@ class DioUtil {
         resetDio();
       });
       UserController().showLogin();
-    } else if (response?.statusCode == 500) {
+    } else if (response?.statusCode == 500 && hasNetwork) {
       Get.snackbar('Status Code:${response?.statusCode}', response?.statusMessage ?? '');
-    } else {
+    } else if (hasNetwork){
       Get.snackbar('Status Code:${response?.statusCode}', message ?? response?.statusMessage ?? 'unknown error');
     }
   }
@@ -102,7 +104,9 @@ class DioUtil {
           if (Get.isDialogOpen ?? false) {
             Get.back();
           }
-          Get.snackbar('${responseData['state'] ?? responseData['code']}', responseData['msg'] ?? responseData['state'] ?? responseData['code'].toString());
+          if (hasNetwork) {
+            Get.snackbar('${responseData['state'] ?? responseData['code']}', responseData['msg'] ?? responseData['state'] ?? responseData['code'].toString());
+          }
         }
       } else {
         _exceptionHandling(null, response);
@@ -142,7 +146,9 @@ class DioUtil {
           if (Get.isDialogOpen ?? false) {
             Get.back();
           }
-          Get.snackbar('${responseData['state'] ?? responseData['code']}', responseData['msg'] ?? responseData['state'] ?? responseData['code'].toString());
+          if (hasNetwork) {
+            Get.snackbar('${responseData['state'] ?? responseData['code']}', responseData['msg'] ?? responseData['state'] ?? responseData['code'].toString());
+          }
         }
       } else {
         _exceptionHandling(null, response);

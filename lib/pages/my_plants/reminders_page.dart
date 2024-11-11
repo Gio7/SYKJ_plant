@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/pages/my_plants/plants_chose_page.dart';
-import 'package:plant/pages/reminder_edit/reminder_edit_page.dart';
+import 'package:plant/router/app_pages.dart';
 import 'package:plant/widgets/btn.dart';
 import 'package:plant/widgets/loading_dialog.dart';
 
@@ -88,13 +88,10 @@ class RemindersPage extends StatelessWidget {
                                 repository.reminderDataList[i] = reminderModel;
                               },
                               onPlant: (timedPlan) {
-                                Get.to(
-                                  () => ReminderEditPage(),
-                                  arguments: {"timedPlanModel": timedPlan},
-                                );
+                                Get.toNamed(AppRoutes.reminderEdit, arguments: {"timedPlanModel": timedPlan});
                               },
                               onDeletePlan: (timedPlan) {
-                                controller.plantAlarmDelete(timedPlan.id, timedPlan.type,index: i,index2: j);
+                                controller.plantAlarmDelete(timedPlan.id, timedPlan.type, index: i, index2: j);
                               },
                             );
                           },

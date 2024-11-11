@@ -13,7 +13,7 @@ import 'package:plant/common/firebase_util.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/plant_diagnosis_model.dart';
 import 'package:plant/models/plant_info_model.dart';
-import 'package:plant/pages/login/login_page.dart';
+import 'package:plant/router/app_pages.dart';
 import 'package:plant/widgets/loading_dialog.dart';
 import 'package:image/image.dart' as img;
 import 'package:plant/widgets/show_dialog.dart';
@@ -249,7 +249,7 @@ class PlantController extends GetxController {
       return true;
     }
     FireBaseUtil.loginPageEvent(Get.currentRoute);
-    Get.to(() => const LoginPage(), fullscreenDialog: true);
+    Get.toNamed(AppRoutes.login);
     return false;
   }
 

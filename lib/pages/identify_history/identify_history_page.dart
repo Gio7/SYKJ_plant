@@ -64,10 +64,11 @@ class IdentifyHistoryPage extends StatelessWidget {
                               ),
                             );
                           },
+                          itemComparator: (a, b) => a.createTimestamp.compareTo(b.createTimestamp),
                           elements: repository.dataList,
-                          groupBy: (element) => element.createTimeLocal,
+                          groupBy: (element) => element.createTimeYmd,
                           order: GroupedListOrder.DESC,
-                          groupSeparatorBuilder: (String value) => Container(
+                          groupHeaderBuilder: (element) => Container(
                             height: 20.0,
                             margin: const EdgeInsets.symmetric(vertical: 16),
                             alignment: Alignment.centerLeft,
@@ -76,7 +77,7 @@ class IdentifyHistoryPage extends StatelessWidget {
                                 Image.asset('images/icon/time.png', width: 20),
                                 const SizedBox(width: 8),
                                 Text(
-                                  value,
+                                  element.createTimeLocal,
                                   style: TextStyle(
                                     color: UIColor.c85B9A8,
                                     fontSize: 12,

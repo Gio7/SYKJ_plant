@@ -10,7 +10,7 @@ class PlantModel {
   final dynamic updateBy;
   final dynamic updateTime;
   final dynamic remark;
-  final int? createTimestamp;
+  final int createTimestamp;
   // 植物记录ID (植物列表返回的)
   final int? id;
   final int? uid;
@@ -44,7 +44,7 @@ class PlantModel {
         updateBy: json["updateBy"],
         updateTime: json["updateTime"],
         remark: json["remark"],
-        createTimestamp: json["createTimestamp"],
+        createTimestamp: json["createTimestamp"] ?? 0,
         id: json["id"],
         uid: json["uid"],
         thumbnail: json["thumbnail"],
@@ -55,24 +55,12 @@ class PlantModel {
         timedPlans: json["timedPlans"] == null ? [] : List<TimedPlan>.from(json["timedPlans"]!.map((x) => TimedPlan.fromJson(x))),
       );
 
-  Map<String, dynamic> toJson() => {
-        "createBy": createBy,
-        "createTime": createTime,
-        "updateBy": updateBy,
-        "updateTime": updateTime,
-        "remark": remark,
-        "createTimestamp": createTimestamp,
-        "id": id,
-        "uid": uid,
-        "thumbnail": thumbnail,
-        "scientificName": scientificName,
-        "plantName": plantName,
-        "language": language,
-        "status": status,
-      };
-
   String get createTimeLocal {
     return DateUtil.formatString(createTime, format: DateFormat.yMd());
+  }
+
+  String get createTimeYmd {
+    return DateUtil.formatString(createTime, format: DateFormat("yyyyMMdd"));
   }
 
   String get getReminderSetText {

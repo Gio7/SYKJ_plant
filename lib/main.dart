@@ -18,6 +18,7 @@ import 'api/dio.dart';
 import 'common/firebase_message.dart';
 import 'common/firebase_util.dart';
 import 'common/ui_color.dart';
+import 'router/app_pages.dart';
 import 'widgets/easy_refresh_custom.dart';
 import 'controllers/core_binding.dart';
 import 'language/language.dart';
@@ -43,8 +44,10 @@ void main() {
       //   Get.log('network status changed: ${element.name}');
       // }
       if (result.contains(ConnectivityResult.none)) {
+        DioUtil.hasNetwork = false;
         Get.log('No network connection.', isError: true);
       } else {
+        DioUtil.hasNetwork = true;
         if (GlobalData.email.isEmpty) {
           getConfig();
         }
@@ -174,6 +177,8 @@ class MainApp extends StatelessWidget {
         ),
       ),
       home: const MainPage(),
+      initialRoute: '/',
+      getPages: AppPages.routes,
     );
   }
 

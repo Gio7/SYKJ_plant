@@ -7,7 +7,7 @@ import 'package:plant/common/ui_color.dart';
 import 'package:plant/models/plant_model.dart';
 import 'package:plant/pages/identify_history/identify_history_page.dart';
 import 'package:plant/pages/plant_scan/shoot_page.dart';
-import 'package:plant/pages/reminder_edit/reminder_edit_page.dart';
+import 'package:plant/router/app_pages.dart';
 import 'package:plant/widgets/btn.dart';
 import 'package:plant/widgets/loading_dialog.dart';
 import 'package:plant/widgets/show_dialog.dart';
@@ -56,9 +56,10 @@ class PlantsPage extends StatelessWidget {
                 },
                 child: GroupedListView(
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                  groupBy: (element) => element.createTimeLocal,
+                  itemComparator: (a, b) => a.createTimestamp.compareTo(b.createTimestamp),
+                  groupBy: (element) => element.createTimeYmd,
                   order: GroupedListOrder.DESC,
-                  groupSeparatorBuilder: (String value) => Container(
+                  groupHeaderBuilder: (value) => Container(
                     height: 20.0,
                     margin: const EdgeInsets.only(bottom: 10),
                     alignment: Alignment.centerLeft,
@@ -67,7 +68,7 @@ class PlantsPage extends StatelessWidget {
                         Image.asset('images/icon/time.png', width: 20),
                         const SizedBox(width: 8),
                         Text(
-                          value,
+                          value.createTimeLocal,
                           style: TextStyle(
                             color: UIColor.c85B9A8,
                             fontSize: 12,
@@ -188,9 +189,6 @@ class PlantsPage extends StatelessWidget {
   }
 
   void _onSetReminder(int? type, PlantModel model) {
-    Get.to(
-      () => ReminderEditPage(),
-      arguments: {'type': type, "plantModel": model},
-    );
+    Get.toNamed(AppRoutes.reminderEdit,arguments: {'type': type, "plantModel": model});
   }
 }

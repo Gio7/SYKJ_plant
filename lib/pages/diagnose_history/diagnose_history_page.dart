@@ -59,10 +59,11 @@ class DiagnoseHistoryPage extends StatelessWidget {
                               child: _buildItem(model, controller),
                             );
                           },
+                          itemComparator: (a, b) => a.createTimestamp.compareTo(b.createTimestamp),
                           elements: repository.dataList,
-                          groupBy: (element) => element.createTimeLocal,
+                          groupBy: (element) => element.createTimeYmd,
                           order: GroupedListOrder.DESC,
-                          groupSeparatorBuilder: (String value) => Container(
+                          groupHeaderBuilder: (value) => Container(
                             height: 20.0,
                             margin: const EdgeInsets.symmetric(vertical: 16),
                             alignment: Alignment.centerLeft,
@@ -71,7 +72,7 @@ class DiagnoseHistoryPage extends StatelessWidget {
                                 Image.asset('images/icon/time.png', width: 20),
                                 const SizedBox(width: 8),
                                 Text(
-                                  value,
+                                  value.createTimeLocal,
                                   style: TextStyle(
                                     color: UIColor.c85B9A8,
                                     fontSize: 12,

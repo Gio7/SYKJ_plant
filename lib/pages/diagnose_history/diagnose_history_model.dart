@@ -7,7 +7,7 @@ class DiagnosisHistoryModel {
   final dynamic updateBy;
   final dynamic updateTime;
   final String? remark;
-  final int? createTimestamp;
+  final int createTimestamp;
   final int? id;
   final int? uid;
   final String? thumbnail;
@@ -26,7 +26,7 @@ class DiagnosisHistoryModel {
     this.updateBy,
     this.updateTime,
     this.remark,
-    this.createTimestamp,
+    required this.createTimestamp,
     this.id,
     this.uid,
     this.thumbnail,
@@ -46,7 +46,7 @@ class DiagnosisHistoryModel {
         updateBy: json["updateBy"],
         updateTime: json["updateTime"],
         remark: json["remark"],
-        createTimestamp: json["createTimestamp"],
+        createTimestamp: json["createTimestamp"] ?? 0,
         id: json["id"],
         uid: json["uid"],
         thumbnail: json["thumbnail"],
@@ -62,5 +62,9 @@ class DiagnosisHistoryModel {
 
   String get createTimeLocal {
     return DateUtil.formatString(createTime, format: DateFormat.yMd());
+  }
+
+  String get createTimeYmd {
+    return DateUtil.formatString(createTime, format: DateFormat("yyyyMMdd"));
   }
 }

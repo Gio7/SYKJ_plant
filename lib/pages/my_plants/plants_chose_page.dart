@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:plant/api/request.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/models/plant_model.dart';
-import 'package:plant/pages/reminder_edit/reminder_edit_page.dart';
+import 'package:plant/router/app_pages.dart';
 import 'package:plant/widgets/empty_widget.dart';
 import 'package:plant/widgets/nav_bar.dart';
 import 'package:plant/widgets/page_bg.dart';
@@ -72,10 +72,7 @@ class _PlantsChosePageState extends State<PlantsChosePage> {
                       model: _dataList![i],
                       hasCreateTime: true,
                       onTap: () {
-                        Get.off(
-                          () => ReminderEditPage(),
-                          arguments: {'plantModel': _dataList![i]},
-                        );
+                        Get.offNamed(AppRoutes.reminderEdit,arguments: {'plantModel': _dataList![i]});
                       },
                     );
                   },

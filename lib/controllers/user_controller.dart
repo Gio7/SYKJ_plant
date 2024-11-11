@@ -5,8 +5,8 @@ import 'package:plant/api/request.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/global_data.dart';
 import 'package:plant/models/userinfo_model.dart';
-import 'package:plant/pages/login/login_page.dart';
 import 'package:plant/pages/my_plants/my_plants_controller.dart';
+import 'package:plant/router/app_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserController extends GetxController {
@@ -32,7 +32,7 @@ class UserController extends GetxController {
   void showLogin() {
     isLogin.value = false;
     FireBaseUtil.loginPageEvent(Get.currentRoute);
-    Get.to(() => const LoginPage(), fullscreenDialog: true, routeName: 'login_page');
+    Get.toNamed(AppRoutes.login);
   }
 
   Future<void> getUserInfo() async {
