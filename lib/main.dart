@@ -105,6 +105,7 @@ Future<void> initMain() async {
   EasyRefreshCustom.setup();
   final info = await PackageInfo.fromPlatform();
   GlobalData.versionName = info.version;
+  GlobalData.packageName = info.packageName;
   final prefs = await SharedPreferences.getInstance();
   final String? token = prefs.getString('token');
 

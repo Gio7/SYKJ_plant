@@ -6,9 +6,10 @@ class GlobalData {
   static String get baseUrl {
     if (defaultTargetPlatform == TargetPlatform.android) {
       return kDebugMode ? 'http://192.168.0.111:19300' : 'https://api.plantidentifier.co';
+    } else if (packageName.contains('identification')){
+      return 'http://192.168.0.111:19300';
     }
-    //https://test.plantidentifier.co
-    return 'https://api.plantidentifier.co';
+    return'https://api.plantidentifier.co';
   }
 
   /// 用户协议
@@ -22,6 +23,8 @@ class GlobalData {
   static BuyShop buyShop = BuyShop();
 
   static String versionName = '';
+
+  static String packageName = '';
 
   /// 唯一标识
   static String adId = '';
