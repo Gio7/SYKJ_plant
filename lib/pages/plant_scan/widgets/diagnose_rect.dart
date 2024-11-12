@@ -42,7 +42,7 @@ class _DiagnoseRectPageState extends State<DiagnoseRectPage> {
       fit: BoxFit.cover,
       fadeInDuration: Duration.zero,
       placeholder: (context, url) => const LoadingDialog(),
-      errorWidget: (context, url, error) => Image.asset('images/icon/no_image.png'),
+      errorWidget: (context, url, error) => Image.asset('images/icon/error_image.png'),
     );
   }
 

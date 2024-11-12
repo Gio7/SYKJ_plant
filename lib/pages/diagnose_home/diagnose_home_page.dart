@@ -135,7 +135,8 @@ class DiagnosePage extends StatelessWidget {
         FireBaseUtil.didNormalDisease(model.categoryName);
         Get.to(
           () => DiseasesCasePage(
-            categorizedFeedModel: model,
+            title: model.categoryName,
+            id: model.categoryId,
           ),
         );
       },

@@ -86,7 +86,7 @@ class ReminderItem extends StatelessWidget {
                                 height: 44,
                                 fit: BoxFit.cover,
                                 fadeInDuration: Duration.zero,
-                                errorWidget: (context, url, error) => Image.asset('images/icon/no_image.png'),
+                                errorWidget: (context, url, error) => Image.asset('images/icon/error_image.png'),
                                 placeholder: (context, url) => const CircularProgressIndicator(),
                               ),
                             ),
