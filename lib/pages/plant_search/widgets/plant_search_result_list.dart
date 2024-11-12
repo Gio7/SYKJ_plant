@@ -57,7 +57,7 @@ class PlantSearchResultList extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 12),
-            Expanded(child: HighlightText(text: model.commonName ?? '', keyword: searchText)),
+            Expanded(child: HighlightText(text: model.title, keyword: searchText)),
             const SizedBox(width: 12),
             Image.asset(
               'images/icon/arrow_right.png',
