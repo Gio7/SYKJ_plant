@@ -136,6 +136,7 @@ class BuyShop {
       await _inAppPurchase.restorePurchases();
       // Get.back();
     } catch (e) {
+      _isResume = false;
       if (Get.isDialogOpen ?? false) {
         Get.back();
       }
