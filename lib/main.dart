@@ -5,6 +5,7 @@ import 'package:advertising_id/advertising_id.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -84,15 +85,21 @@ void main() {
     // };
 
     // 拦截同步错误
-    // FlutterError.onError = (FlutterErrorDetails details) {
-    //   Get.log(" ----捕获到同步异常---- \n${details.exceptionAsString()}\n\nStack Trace:\n${details.stack}", isError: true);
-    // };
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+    if (kDebugMode) {
+      FlutterError.onError = (FlutterErrorDetails details) {
+        Get.log(" ----捕获到同步异常---- \n${details.exceptionAsString()}\n\nStack Trace:\n${details.stack}", isError: true);
+      };
+    } else {
+      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+    }
     FlutterNativeSplash.remove();
     runApp(const MainApp());
   }, (error, stackTrace) {
-    Get.log(" ----捕获到异步异常---- \n$error\n\nStack Trace:\n$stackTrace", isError: true);
-    FirebaseCrashlytics.instance.recordError(error, stackTrace, fatal: true);
+    if (kDebugMode) {
+      Get.log(" ----捕获到异步异常---- \n$error\n\nStack Trace:\n$stackTrace", isError: true);
+    } else {
+      FirebaseCrashlytics.instance.recordError(error, stackTrace, fatal: true);
+    }
   });
 }
 
@@ -106,7 +113,7 @@ Future<void> initMain() async {
     EasyRefreshCustom.setup();
     final info = await PackageInfo.fromPlatform();
     GlobalData.versionName = info.version;
-      final prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
     final String? token = prefs.getString('token');
 
     if (token != null) {
