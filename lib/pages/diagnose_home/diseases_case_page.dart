@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plant/api/db_server.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/controllers/main_controller.dart';
 import 'package:plant/widgets/common_webview.dart';
 import 'package:plant/widgets/empty_widget.dart';
 import 'package:plant/widgets/nav_bar.dart';
@@ -30,7 +30,7 @@ class _DiseasesCasePageState extends State<DiseasesCasePage> {
   }
 
   Future<void> getList() async {
-    final res = await Get.find<MainController>().getCategoryItemByDB(widget.id);
+    final res = await DbServer.getCategoryItemByDB(widget.id);
     setState(() {
       categorizedItemList = res.map((e) => CategorizedItem.fromJson(e)).toList();
     });

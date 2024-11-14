@@ -113,7 +113,7 @@ class HomePage extends StatelessWidget {
                   'reminders'.tr,
                   [const Color(0xFFD9F8E9), const Color(0xFFAEE9CD)],
                   () {
-                    Get.find<MainController>().tabController.index = 3;
+                    Get.find<MainController>().tabController.index = 4;
                     if (Get.isRegistered<MyPlantsController>()) {
                       final c = Get.find<MyPlantsController>();
                       c.onSegmentChange(c.repository.customSegmentedValues[1]);

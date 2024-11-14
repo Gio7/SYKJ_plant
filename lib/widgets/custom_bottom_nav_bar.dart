@@ -71,6 +71,20 @@ class CustomBottomNavBar extends StatelessWidget {
                   const BottomNavigationBarItem(icon: SizedBox(), label: ''),
                   BottomNavigationBarItem(
                     tooltip: '',
+                    label: "askExpert".tr,
+                    icon: Image.asset(
+                      'images/tabbar/chat.png',
+                      width: 28,
+                      height: 28,
+                    ),
+                    activeIcon: Image.asset(
+                      'images/tabbar/chat_selected.png',
+                      width: 28,
+                      height: 28,
+                    ),
+                  ),
+                  BottomNavigationBarItem(
+                    tooltip: '',
                     label: "myPlants".tr,
                     icon: Image.asset(
                       'images/tabbar/my_plant.png',
@@ -79,20 +93,6 @@ class CustomBottomNavBar extends StatelessWidget {
                     ),
                     activeIcon: Image.asset(
                       'images/tabbar/my_plant_selected.png',
-                      width: 28,
-                      height: 28,
-                    ),
-                  ),
-                  BottomNavigationBarItem(
-                    tooltip: '',
-                    label: "profile".tr,
-                    icon: Image.asset(
-                      'images/tabbar/user.png',
-                      width: 28,
-                      height: 28,
-                    ),
-                    activeIcon: Image.asset(
-                      'images/tabbar/user_selected.png',
                       width: 28,
                       height: 28,
                     ),

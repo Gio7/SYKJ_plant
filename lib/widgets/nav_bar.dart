@@ -9,6 +9,8 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? backgroundColor;
   final Widget? leftWidget;
   final Widget? rightWidget;
+  final bool topSafeArea;
+  final Function()? onBack;
 
   const NavBar({
     super.key,
@@ -18,15 +20,18 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.leftWidget,
     this.rightWidget,
+    this.topSafeArea = true,
+    this.onBack,
   });
 
   @override
   Widget build(BuildContext context) {
+    final double top = topSafeArea ? Get.mediaQuery.padding.top : 0;
     return Container(
       color: backgroundColor,
-      height: 56 + Get.mediaQuery.padding.top,
+      height: 56 + top,
       child: Padding(
-        padding: EdgeInsets.only(top: Get.mediaQuery.padding.top),
+        padding: EdgeInsets.only(top: top),
         child: SizedBox(
           height: 56,
           width: Get.mediaQuery.size.width,
@@ -36,7 +41,7 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
                 alignment: Alignment.centerLeft,
                 child: leftWidget ??
                     IconButton(
-                      onPressed: () => Get.back(),
+                      onPressed: () => onBack?.call() ?? Get.back(),
                       icon: const ImageIcon(
                         AssetImage('images/icon/nav_back.png'),
                         size: 32,
@@ -71,5 +76,5 @@ class NavBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(Get.mediaQuery.padding.top + 56);
+  Size get preferredSize => Size.fromHeight((topSafeArea ? Get.mediaQuery.padding.top : 0) + 56);
 }

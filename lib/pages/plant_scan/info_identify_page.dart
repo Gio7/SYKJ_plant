@@ -166,8 +166,8 @@ class InfoIdentifyPage extends StatelessWidget {
                   Get.dialog(const LoadingDialog());
                   await ctr.savePlant(ctr.repository.plantInfo!.scanRecordId!);
                   Get.back();
-                  if (Get.find<MainController>().tabController.index != 3) {
-                    Get.find<MainController>().tabController.index = 3;
+                  if (Get.find<MainController>().tabController.index != 4) {
+                    Get.find<MainController>().tabController.index = 4;
                   }
                   if (Get.isRegistered<MyPlantsController>()) {
                     final c = Get.find<MyPlantsController>();

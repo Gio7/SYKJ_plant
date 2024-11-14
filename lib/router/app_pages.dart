@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:plant/controllers/user_controller.dart';
+import 'package:plant/pages/chat_expert/chat_expert_content.dart';
 import 'package:plant/pages/login/login_page.dart';
 import 'package:plant/pages/reminder_edit/reminder_edit_page.dart';
 import 'package:plant/pages/shop/shop_view.dart';
@@ -24,6 +25,11 @@ class AppPages {
       page: () => ReminderEditPage(),
       middlewares: [AuthMiddleware()],
     ),
+    GetPage(
+      name: AppRoutes.chatExpertContent,
+      page: () => const ChatExpertContent(),
+      middlewares: [AuthMiddleware()],
+    ),
   ];
 }
 
@@ -38,7 +44,7 @@ class AuthMiddleware extends GetMiddleware {
     if (!isLoggedIn) {
       return const RouteSettings(name: AppRoutes.login);
     }
-    if (route == AppRoutes.reminderEdit) {
+    if (route == AppRoutes.reminderEdit || route == AppRoutes.chatExpertContent) {
       isRealVip = Get.find<UserController>().userInfo.value.isRealVip;
       if (!isRealVip) {
         return const RouteSettings(name: AppRoutes.shop);

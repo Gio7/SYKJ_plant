@@ -43,6 +43,7 @@ class BuyShop {
   }
 
   Future<void> _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) async {
+    Get.log("检测到需要处理的订单数：${purchaseDetailsList.length}");
     for (final purchaseDetails in purchaseDetailsList) {
       if (purchaseDetails.status == PurchaseStatus.pending) {
         Get.log("等待支付");

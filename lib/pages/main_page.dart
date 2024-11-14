@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/pages/chat_expert/chat_expert_page.dart';
 import 'package:plant/pages/diagnose_home/diagnose_home_page.dart';
-import 'package:plant/pages/set/set_page.dart';
 import 'package:plant/widgets/custom_bottom_nav_bar.dart';
 import 'package:plant/widgets/page_bg.dart';
 import 'package:plant/controllers/main_controller.dart';
@@ -54,8 +54,8 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
               HomePage(),
               DiagnosePage(),
               SizedBox(),
+              ChatExpertPage(),
               MyPlantsPage(),
-              SetPage(hasNavBar: false)
             ],
           ),
         ),
