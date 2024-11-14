@@ -77,7 +77,12 @@ class AwsUtils {
       }
     } catch (e) {
       Get.back();
-      Fluttertoast.showToast(msg: e.toString(), toastLength: Toast.LENGTH_LONG, timeInSecForIosWeb: 5, gravity: ToastGravity.CENTER);
+      Fluttertoast.showToast(
+        msg: "Network error. Please try again later.",
+        toastLength: Toast.LENGTH_LONG,
+        timeInSecForIosWeb: 5,
+        gravity: ToastGravity.CENTER,
+      );
       Get.log(e.toString(), isError: true);
       rethrow;
     }

@@ -22,6 +22,8 @@ class BuyShop {
   String? orderNum;
   String? sign;
 
+  bool _isResume = false;
+
   void onClose() {
     _subscription.cancel();
   }
@@ -33,12 +35,26 @@ class BuyShop {
     final Stream<List<PurchaseDetails>> purchaseUpdated = _inAppPurchase.purchaseStream;
     _subscription = purchaseUpdated.listen((purchaseDetailsList) {
       Get.log('检测到需要处理的订单数：${purchaseDetailsList.length}');
+      if (_isResume) {
+        _isResume = false;
+        if (purchaseDetailsList.isEmpty) {
+          if (Get.isDialogOpen ?? false) {
+            Get.back();
+          }
+          Fluttertoast.showToast(msg: 'restoreTips'.tr);
+        }
+      }
       _listenToPurchaseUpdated(purchaseDetailsList);
     }, onDone: () {
       _subscription.cancel();
     }, onError: (error) {
       error.printError();
-      Fluttertoast.showToast(msg: 'paymentInitiationFailure'.tr, toastLength: Toast.LENGTH_LONG,timeInSecForIosWeb: 5,gravity: ToastGravity.CENTER);
+      Fluttertoast.showToast(
+        msg: 'paymentInitiationFailure'.tr,
+        toastLength: Toast.LENGTH_LONG,
+        timeInSecForIosWeb: 5,
+        gravity: ToastGravity.CENTER,
+      );
     });
   }
 
@@ -52,7 +68,12 @@ class BuyShop {
             Get.back();
           }
           Get.log("支付出错:${purchaseDetails.error?.toString()}");
-          Fluttertoast.showToast(msg: purchaseDetails.error?.message ?? 'pay error', toastLength: Toast.LENGTH_LONG,timeInSecForIosWeb: 5,gravity: ToastGravity.CENTER);
+          Fluttertoast.showToast(
+            msg: purchaseDetails.error?.message ?? 'pay error',
+            toastLength: Toast.LENGTH_LONG,
+            timeInSecForIosWeb: 5,
+            gravity: ToastGravity.CENTER,
+          );
         } else if (purchaseDetails.status == PurchaseStatus.canceled) {
           if (Get.isDialogOpen ?? false) {
             Get.back();
@@ -87,12 +108,12 @@ class BuyShop {
     }
     final desKey = await Rsa.decodeString(sign);
     Map data = {
-        'orderNum': orderNum ?? '',
-        'productId': purchaseDetails.productID,
-        'purchaseToken': purchaseDetails.verificationData.serverVerificationData,
-        'payOrderId': purchaseDetails.purchaseID,
-        'type': orderNum == null ? 1 : 0,
-      };
+      'orderNum': orderNum ?? '',
+      'productId': purchaseDetails.productID,
+      'purchaseToken': purchaseDetails.verificationData.serverVerificationData,
+      'payOrderId': purchaseDetails.purchaseID,
+      'type': orderNum == null ? 1 : 0,
+    };
     final jsonString = jsonEncode(data);
     final time = DateTime.now().millisecondsSinceEpoch;
     final dataString = DesUtil.desEncrypt(jsonString, desKey, time);
@@ -111,6 +132,7 @@ class BuyShop {
   Future<void> resumePurchase() async {
     Get.dialog(const Center(child: CircularProgressIndicator()));
     try {
+      _isResume = true;
       await _inAppPurchase.restorePurchases();
       // Get.back();
     } catch (e) {
@@ -133,14 +155,24 @@ class BuyShop {
 
     if (orderNum == null || sign == null) {
       Get.back();
-      Fluttertoast.showToast(msg: 'orderCreationFailure'.tr, toastLength: Toast.LENGTH_LONG,timeInSecForIosWeb: 5,gravity: ToastGravity.CENTER);
+      Fluttertoast.showToast(
+        msg: 'orderCreationFailure'.tr,
+        toastLength: Toast.LENGTH_LONG,
+        timeInSecForIosWeb: 5,
+        gravity: ToastGravity.CENTER,
+      );
       return;
     }
 
     final bool isAvailable = await _inAppPurchase.isAvailable();
     if (!isAvailable) {
       Get.back();
-      Fluttertoast.showToast(msg: 'paymentInitiationFailure'.tr, toastLength: Toast.LENGTH_LONG,timeInSecForIosWeb: 5,gravity: ToastGravity.CENTER);
+      Fluttertoast.showToast(
+        msg: 'paymentInitiationFailure'.tr,
+        toastLength: Toast.LENGTH_LONG,
+        timeInSecForIosWeb: 5,
+        gravity: ToastGravity.CENTER,
+      );
       return;
     }
     try {
@@ -152,14 +184,22 @@ class BuyShop {
       // obfuscatedExternalAccountId == uidGet.find<UserController>().getUserInfo();
       final applicationUserName = '$orderNum,$uid';
       // Get.log('applicationUserName: $applicationUserName');
-      final purchaseParam = PurchaseParam(productDetails: currentItem.productDetails!, applicationUserName: applicationUserName);
+      final purchaseParam = PurchaseParam(
+        productDetails: currentItem.productDetails!,
+        applicationUserName: applicationUserName,
+      );
       if (buyNonConsumable) {
         await _inAppPurchase.buyNonConsumable(purchaseParam: purchaseParam);
       } else {
         await _inAppPurchase.buyConsumable(purchaseParam: purchaseParam);
       }
     } catch (e) {
-      Fluttertoast.showToast(msg: e.toString(), toastLength: Toast.LENGTH_LONG,timeInSecForIosWeb: 5,gravity: ToastGravity.CENTER);
+      Fluttertoast.showToast(
+        msg: e.toString(),
+        toastLength: Toast.LENGTH_LONG,
+        timeInSecForIosWeb: 5,
+        gravity: ToastGravity.CENTER,
+      );
       Get.back();
     }
   }
