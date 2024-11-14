@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:advertising_id/advertising_id.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -165,6 +166,12 @@ class MainApp extends StatelessWidget {
       translations: Language(),
       locale: _parseLocale(Get.deviceLocale ?? const Locale('en', 'US')),
       fallbackLocale: const Locale('en', 'US'),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [Get.deviceLocale ?? const Locale('en', 'US')],
       navigatorObservers: FireBaseUtil.observer == null ? [] : [FireBaseUtil.observer!],
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: UIColor.primary),

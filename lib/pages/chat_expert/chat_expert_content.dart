@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/widgets/loading_dialog.dart';
@@ -90,7 +91,7 @@ class _ChatExpertContentState extends State<ChatExpertContent> {
                 focusNode: _focusNode,
                 style: TextStyle(fontSize: 14, color: UIColor.c15221D, fontWeight: FontWeightExt.medium),
                 onSubmitted: (value) async {
-                  if (value.isEmpty) {
+                  if (value.trim().isEmpty || ctr.isLoading.value) {
                     return;
                   }
                   await ctr.insertChat(value, true);
@@ -110,7 +111,7 @@ class _ChatExpertContentState extends State<ChatExpertContent> {
                   suffixIcon: UnconstrainedBox(
                     child: IconButton(
                       onPressed: () async {
-                        if (_textEditingController.text.isEmpty) {
+                        if (_textEditingController.text.trim().isEmpty || ctr.isLoading.value) {
                           return;
                         }
                         await ctr.insertChat(_textEditingController.text, true);
@@ -195,13 +196,42 @@ class _ChatExpertContentState extends State<ChatExpertContent> {
                 ),
               ),
             ),
-            child: Text(
+            child: SelectableText(
               text,
               style: TextStyle(
                 color: UIColor.c8E8B8B,
                 fontSize: 12,
                 fontWeight: FontWeightExt.medium,
               ),
+              contextMenuBuilder: (c, selectableTextState) {
+                // final List<ContextMenuButtonItem> buttonItems = selectableTextState.contextMenuButtonItems;
+                // buttonItems.removeWhere((ContextMenuButtonItem buttonItem) {
+                //   return buttonItem.type == ContextMenuButtonType.cut;
+                // });
+
+                return AdaptiveTextSelectionToolbar.buttonItems(
+                  anchors: selectableTextState.contextMenuAnchors,
+                  buttonItems: [
+                    ContextMenuButtonItem(
+                      onPressed: () {
+                        selectableTextState.selectAll(SelectionChangedCause.toolbar);
+                      },
+                      type: ContextMenuButtonType.selectAll,
+                    ),
+                    ContextMenuButtonItem(
+                      onPressed: () {
+                        final String selectedText = selectableTextState.textEditingValue.text.substring(
+                          selectableTextState.textEditingValue.selection.start,
+                          selectableTextState.textEditingValue.selection.end,
+                        );
+                        Clipboard.setData(ClipboardData(text: selectedText));
+                        selectableTextState.hideToolbar();
+                      },
+                      type: ContextMenuButtonType.copy,
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ),
