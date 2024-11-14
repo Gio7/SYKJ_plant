@@ -76,6 +76,7 @@ class PlantCategriesWidget extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: item.thumbnailUrl ?? '',
                 fit: BoxFit.cover,
+                placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
               ),
             ),
           ),

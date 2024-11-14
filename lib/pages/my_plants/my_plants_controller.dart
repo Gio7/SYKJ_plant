@@ -33,12 +33,10 @@ class MyPlantsController extends GetxController {
 
     if (value.value == '1') {
       if (repository.plantDataList.isEmpty) {
-        repository.plantIsLoading.value = true;
         onPlantRefresh();
       }
     } else {
       if (repository.reminderDataList.isEmpty) {
-        repository.reminderIsLoading.value = true;
         onReminderRefresh();
       }
     }
@@ -48,6 +46,7 @@ class MyPlantsController extends GetxController {
     if (!Get.find<UserController>().isLogin.value) {
       return;
     }
+    repository.plantIsLoading.value = true;
     repository.plantIsLastPage = false;
     repository.plantPageNum = 1;
     final res = await Request.getPlantScanHistory(repository.plantPageNum);

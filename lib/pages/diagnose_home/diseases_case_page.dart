@@ -70,6 +70,7 @@ class DiseasesCasePage extends StatelessWidget {
                   height: 70,
                   fit: BoxFit.cover,
                   fadeInDuration: Duration.zero,
+                  placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
                   errorWidget: (_, __, ___) => Image.asset('images/icon/no_image.png')),
             ),
             const SizedBox(width: 12),

@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/models/plant_model.dart';
@@ -36,6 +36,7 @@ class PlantItemReminder extends StatelessWidget {
                       width: 50,
                       height: 50,
                       fit: BoxFit.cover,
+                      placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
                     ),
                   ),
                   const SizedBox(width: 12),

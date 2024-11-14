@@ -1,5 +1,6 @@
 import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
 import 'package:dio/dio.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:plant/common/global_data.dart';
 import 'package:plant/controllers/user_controller.dart';
@@ -73,9 +74,21 @@ class DioUtil {
       });
       UserController().showLogin();
     } else if (response?.statusCode == 500 && hasNetwork) {
-      Get.snackbar('Status Code:${response?.statusCode}', response?.statusMessage ?? '');
-    } else if (hasNetwork){
-      Get.snackbar('Status Code:${response?.statusCode}', message ?? response?.statusMessage ?? 'unknown error');
+      Fluttertoast.showToast(
+        msg: 'Network error. Please try again later.',
+        toastLength: Toast.LENGTH_LONG,
+        timeInSecForIosWeb: 5,
+        gravity: ToastGravity.CENTER,
+      );
+      Get.log('Status Code:${response?.statusCode} ${response?.statusMessage}');
+    } else if (hasNetwork) {
+      Fluttertoast.showToast(
+        msg: 'Network error. Please try again later.',
+        toastLength: Toast.LENGTH_LONG,
+        timeInSecForIosWeb: 5,
+        gravity: ToastGravity.CENTER,
+      );
+      Get.log('Status Code:${response?.statusCode} ${message ?? response?.statusMessage ?? 'unknown error'}');
     }
   }
 
@@ -105,7 +118,13 @@ class DioUtil {
             Get.back();
           }
           if (hasNetwork) {
-            Get.snackbar('${responseData['state'] ?? responseData['code']}', responseData['msg'] ?? responseData['state'] ?? responseData['code'].toString());
+            Fluttertoast.showToast(
+              msg: 'Network error. Please try again later.',
+              toastLength: Toast.LENGTH_LONG,
+              timeInSecForIosWeb: 5,
+              gravity: ToastGravity.CENTER,
+            );
+            Get.log('${responseData['state'] ?? responseData['code']} ${responseData['msg'] ?? responseData['state'] ?? responseData['code'].toString()}');
           }
         }
       } else {
@@ -147,7 +166,13 @@ class DioUtil {
             Get.back();
           }
           if (hasNetwork) {
-            Get.snackbar('${responseData['state'] ?? responseData['code']}', responseData['msg'] ?? responseData['state'] ?? responseData['code'].toString());
+            Fluttertoast.showToast(
+              msg: 'Network error. Please try again later.',
+              toastLength: Toast.LENGTH_LONG,
+              timeInSecForIosWeb: 5,
+              gravity: ToastGravity.CENTER,
+            );
+            Get.log('${responseData['state'] ?? responseData['code']} ${responseData['msg'] ?? responseData['state'] ?? responseData['code'].toString()}');
           }
         }
       } else {

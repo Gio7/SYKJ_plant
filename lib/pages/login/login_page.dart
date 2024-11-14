@@ -175,7 +175,7 @@ class LoginPage extends StatelessWidget {
                 Get.back(closeOverlays: true);
               }
             },
-            bgColor: UIColor.transparentPrimary70,
+            bgColor: UIColor.primary,
             text: 'continueWithApple'.tr,
             textColor: UIColor.white,
             icon: 'images/icon/apple.png',
@@ -196,7 +196,7 @@ class LoginPage extends StatelessWidget {
                 Get.back(closeOverlays: true);
               }
             },
-            bgColor: UIColor.transparentPrimary70,
+            bgColor: UIColor.primary,
             text: 'continueWithGoogle'.tr,
             textColor: UIColor.white,
             iconWidget: Image.asset('images/icon/google.png', width: 24),
@@ -211,7 +211,7 @@ class LoginPage extends StatelessWidget {
               FireBaseUtil.logEvent(EventName.passwordLoginBtn);
               Get.to(() => const EmailSignupPage());
             },
-            bgColor: UIColor.c40BD95,
+            bgColor: UIColor.primary,
             text: 'signUpWithEmail'.tr,
             textColor: UIColor.white,
             iconWidget: Image.asset('images/icon/mail.png', width: 24),

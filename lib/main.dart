@@ -109,21 +109,31 @@ Future<void> initMain() async {
       options: DefaultFirebaseOptions.currentPlatform,
     );
     FireBaseUtil.initAnalyticsServices();
+  } catch (e) {
+    Get.log('firebase init error: $e');
+  }
 
-    EasyRefreshCustom.setup();
+  EasyRefreshCustom.setup();
+  try {
     final info = await PackageInfo.fromPlatform();
     GlobalData.versionName = info.version;
+  } catch (e) {
+    Get.log('PackageInfo init error: $e');
+  }
+
+  try {
     final prefs = await SharedPreferences.getInstance();
     final String? token = prefs.getString('token');
 
     if (token != null) {
       DioUtil.token = token;
     }
-    DioUtil.resetDio();
-    GlobalData.buyShop.initializeInAppPurchase();
   } catch (e) {
-    Get.log('initMain error: $e');
+    Get.log('SharedPreferences init error: $e');
   }
+
+  DioUtil.resetDio();
+  GlobalData.buyShop.initializeInAppPurchase();
 }
 
 Future<void> getConfig() async {

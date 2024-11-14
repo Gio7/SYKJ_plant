@@ -116,6 +116,7 @@ class DiagnoseHistoryPage extends StatelessWidget {
                       height: 50,
                       fit: BoxFit.cover,
                       fadeInDuration: Duration.zero,
+                      placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
                     ),
             ),
             const SizedBox(width: 12),

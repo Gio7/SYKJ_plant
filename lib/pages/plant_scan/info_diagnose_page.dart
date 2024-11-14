@@ -295,7 +295,11 @@ class InfoDiagnosePage extends StatelessWidget {
             if (content.imageUrl != null && content.imageUrl!.isNotEmpty) {
               widgets.add(Padding(
                 padding: const EdgeInsets.only(bottom: 24),
-                child: CachedNetworkImage(imageUrl: content.imageUrl!, fit: BoxFit.cover),
+                child: CachedNetworkImage(
+                  imageUrl: content.imageUrl!,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                ),
               ));
             }
           }

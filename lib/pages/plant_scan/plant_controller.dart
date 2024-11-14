@@ -198,6 +198,16 @@ class PlantController extends GetxController {
       );
     } catch (e) {
       Get.log('cameras init error:$e', isError: true);
+      Get.dialog(
+        barrierDismissible: false,
+        NormalDialog(
+          title: 'Device not detected',
+          confirmText: 'ok',
+          onConfirm: () {
+            Get.until((route) => Get.currentRoute == '/');
+          },
+        ),
+      );
     }
 //  on PlatformException catch (e) {
 //       switch (e.code) {

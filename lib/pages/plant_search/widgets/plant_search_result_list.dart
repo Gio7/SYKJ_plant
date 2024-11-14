@@ -53,7 +53,7 @@ class PlantSearchResultList extends StatelessWidget {
                 fit: BoxFit.cover,
                 fadeInDuration: Duration.zero,
                 errorWidget: (context, url, error) => Image.asset('images/icon/error_image.png'),
-                placeholder: (context, url) => const CircularProgressIndicator(),
+                placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
               ),
             ),
             const SizedBox(width: 12),

@@ -48,6 +48,7 @@ class InfoIdentifyPage extends StatelessWidget {
         imageUrl: ctr.repository.plantInfo?.plant?.thumbnail ?? '',
         fit: BoxFit.cover,
         fadeInDuration: Duration.zero,
+        placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
       ),
     );
   }
