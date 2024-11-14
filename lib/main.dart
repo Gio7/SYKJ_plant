@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:advertising_id/advertising_id.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -38,7 +39,7 @@ void main() {
       ));
     }
     // 锁定竖屏
-    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    // await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     await initMain();
     Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) async {
       // Get.log('network status list: ${result.length}');
@@ -83,13 +84,15 @@ void main() {
     // };
 
     // 拦截同步错误
-    FlutterError.onError = (FlutterErrorDetails details) {
-      Get.log(" ----捕获到同步异常---- \n${details.exceptionAsString()}\n\nStack Trace:\n${details.stack}", isError: true);
-    };
+    // FlutterError.onError = (FlutterErrorDetails details) {
+    //   Get.log(" ----捕获到同步异常---- \n${details.exceptionAsString()}\n\nStack Trace:\n${details.stack}", isError: true);
+    // };
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
     FlutterNativeSplash.remove();
     runApp(const MainApp());
   }, (error, stackTrace) {
     Get.log(" ----捕获到异步异常---- \n$error\n\nStack Trace:\n$stackTrace", isError: true);
+    FirebaseCrashlytics.instance.recordError(error, stackTrace, fatal: true);
   });
 }
 
@@ -99,20 +102,21 @@ Future<void> initMain() async {
       options: DefaultFirebaseOptions.currentPlatform,
     );
     FireBaseUtil.initAnalyticsServices();
-  } catch (e) {
-    Get.log('Firebase initialization error: $e');
-  }
-  EasyRefreshCustom.setup();
-  final info = await PackageInfo.fromPlatform();
-  GlobalData.versionName = info.version;
-  final prefs = await SharedPreferences.getInstance();
-  final String? token = prefs.getString('token');
 
-  if (token != null) {
-    DioUtil.token = token;
+    EasyRefreshCustom.setup();
+    final info = await PackageInfo.fromPlatform();
+    GlobalData.versionName = info.version;
+      final prefs = await SharedPreferences.getInstance();
+    final String? token = prefs.getString('token');
+
+    if (token != null) {
+      DioUtil.token = token;
+    }
+    DioUtil.resetDio();
+    GlobalData.buyShop.initializeInAppPurchase();
+  } catch (e) {
+    Get.log('initMain error: $e');
   }
-  DioUtil.resetDio();
-  GlobalData.buyShop.initializeInAppPurchase();
 }
 
 Future<void> getConfig() async {

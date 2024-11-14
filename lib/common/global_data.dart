@@ -1,13 +1,7 @@
-import 'package:flutter/foundation.dart';
-
 import 'buy_shop.dart';
 
 class GlobalData {
   static String get baseUrl {
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      return kDebugMode ? 'http://192.168.0.111:19300' : 'https://api.plantidentifier.co';
-    }
-    //https://test.plantidentifier.co
     return 'https://api.plantidentifier.co';
   }
 
