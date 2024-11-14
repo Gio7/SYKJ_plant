@@ -32,6 +32,14 @@ class PlantSearchModel {
         hierarchyRank: json["hierarchyRank"],
         additionalInfo: json["additionalInfo"] == null ? null : AdditionalInfo.fromJson(json["additionalInfo"]),
       );
+
+  String get title {
+    String title = commonName ?? '';
+    if (aboutName != null && aboutName!.isNotEmpty) {
+      title += '($aboutName)';
+    }
+    return title;
+  }
 }
 
 class AdditionalInfo {
