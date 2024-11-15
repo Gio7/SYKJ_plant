@@ -62,6 +62,15 @@ class DioUtil {
       ..interceptors.add(CurlLoggerDioInterceptor(printOnSuccess: true));
   }
 
+  static _showNetworkErrorToast() {
+    Fluttertoast.showToast(
+      msg: 'Network error. Please try again later.',
+      toastLength: Toast.LENGTH_LONG,
+      timeInSecForIosWeb: 5,
+      gravity: ToastGravity.CENTER,
+    );
+  }
+
   static _exceptionHandling(String? message, Response? response) {
     if (Get.isDialogOpen ?? false) {
       Get.back();
@@ -74,20 +83,10 @@ class DioUtil {
       });
       UserController().showLogin();
     } else if (response?.statusCode == 500 && hasNetwork) {
-      Fluttertoast.showToast(
-        msg: 'Network error. Please try again later.',
-        toastLength: Toast.LENGTH_LONG,
-        timeInSecForIosWeb: 5,
-        gravity: ToastGravity.CENTER,
-      );
-      Get.log('Status Code:${response?.statusCode} ${response?.statusMessage}');
+      _showNetworkErrorToast();
+      Get.log('Status Code 500: ${response?.statusMessage}');
     } else if (hasNetwork) {
-      Fluttertoast.showToast(
-        msg: 'Network error. Please try again later.',
-        toastLength: Toast.LENGTH_LONG,
-        timeInSecForIosWeb: 5,
-        gravity: ToastGravity.CENTER,
-      );
+      _showNetworkErrorToast();
       Get.log('Status Code:${response?.statusCode} ${message ?? response?.statusMessage ?? 'unknown error'}');
     }
   }
@@ -118,12 +117,7 @@ class DioUtil {
             Get.back();
           }
           if (hasNetwork) {
-            Fluttertoast.showToast(
-              msg: 'Network error. Please try again later.',
-              toastLength: Toast.LENGTH_LONG,
-              timeInSecForIosWeb: 5,
-              gravity: ToastGravity.CENTER,
-            );
+            _showNetworkErrorToast();
             Get.log('${responseData['state'] ?? responseData['code']} ${responseData['msg'] ?? responseData['state'] ?? responseData['code'].toString()}');
           }
         }
@@ -166,12 +160,7 @@ class DioUtil {
             Get.back();
           }
           if (hasNetwork) {
-            Fluttertoast.showToast(
-              msg: 'Network error. Please try again later.',
-              toastLength: Toast.LENGTH_LONG,
-              timeInSecForIosWeb: 5,
-              gravity: ToastGravity.CENTER,
-            );
+            _showNetworkErrorToast();
             Get.log('${responseData['state'] ?? responseData['code']} ${responseData['msg'] ?? responseData['state'] ?? responseData['code'].toString()}');
           }
         }
