@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:advertising_id/advertising_id.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -39,7 +40,7 @@ void main() {
       ));
     }
     // 锁定竖屏
-    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    // await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     await initMain();
     Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) async {
       // Get.log('network status list: ${result.length}');
@@ -84,13 +85,21 @@ void main() {
     // };
 
     // 拦截同步错误
-    FlutterError.onError = (FlutterErrorDetails details) {
-      Get.log(" ----捕获到同步异常---- \n${details.exceptionAsString()}\n\nStack Trace:\n${details.stack}", isError: true);
-    };
+    if (kDebugMode) {
+      FlutterError.onError = (FlutterErrorDetails details) {
+        Get.log(" ----捕获到同步异常---- \n${details.exceptionAsString()}\n\nStack Trace:\n${details.stack}", isError: true);
+      };
+    } else {
+      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+    }
     FlutterNativeSplash.remove();
     runApp(const MainApp());
   }, (error, stackTrace) {
-    Get.log(" ----捕获到异步异常---- \n$error\n\nStack Trace:\n$stackTrace", isError: true);
+    if (kDebugMode) {
+      Get.log(" ----捕获到异步异常---- \n$error\n\nStack Trace:\n$stackTrace", isError: true);
+    } else {
+      FirebaseCrashlytics.instance.recordError(error, stackTrace, fatal: true);
+    }
   });
 }
 
@@ -101,18 +110,29 @@ Future<void> initMain() async {
     );
     FireBaseUtil.initAnalyticsServices();
   } catch (e) {
-    Get.log('Firebase initialization error: $e');
+    Get.log('firebase init error: $e');
   }
-  EasyRefreshCustom.setup();
-  final info = await PackageInfo.fromPlatform();
-  GlobalData.versionName = info.version;
-  GlobalData.packageName = info.packageName;
-  final prefs = await SharedPreferences.getInstance();
-  final String? token = prefs.getString('token');
 
-  if (token != null) {
-    DioUtil.token = token;
+  EasyRefreshCustom.setup();
+  try {
+    final info = await PackageInfo.fromPlatform();
+    GlobalData.versionName = info.version;
+    GlobalData.packageName = info.packageName;
+  } catch (e) {
+    Get.log('PackageInfo init error: $e');
   }
+
+  try {
+    final prefs = await SharedPreferences.getInstance();
+    final String? token = prefs.getString('token');
+
+    if (token != null) {
+      DioUtil.token = token;
+    }
+  } catch (e) {
+    Get.log('SharedPreferences init error: $e');
+  }
+
   DioUtil.resetDio();
   GlobalData.buyShop.initializeInAppPurchase();
 }

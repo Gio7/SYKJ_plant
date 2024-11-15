@@ -186,15 +186,29 @@ class PlantController extends GetxController {
   }
 
   Future<void> initCamera() async {
-    final cameras = await availableCameras();
-    final firstCamera = cameras.first;
+    try {
+      final cameras = await availableCameras();
+      final firstCamera = cameras.first;
 
-    repository.cameraController = CameraController(
-      firstCamera,
-      ResolutionPreset.veryHigh,
-      enableAudio: false,
-      imageFormatGroup: ImageFormatGroup.jpeg,
-    );
+      repository.cameraController = CameraController(
+        firstCamera,
+        ResolutionPreset.veryHigh,
+        enableAudio: false,
+        imageFormatGroup: ImageFormatGroup.jpeg,
+      );
+    } catch (e) {
+      Get.log('cameras init error:$e', isError: true);
+      Get.dialog(
+        barrierDismissible: false,
+        NormalDialog(
+          title: 'Device not detected',
+          confirmText: 'ok',
+          onConfirm: () {
+            Get.until((route) => Get.currentRoute == '/');
+          },
+        ),
+      );
+    }
 //  on PlatformException catch (e) {
 //       switch (e.code) {
 //         case 'photo_access_denied':
@@ -206,9 +220,9 @@ class PlantController extends GetxController {
 //       }
 //       rethrow;
 //     }
-    repository.cameraController!.initialize().then((_) {
+    repository.cameraController?.initialize().then((_) {
       repository.isCameraReady.value = true;
-      repository.cameraController!.lockCaptureOrientation();
+      repository.cameraController?.lockCaptureOrientation();
     }).catchError((Object e) {
       Get.log(e.toString(), isError: true);
       if (e is CameraException) {

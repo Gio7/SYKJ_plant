@@ -95,6 +95,7 @@ class _DiseasesCasePageState extends State<DiseasesCasePage> {
                   height: 70,
                   fit: BoxFit.cover,
                   fadeInDuration: Duration.zero,
+                  placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
                   errorWidget: (_, __, ___) => Image.asset('images/icon/error_image.png')),
             ),
             const SizedBox(width: 12),

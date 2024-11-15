@@ -29,7 +29,6 @@ class Common {
         url,
       );
       if (!isSul) {
-        // Get.snackbar('error', 'fail');
         throw Exception('fail');
       }
     } catch (e) {

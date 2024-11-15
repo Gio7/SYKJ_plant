@@ -194,7 +194,7 @@ class HomePage extends StatelessWidget {
               left: 0,
               right: 0,
               bottom: 42,
-              child: Image.asset(image),
+              child: Image.asset(image,height: 160),
             ),
           ],
         ),

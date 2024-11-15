@@ -201,7 +201,7 @@ class ReminderEditPage extends StatelessWidget {
         imageUrl: reminderEditCtr.repository.thumbnail ?? '',
         fit: BoxFit.cover,
         fadeInDuration: Duration.zero,
-        placeholder: (context, url) => const CircularProgressIndicator(),
+        placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
         errorWidget: (context, url, error) => Image.asset('images/icon/error_image.png'),
       ),
     );

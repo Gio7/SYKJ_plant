@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/pages/chat_expert/chat_expert_content.dart';
 import 'package:plant/pages/login/login_page.dart';
+import 'package:plant/pages/my_plants/plants_chose_page.dart';
 import 'package:plant/pages/reminder_edit/reminder_edit_page.dart';
 import 'package:plant/pages/shop/shop_view.dart';
 
@@ -28,6 +29,11 @@ class AppPages {
     GetPage(
       name: AppRoutes.chatExpertContent,
       page: () => const ChatExpertContent(),
+      middlewares: [AuthMiddleware()],
+    ),
+    GetPage(
+      name: AppRoutes.plantsChose,
+      page: () => const PlantsChosePage(),
       middlewares: [AuthMiddleware()],
     ),
   ];
