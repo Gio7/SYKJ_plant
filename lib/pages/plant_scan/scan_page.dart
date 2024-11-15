@@ -65,7 +65,8 @@ class ScanPage extends StatelessWidget {
     _requestNetwork(ctr, completer);
     completer.future.catchError((e) => Get.log(e.toString(), isError: true));
 
-    final width = MediaQuery.of(context).size.width - 116;
+    double width = MediaQuery.of(context).size.width - 116;
+    width = width > 350 ? 350 : width;
     return PopScope(
       canPop: true,
       onPopInvoked: (didPop) {

@@ -299,10 +299,12 @@ class PlantController extends GetxController {
         img.Image image = (await FileUtils.xFileToImage(imageFile))!;
 
 ///////////// 计算需要裁剪的区域
+        double width = MediaQuery.of(Get.context!).size.width - 116;
+        width = width > 350 ? 350 : width;
+
         final mediaSize = MediaQuery.of(Get.context!).size;
-        final showSize = mediaSize.width - 116;
         double scaleFactor = image.width / mediaSize.width;
-        double cropWidth = scaleFactor * showSize;
+        double cropWidth = scaleFactor * width;
         double x = (image.width - cropWidth) / 2;
         double y = (image.height - cropWidth) / 2;
 ////////////

@@ -18,8 +18,8 @@ class ShootPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ctr = Get.put(PlantController(shootType));
-    final width = MediaQuery.of(context).size.width - 116;
-
+    double width = MediaQuery.of(context).size.width - 116;
+    width = width > 350 ? 350 : width;
     final repository = ctr.repository;
 
     return Container(

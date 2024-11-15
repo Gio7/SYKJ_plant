@@ -62,8 +62,9 @@ class PlantCropImage extends StatelessWidget {
                   fixCropRect: true,
                   radius: 20,
                   initialRectBuilder: (viewportRect, imageRect) {
-                    final w = viewportRect.right - 116;
-                    return Rect.fromCenter(center: Offset(viewportRect.width / 2, viewportRect.height / 2), width: w, height: w);
+                    double width = viewportRect.right - 116;
+                    width = width > 350 ? 350 : width;
+                    return Rect.fromCenter(center: Offset(viewportRect.width / 2, viewportRect.height / 2), width: width, height: width);
                   },
                 ),
               ),
