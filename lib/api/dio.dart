@@ -64,7 +64,7 @@ class DioUtil {
 
   static _showNetworkErrorToast() {
     Fluttertoast.showToast(
-      msg: 'Network error. Please try again later.',
+      msg: "apiError".tr,
       toastLength: Toast.LENGTH_LONG,
       timeInSecForIosWeb: 5,
       gravity: ToastGravity.CENTER,
@@ -117,7 +117,9 @@ class DioUtil {
             Get.back();
           }
           if (hasNetwork) {
-            _showNetworkErrorToast();
+            if (responseData['msg'] == 'Request too frequently') {
+              _showNetworkErrorToast();
+            }
             Get.log('${responseData['state'] ?? responseData['code']} ${responseData['msg'] ?? responseData['state'] ?? responseData['code'].toString()}');
           }
         }
@@ -160,7 +162,9 @@ class DioUtil {
             Get.back();
           }
           if (hasNetwork) {
-            _showNetworkErrorToast();
+            if (responseData['msg'] == 'Request too frequently') {
+              _showNetworkErrorToast();
+            }
             Get.log('${responseData['state'] ?? responseData['code']} ${responseData['msg'] ?? responseData['state'] ?? responseData['code'].toString()}');
           }
         }

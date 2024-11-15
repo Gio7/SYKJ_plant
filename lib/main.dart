@@ -106,9 +106,12 @@ void main() {
 
 Future<void> initMain() async {
   try {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+    if (Firebase.apps.isEmpty) {
+      await Firebase.initializeApp(
+        name: 'PlantIdentifier',
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    }
     FireBaseUtil.initAnalyticsServices();
   } catch (e) {
     Get.log('firebase init error: $e');

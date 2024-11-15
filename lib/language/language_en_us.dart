@@ -213,6 +213,10 @@ class LanguageEnUs {
       "writeYourMessage": "Write your message",
       "apiError": "Network error. Please try again later.",
       "normalError": "Oops! Something went wrong.",
+      "weakPassword":"The password provided is too weak.",
+      "emailAlreadyInUse":"The account already exists for that email.",
+      "userNotFound": "No found for that email.",
+      "wrongPassword": "Wrong password provided.",
     };
   }
 }

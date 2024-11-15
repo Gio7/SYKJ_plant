@@ -19,7 +19,11 @@ import 'widgets.dart';
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
-  Future<AuthorizationCredentialAppleID> signInWithApple() async {
+  _showNormalErrorToast() {
+    Fluttertoast.showToast(msg: "normalError".tr, gravity: ToastGravity.CENTER);
+  }
+
+  Future<AuthorizationCredentialAppleID?> signInWithApple() async {
     try {
       return await SignInWithApple.getAppleIDCredential(
         scopes: [
@@ -29,10 +33,14 @@ class LoginPage extends StatelessWidget {
       );
     } on SignInWithAppleAuthorizationException catch (e) {
       Get.log(e.toString(), isError: true);
-      Fluttertoast.showToast(msg: e.message, gravity: ToastGravity.CENTER);
-      rethrow;
+      if (e.code != AuthorizationErrorCode.canceled) {
+        _showNormalErrorToast();
+        rethrow;
+      }
+      return null;
     } catch (e) {
       Get.log(e.toString(), isError: true);
+      _showNormalErrorToast();
       rethrow;
     }
   }
@@ -45,7 +53,7 @@ class LoginPage extends StatelessWidget {
 
       final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
       if (googleAuth == null) {
-        throw 'googleAuth 为空';
+        throw 'googleAuth null';
       }
 
       final credential = GoogleAuthProvider.credential(
@@ -55,10 +63,17 @@ class LoginPage extends StatelessWidget {
 
       return await FirebaseAuth.instance.signInWithCredential(credential);
     } on PlatformException catch (e) {
-      Get.log(e.toString(), isError: true);
-      Fluttertoast.showToast(msg: e.message ?? 'login error', gravity: ToastGravity.CENTER);
+      Get.log("PlatformException: $e", isError: true);
+      if (e.code == 'network_error') {
+        Fluttertoast.showToast(msg: 'apiError'.tr, gravity: ToastGravity.CENTER);
+      } else {
+        _showNormalErrorToast();
+      }
       rethrow;
     } catch (e) {
+      if (e != 'googleAuth null') {
+        _showNormalErrorToast();
+      }
       Get.log(e.toString(), isError: true);
       rethrow;
     }
@@ -169,8 +184,8 @@ class LoginPage extends StatelessWidget {
             onTap: () async {
               FireBaseUtil.logEvent(EventName.apLoginBtn);
               final aca = await signInWithApple();
-              if (aca.userIdentifier != null) {
-                await loginCtr.login(aca.userIdentifier!, aca.email, type: 3);
+              if (aca?.userIdentifier != null) {
+                await loginCtr.login(aca!.userIdentifier!, aca.email, type: 3);
                 FireBaseUtil.logEvent(EventName.apLoginSuccess);
                 Get.back(closeOverlays: true);
               }

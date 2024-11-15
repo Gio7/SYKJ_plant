@@ -43,15 +43,18 @@ class LoginController extends GetxController {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        Fluttertoast.showToast(msg: 'The password provided is too weak.', gravity: ToastGravity.CENTER);
+        Fluttertoast.showToast(msg: 'weakPassword'.tr, gravity: ToastGravity.CENTER);
       } else if (e.code == 'email-already-in-use') {
-        Fluttertoast.showToast(msg: 'The account already exists for that email.', gravity: ToastGravity.CENTER);
+        Fluttertoast.showToast(msg: 'emailAlreadyInUse'.tr, gravity: ToastGravity.CENTER);
+      } else if (e.code == 'network-request-failed'){
+        Fluttertoast.showToast(msg: 'apiError'.tr, gravity: ToastGravity.CENTER);
       } else {
-        Fluttertoast.showToast(msg: e.message ?? 'error', gravity: ToastGravity.CENTER);
+        Fluttertoast.showToast(msg: 'normalError'.tr, gravity: ToastGravity.CENTER);
       }
       Get.log(e.toString(), isError: true);
       rethrow;
     } catch (e) {
+      Fluttertoast.showToast(msg: 'normalError'.tr, gravity: ToastGravity.CENTER);
       Get.log(e.toString(), isError: true);
       rethrow;
     }
@@ -100,15 +103,18 @@ class LoginController extends GetxController {
       emailSend();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        Fluttertoast.showToast(msg: 'The password provided is too weak.', gravity: ToastGravity.CENTER);
+        Fluttertoast.showToast(msg: 'weakPassword'.tr, gravity: ToastGravity.CENTER);
       } else if (e.code == 'email-already-in-use') {
-        Fluttertoast.showToast(msg: 'The account already exists for that email.', gravity: ToastGravity.CENTER);
+        Fluttertoast.showToast(msg: 'emailAlreadyInUse'.tr, gravity: ToastGravity.CENTER);
+      } else if (e.code == 'network-request-failed'){
+        Fluttertoast.showToast(msg: 'apiError'.tr, gravity: ToastGravity.CENTER);
       } else {
-        Fluttertoast.showToast(msg: e.message ?? 'create error', gravity: ToastGravity.CENTER);
+        Fluttertoast.showToast(msg: 'normalError'.tr, gravity: ToastGravity.CENTER);
       }
       Get.log(e.toString(), isError: true);
       rethrow;
     } catch (e) {
+      Fluttertoast.showToast(msg: 'normalError'.tr, gravity: ToastGravity.CENTER);
       Get.log(e.toString(), isError: true);
       rethrow;
     }
@@ -129,15 +135,18 @@ class LoginController extends GetxController {
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        Fluttertoast.showToast(msg: 'No found for that email.', gravity: ToastGravity.CENTER);
+        Fluttertoast.showToast(msg: 'userNotFound'.tr, gravity: ToastGravity.CENTER);
       } else if (e.code == 'wrong-password') {
-        Fluttertoast.showToast(msg: 'Wrong password provided.', gravity: ToastGravity.CENTER);
+        Fluttertoast.showToast(msg: 'wrongPassword'.tr, gravity: ToastGravity.CENTER);
+      } else if (e.code == 'network-request-failed'){
+        Fluttertoast.showToast(msg: 'apiError'.tr, gravity: ToastGravity.CENTER);
       } else {
-        Fluttertoast.showToast(msg: e.message ?? 'login error', gravity: ToastGravity.CENTER);
+        Fluttertoast.showToast(msg: 'normalError'.tr, gravity: ToastGravity.CENTER);
       }
       Get.log(e.toString(), isError: true);
       rethrow;
     } catch (e) {
+      Fluttertoast.showToast(msg: 'normalError'.tr, gravity: ToastGravity.CENTER);
       Get.log(e.toString(), isError: true);
       rethrow;
     }
