@@ -108,14 +108,14 @@ Future<void> initMain() async {
   try {
     if (Firebase.apps.isEmpty) {
       await Firebase.initializeApp(
-        name: 'PlantIdentifier',
+        // name: 'PlantIdentifier', 写了之后iOS无法初始化
         options: DefaultFirebaseOptions.currentPlatform,
       );
     }
-    FireBaseUtil.initAnalyticsServices();
   } catch (e) {
     Get.log('firebase init error: $e');
   }
+  FireBaseUtil.initAnalyticsServices();
 
   EasyRefreshCustom.setup();
   try {

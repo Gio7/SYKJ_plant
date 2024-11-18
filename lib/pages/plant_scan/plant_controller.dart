@@ -201,7 +201,7 @@ class PlantController extends GetxController {
       Get.dialog(
         barrierDismissible: false,
         NormalDialog(
-          title: 'Device not detected',
+          title: 'deviceNotDetected'.tr,
           confirmText: 'ok',
           onConfirm: () {
             Get.until((route) => Get.currentRoute == '/');
@@ -209,17 +209,7 @@ class PlantController extends GetxController {
         ),
       );
     }
-//  on PlatformException catch (e) {
-//       switch (e.code) {
-//         case 'photo_access_denied':
-//           showPermissionDialog();
-//           break;
-//         default:
-//           Fluttertoast.showToast(msg: e.toString());
-//           break;
-//       }
-//       rethrow;
-//     }
+
     repository.cameraController?.initialize().then((_) {
       repository.isCameraReady.value = true;
       repository.cameraController?.lockCaptureOrientation();

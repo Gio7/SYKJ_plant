@@ -17,8 +17,7 @@ class LightController extends GetxController {
   void onInit() {
     super.onInit();
     if(GetPlatform.isAndroid) {
-      // startAndroidListening();
-      initCamera();
+      startAndroidListening();
     } else {
       initCamera();
     }
@@ -53,7 +52,21 @@ class LightController extends GetxController {
         ResolutionPreset.veryHigh,
         enableAudio: false,
       );
-      await repository.cameraController!.initialize();
+    } catch (e) {
+      Get.log('cameras init error:$e', isError: true);
+      Get.dialog(
+        barrierDismissible: false,
+        NormalDialog(
+          title: 'deviceNotDetected'.tr,
+          confirmText: 'ok',
+          onConfirm: () {
+            Get.until((route) => Get.currentRoute == '/');
+          },
+        ),
+      );
+    }
+    try {
+      await repository.cameraController?.initialize();
       repository.isCameraReady.value = true;
       repository.cameraController!.lockCaptureOrientation();
       repository.cameraController?.startImageStream((CameraImage image) {

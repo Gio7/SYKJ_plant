@@ -217,6 +217,7 @@ class LanguageEnUs {
       "emailAlreadyInUse":"The account already exists for that email.",
       "userNotFound": "No found for that email.",
       "wrongPassword": "Wrong password provided.",
+      "deviceNotDetected": "Device not detected",
     };
   }
 }
