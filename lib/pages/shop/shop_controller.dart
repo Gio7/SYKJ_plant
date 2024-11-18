@@ -63,7 +63,7 @@ class ShopController extends GetxController {
       }
       if (pdRes != null && pdRes.productDetails.isNotEmpty) {
         for (final apiShop in resList) {
-          apiShop.productDetails = pdRes.productDetails.firstWhereOrNull((element) => apiShop.shopId == element.id);
+          apiShop.productDetails = pdRes.productDetails.firstWhereOrNull((element) => apiShop.shopId == element.id && element.rawPrice != 0);
         }
       }
       resList.removeWhere((e) => e.productDetails == null);
