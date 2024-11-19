@@ -5,7 +5,7 @@ import 'package:plant/pages/chat_expert/chat_expert_content.dart';
 import 'package:plant/pages/login/login_page.dart';
 import 'package:plant/pages/my_plants/plants_chose_page.dart';
 import 'package:plant/pages/reminder_edit/reminder_edit_page.dart';
-import 'package:plant/pages/shop/shop_view.dart';
+import 'package:plant/pages/shop/shop_page.dart';
 
 part 'app_routes.dart';
 
@@ -13,7 +13,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: AppRoutes.shop,
-      page: () => ShopPage(),
+      page: () => const ShopPage(),
       middlewares: [AuthMiddleware()],
     ),
     GetPage(

@@ -12,6 +12,12 @@ part 'shop_state.dart';
 class ShopController extends GetxController {
   final ShopState state = ShopState();
 
+  @override
+  onInit() {
+    super.onInit();
+    getShopList();
+  }
+
   Future<void> skipUrl(bool isPrivacy) async {
     try {
       final url = Uri.parse(isPrivacy ? GlobalData.privacyNoticeUrl : GlobalData.termsOfUseUrl);
