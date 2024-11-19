@@ -57,7 +57,28 @@ class PlantSearchResultList extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 12),
-            Expanded(child: HighlightText(text: model.title, keyword: searchText)),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  HighlightText(text: model.title, keyword: searchText),
+                  if (model.scientificName != null && model.scientificName!.isNotEmpty)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4),
+                      child: Text(
+                        model.scientificName!,
+                        style: TextStyle(
+                          color: UIColor.c8E8B8B,
+                          fontSize: 12,
+                          fontWeight: FontWeightExt.medium,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                ],
+              ),
+            ),
             const SizedBox(width: 12),
             Image.asset(
               'images/icon/arrow_right.png',

@@ -70,13 +70,25 @@ class ShopController extends GetxController {
       state.productList = resList;
       if (state.productList == null || state.productList!.isEmpty) {
         state.isInRequest.value = false;
-        Fluttertoast.showToast(msg: 'productNotFound'.tr, toastLength: Toast.LENGTH_LONG, timeInSecForIosWeb: 5, gravity: ToastGravity.CENTER);
+        Fluttertoast.showToast(
+          msg: 'productNotFound'.tr,
+          toastLength: Toast.LENGTH_LONG,
+          timeInSecForIosWeb: 5,
+          gravity: ToastGravity.CENTER,
+        );
         return;
       }
 
       state.currentProduct.value = resList.firstWhereOrNull((e) => (e.selected ?? false)) ?? resList.first;
       state.isInRequest.value = false;
     } catch (e) {
+      state.isInRequest.value = false;
+      Fluttertoast.showToast(
+        msg: 'productNotFound'.tr,
+        toastLength: Toast.LENGTH_LONG,
+        timeInSecForIosWeb: 5,
+        gravity: ToastGravity.CENTER,
+      );
       Get.log(e.toString(), isError: true);
       rethrow;
     }

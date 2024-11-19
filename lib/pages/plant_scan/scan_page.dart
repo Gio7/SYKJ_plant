@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/router/app_pages.dart';
 import 'package:plant/widgets/show_dialog.dart';
 import 'package:plant/pages/plant_scan/plant_controller.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/sdk/scanning_effect/scanning_effect.dart';
 
-import '../shop/shop_view.dart';
 import 'info_diagnose_page.dart';
 import 'info_identify_page.dart';
 
@@ -17,11 +17,21 @@ class ScanPage extends StatelessWidget {
   const ScanPage({super.key});
 
   void _requestNetwork(PlantController ctr, Completer<void> completer) async {
-    if (!(Get.find<UserController>().userInfo.value.isRealVip)) {
+    /* if (!(Get.find<UserController>().userInfo.value.isRealVip)) {
       await Future.delayed(const Duration(milliseconds: 800));
       FireBaseUtil.subscribePageEvent(Get.currentRoute);
       await Get.to(() => ShopPage());
       if (!(Get.find<UserController>().userInfo.value.isRealVip)) {
+        Get.until((route) => Get.currentRoute == '/');
+        return;
+      }
+    } */
+   if (!(Get.find<UserController>().isLogin.value)) {
+      await Future.delayed(const Duration(milliseconds: 800));
+      FireBaseUtil.subscribePageEvent(Get.currentRoute);
+      // await Get.to(() => ShopPage());
+      await Get.toNamed(AppRoutes.login);
+      if (!(Get.find<UserController>().isLogin.value)) {
         Get.until((route) => Get.currentRoute == '/');
         return;
       }

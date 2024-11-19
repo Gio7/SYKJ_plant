@@ -52,6 +52,7 @@ class LightController extends GetxController {
         ResolutionPreset.veryHigh,
         enableAudio: false,
       );
+      repository.isCameraReady.value = true;
     } catch (e) {
       Get.log('cameras init error:$e', isError: true);
       Get.dialog(
@@ -60,15 +61,15 @@ class LightController extends GetxController {
           title: 'deviceNotDetected'.tr,
           confirmText: 'ok',
           onConfirm: () {
-            Get.until((route) => Get.currentRoute == '/');
+            // Get.until((route) => Get.currentRoute == '/');
+            Get.back(closeOverlays: true);
           },
         ),
       );
     }
     try {
       await repository.cameraController?.initialize();
-      repository.isCameraReady.value = true;
-      repository.cameraController!.lockCaptureOrientation();
+      repository.cameraController?.lockCaptureOrientation();
       repository.cameraController?.startImageStream((CameraImage image) {
         repository.lux.value = _calculateLuxFromBrightness(image);
       });

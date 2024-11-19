@@ -15,8 +15,6 @@ import 'package:plant/widgets/nav_bar.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/userinfo_model.dart';
 
-import '../shop/shop_view.dart';
-
 class SetPage extends StatelessWidget {
   const SetPage({super.key, this.hasNavBar = true});
   final bool hasNavBar;
@@ -406,7 +404,7 @@ class SetPage extends StatelessWidget {
     return NormalButton(
       onTap: () {
         FireBaseUtil.subscribePageEvent(Get.currentRoute);
-        Get.to(() => ShopPage());
+        Get.toNamed(AppRoutes.shop);
       },
       text: 'getPro'.tr,
       textColor: UIColor.c00997A,

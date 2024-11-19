@@ -199,12 +199,13 @@ class PlantController extends GetxController {
     } catch (e) {
       Get.log('cameras init error:$e', isError: true);
       Get.dialog(
-        barrierDismissible: false,
+        // barrierDismissible: false,
         NormalDialog(
           title: 'deviceNotDetected'.tr,
           confirmText: 'ok',
           onConfirm: () {
-            Get.until((route) => Get.currentRoute == '/');
+            // Get.until((route) => Get.currentRoute == '/');
+            Get.back(closeOverlays: true);
           },
         ),
       );
