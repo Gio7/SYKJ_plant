@@ -32,7 +32,7 @@ class _DiagnoseRectPageState extends State<DiagnoseRectPage> {
   @override
   void initState() {
     super.initState();
-    _widgetWidth = MediaQuery.of(context).size.width;
+    _widgetWidth = MediaQuery.of(Get.context!).size.width;
     _getImageSize(widget.url);
   }
 

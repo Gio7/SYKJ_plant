@@ -43,13 +43,13 @@ class DiagnoseHistoryController extends GetxController {
     Get.dialog(const LoadingDialog(), barrierDismissible: false);
     try {
       final res = await Request.diagnosisHistoryDetailById(id);
+      Get.back();
       final p = PlantDiagnosisModel.fromJson(res);
       final ctr = Get.put(PlantController(ShootType.diagnose, hasCamera: false));
       ctr.repository.diagnoseInfo = p;
-      Get.back();
 
       await Get.to(() => InfoDiagnosePage(hideBottom: true));
-      ctr.dispose();
+      Get.delete<PlantController>();
     } catch (e) {
       Get.back();
       Get.log(e.toString(), isError: true);

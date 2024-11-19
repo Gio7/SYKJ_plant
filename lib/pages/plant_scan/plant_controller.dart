@@ -14,10 +14,13 @@ import 'package:plant/common/firebase_util.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/plant_diagnosis_model.dart';
 import 'package:plant/models/plant_info_model.dart';
+import 'package:plant/models/userinfo_model.dart';
+import 'package:plant/pages/shop/shop_page.dart';
 import 'package:plant/router/app_pages.dart';
 import 'package:plant/widgets/loading_dialog.dart';
 import 'package:image/image.dart' as img;
 import 'package:plant/widgets/show_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'scan_page.dart';
 import 'widgets/help_example.dart';
@@ -44,6 +47,51 @@ class PlantController extends GetxController {
   onClose() {
     repository.cameraController?.dispose();
     super.onClose();
+    if (shootType == ShootType.diagnose) {
+      _checkCloseCount();
+    }
+  }
+
+  void _checkCloseCount() {
+    //非会员每日首次关闭页面弹出会员购买
+    final userCtr = Get.find<UserController>();
+    if (userCtr.userInfo.value.isRealVip) {
+      SharedPreferences.getInstance().then((prefs) {
+        final timeNow = DateTime.now();
+        final today = DateTime(timeNow.year, timeNow.month, timeNow.day).millisecondsSinceEpoch;
+        int lastCloseDate = prefs.getInt('lastColseDiagnoseTime') ?? 0;
+        int closeCount = prefs.getInt('closeDiagnoseCount') ?? 0;
+
+        if (lastCloseDate == today) {
+          closeCount += 1;
+        } else {
+          closeCount = 1;
+        }
+
+        if (closeCount == 1) {
+          _showShopDialog(userCtr);
+        }
+
+        prefs.setInt('closeDiagnoseCount', closeCount);
+        prefs.setInt('lastColseDiagnoseTime', today);
+      });
+    }
+  }
+
+  void _showShopDialog(UserController userCtr) {
+    if (userCtr.userInfo.value.memberType == MemberType.normal) {
+      Get.to(
+        () => const ShopPage(),
+        fullscreenDialog: true,
+      );
+    } else {
+      Get.to(
+        () => const ShopPage(
+          formPage: ShopFormPage.diagnose,
+        ),
+        fullscreenDialog: true,
+      );
+    }
   }
 
   Future<bool> requestIdentifyInfo(Completer<void> completer) async {
