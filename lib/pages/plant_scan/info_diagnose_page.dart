@@ -4,6 +4,9 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/controllers/user_controller.dart';
+import 'package:plant/models/userinfo_model.dart';
+import 'package:plant/router/app_pages.dart';
 import 'package:plant/widgets/btn.dart';
 import 'package:plant/widgets/loading_dialog.dart';
 import 'package:plant/pages/plant_scan/plant_controller.dart';
@@ -16,6 +19,7 @@ class InfoDiagnosePage extends StatelessWidget {
   final bool hideBottom;
 
   final ctr = Get.find<PlantController>();
+  final userCtr = Get.find<UserController>();
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +31,63 @@ class InfoDiagnosePage extends StatelessWidget {
           _buildBody(),
           if (!hideBottom) _buildBottomBtn(),
           _buildNav(),
+          Obx(() => userCtr.userInfo.value.isRealVip ? Container() : _buildMask()),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMask() {
+    const textStyle = TextStyle(
+      color: UIColor.c8E8B8B,
+      fontSize: 12,
+      fontWeight: FontWeight.w600,
+    );
+    return Positioned(
+      left: 0,
+      right: 0,
+      bottom: 0,
+      height: 400,
+      child: Column(
+        children: [
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Colors.white.withOpacity(0.3), Colors.white],
+                ),
+              ),
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+            color: Colors.white,
+            child: Column(
+              children: [
+                Text(
+                  'learnPlantCareEasily'.tr,
+                  style: textStyle,
+                ),
+                const SizedBox(height: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: NormalButton(
+                    text: userCtr.userInfo.value.memberType == MemberType.normal ? 'startFreeTrial'.tr : 'goProNow'.tr,
+                    textColor: UIColor.white,
+                    bgColor: UIColor.primary,
+                    onTap: () async{
+                      FireBaseUtil.subscribePageEvent(Get.currentRoute);
+                      Get.toNamed(AppRoutes.shop);
+                    },
+                  ),
+                ),
+                SizedBox(height: Get.mediaQuery.padding.bottom),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -104,50 +165,52 @@ class InfoDiagnosePage extends StatelessWidget {
     );
   }
 
-  Positioned _buildBody() {
-    return Positioned(
-      left: 0,
-      right: 0,
-      bottom: 0,
-      top: 0,
-      child: SingleChildScrollView(
-        // physics: const ClampingScrollPhysics(),
-        child: Container(
-          margin: EdgeInsets.only(top: 245 /* 256 */, bottom: 70 + Get.mediaQuery.padding.bottom),
-          padding: const EdgeInsets.only(top: 60, left: 16, right: 16),
-          decoration: const ShapeDecoration(
-            color: UIColor.cF3F4F3,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
+  Widget _buildBody() {
+    return Obx(() {
+      final isRealVip = userCtr.userInfo.value.isRealVip;
+      return Positioned(
+        left: 0,
+        right: 0,
+        bottom: 0,
+        top: 0,
+        child: SingleChildScrollView(
+          physics: isRealVip ? null : const NeverScrollableScrollPhysics(),
+          child: Container(
+            margin: EdgeInsets.only(top: 245 /* 256 */, bottom: 70 + Get.mediaQuery.padding.bottom),
+            padding: const EdgeInsets.only(top: 60, left: 16, right: 16),
+            decoration: const ShapeDecoration(
+              color: UIColor.cF3F4F3,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
               ),
             ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(
-                      top: 60,
-                      left: 20,
-                      right: 20,
-                      bottom: 24,
-                    ),
-                    decoration: ShapeDecoration(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                    ),
-                    child: Column(
-                      children: [
-                        Text.rich(
-                          TextSpan(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(
+                        top: 60,
+                        left: 20,
+                        right: 20,
+                        bottom: 24,
+                      ),
+                      decoration: ShapeDecoration(
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              TextSpan(
-                                text: 'yourPlantIs'.tr,
+                              Text(
+                                "${'yourPlantIs'.tr} ",
                                 style: const TextStyle(
                                   color: UIColor.c15221D,
                                   fontSize: 14,
@@ -155,71 +218,79 @@ class InfoDiagnosePage extends StatelessWidget {
                                   decoration: TextDecoration.none,
                                 ),
                               ),
-                              TextSpan(
-                                text: ' ${(ctr.repository.diagnoseInfo?.plant?.healthy ?? false) ? 'healthy'.tr : 'notHealthy'.tr}',
-                                style: TextStyle(
-                                  color: (ctr.repository.diagnoseInfo?.plant?.healthy ?? false) ? UIColor.primary : UIColor.cFD5050,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  decoration: TextDecoration.none,
+                              Container(
+                                foregroundDecoration: ShapeDecoration(
+                                  color: isRealVip ? UIColor.transparent : const Color(0xFFDFF6EB),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                                ),
+                                child: Text(
+                                  (ctr.repository.diagnoseInfo?.plant?.healthy ?? false) ? 'healthy'.tr : 'notHealthy'.tr,
+                                  style: TextStyle(
+                                    color: (ctr.repository.diagnoseInfo?.plant?.healthy ?? false) ? UIColor.primary : UIColor.cFD5050,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    decoration: TextDecoration.none,
+                                  ),
                                 ),
                               ),
                             ],
                           ),
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'diagnosisTips'.tr,
-                          style: TextStyle(
-                            color: UIColor.c8E8B8B,
-                            fontSize: 12,
-                            fontWeight: FontWeightExt.medium,
-                            decoration: TextDecoration.none,
+                          const SizedBox(height: 16),
+                          Text(
+                            'diagnosisTips'.tr,
+                            style: TextStyle(
+                              color: UIColor.c8E8B8B,
+                              fontSize: 12,
+                              fontWeight: FontWeightExt.medium,
+                              decoration: TextDecoration.none,
+                            ),
                           ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      top: -45,
+                      height: 90,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Image.asset(
+                          (ctr.repository.diagnoseInfo?.plant?.healthy ?? false) ? 'images/icon/detail_head_health.png' : 'images/icon/detail_head.png',
                         ),
-                      ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 24),
+                for (final item in ctr.repository.diagnoseInfo?.plant?.diseaseDetail ?? []) ...[
+                  Text(
+                    item.displayTitle,
+                    style: const TextStyle(
+                      color: UIColor.c15221D,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      decoration: TextDecoration.none,
                     ),
                   ),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    top: -45,
-                    height: 90,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Image.asset('images/icon/detail_head.png'),
+                  const SizedBox(height: 12),
+                  Text(
+                    item.treatmentPlan,
+                    style: const TextStyle(
+                      color: UIColor.c15221D,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      decoration: TextDecoration.none,
                     ),
                   ),
+                  ..._buildArticle(),
                 ],
-              ),
-              const SizedBox(height: 24),
-              for (final item in ctr.repository.diagnoseInfo?.plant?.diseaseDetail ?? []) ...[
-                Text(
-                  item.displayTitle,
-                  style: const TextStyle(
-                    color: UIColor.c15221D,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    decoration: TextDecoration.none,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  item.treatmentPlan,
-                  style: const TextStyle(
-                    color: UIColor.c15221D,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    decoration: TextDecoration.none,
-                  ),
-                ),
-                ..._buildArticle(),
               ],
-            ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   List<Widget> _buildArticle() {

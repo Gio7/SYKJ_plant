@@ -1,6 +1,8 @@
+import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/models/member_product_model.dart';
 import 'package:plant/pages/shop/shop_controller.dart';
 import 'package:plant/widgets/btn.dart';
 import 'package:plant/widgets/loading_dialog.dart';
@@ -11,144 +13,146 @@ class ShopNormal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: 6),
-                Image.asset('images/icon/shop_head.png', height: 142),
-                const SizedBox(height: 12),
-                Text(
-                  'getUnlimitedAccess'.tr,
-                  style: const TextStyle(
-                    color: UIColor.c15221D,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                const SizedBox(height: 24),
-                UnconstrainedBox(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      buildRow(
-                        'images/icon/detail_characteristics.png',
-                        'unlimitedPlantIdentify'.tr,
+    return Obx(() {
+      List<String> tips = [
+        'unlmitedIdengtify'.tr,
+        'enhanceFaster'.tr,
+        'botanistSupport'.tr,
+        'remindersForCare'.tr,
+      ];
+      if (controller.state.currentProduct.value.isFreeTrial) {
+        tips.insert(0, 'vipFree'.tr);
+      }
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Image.asset('images/icon/shop_head.png', height: 142),
+                  const SizedBox(height: 18),
+                  Container(
+                    decoration: ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                      const SizedBox(height: 14),
-                      buildRow(
-                        'images/icon/shop_diagnosis.png',
-                        'autoDiagnosisOfPlantProblem'.tr,
+                      color: UIColor.transparent60,
+                    ),
+                    child: Container(
+                      decoration: DottedDecoration(
+                        shape: Shape.box,
+                        color: UIColor.cAEE9CD,
+                        strokeWidth: 1,
+                        dash: const <int>[2, 2],
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                    ],
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      width: double.infinity,
+                      child: UnconstrainedBox(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            for (int i = 0; i < tips.length; i++)
+                              Padding(
+                                padding: EdgeInsets.only(top: i == 0 ? 0 : 16),
+                                child: buildRow(tips[i]),
+                              )
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 32),
-                Obx(
-                  () => controller.state.isInRequest.value
+                  const SizedBox(height: 24),
+                  controller.state.isInRequest.value
                       ? const LoadingDialog()
                       : Column(
                           children: controller.state.productList!
                               .map(
                                 (e) => buildShopItem(
                                   isSelected: controller.state.currentProduct.value == e,
-                                  title: 'freeTrial'.tr,
-                                  amount: e.unitStr,
-                                  onTap: () => controller.selectProduct(e),
+                                  e: e,
                                 ),
                               )
                               .toList(),
                         ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-        SizedBox(
-          width: double.infinity,
-          child: NormalButton(
-            text: 'subscribe'.tr,
-            textColor: UIColor.white,
-            bgColor: UIColor.primary,
-            onTap: () => controller.subscribe(),
+          SizedBox(
+            width: double.infinity,
+            child: controller.state.currentProduct.value.isFreeTrial
+                ? _buildBtn()
+                : NormalButton(
+                    text: 'continue'.tr,
+                    textFontSize: 16,
+                    textColor: UIColor.white,
+                    bgColor: UIColor.primary,
+                    onTap: () => controller.subscribe(),
+                  ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Text(
-            'subscribeTips'.tr,
-            style: TextStyle(
-              color: UIColor.cBDBDBD,
-              fontSize: 12,
-              fontWeight: FontWeightExt.medium,
-            ),
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(bottom: 16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              buildTextBtn(
-                'restore'.tr,
-                () => controller.restore(),
-              ),
-              buildLine(),
-              buildTextBtn(
-                'termsOfUse'.tr,
-                () => controller.skipUrl(false),
-              ),
-              buildLine(),
-              buildTextBtn(
-                'privacyPolicy'.tr,
-                () => controller.skipUrl(true),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
+          const SizedBox(height: 16),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(vertical: 16),
+          //   child: Text(
+          //     'subscribeTips'.tr,
+          //     style: TextStyle(
+          //       color: UIColor.cBDBDBD,
+          //       fontSize: 12,
+          //       fontWeight: FontWeightExt.medium,
+          //     ),
+          //   ),
+          // ),
+        ],
+      );
+    });
   }
 
-  Widget buildTextBtn(String text, Function()? onTap) {
+  Widget _buildBtn() {
     return GestureDetector(
-      onTap: onTap,
-      child: Text(
-        text,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: UIColor.cBDBDBD,
-          fontSize: 10,
-          fontWeight: FontWeightExt.medium,
-          // decoration: TextDecoration.underline,
-          decorationColor: UIColor.cBDBDBD,
+      onTap: () => controller.subscribe(),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        decoration: BoxDecoration(
+          color: UIColor.primary,
+          borderRadius: BorderRadius.circular(256),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'startFreeTrial'.tr,
+              style: const TextStyle(
+                color: UIColor.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                decoration: TextDecoration.none,
+              ),
+            ),
+            Text(
+              'cancelAnytime'.tr,
+              style: const TextStyle(
+                color: UIColor.transparent60,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                decoration: TextDecoration.none,
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Container buildLine() {
-    return Container(
-      height: 10,
-      margin: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: ShapeDecoration(
-        color: UIColor.transparent40,
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(width: 0.5, color: UIColor.cBDBDBD),
-          borderRadius: BorderRadius.circular(0.5),
-        ),
-      ),
-    );
-  }
-
-  Row buildRow(String icon, String text) {
+  Row buildRow(String text) {
     return Row(
       children: [
-        Image.asset(icon, height: 24),
+        Image.asset('images/icon/check.png', height: 18),
         const SizedBox(width: 8),
         Text(
           text,
@@ -164,48 +168,25 @@ class ShopNormal extends StatelessWidget {
 
   Widget buildShopItem({
     required bool isSelected,
-    required String title,
-    required String amount,
-    required Function()? onTap,
+    required MemberProductModel e,
   }) {
     Color borderColor;
     Color titleColor;
     Color amountColor;
     String rightIcon;
-    Widget? selectedTag;
     if (isSelected) {
       borderColor = UIColor.c40BD95;
-      titleColor = UIColor.cD8FE5C;
-      amountColor = UIColor.white;
+      titleColor = UIColor.white;
+      amountColor = UIColor.transparent70;
       rightIcon = 'images/icon/check_circle.png';
-      selectedTag = Container(
-        height: 22,
-        margin: const EdgeInsets.only(left: 16),
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        decoration: ShapeDecoration(
-          color: UIColor.transparent40,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        alignment: Alignment.center,
-        child: Text(
-          'autoRenewable'.tr,
-          style: const TextStyle(
-            color: UIColor.c00997A,
-            fontSize: 10,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      );
     } else {
       borderColor = UIColor.cE5E5E5;
-      titleColor = UIColor.c8E8B8B;
-      amountColor = UIColor.c15221D;
+      titleColor = UIColor.c15221D;
+      amountColor = UIColor.c8E8B8B;
       rightIcon = 'images/icon/unchecked_circle.png';
     }
     return GestureDetector(
-      onTap: onTap,
+      onTap: () => controller.selectProduct(e),
       child: Container(
         margin: const EdgeInsets.only(bottom: 16),
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -234,26 +215,21 @@ class ShopNormal extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 4),
                     child: Text(
-                      title,
+                      e.isFreeTrial ? 'newFreeTrial'.tr : e.unitSingleStr,
                       style: TextStyle(
                         color: titleColor,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        amount,
-                        style: TextStyle(
-                          color: amountColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      if (selectedTag != null) selectedTag,
-                    ],
+                  Text(
+                    e.isFreeTrial ? "${'then'.tr} ${e.unitStr}" : e.unitStr,
+                    style: TextStyle(
+                      color: amountColor,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ],
               ),

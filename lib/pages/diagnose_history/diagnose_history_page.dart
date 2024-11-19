@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/pages/diagnose_history/diagnose_history_controller.dart';
+import 'package:plant/pages/shop/shop_page.dart';
+import 'package:plant/widgets/btn.dart';
 import 'package:plant/widgets/empty_widget.dart';
 import 'package:plant/widgets/nav_bar.dart';
 import 'package:plant/widgets/page_bg.dart';
@@ -18,6 +21,7 @@ class DiagnoseHistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(DiagnoseHistoryController());
     final repository = controller.repository;
+
     return PageBG(
       child: Scaffold(
         backgroundColor: UIColor.transparent,
@@ -30,14 +34,39 @@ class DiagnoseHistoryPage extends StatelessWidget {
               width: double.infinity,
               decoration: const BoxDecoration(color: UIColor.transparentPrimary40),
               alignment: Alignment.center,
-              child: Text(
-                'diagnosisHistoryListTips'.tr,
-                style: TextStyle(
-                  color: UIColor.c40BD95,
-                  fontSize: 12,
-                  fontWeight: FontWeightExt.medium,
-                ),
-              ),
+              child: Obx(() {
+                final userCtr = Get.find<UserController>();
+                return Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        userCtr.userInfo.value.isRealVip ? 'diagnosisHistoryListTips'.tr : 'aboutToExpire'.tr,
+                        style: TextStyle(
+                          color: UIColor.c40BD95,
+                          fontSize: 12,
+                          fontWeight: FontWeightExt.medium,
+                        ),
+                      ),
+                    ),
+                    if (!userCtr.userInfo.value.isRealVip)
+                      Padding(
+                        padding: const EdgeInsets.only(left: 12),
+                        child: NormalButton(
+                          text: 'save'.tr,
+                          height: 28,
+                          onTap: () {
+                            Get.to(
+                              () => const ShopPage(
+                                formPage: ShopFormPage.history,
+                              ),
+                              fullscreenDialog: true,
+                            );
+                          },
+                        ),
+                      ),
+                  ],
+                );
+              }),
             ),
             Obx(
               () => Expanded(
@@ -53,7 +82,7 @@ class DiagnoseHistoryPage extends StatelessWidget {
                         child: GroupedListView(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           separator: const SizedBox(height: 16),
-                          groupItemBuilder: (_, model,__,groupEnd) {
+                          groupItemBuilder: (_, model, __, groupEnd) {
                             return Padding(
                               padding: EdgeInsets.only(bottom: groupEnd ? 4 : 0),
                               child: _buildItem(model, controller),

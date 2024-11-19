@@ -22,6 +22,8 @@ class MemberProductModel with EquatableMixin {
   final int? status;
   ProductDetails? productDetails;
 
+  final bool isFreeTrial;
+
   MemberProductModel({
     this.createBy,
     this.createTime,
@@ -40,9 +42,10 @@ class MemberProductModel with EquatableMixin {
     this.shopDescribe,
     this.selected,
     this.status,
+    this.isFreeTrial = false,
   });
 
-  factory MemberProductModel.fromJson(Map<String, dynamic> json) => MemberProductModel(
+  factory MemberProductModel.fromJson(Map<String, dynamic> json, {bool isTrial = false}) => MemberProductModel(
         createBy: json["createBy"],
         createTime: json["createTime"],
         updateBy: json["updateBy"],
@@ -60,6 +63,7 @@ class MemberProductModel with EquatableMixin {
         shopDescribe: json["shopDescribe"],
         selected: json["selected"],
         status: json["status"],
+        isFreeTrial: json["trial"],
       );
 
   @override
@@ -77,5 +81,15 @@ class MemberProductModel with EquatableMixin {
       return '$price/$unit';
     }
     return price;
+  }
+
+    String get unitSingleStr {
+    String unit = '';
+    if (productDetails?.id == 'plant_sub_vip_plan_weekly' || productDetails?.id == 'sub_vip_plan_weekly' || productDetails?.id == 'vip_plan_weekly_sub') {
+      unit = 'weeks'.tr;
+    } else if (productDetails?.id == 'sub_vip_plan_yearly' || productDetails?.id == 'plant_sub_vip_plan_yearly' || productDetails?.id == 'vip_plan_yearly_sub') {
+      unit = 'yearly'.tr;
+    }
+    return unit;
   }
 }

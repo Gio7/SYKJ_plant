@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
+import 'package:plant/common/ui_color.dart';
 
 class NormalButton extends StatelessWidget {
   const NormalButton({
     super.key,
     this.onTap,
     required this.text,
-    required this.textColor,
-    required this.bgColor,
+    this.textFontSize = 14,
+    this.textColor = UIColor.white,
+    this.bgColor = UIColor.primary,
     this.bgColors,
     this.icon,
     this.iconRight,
@@ -14,11 +16,13 @@ class NormalButton extends StatelessWidget {
     this.iconWidget,
     this.borderRadius,
     this.paddingHorizontal = 16,
+    this.height = 44,
   });
 
   final List<Color>? bgColors;
   final Color bgColor;
   final String text;
+  final double textFontSize;
   final Color textColor;
   final String? icon;
   final String? iconRight;
@@ -27,13 +31,14 @@ class NormalButton extends StatelessWidget {
   final Function()? onTap;
   final double? borderRadius;
   final double paddingHorizontal;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 48,
+        height: height,
         width: width,
         padding: EdgeInsets.symmetric(horizontal: paddingHorizontal),
         decoration: BoxDecoration(
@@ -60,7 +65,7 @@ class NormalButton extends StatelessWidget {
               text,
               style: TextStyle(
                 color: textColor,
-                fontSize: 14,
+                fontSize: textFontSize,
                 fontWeight: FontWeight.w600,
                 decoration: TextDecoration.none,
               ),

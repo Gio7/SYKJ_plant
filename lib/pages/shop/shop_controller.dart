@@ -4,7 +4,9 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:plant/api/request.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/global_data.dart';
+import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/member_product_model.dart';
+import 'package:plant/models/userinfo_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 part 'shop_state.dart';
@@ -60,7 +62,8 @@ class ShopController extends GetxController {
     final res = await Request.getShopList('0');
 
     try {
-      final resList = res.map((e) => MemberProductModel.fromJson(e)).toList();
+      final isTrial = Get.find<UserController>().userInfo.value.memberType == MemberType.normal;
+      final resList = res.map((e) => MemberProductModel.fromJson(e, isTrial: isTrial)).toList();
       resList.removeWhere((e) => e.shopId == null);
       final Set<String> ids = resList.map((e) => e.shopId!).toSet();
       ProductDetailsResponse? pdRes;

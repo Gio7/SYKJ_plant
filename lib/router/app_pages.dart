@@ -14,6 +14,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.shop,
       page: () => const ShopPage(),
+      fullscreenDialog: true,
       middlewares: [AuthMiddleware()],
     ),
     GetPage(

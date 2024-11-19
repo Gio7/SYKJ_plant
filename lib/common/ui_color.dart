@@ -8,6 +8,7 @@ class UIColor {
   static const Color transparent = Color(0x00FFFFFF);
   static const Color transparent40 = Color(0x66FFFFFF);
   static const Color transparent60 = Color(0x99FFFFFF);
+  static const Color transparent70 = Color(0xB2FFFFFF);
   static const Color transparentPrimary40 = Color(0x66AEE9CD);
   static const Color transparentPrimary70 = Color(0xB240BD95);
   static const Color transparentPrimary20 = Color(0x33AEE9CD);
