@@ -2,7 +2,8 @@
   "project_info": {
     "project_number": "631136567042",
     "project_id": "plant-identifier-android",
-    "storage_bucket": "plant-identifier-android.appspot.com"
+    "storage_bucket": "plant-identifier-android.appspot.com",
+    "google_app_id": "1:631136567042:android:5cd91b8b015d65fc92cc1b"
   },
   "client": [
     {

@@ -108,7 +108,6 @@ Future<void> initMain() async {
   try {
     if (Firebase.apps.isEmpty) {
       await Firebase.initializeApp(
-        // name: 'PlantIdentifier', 写了之后iOS无法初始化
         options: DefaultFirebaseOptions.currentPlatform,
       );
     }
