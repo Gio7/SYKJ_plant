@@ -87,7 +87,7 @@ class MemberProductModel with EquatableMixin {
   String get unitSingleStr {
     String unit = '';
     if (productDetails?.id == 'plant_sub_vip_plan_weekly' || productDetails?.id == 'sub_vip_plan_weekly' || productDetails?.id == 'vip_plan_weekly_sub') {
-      unit = 'weeks'.tr;
+      unit = 'weekly'.tr;
     } else if (productDetails?.id == 'sub_vip_plan_yearly' || productDetails?.id == 'plant_sub_vip_plan_yearly' || productDetails?.id == 'vip_plan_yearly_sub') {
       unit = 'yearly'.tr;
     }

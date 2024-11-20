@@ -42,7 +42,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 items: [
                   BottomNavigationBarItem(
                     tooltip: '',
-                    label: 'home'.tr,
+                    label: 'tabHome'.tr,
                     icon: Image.asset(
                       'images/tabbar/home.png',
                       width: 28,
@@ -56,7 +56,7 @@ class CustomBottomNavBar extends StatelessWidget {
                   ),
                   BottomNavigationBarItem(
                     tooltip: '',
-                    label: 'diagnose'.tr,
+                    label: 'tabDiagnose'.tr,
                     icon: Image.asset(
                       'images/tabbar/diagnose.png',
                       width: 28,
@@ -71,7 +71,7 @@ class CustomBottomNavBar extends StatelessWidget {
                   const BottomNavigationBarItem(icon: SizedBox(), label: ''),
                   BottomNavigationBarItem(
                     tooltip: '',
-                    label: "askExpert".tr,
+                    label: "tabAskExpert".tr,
                     icon: Image.asset(
                       'images/tabbar/chat.png',
                       width: 28,
@@ -85,7 +85,7 @@ class CustomBottomNavBar extends StatelessWidget {
                   ),
                   BottomNavigationBarItem(
                     tooltip: '',
-                    label: "myPlants".tr,
+                    label: "tabMyPlants".tr,
                     icon: Image.asset(
                       'images/tabbar/my_plant.png',
                       width: 28,
