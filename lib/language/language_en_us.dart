@@ -233,11 +233,11 @@ class LanguageEnUs {
       "learnPlantCareEasily": "Learn plant care easily with Plant Identifier!",
       "goProNow": "Go Pro Now",
       "aboutToExpire" : "Your photo records are about to expire.Would you like to keep them?",
-      "startYourFreeTrial": "Start your 3-day free trial Then 999 per week, cancel anytim.",
+      "startYourFreeTrial": "Start your 3-day free trial Then 999 per year, cancel anytim.",
       "historyVipTips1": "Due to the high cost of data maintenance, photos in the Snap History for free users can only be stored for 30 days.",
       "historyVipTips2": "You currently have 0 recognition results in your photo records that are about to be cleared. Upgrade to the Pro version to retain them for 12 months.",
       "benefitsPro" : "Other benefits of the Pro version",
-      "onlyWeekCancelAnytime": "Only 999/week, cancel anytime",
+      "onlyCancelAnytime": "Only 999/year, cancel anytime",
     };
   }
 }

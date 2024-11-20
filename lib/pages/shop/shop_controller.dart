@@ -30,12 +30,12 @@ class ShopController extends GetxController {
   Future<void> getShopData() async {
     await getShopList();
     if (formPage == ShopFormPage.diagnose || formPage == ShopFormPage.main || formPage == ShopFormPage.history) {
-      state.currentProduct.value = state.productList?.firstWhereOrNull((e) => e.memberType == 2);
+      state.currentProduct.value = state.productList?.firstWhereOrNull((e) => e.memberType == 3);
 
       if (state.currentProduct.value != null) {
         String text = "startYourFreeTrial".tr;
         if (formPage == ShopFormPage.history) {
-          text = "onlyWeekCancelAnytime".tr;
+          text = "onlyCancelAnytime".tr;
 
           final count = Get.find<DiagnoseHistoryController>().repository.total;
           String historyVipTips2 = "historyVipTips2".tr;
