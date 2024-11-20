@@ -72,9 +72,6 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
 
   void _showShopDialog(UserController userCtr) {
     if (userCtr.userInfo.value.memberType == MemberType.normal) {
-      Get.toNamed(AppRoutes.shop);
-      FireBaseUtil.membershipPageEvent('main');
-    } else {
       Get.to(
         () => const ShopPage(
           formPage: ShopFormPage.main,
@@ -82,6 +79,9 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         fullscreenDialog: true,
       );
       FireBaseUtil.logEvent(EventName.openAppFreePage);
+    } else {
+      Get.toNamed(AppRoutes.shop);
+      FireBaseUtil.membershipPageEvent('main');
     }
   }
 

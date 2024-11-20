@@ -80,9 +80,6 @@ class PlantController extends GetxController {
 
   void _showShopDialog(UserController userCtr) {
     if (userCtr.userInfo.value.memberType == MemberType.normal) {
-      Get.toNamed(AppRoutes.shop);
-      FireBaseUtil.membershipPageEvent(Get.currentRoute);
-    } else {
       Get.to(
         () => const ShopPage(
           formPage: ShopFormPage.diagnose,
@@ -90,6 +87,9 @@ class PlantController extends GetxController {
         fullscreenDialog: true,
       );
       FireBaseUtil.logEvent(EventName.resultCloseFreePage);
+    } else {
+      Get.toNamed(AppRoutes.shop);
+      FireBaseUtil.membershipPageEvent(Get.currentRoute);
     }
   }
 
