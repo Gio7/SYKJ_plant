@@ -147,6 +147,7 @@ class PlantsPage extends StatelessWidget {
               onTap: () {
                 Get.back();
                 _onSetReminder(null, model);
+                FireBaseUtil.logEvent(EventName.plantEditReminder);
               },
               text: 'setReminder'.tr,
               textColor: UIColor.c15221D,

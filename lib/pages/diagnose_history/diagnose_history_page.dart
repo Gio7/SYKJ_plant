@@ -3,6 +3,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:grouped_list/grouped_list.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/pages/diagnose_history/diagnose_history_controller.dart';
@@ -61,6 +62,7 @@ class DiagnoseHistoryPage extends StatelessWidget {
                               ),
                               fullscreenDialog: true,
                             );
+                            FireBaseUtil.logEvent(EventName.snapHistorySaveBtn);
                           },
                         ),
                       ),

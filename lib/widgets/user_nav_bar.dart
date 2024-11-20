@@ -24,7 +24,7 @@ class UserNavBar extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   if (Get.find<UserController>().isLogin.value) {
-                    FireBaseUtil.subscribePageEvent(Get.currentRoute);
+                    FireBaseUtil.membershipPageEvent(Get.currentRoute);
                   } else {
                     FireBaseUtil.loginPageEvent(Get.currentRoute);
                   }

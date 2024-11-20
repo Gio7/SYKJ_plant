@@ -1,6 +1,7 @@
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/router/app_pages.dart';
 import 'package:plant/widgets/btn.dart';
@@ -124,5 +125,6 @@ class RemindersPage extends StatelessWidget {
 
   void _onAddTap() {
     Get.toNamed(AppRoutes.plantsChose);
+    FireBaseUtil.logEvent(EventName.addReminder);
   }
 }

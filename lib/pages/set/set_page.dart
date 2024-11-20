@@ -403,8 +403,8 @@ class SetPage extends StatelessWidget {
     }
     return NormalButton(
       onTap: () {
-        FireBaseUtil.subscribePageEvent(Get.currentRoute);
         Get.toNamed(AppRoutes.shop);
+        FireBaseUtil.membershipPageEvent(Get.currentRoute);
       },
       text: 'getPro'.tr,
       textColor: UIColor.c00997A,

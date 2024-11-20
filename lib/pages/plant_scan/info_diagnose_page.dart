@@ -79,8 +79,8 @@ class InfoDiagnosePage extends StatelessWidget {
                     textColor: UIColor.white,
                     bgColor: UIColor.primary,
                     onTap: () async{
-                      FireBaseUtil.subscribePageEvent(Get.currentRoute);
                       Get.toNamed(AppRoutes.shop);
+                      FireBaseUtil.membershipPageEvent(Get.currentRoute);
                     },
                   ),
                 ),

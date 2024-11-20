@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/models/plant_model.dart';
 
@@ -129,6 +130,7 @@ class PlantItemReminder extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         onSetReminder?.call(null);
+        FireBaseUtil.logEvent(EventName.plantAddReminder);
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,

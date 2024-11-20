@@ -109,7 +109,7 @@ class ShopFromMain extends StatelessWidget {
           child: Obx(() {
             if (controller.state.priceIntroductionText.value.isNotEmpty) {
               return NormalButton(
-                text: 'continue'.tr,
+                text: 'startFreeTrial'.tr,
                 textFontSize: 16,
                 textColor: UIColor.white,
                 bgColor: UIColor.primary,

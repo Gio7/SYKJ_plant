@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:plant/api/db_server.dart';
 import 'package:plant/api/request.dart';
+import 'package:plant/common/firebase_util.dart';
 
 class ChatExpertController extends GetxController {
   RxList<Map<String, dynamic>> chatList = <Map<String, dynamic>>[].obs;
@@ -24,6 +25,7 @@ class ChatExpertController extends GetxController {
   }
 
   Future<void> insertChat(String content, bool isSelf) async {
+    FireBaseUtil.logEvent(EventName.textSendBtn);
     try {
       final map = await DbServer.insertChatData(content, isSelf: isSelf);
       chatList.insert(0, map);

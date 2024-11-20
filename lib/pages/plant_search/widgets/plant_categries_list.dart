@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/controllers/main_controller.dart';
 import 'package:plant/pages/plant_search/plant_search_controller.dart';
@@ -65,6 +66,7 @@ class PlantCategriesWidget extends StatelessWidget {
           ctr.repository.categoryId = item.categoryId;
           ctr.didSearch('', categoryId: item.categoryId, type: 0);
         } else {
+          FireBaseUtil.logEvent(EventName.homeCategories);
           await Get.to(() => SearchPage(isActiveSearch: true, categoryId: item.categoryId));
         }
       },

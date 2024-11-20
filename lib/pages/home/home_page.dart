@@ -118,6 +118,7 @@ class HomePage extends StatelessWidget {
                       final c = Get.find<MyPlantsController>();
                       c.onSegmentChange(c.repository.customSegmentedValues[1]);
                     }
+                    FireBaseUtil.logEvent(EventName.homeOpenReminder);
                   },
                 ),
                 const SizedBox(width: 12),
@@ -128,6 +129,7 @@ class HomePage extends StatelessWidget {
                   [const Color(0xFFF8EFD9), const Color(0xFFE9DFAE)],
                   () {
                     Get.to(() => LightPage());
+                    FireBaseUtil.logEvent(EventName.homeOpenLight);
                   },
                 ),
               ],

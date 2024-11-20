@@ -28,8 +28,7 @@ class ScanPage extends StatelessWidget {
     } */
    if (!(Get.find<UserController>().isLogin.value)) {
       await Future.delayed(const Duration(milliseconds: 800));
-      FireBaseUtil.subscribePageEvent(Get.currentRoute);
-      // await Get.to(() => ShopPage());
+      FireBaseUtil.loginPageEvent(Get.currentRoute);
       await Get.toNamed(AppRoutes.login);
       if (!(Get.find<UserController>().isLogin.value)) {
         Get.until((route) => Get.currentRoute == '/');

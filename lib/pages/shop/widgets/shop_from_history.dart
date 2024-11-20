@@ -2,6 +2,8 @@ import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/controllers/user_controller.dart';
+import 'package:plant/models/userinfo_model.dart';
 import 'package:plant/pages/shop/shop_controller.dart';
 import 'package:plant/widgets/btn.dart';
 import 'package:plant/widgets/loading_dialog.dart';
@@ -18,6 +20,10 @@ class ShopFromHistory extends StatelessWidget {
       'botanistSupport'.tr,
       'remindersForCare'.tr,
     ];
+    final memberType = Get.find<UserController>().userInfo.value.memberType;
+    if (memberType == MemberType.normal) {
+      tips.insert(0, 'vipFree'.tr);
+    }
     return Column(
       children: [
         Expanded(
@@ -126,9 +132,13 @@ class ShopFromHistory extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.symmetric(vertical: 16),
           child: Obx(() {
-            if (controller.state.priceIntroductionText.value.isNotEmpty) {
+            String text = 'goProNow'.tr;
+            if (memberType == MemberType.normal) {
+              text = 'startFreeTrial'.tr;
+            }
+            if (controller.state.historyVipTips2.value.isNotEmpty) {
               return NormalButton(
-                text: 'goProNow'.tr,
+                text: text,
                 textFontSize: 16,
                 textColor: UIColor.white,
                 bgColor: UIColor.primary,

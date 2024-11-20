@@ -31,11 +31,11 @@ class FireBaseUtil {
     );
   }
 
-  /// 调起支付页面
-  static void subscribePageEvent(String fromPage) {
+  /// 展示订阅页面
+  static void membershipPageEvent(String fromPage) {
     _analytics?.logEvent(
-      name: EventName.subscribePage,
-      parameters: {'from_event': fromPage},
+      name: EventName.membershipPage,
+      parameters: {'page_from': fromPage},
     );
   }
 
@@ -47,7 +47,7 @@ class FireBaseUtil {
     );
   }
 
-  /// 创建订阅 weekly，year 
+  /// 创建订阅 weekly，year
   static void subscribeCreate(String? id) {
     _analytics?.logEvent(
       name: EventName.subscribeSelect,
@@ -55,7 +55,7 @@ class FireBaseUtil {
     );
   }
 
-  /// 订阅成功 weekly，year 
+  /// 订阅成功 weekly，year
   static void subscribeSuccess(String? id) {
     _analytics?.logEvent(
       name: EventName.subscribeSuccess,
@@ -135,9 +135,6 @@ class EventName {
   /// 首页点击底部拍照icon
   static const String homeShootBttom = 'home_shoot_buttom';
 
-  /// 调起支付页面
-  static const String subscribePage = 'subscribe_page';
-
   /// 用户发起会员订阅
   static const String memberPurchaseSelect = 'member_purchase_select';
 
@@ -197,4 +194,61 @@ class EventName {
 
   /// 诊断记录点击
   static const String diagnoseHistory = 'diagnose_history';
+
+  /// 首页打开提醒
+  static const String homeOpenReminder = 'home_open_reminder';
+
+  /// 提醒列表添加新reminder按钮
+  static const String addReminder = 'add_reminder';
+
+  /// 具体植物底部添加reminder按钮
+  static const String plantAddReminder = 'plant_add_reminder';
+
+  /// 具体植物底部编辑reminder按钮
+  static const String plantEditReminder = 'plant_edit_reminder';
+
+  /// 首页打开光度计
+  static const String homeOpenLight = 'home_open_light';
+
+  /// 通过首页点击分类
+  static const String homeCategories = 'home_categories';
+
+  /// 首页点击搜索框
+  static const String homeSearch = 'home_search';
+
+  /// 会员订阅页面
+  static const String membershipPage = 'menbership_page';
+
+  /// 会员订阅页面点击调起支付按钮
+  static const String subscribeMembershipBtn = 'subscribe_menbership_btn';
+
+  /// 启动app弹起试用页面
+  static const String openAppFreePage = 'open_app_free_page';
+
+  /// 启动app页面点击调起支付按钮
+  static const String openAppFreePageBtn = 'open_app_free_page_btn';
+
+  /// 每日首日识别结果关闭弹起试用页面
+  static const String resultCloseFreePage = 'result_close_free_page';
+
+  /// 识别结果试用页面点击调起支付按钮
+  static const String resultCloseFreePageBtn = 'result_close_free_page_btn';
+
+  /// 非会员诊断结果页面点击底部按钮
+  static const String diagnosisPurchaseBtn = 'diagnosis_perchase_btn';
+
+  /// 拍照历史点击save按钮
+  static const String snapHistorySaveBtn = 'snap_history_save_btn';
+
+  /// 拍照历史save说明页面底部升级按钮
+  static const String savePagePurchaseBtn = 'save_page_perchase_btn';
+
+  /// 导航跳转询问专家页面
+  static const String gptPage = 'gpt_page';
+
+  /// 专家页面发送文字按钮
+  static const String textSendBtn = 'text_send_btn';
+
+  /// 点击诊断历史图标
+  static const String diagnosisHistoryIcon = 'diagnosis_history_icon';
 }

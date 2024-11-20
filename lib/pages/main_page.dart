@@ -7,6 +7,7 @@ import 'package:plant/models/userinfo_model.dart';
 import 'package:plant/pages/chat_expert/chat_expert_page.dart';
 import 'package:plant/pages/diagnose_home/diagnose_home_page.dart';
 import 'package:plant/pages/shop/shop_page.dart';
+import 'package:plant/router/app_pages.dart';
 import 'package:plant/widgets/custom_bottom_nav_bar.dart';
 import 'package:plant/widgets/page_bg.dart';
 import 'package:plant/controllers/main_controller.dart';
@@ -71,10 +72,8 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
 
   void _showShopDialog(UserController userCtr) {
     if (userCtr.userInfo.value.memberType == MemberType.normal) {
-      Get.to(
-        () => const ShopPage(),
-        fullscreenDialog: true,
-      );
+      Get.toNamed(AppRoutes.shop);
+      FireBaseUtil.membershipPageEvent('main');
     } else {
       Get.to(
         () => const ShopPage(
@@ -82,6 +81,7 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
         ),
         fullscreenDialog: true,
       );
+      FireBaseUtil.logEvent(EventName.openAppFreePage);
     }
   }
 
@@ -114,6 +114,10 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
             setState(() {
               mainController.tabController.index = index;
             });
+
+            if (index == 3) {
+              FireBaseUtil.logEvent(EventName.gptPage);
+            }
           },
           centerOnTap: () {
             HapticFeedback.lightImpact();

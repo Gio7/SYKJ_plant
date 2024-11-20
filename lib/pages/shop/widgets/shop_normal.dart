@@ -77,7 +77,7 @@ class ShopNormal extends StatelessWidget {
                                 (e) => buildShopItem(
                                   isSelected: controller.state.currentProduct.value == e,
                                   e: e,
-                                  isFreeTrial:isFreeTrial,
+                                  memberType: memberType,
                                 ),
                               )
                               .toList(),
@@ -174,7 +174,7 @@ class ShopNormal extends StatelessWidget {
   Widget buildShopItem({
     required bool isSelected,
     required MemberProductModel e,
-    required bool isFreeTrial,
+    required MemberType? memberType,
   }) {
     Color borderColor;
     Color titleColor;
@@ -191,6 +191,7 @@ class ShopNormal extends StatelessWidget {
       amountColor = UIColor.c8E8B8B;
       rightIcon = 'images/icon/unchecked_circle.png';
     }
+    final isFreeTrial = e.isFreeTrial == true && memberType == MemberType.normal;
     return GestureDetector(
       onTap: () => controller.selectProduct(e),
       child: Container(

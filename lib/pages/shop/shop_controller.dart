@@ -35,7 +35,9 @@ class ShopController extends GetxController {
       if (state.currentProduct.value != null) {
         String text = "startYourFreeTrial".tr;
         if (formPage == ShopFormPage.history) {
-          text = "onlyCancelAnytime".tr;
+          if (Get.find<UserController>().userInfo.value.memberType != MemberType.normal) {
+            text = "onlyCancelAnytime".tr;
+          }
 
           final count = Get.find<DiagnoseHistoryController>().repository.total;
           String historyVipTips2 = "historyVipTips2".tr;
@@ -85,7 +87,15 @@ class ShopController extends GetxController {
 
   Future<void> subscribe() async {
     if (state.currentProduct.value == null) return;
-    FireBaseUtil.logEvent(EventName.memberPurchaseSelect);
+    if (formPage == ShopFormPage.main) {
+      FireBaseUtil.logEvent(EventName.openAppFreePageBtn);
+    } else if (formPage == ShopFormPage.diagnose) {
+      FireBaseUtil.logEvent(EventName.resultCloseFreePageBtn);
+    } else if (formPage == ShopFormPage.history) {
+      FireBaseUtil.logEvent(EventName.savePagePurchaseBtn);
+    } else {
+      FireBaseUtil.logEvent(EventName.memberPurchaseSelect);
+    }
     GlobalData.buyShop.submit(state.currentProduct.value!, true);
   }
 
