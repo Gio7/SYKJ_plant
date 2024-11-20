@@ -22,7 +22,7 @@ class ShopPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ShopController());
+    final controller = Get.put(ShopController(formPage));
 
     return Container(
       decoration: const BoxDecoration(
@@ -60,7 +60,7 @@ class ShopPage extends StatelessWidget {
                           ? const ShopFromHistory()
                           : formPage == ShopFormPage.main
                               ? const ShopFromMain()
-                              : ShopNormal(controller: controller),
+                              : ShopNormal(),
                 ),
                 Container(
                   margin: const EdgeInsets.only(bottom: 16),

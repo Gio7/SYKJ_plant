@@ -117,7 +117,7 @@ class DioUtil {
             Get.back();
           }
           if (hasNetwork) {
-            if (responseData['msg'] == 'Request too frequently') {
+            if (responseData['msg'] != 'Request too frequently') {
               _showNetworkErrorToast();
             }
             Get.log('${responseData['state'] ?? responseData['code']} ${responseData['msg'] ?? responseData['state'] ?? responseData['code'].toString()}');
@@ -162,7 +162,7 @@ class DioUtil {
             Get.back();
           }
           if (hasNetwork) {
-            if (responseData['msg'] == 'Request too frequently') {
+            if (responseData['msg'] != 'Request too frequently') {
               _showNetworkErrorToast();
             }
             Get.log('${responseData['state'] ?? responseData['code']} ${responseData['msg'] ?? responseData['state'] ?? responseData['code'].toString()}');

@@ -8,8 +8,8 @@ import 'package:plant/widgets/btn.dart';
 import 'package:plant/widgets/loading_dialog.dart';
 
 class ShopNormal extends StatelessWidget {
-  const ShopNormal({super.key, required this.controller});
-  final ShopController controller;
+  ShopNormal({super.key});
+  final controller = Get.find<ShopController>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class ShopNormal extends StatelessWidget {
         'botanistSupport'.tr,
         'remindersForCare'.tr,
       ];
-      if (controller.state.currentProduct.value.isFreeTrial) {
+      if (controller.state.currentProduct.value?.isFreeTrial == true) {
         tips.insert(0, 'vipFree'.tr);
       }
       return Column(
@@ -83,7 +83,7 @@ class ShopNormal extends StatelessWidget {
           ),
           SizedBox(
             width: double.infinity,
-            child: controller.state.currentProduct.value.isFreeTrial
+            child: controller.state.currentProduct.value?.isFreeTrial == true
                 ? _buildBtn()
                 : NormalButton(
                     text: 'continue'.tr,

@@ -7,17 +7,47 @@ import 'package:plant/common/global_data.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/member_product_model.dart';
 import 'package:plant/models/userinfo_model.dart';
+import 'package:plant/pages/diagnose_history/diagnose_history_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'shop_page.dart';
 
 part 'shop_state.dart';
 
 class ShopController extends GetxController {
+  final ShopFormPage formPage;
+
+  ShopController(this.formPage);
+
   final ShopState state = ShopState();
 
   @override
   onInit() {
     super.onInit();
-    getShopList();
+    getShopData();
+  }
+
+  Future<void> getShopData() async {
+    await getShopList();
+    if (formPage == ShopFormPage.diagnose || formPage == ShopFormPage.main || formPage == ShopFormPage.history) {
+      state.currentProduct.value = state.productList?.firstWhereOrNull((e) => e.memberType == 2);
+
+      if (state.currentProduct.value != null) {
+        String text = "startYourFreeTrial".tr;
+        if (formPage == ShopFormPage.history) {
+          text = "onlyWeekCancelAnytime".tr;
+
+          final count = Get.find<DiagnoseHistoryController>().repository.total;
+          String historyVipTips2 = "historyVipTips2".tr;
+          historyVipTips2 = historyVipTips2.replaceFirst('0', '$count');
+          state.historyVipTips2.value = historyVipTips2;
+        }
+        text = text.replaceFirst('999', '${state.currentProduct.value!.productDetails?.price}');
+        state.priceIntroductionText.value = text;
+      } else {
+        Get.back(closeOverlays: true);
+      }
+    }
   }
 
   Future<void> skipUrl(bool isPrivacy) async {
@@ -54,8 +84,9 @@ class ShopController extends GetxController {
   }
 
   Future<void> subscribe() async {
+    if (state.currentProduct.value == null) return;
     FireBaseUtil.logEvent(EventName.memberPurchaseSelect);
-    GlobalData.buyShop.submit(state.currentProduct.value, true);
+    GlobalData.buyShop.submit(state.currentProduct.value!, true);
   }
 
   Future<void> getShopList() async {

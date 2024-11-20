@@ -203,7 +203,7 @@ class LanguageEnUs {
       "appropriateLighting": "Appropriate lighting",
       "insufficientLighting": "Insufficient lighting",
       "lightTips": "Optimal Light Value:300~2000 LUX",
-      "lightHelpTitle": "How to Use Light Meter？",
+      "lightHelpTitle": "How to Use Light Meter?",
       "lightHelpTips":
           "1. Turn off all artificial light sources, as Light Meter is only able to measure natural light.\n\n2. Position your phone at the spot where you want to place the plant.\n\n3. Point the camera at the spot. To get the most accurate result, take the measurement with the plant placed in the spot or make sure the spot isn't too bright.\n\n4. Check if the measurement meets the light requirements for your plant.",
       // 1.1.3
@@ -223,7 +223,7 @@ class LanguageEnUs {
       "newFreeTrial": "3-day Free trial",
       "then": "then",
       "yearly": "Yearly",
-      "vipFree": "Enjoy your first 7 days, it's free",
+      "vipFree": "Enjoy your first 3 days, it's free",
       "unlmitedIdengtify": "Unlmited Idengtify & Diagnose",
       "enhanceFaster": "Enhance faster identification",
       "botanistSupport": "24/7 AI Botanist Support",
@@ -233,6 +233,11 @@ class LanguageEnUs {
       "learnPlantCareEasily": "Learn plant care easily with Plant Identifier!",
       "goProNow": "Go Pro Now",
       "aboutToExpire" : "Your photo records are about to expire.Would you like to keep them?",
+      "startYourFreeTrial": "Start your 3-day free trial Then 999 per week, cancel anytim.",
+      "historyVipTips1": "Due to the high cost of data maintenance, photos in the Snap History for free users can only be stored for 30 days.",
+      "historyVipTips2": "You currently have 0 recognition results in your photo records that are about to be cleared. Upgrade to the Pro version to retain them for 12 months.",
+      "benefitsPro" : "Other benefits of the Pro version",
+      "onlyWeekCancelAnytime": "Only 999/week, cancel anytime",
     };
   }
 }

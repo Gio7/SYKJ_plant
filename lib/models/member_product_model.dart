@@ -11,6 +11,7 @@ class MemberProductModel with EquatableMixin {
   final int? createTimestamp;
   final int? id;
   final int? point;
+  /// 1 = 非会员 2 = 周卡 3 = 年卡
   final int? memberType;
   final int? shopType;
   final String? shopId;
@@ -83,7 +84,7 @@ class MemberProductModel with EquatableMixin {
     return price;
   }
 
-    String get unitSingleStr {
+  String get unitSingleStr {
     String unit = '';
     if (productDetails?.id == 'plant_sub_vip_plan_weekly' || productDetails?.id == 'sub_vip_plan_weekly' || productDetails?.id == 'vip_plan_weekly_sub') {
       unit = 'weeks'.tr;
