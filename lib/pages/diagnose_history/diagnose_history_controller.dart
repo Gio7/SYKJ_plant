@@ -23,7 +23,6 @@ class DiagnoseHistoryController extends GetxController {
     repository.isLastPage = false;
     repository.pageNum = 1;
     final res = await Request.diagnosisHistory(repository.pageNum);
-    repository.total = res['total'] ?? 0;
     repository.isLastPage = res['lastPage'];
     final rows = (res['rows'] as List).map((x) => DiagnosisHistoryModel.fromJson(x)).toList();
     repository.isLoading.value = false;

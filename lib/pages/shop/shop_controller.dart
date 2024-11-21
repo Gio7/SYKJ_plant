@@ -7,7 +7,7 @@ import 'package:plant/common/global_data.dart';
 import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/member_product_model.dart';
 import 'package:plant/models/userinfo_model.dart';
-import 'package:plant/pages/diagnose_history/diagnose_history_controller.dart';
+import 'package:plant/pages/identify_history/identify_history_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'shop_page.dart';
@@ -39,7 +39,7 @@ class ShopController extends GetxController {
             text = "onlyCancelAnytime".tr;
           }
 
-          final count = Get.find<DiagnoseHistoryController>().repository.total;
+          final count = Get.find<IdentifyHistoryController>().repository.total;
           String historyVipTips2 = "historyVipTips2".tr;
           historyVipTips2 = historyVipTips2.replaceFirst('0', '$count');
           state.historyVipTips2.value = historyVipTips2;

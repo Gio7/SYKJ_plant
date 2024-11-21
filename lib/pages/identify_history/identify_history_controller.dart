@@ -23,6 +23,7 @@ class IdentifyHistoryController extends GetxController {
     repository.pageNum = 1;
     final res = await Request.getPlantScanHistory(repository.pageNum, type: "all");
     repository.isLastPage = res['lastPage'];
+    repository.total = res['total'] ?? 0;
     final rows = (res['rows'] as List).map((plant) => PlantModel.fromJson(plant)).toList();
     repository.isLoading.value = false;
     repository.dataList.value = rows;

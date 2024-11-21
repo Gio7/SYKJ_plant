@@ -90,7 +90,7 @@ jobs:
         with:
           _api_key: ${{ secrets.PGY_KEY }}
           appFilePath: ${{ env.UPLOAD_FILE_PATH }}
-          buildUpdateDescription: 'ai专家调整'
+          buildUpdateDescription: '诊断详情非会员增加高斯模糊遮罩'
 #        uses: xtayga/upload-pgyer-action@master
 #        with:
 #          url: https://www.pgyer.com/apiv2/app/upload

@@ -4,4 +4,6 @@ class IdentifyHistoryRepository {
   int pageNum = 1;
   RxBool isLoading = false.obs;
   bool isLastPage = false;
+
+  int total = 0;
 }

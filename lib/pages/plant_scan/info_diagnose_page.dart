@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -47,16 +49,21 @@ class InfoDiagnosePage extends StatelessWidget {
       left: 0,
       right: 0,
       bottom: 0,
-      height: 400,
+      top: 390,
       child: Column(
         children: [
           Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Colors.white.withOpacity(0.3), Colors.white],
+            child: ClipRRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Colors.white.withOpacity(0.1), Colors.white],
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -78,7 +85,7 @@ class InfoDiagnosePage extends StatelessWidget {
                     text: userCtr.userInfo.value.memberType == MemberType.normal ? 'startFreeTrial'.tr : 'goProNow'.tr,
                     textColor: UIColor.white,
                     bgColor: UIColor.primary,
-                    onTap: () async{
+                    onTap: () async {
                       Get.toNamed(AppRoutes.shop);
                       FireBaseUtil.membershipPageEvent(Get.currentRoute);
                     },
