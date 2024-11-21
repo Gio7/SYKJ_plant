@@ -241,6 +241,8 @@ class LanguageNo {
       "onlyCancelAnytime": "Kun 999/år. Avbryt når som helst.",
       "assistantMessage":
           "Jeg er din botaniske AI-assistent, alltid klar til å hjelpe deg med å ta vare på plantene dine. Hvis du har spørsmål eller bekymringer om plantene dine, gi meg beskjed.",
+      "vipFeature": "Dette er en PRO-funksjon",
+      "needUpgrade": "Du må oppgradere til PRO for å fortsette å bruke denne funksjonen",
     };
   }
 }

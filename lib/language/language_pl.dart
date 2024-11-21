@@ -239,6 +239,8 @@ class LanguagePl {
       "onlyCancelAnytime": "Tylko 999/rok. Anuluj w dowolnym momencie.",
       "assistantMessage":
           "Jestem twoim botanicznym asystentem AI, zawsze gotowym pomóc ci w pielęgnacji roślin. Jeśli masz pytania lub wątpliwości dotyczące swoich roślin, daj mi znać.",
+      "vipFeature": "To jest funkcja PRO",
+      "needUpgrade": "Musisz zaktualizować do PRO, aby nadal korzystać z tej funkcji",
     };
   }
 }

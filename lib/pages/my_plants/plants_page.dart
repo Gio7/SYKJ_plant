@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/plant_model.dart';
 import 'package:plant/pages/identify_history/identify_history_page.dart';
 import 'package:plant/pages/plant_scan/shoot_page.dart';
@@ -190,6 +191,14 @@ class PlantsPage extends StatelessWidget {
   }
 
   void _onSetReminder(int? type, PlantModel model) {
-    Get.toNamed(AppRoutes.reminderEdit,arguments: {'type': type, "plantModel": model});
+    bool isRealVip = false;
+    if (Get.isRegistered<UserController>()) {
+      isRealVip = Get.find<UserController>().userInfo.value.isRealVip;
+    }
+    if (isRealVip) {
+      Get.toNamed(AppRoutes.reminderEdit, arguments: {'type': type, "plantModel": model});
+    } else {
+      NormalDialog.showChargeableFeature();
+    }
   }
 }

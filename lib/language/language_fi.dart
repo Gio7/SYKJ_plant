@@ -240,6 +240,8 @@ class LanguageFi {
       "onlyCancelAnytime": "Vain 999/vuosi. Peruuta milloin tahansa.",
       "assistantMessage":
           "Olen botaaninen tekoälyapulaisesi, joka on aina valmis auttamaan sinua kasvien hoidossa. Jos sinulla on kysymyksiä tai huolenaiheita kasveistasi, kerro siitä minulle.",
+      "vipFeature": "Tämä on PRO-ominaisuus",
+      "needUpgrade": "Sinun on päivitettävä PRO:hon jatkaaksesi tämän ominaisuuden käyttöä",
     };
   }
 }

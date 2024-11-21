@@ -240,6 +240,8 @@ class LanguagePt {
       "onlyCancelAnytime": "Apenas 999/ano. Cancele a qualquer momento.",
       "assistantMessage":
           "Sou o seu assistente botânico de IA, sempre pronto para ajudar você a cuidar de suas plantas. Se tiver dúvidas ou preocupações sobre suas plantas, não hesite em me informar.",
+      "vipFeature": "Este é um recurso PRO",
+      "needUpgrade": "Você precisa atualizar para PRO para continuar usando este recurso",
     };
   }
 }

@@ -239,6 +239,8 @@ class LanguageMs {
       "onlyCancelAnytime": "Hanya 999/setahun. Batalkan bila-bila masa.",
       "assistantMessage":
           "Saya adalah pembantu botanik AI anda, sentiasa bersedia untuk membantu anda menjaga tumbuhan anda. Jika anda mempunyai sebarang soalan atau kebimbangan tentang tumbuhan anda, beritahu saya.",
+      "vipFeature": "Ini adalah ciri PRO",
+      "needUpgrade": "Anda perlu meningkatkan kepada PRO untuk terus menggunakan ciri ini",
     };
   }
 }

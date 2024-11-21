@@ -30,7 +30,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.chatExpertContent,
       page: () => const ChatExpertContent(),
-      // middlewares: [AuthMiddleware()],
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: AppRoutes.plantsChose,

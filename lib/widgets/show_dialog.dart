@@ -2,9 +2,27 @@ import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/router/app_pages.dart';
 import 'package:plant/widgets/btn.dart';
 
 class NormalDialog extends StatelessWidget {
+
+  /// 展示会员功能呢弹窗
+  static Future<void> showChargeableFeature() {
+    return Get.dialog(
+      NormalDialog(
+        title: 'vipFeature'.tr,
+        subText: 'needUpgrade'.tr,
+        icon: Image.asset('images/icon/need_upgrade.png', height: 252),
+        confirmText: 'goProNow'.tr,
+        onConfirm: () {
+          Get.back();
+          Get.toNamed(AppRoutes.shop);
+        },
+      ),
+    );
+  }
+
   /// 展示权限弹窗
   static Future<void> showPermission() {
     return Get.dialog(

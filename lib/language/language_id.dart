@@ -239,6 +239,8 @@ class LanguageId {
       "onlyCancelAnytime": "Hanya 999/tahun. Batalkan kapan saja.",
       "assistantMessage":
           "Saya adalah asisten AI botani Anda, selalu siap membantu Anda merawat tanaman Anda. Jika Anda memiliki pertanyaan atau kekhawatiran tentang tanaman Anda, beri tahu saya.",
+      "vipFeature": "Ini adalah fitur PRO",
+      "needUpgrade": "Anda perlu meningkatkan ke PRO untuk terus menggunakan fitur ini",
     };
   }
 }

@@ -240,6 +240,8 @@ class LanguageSv {
       "onlyCancelAnytime": "Endast 999/år. Avbryt när som helst.",
       "assistantMessage":
           "Jag är din botaniska AI-assistent, alltid redo att hjälpa dig att ta hand om dina växter. Om du har några frågor eller funderingar om dina växter, låt mig veta.",
+      "vipFeature": "Det här är en PRO-funktion",
+      "needUpgrade": "Du måste uppgradera till PRO för att fortsätta använda den här funktionen",
     };
   }
 }

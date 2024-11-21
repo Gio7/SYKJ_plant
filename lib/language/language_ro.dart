@@ -240,6 +240,8 @@ class LanguageRo {
       "onlyCancelAnytime": "Doar 999/an. Anulează oricând.",
       "assistantMessage":
           "Sunt asistentul tău botanic AI, mereu pregătit să te ajut să ai grijă de plantele tale. Dacă ai întrebări sau nelămuriri despre plantele tale, nu ezita să-mi spui.",
+      "vipFeature": "Aceasta este o funcție PRO",
+      "needUpgrade": "Trebuie să faceți upgrade la PRO pentru a continua să utilizați această funcție",
     };
   }
 }

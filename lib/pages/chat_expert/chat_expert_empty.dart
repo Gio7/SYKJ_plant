@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/router/app_pages.dart';
+import 'package:plant/widgets/show_dialog.dart';
 
 class ChatExpertEmpty extends StatelessWidget {
   const ChatExpertEmpty({super.key});
@@ -61,7 +63,15 @@ class ChatExpertEmpty extends StatelessWidget {
               const SizedBox(height: 24),
               GestureDetector(
                 onTap: () {
-                  Get.toNamed(AppRoutes.chatExpertContent);
+                  bool isRealVip = false;
+                  if (Get.isRegistered<UserController>()) {
+                    isRealVip = Get.find<UserController>().userInfo.value.isRealVip;
+                  }
+                  if (isRealVip) {
+                    Get.toNamed(AppRoutes.chatExpertContent);
+                  } else {
+                    NormalDialog.showChargeableFeature();
+                  }
                 },
                 child: Container(
                   height: 44,

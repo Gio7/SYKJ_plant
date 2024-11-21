@@ -241,6 +241,8 @@ class LanguageEnUs {
       "benefitsPro": "Other benefits of the Pro version",
       "onlyCancelAnytime": "Only 999/year. Cancel anytime.",
       "assistantMessage": "I am your botanic AI assistant, always ready to help you take care of your plants. If you have any questions or concerns about your plants.",
+      "vipFeature": "This is a PRO feature",
+      "needUpgrade": "You need to upgrade to PRO to keep using this feature",
     };
   }
 }

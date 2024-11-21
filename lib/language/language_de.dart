@@ -240,6 +240,8 @@ class LanguageDe {
       "onlyCancelAnytime": "Nur 999/Jahr. Jederzeit kündbar.",
       "assistantMessage":
           "Ich bin Ihr botanischer KI-Assistent, immer bereit, Ihnen bei der Pflege Ihrer Pflanzen zu helfen. Wenn Sie Fragen oder Bedenken zu Ihren Pflanzen haben, lassen Sie es mich wissen.",
+      "vipFeature": "Dies ist eine PRO-Funktion",
+      "needUpgrade": "Sie müssen auf PRO upgraden, um diese Funktion weiterhin zu nutzen",
     };
   }
 }

@@ -239,6 +239,8 @@ class LanguageTr {
       "onlyCancelAnytime": "Yalnızca yıllık 999. İstediğiniz zaman iptal edebilirsiniz.",
       "assistantMessage":
           "Ben sizin botanik AI asistanınızım, bitkilerinizle ilgilenmenize her zaman yardımcı olmaya hazırım. Bitkilerinizle ilgili sorularınız veya endişeleriniz varsa, bana bildirin.",
+      "vipFeature": "Bu bir PRO özelliğidir",
+      "needUpgrade": "Bu özelliği kullanmaya devam etmek için PRO'ya yükseltmeniz gerekiyor",
     };
   }
 }

@@ -240,6 +240,8 @@ class LanguageEs {
       "onlyCancelAnytime": "Solo 999/año. Cancela en cualquier momento.",
       "assistantMessage":
           "Soy tu asistente botánico de IA, siempre listo para ayudarte a cuidar tus plantas. Si tienes preguntas o inquietudes sobre tus plantas, no dudes en hacérmelo saber.",
+      "vipFeature": "Esta es una función PRO",
+      "needUpgrade": "Necesitas actualizar a PRO para seguir usando esta función",
     };
   }
 }

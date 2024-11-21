@@ -235,6 +235,8 @@ class LanguageKo {
       "benefitsPro": "Pro 버전의 다른 혜택",
       "onlyCancelAnytime": "연간 999원에 불과합니다. 언제든지 취소 가능.",
       "assistantMessage": "저는 식물을 관리하는 데 도움을 줄 준비가 된 AI 식물 도우미입니다. 식물에 대한 질문이나 걱정이 있다면 언제든지 말씀해주세요.",
+      "vipFeature": "이것은 PRO 기능입니다",
+      "needUpgrade": "이 기능을 계속 사용하려면 PRO로 업그레이드해야 합니다",
     };
   }
 }

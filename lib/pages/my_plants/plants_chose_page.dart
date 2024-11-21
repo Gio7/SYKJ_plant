@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/api/request.dart';
 import 'package:plant/common/ui_color.dart';
+import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/plant_model.dart';
 import 'package:plant/router/app_pages.dart';
 import 'package:plant/widgets/empty_widget.dart';
 import 'package:plant/widgets/nav_bar.dart';
 import 'package:plant/widgets/page_bg.dart';
+import 'package:plant/widgets/show_dialog.dart';
 
 import 'widgets/plant_item_more.dart';
 
@@ -72,7 +74,15 @@ class _PlantsChosePageState extends State<PlantsChosePage> {
                       model: _dataList![i],
                       hasCreateTime: true,
                       onTap: () {
-                        Get.offNamed(AppRoutes.reminderEdit,arguments: {'plantModel': _dataList![i]});
+                        bool isRealVip = false;
+                        if (Get.isRegistered<UserController>()) {
+                          isRealVip = Get.find<UserController>().userInfo.value.isRealVip;
+                        }
+                        if (isRealVip) {
+                          Get.offNamed(AppRoutes.reminderEdit, arguments: {'plantModel': _dataList![i]});
+                        } else {
+                          NormalDialog.showChargeableFeature();
+                        }
                       },
                     );
                   },

@@ -234,6 +234,8 @@ class LanguageZhTw {
       "benefitsPro": "Pro版本的其他好處",
       "onlyCancelAnytime": "僅需每年999元。隨時取消。",
       "assistantMessage": "我是您的植物AI助手，隨時準備幫助您照顧您的植物。如果您對植物有任何問題或疑慮，請隨時告訴我。",
+      "vipFeature": "這是一個PRO功能",
+      "needUpgrade": "您需要升級到PRO以繼續使用此功能",
     };
   }
 }

@@ -235,6 +235,8 @@ class LanguageJa {
       "benefitsPro": "Pro版のその他の利点",
       "onlyCancelAnytime": "わずか年額999。いつでもキャンセル可能。",
       "assistantMessage": "私はあなたの植物AIアシスタントで、いつでもあなたの植物のケアをお手伝いする準備ができています。植物に関する質問や不安があれば、いつでもお知らせください。",
+      "vipFeature": "これはPRO機能です",
+      "needUpgrade": "この機能を使用し続けるには、PROにアップグレードする必要があります",
     };
   }
 }
