@@ -77,7 +77,7 @@ class _ChatExpertContentState extends State<ChatExpertContent> {
               ),
               TextField(
                 minLines: 1,
-                maxLength: 250,
+                maxLength: 50,
                 maxLines: 3,
                 controller: _textEditingController,
                 // obscureText: obscureText,

@@ -52,11 +52,10 @@ class LightController extends GetxController {
         ResolutionPreset.veryHigh,
         enableAudio: false,
       );
-      repository.isCameraReady.value = true;
     } catch (e) {
       Get.log('cameras init error:$e', isError: true);
       Get.dialog(
-        barrierDismissible: false,
+        barrierDismissible: true,
         NormalDialog(
           title: 'deviceNotDetected'.tr,
           confirmText: 'ok',
@@ -69,6 +68,7 @@ class LightController extends GetxController {
     }
     try {
       await repository.cameraController?.initialize();
+      repository.isCameraReady.value = true;
       repository.cameraController?.lockCaptureOrientation();
       repository.cameraController?.startImageStream((CameraImage image) {
         repository.lux.value = _calculateLuxFromBrightness(image);
