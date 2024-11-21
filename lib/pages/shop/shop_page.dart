@@ -12,7 +12,7 @@ import 'widgets/shop_normal.dart';
 enum ShopFormPage {
   normal,
   history,
-  diagnose,
+  identify,
   main,
 }
 
@@ -54,7 +54,7 @@ class ShopPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                  child: formPage == ShopFormPage.diagnose
+                  child: formPage == ShopFormPage.identify
                       ? const ShopFromDiagnose()
                       : formPage == ShopFormPage.history
                           ? const ShopFromHistory()

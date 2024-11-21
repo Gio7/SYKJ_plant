@@ -47,7 +47,7 @@ class PlantController extends GetxController {
   onClose() {
     repository.cameraController?.dispose();
     super.onClose();
-    if (shootType == ShootType.diagnose) {
+    if (shootType == ShootType.identify) {
       _checkCloseCount();
     }
   }
@@ -59,8 +59,8 @@ class PlantController extends GetxController {
       SharedPreferences.getInstance().then((prefs) {
         final timeNow = DateTime.now();
         final today = DateTime(timeNow.year, timeNow.month, timeNow.day).millisecondsSinceEpoch;
-        int lastCloseDate = prefs.getInt('lastColseDiagnoseTime') ?? 0;
-        int closeCount = prefs.getInt('closeDiagnoseCount') ?? 0;
+        int lastCloseDate = prefs.getInt('lastColseIdentifyTime') ?? 0;
+        int closeCount = prefs.getInt('closeIdentifyCount') ?? 0;
 
         if (lastCloseDate == today) {
           closeCount += 1;
@@ -72,8 +72,8 @@ class PlantController extends GetxController {
           _showShopDialog(userCtr);
         }
 
-        prefs.setInt('closeDiagnoseCount', closeCount);
-        prefs.setInt('lastColseDiagnoseTime', today);
+        prefs.setInt('closeIdentifyCount', closeCount);
+        prefs.setInt('lastColseIdentifyTime', today);
       });
     }
   }
@@ -82,7 +82,7 @@ class PlantController extends GetxController {
     if (userCtr.userInfo.value.memberType == MemberType.normal) {
       Get.to(
         () => const ShopPage(
-          formPage: ShopFormPage.diagnose,
+          formPage: ShopFormPage.identify,
         ),
         fullscreenDialog: true,
       );

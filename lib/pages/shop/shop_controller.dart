@@ -29,7 +29,7 @@ class ShopController extends GetxController {
 
   Future<void> getShopData() async {
     await getShopList();
-    if (formPage == ShopFormPage.diagnose || formPage == ShopFormPage.main || formPage == ShopFormPage.history) {
+    if (formPage == ShopFormPage.identify || formPage == ShopFormPage.main || formPage == ShopFormPage.history) {
       state.currentProduct.value = state.productList?.firstWhereOrNull((e) => e.memberType == 3);
 
       if (state.currentProduct.value != null) {
@@ -89,7 +89,7 @@ class ShopController extends GetxController {
     if (state.currentProduct.value == null) return;
     if (formPage == ShopFormPage.main) {
       FireBaseUtil.logEvent(EventName.openAppFreePageBtn);
-    } else if (formPage == ShopFormPage.diagnose) {
+    } else if (formPage == ShopFormPage.identify) {
       FireBaseUtil.logEvent(EventName.resultCloseFreePageBtn);
     } else if (formPage == ShopFormPage.history) {
       FireBaseUtil.logEvent(EventName.savePagePurchaseBtn);
