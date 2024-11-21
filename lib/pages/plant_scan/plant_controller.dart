@@ -55,7 +55,7 @@ class PlantController extends GetxController {
   void _checkCloseCount() {
     //非会员每日首次关闭页面弹出会员购买
     final userCtr = Get.find<UserController>();
-    if (userCtr.userInfo.value.isRealVip) {
+    if (!userCtr.userInfo.value.isRealVip) {
       SharedPreferences.getInstance().then((prefs) {
         final timeNow = DateTime.now();
         final today = DateTime(timeNow.year, timeNow.month, timeNow.day).millisecondsSinceEpoch;
