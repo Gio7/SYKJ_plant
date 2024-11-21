@@ -238,6 +238,8 @@ class LanguageDa {
           "Du har i øjeblikket 0 identifikationsresultater i dine fotohistorikposter, der snart vil blive slettet. Opgrader til Pro-versionen for at bevare dem i 12 måneder.",
       "benefitsPro": "Andre fordele ved Pro-versionen",
       "onlyCancelAnytime": "Kun 999/år. Annuller når som helst.",
+      "assistantMessage":
+          "Jeg er din botaniske AI-assistent, altid klar til at hjælpe dig med at passe dine planter. Hvis du har spørgsmål eller bekymringer om dine planter, så lad mig vide det.",
     };
   }
 }

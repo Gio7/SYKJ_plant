@@ -239,6 +239,8 @@ class LanguageFr {
           "Vous avez actuellement 0 résultats de reconnaissance dans vos enregistrements photo sur le point d'être supprimés. Passez à la version Pro pour les conserver pendant 12 mois.",
       "benefitsPro": "Autres avantages de la version Pro ",
       "onlyCancelAnytime": "Seulement 999/an. Annulez à tout moment.",
+      "assistantMessage":
+          "Je suis votre assistant botanique IA, toujours prêt à vous aider à prendre soin de vos plantes. Si vous avez des questions ou des préoccupations concernant vos plantes, n'hésitez pas à me le faire savoir.",
     };
   }
 }

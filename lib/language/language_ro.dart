@@ -238,6 +238,8 @@ class LanguageRo {
           "În prezent, ai 0 rezultate de identificare în înregistrările foto care urmează să fie șterse. Fă upgrade la versiunea Pro pentru a le păstra timp de 12 luni.",
       "benefitsPro": "Alte beneficii ale versiunii Pro",
       "onlyCancelAnytime": "Doar 999/an. Anulează oricând.",
+      "assistantMessage":
+          "Sunt asistentul tău botanic AI, mereu pregătit să te ajut să ai grijă de plantele tale. Dacă ai întrebări sau nelămuriri despre plantele tale, nu ezita să-mi spui.",
     };
   }
 }

@@ -237,7 +237,9 @@ class LanguageDe {
       "historyVipTips2":
           "Sie haben derzeit 0 Erkennungsergebnisse in Ihren Fotoaufzeichnungen, die bald gelöscht werden. Upgraden Sie auf die Pro-Version, um sie 12 Monate lang zu behalten.",
       "benefitsPro": "Weitere Vorteile der Pro-Version",
-      "onlyCancelAnytime": "Nur 999/Jahr. Jederzeit kündbar."
+      "onlyCancelAnytime": "Nur 999/Jahr. Jederzeit kündbar.",
+      "assistantMessage":
+          "Ich bin Ihr botanischer KI-Assistent, immer bereit, Ihnen bei der Pflege Ihrer Pflanzen zu helfen. Wenn Sie Fragen oder Bedenken zu Ihren Pflanzen haben, lassen Sie es mich wissen.",
     };
   }
 }

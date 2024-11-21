@@ -238,6 +238,8 @@ class LanguageSv {
           "Du har för närvarande 0 identifieringsresultat i din fotohistorik som snart kommer att raderas. Uppgradera till Pro-versionen för att behålla dem i 12 månader.",
       "benefitsPro": "Andra fördelar med Pro-versionen",
       "onlyCancelAnytime": "Endast 999/år. Avbryt när som helst.",
+      "assistantMessage":
+          "Jag är din botaniska AI-assistent, alltid redo att hjälpa dig att ta hand om dina växter. Om du har några frågor eller funderingar om dina växter, låt mig veta.",
     };
   }
 }

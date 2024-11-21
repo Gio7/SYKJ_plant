@@ -233,6 +233,7 @@ class LanguageZhTw {
       "historyVipTips2": "您目前有0個識別結果在您的照片記錄中即將被清除。升級到Pro版可保存12個月。",
       "benefitsPro": "Pro版本的其他好處",
       "onlyCancelAnytime": "僅需每年999元。隨時取消。",
+      "assistantMessage": "我是您的植物AI助手，隨時準備幫助您照顧您的植物。如果您對植物有任何問題或疑慮，請隨時告訴我。",
     };
   }
 }

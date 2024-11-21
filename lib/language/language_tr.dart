@@ -237,6 +237,8 @@ class LanguageTr {
       "historyVipTips2": "Fotoğraf kayıtlarınızda silinmek üzere olan 0 tanıma sonucunuz var. Bunları 12 ay boyunca saklamak için Pro sürüme geçin.",
       "benefitsPro": "Pro sürümün diğer avantajları",
       "onlyCancelAnytime": "Yalnızca yıllık 999. İstediğiniz zaman iptal edebilirsiniz.",
+      "assistantMessage":
+          "Ben sizin botanik AI asistanınızım, bitkilerinizle ilgilenmenize her zaman yardımcı olmaya hazırım. Bitkilerinizle ilgili sorularınız veya endişeleriniz varsa, bana bildirin.",
     };
   }
 }

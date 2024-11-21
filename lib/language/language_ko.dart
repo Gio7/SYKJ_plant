@@ -234,6 +234,7 @@ class LanguageKo {
       "historyVipTips2": "현재 사진 기록에 0개의 식별 결과가 있으며 곧 삭제될 예정입니다. Pro 버전으로 업그레이드하여 12개월 동안 보관하세요.",
       "benefitsPro": "Pro 버전의 다른 혜택",
       "onlyCancelAnytime": "연간 999원에 불과합니다. 언제든지 취소 가능.",
+      "assistantMessage": "저는 식물을 관리하는 데 도움을 줄 준비가 된 AI 식물 도우미입니다. 식물에 대한 질문이나 걱정이 있다면 언제든지 말씀해주세요.",
     };
   }
 }

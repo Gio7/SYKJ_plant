@@ -238,6 +238,7 @@ class LanguageNl {
           "U heeft momenteel 0 herkenningsresultaten in uw fotogeschiedenis die binnenkort worden gewist. Upgrade naar de Pro-versie om deze 12 maanden te behouden.",
       "benefitsPro": "Andere voordelen van de Pro-versie",
       "onlyCancelAnytime": "Slechts 999/jaar. Annuleer op elk moment.",
+      "assistantMessage": "Ik ben je botanische AI-assistent, altijd klaar om je te helpen bij het verzorgen van je planten. Als je vragen of zorgen hebt over je planten, laat het me weten.",
     };
   }
 }

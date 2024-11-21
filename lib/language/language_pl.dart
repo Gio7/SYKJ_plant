@@ -237,6 +237,8 @@ class LanguagePl {
       "historyVipTips2": "Obecnie masz 0 wyników rozpoznawania w swojej historii zdjęć, które wkrótce zostaną usunięte. Przejdź na wersję Pro, aby zachować je przez 12 miesięcy.",
       "benefitsPro": "Inne korzyści wersji Pro",
       "onlyCancelAnytime": "Tylko 999/rok. Anuluj w dowolnym momencie.",
+      "assistantMessage":
+          "Jestem twoim botanicznym asystentem AI, zawsze gotowym pomóc ci w pielęgnacji roślin. Jeśli masz pytania lub wątpliwości dotyczące swoich roślin, daj mi znać.",
     };
   }
 }

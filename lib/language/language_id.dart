@@ -237,6 +237,8 @@ class LanguageId {
       "historyVipTips2": "Saat ini Anda memiliki 0 hasil pengenalan dalam catatan foto Anda yang akan segera dihapus. Upgrade ke versi Pro untuk menyimpannya selama 12 bulan.",
       "benefitsPro": "Manfaat lain dari versi Pro",
       "onlyCancelAnytime": "Hanya 999/tahun. Batalkan kapan saja.",
+      "assistantMessage":
+          "Saya adalah asisten AI botani Anda, selalu siap membantu Anda merawat tanaman Anda. Jika Anda memiliki pertanyaan atau kekhawatiran tentang tanaman Anda, beri tahu saya.",
     };
   }
 }

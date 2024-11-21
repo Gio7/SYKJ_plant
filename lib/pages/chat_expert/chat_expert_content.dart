@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/widgets/loading_dialog.dart';
 import 'package:plant/widgets/nav_bar.dart';
 import 'package:plant/widgets/page_bg.dart';
 
@@ -56,31 +55,25 @@ class _ChatExpertContentState extends State<ChatExpertContent> {
             children: [
               Expanded(
                 child: Obx(
-                  () => ListView.separated(
-                    reverse: true,
-                    controller: listController,
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                    itemBuilder: (_, i) {
-                      final item = ctr.chatList[i];
-                      if (item['isSelf'] == 1) {
-                        return _buildItemSelf(item['content']);
-                      }
-                      return _buildItemExpert(item['content']);
-                    },
-                    separatorBuilder: (_, __) => const SizedBox(height: 24),
-                    itemCount: ctr.chatList.length,
+                  () => Align(
+                    alignment: Alignment.topCenter,
+                    child: ListView.separated(
+                      reverse: true,
+                      shrinkWrap: true,
+                      controller: listController,
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                      itemBuilder: (_, i) {
+                        final item = ctr.chatList[i];
+                        if (item['isSelf'] == 1) {
+                          return _buildItemSelf(item['content']);
+                        }
+                        return _buildItemExpert(item['content']);
+                      },
+                      separatorBuilder: (_, __) => const SizedBox(height: 24),
+                      itemCount: ctr.chatList.length,
+                    ),
                   ),
                 ),
-              ),
-              Obx(
-                () => ctr.isLoading.value
-                    ? Container(
-                        width: 24,
-                        height: 24,
-                        margin: const EdgeInsets.only(bottom: 16),
-                        child: const LoadingDialog(),
-                      )
-                    : Container(),
               ),
               TextField(
                 minLines: 1,
@@ -146,7 +139,9 @@ class _ChatExpertContentState extends State<ChatExpertContent> {
       children: [
         Expanded(
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
+            constraints: const BoxConstraints(minHeight: 44),
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: const ShapeDecoration(
               gradient: LinearGradient(
                 begin: Alignment.centerLeft,
@@ -185,7 +180,9 @@ class _ChatExpertContentState extends State<ChatExpertContent> {
         const SizedBox(width: 12),
         Expanded(
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 16),
+            constraints: const BoxConstraints(minHeight: 44),
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: const ShapeDecoration(
               color: UIColor.white,
               shape: RoundedRectangleBorder(
@@ -196,43 +193,49 @@ class _ChatExpertContentState extends State<ChatExpertContent> {
                 ),
               ),
             ),
-            child: SelectableText(
-              text,
-              style: TextStyle(
-                color: UIColor.c8E8B8B,
-                fontSize: 12,
-                fontWeight: FontWeightExt.medium,
-              ),
-              contextMenuBuilder: (c, selectableTextState) {
-                // final List<ContextMenuButtonItem> buttonItems = selectableTextState.contextMenuButtonItems;
-                // buttonItems.removeWhere((ContextMenuButtonItem buttonItem) {
-                //   return buttonItem.type == ContextMenuButtonType.cut;
-                // });
+            child: text.isEmpty
+                ? const SizedBox(
+                    height: 16,
+                    width: 16,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : SelectableText(
+                    text,
+                    style: TextStyle(
+                      color: UIColor.c8E8B8B,
+                      fontSize: 12,
+                      fontWeight: FontWeightExt.medium,
+                    ),
+                    contextMenuBuilder: (c, selectableTextState) {
+                      // final List<ContextMenuButtonItem> buttonItems = selectableTextState.contextMenuButtonItems;
+                      // buttonItems.removeWhere((ContextMenuButtonItem buttonItem) {
+                      //   return buttonItem.type == ContextMenuButtonType.cut;
+                      // });
 
-                return AdaptiveTextSelectionToolbar.buttonItems(
-                  anchors: selectableTextState.contextMenuAnchors,
-                  buttonItems: [
-                    ContextMenuButtonItem(
-                      onPressed: () {
-                        selectableTextState.selectAll(SelectionChangedCause.toolbar);
-                      },
-                      type: ContextMenuButtonType.selectAll,
-                    ),
-                    ContextMenuButtonItem(
-                      onPressed: () {
-                        final String selectedText = selectableTextState.textEditingValue.text.substring(
-                          selectableTextState.textEditingValue.selection.start,
-                          selectableTextState.textEditingValue.selection.end,
-                        );
-                        Clipboard.setData(ClipboardData(text: selectedText));
-                        selectableTextState.hideToolbar();
-                      },
-                      type: ContextMenuButtonType.copy,
-                    ),
-                  ],
-                );
-              },
-            ),
+                      return AdaptiveTextSelectionToolbar.buttonItems(
+                        anchors: selectableTextState.contextMenuAnchors,
+                        buttonItems: [
+                          ContextMenuButtonItem(
+                            onPressed: () {
+                              selectableTextState.selectAll(SelectionChangedCause.toolbar);
+                            },
+                            type: ContextMenuButtonType.selectAll,
+                          ),
+                          ContextMenuButtonItem(
+                            onPressed: () {
+                              final String selectedText = selectableTextState.textEditingValue.text.substring(
+                                selectableTextState.textEditingValue.selection.start,
+                                selectableTextState.textEditingValue.selection.end,
+                              );
+                              Clipboard.setData(ClipboardData(text: selectedText));
+                              selectableTextState.hideToolbar();
+                            },
+                            type: ContextMenuButtonType.copy,
+                          ),
+                        ],
+                      );
+                    },
+                  ),
           ),
         ),
       ],

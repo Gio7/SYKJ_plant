@@ -238,6 +238,8 @@ class LanguagePt {
           "Você atualmente tem 0 resultados de reconhecimento em seus registros fotográficos que estão prestes a serem apagados. Atualize para a versão Pro para mantê-los por 12 meses.",
       "benefitsPro": "Outros benefícios da versão Pro",
       "onlyCancelAnytime": "Apenas 999/ano. Cancele a qualquer momento.",
+      "assistantMessage":
+          "Sou o seu assistente botânico de IA, sempre pronto para ajudar você a cuidar de suas plantas. Se tiver dúvidas ou preocupações sobre suas plantas, não hesite em me informar.",
     };
   }
 }

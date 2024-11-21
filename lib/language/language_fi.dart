@@ -238,6 +238,8 @@ class LanguageFi {
           "Sinulla on tällä hetkellä 0 tunnistustulosta valokuvamuistiinpanoissasi, jotka ovat pian poistumassa. Päivitä Pro-versioon säilyttääksesi ne 12 kuukauden ajan.",
       "benefitsPro": "Muita Pro-version etuja",
       "onlyCancelAnytime": "Vain 999/vuosi. Peruuta milloin tahansa.",
+      "assistantMessage":
+          "Olen botaaninen tekoälyapulaisesi, joka on aina valmis auttamaan sinua kasvien hoidossa. Jos sinulla on kysymyksiä tai huolenaiheita kasveistasi, kerro siitä minulle.",
     };
   }
 }

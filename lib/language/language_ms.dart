@@ -237,6 +237,8 @@ class LanguageMs {
       "historyVipTips2": "Anda kini mempunyai 0 keputusan pengecaman dalam rekod foto anda yang akan dipadamkan. Tingkatkan kepada versi Pro untuk menyimpannya selama 12 bulan.",
       "benefitsPro": "Manfaat lain versi Pro",
       "onlyCancelAnytime": "Hanya 999/setahun. Batalkan bila-bila masa.",
+      "assistantMessage":
+          "Saya adalah pembantu botanik AI anda, sentiasa bersedia untuk membantu anda menjaga tumbuhan anda. Jika anda mempunyai sebarang soalan atau kebimbangan tentang tumbuhan anda, beritahu saya.",
     };
   }
 }

@@ -239,6 +239,8 @@ class LanguageNo {
           "Du har for øyeblikket 0 identifikasjonsresultater i fotohistorikken din som snart blir slettet. Oppgrader til Pro-versjonen for å beholde dem i 12 måneder.",
       "benefitsPro": "Andre fordeler med Pro-versjonen",
       "onlyCancelAnytime": "Kun 999/år. Avbryt når som helst.",
+      "assistantMessage":
+          "Jeg er din botaniske AI-assistent, alltid klar til å hjelpe deg med å ta vare på plantene dine. Hvis du har spørsmål eller bekymringer om plantene dine, gi meg beskjed.",
     };
   }
 }

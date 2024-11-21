@@ -240,6 +240,7 @@ class LanguageEnUs {
       "historyVipTips2": "You currently have 0 recognition results in your photo records that are about to be cleared. Upgrade to the Pro version to retain them for 12 months.",
       "benefitsPro": "Other benefits of the Pro version",
       "onlyCancelAnytime": "Only 999/year. Cancel anytime.",
+      "assistantMessage": "I am your botanic AI assistant, always ready to help you take care of your plants. If you have any questions or concerns about your plants.",
     };
   }
 }

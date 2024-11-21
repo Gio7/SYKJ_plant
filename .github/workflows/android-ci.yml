@@ -90,7 +90,7 @@ jobs:
         with:
           _api_key: ${{ secrets.PGY_KEY }}
           appFilePath: ${{ env.UPLOAD_FILE_PATH }}
-          buildUpdateDescription: 'v1.1.4 1.增加多个会员购买页面；2.识别改为免费功能；3.诊断结果非会员增加遮罩；4.增加植物专家功能'
+          buildUpdateDescription: 'ai专家调整'
 #        uses: xtayga/upload-pgyer-action@master
 #        with:
 #          url: https://www.pgyer.com/apiv2/app/upload

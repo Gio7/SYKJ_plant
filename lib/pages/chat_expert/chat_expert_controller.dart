@@ -18,6 +18,15 @@ class ChatExpertController extends GetxController {
     try {
       final res = await DbServer.getChatList();
       chatList.value = res.toList();
+      if (chatList.isEmpty) {
+        final Map<String, dynamic> map = {
+          'isSelf': 0,
+          'createTime': DateTime.now().millisecondsSinceEpoch,
+          'content': 'assistantMessage'.tr,
+          'id': 0,
+        };
+        chatList.add(map);
+      }
     } catch (e) {
       Get.log(e.toString(), isError: true);
       rethrow;
@@ -38,10 +47,22 @@ class ChatExpertController extends GetxController {
     }
   }
 
+  Future<void> insertEmptyChat() async {
+    final Map<String, dynamic> map = {
+      'isSelf': 0,
+      'createTime': DateTime.now().millisecondsSinceEpoch,
+      'content': '',
+      'id': 0,
+    };
+    chatList.insert(0, map);
+  }
+
   Future<void> plantPlantQuestion(String text) async {
     try {
       isLoading.value = true;
+      insertEmptyChat();
       final data = await Request.plantPlantQuestion(text);
+      chatList.removeAt(0);
       isLoading.value = false;
       insertChat(data, false);
     } catch (e) {
