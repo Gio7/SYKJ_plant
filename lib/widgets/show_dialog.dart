@@ -1,6 +1,7 @@
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/router/app_pages.dart';
 import 'package:plant/widgets/btn.dart';
@@ -17,6 +18,7 @@ class NormalDialog extends StatelessWidget {
         confirmText: 'goProNow'.tr,
         onConfirm: () {
           Get.back();
+          FireBaseUtil.membershipPageEvent(Get.currentRoute);
           Get.toNamed(AppRoutes.shop);
         },
       ),

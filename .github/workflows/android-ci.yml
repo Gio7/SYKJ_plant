@@ -90,7 +90,7 @@ jobs:
         with:
           _api_key: ${{ secrets.PGY_KEY }}
           appFilePath: ${{ env.UPLOAD_FILE_PATH }}
-          buildUpdateDescription: 'v1.1.4 增加会员功能弹窗'
+          buildUpdateDescription: 'v1.1.4 修改埋点'
 #        uses: xtayga/upload-pgyer-action@master
 #        with:
 #          url: https://www.pgyer.com/apiv2/app/upload

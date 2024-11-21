@@ -13,7 +13,6 @@ import 'package:plant/widgets/btn.dart';
 import 'package:plant/widgets/loading_dialog.dart';
 import 'package:plant/pages/plant_scan/plant_controller.dart';
 import 'package:plant/pages/plant_scan/info_identify_page.dart';
-import 'package:plant/widgets/show_dialog.dart';
 
 import 'widgets/diagnose_rect.dart';
 
@@ -87,12 +86,8 @@ class InfoDiagnosePage extends StatelessWidget {
                     textColor: UIColor.white,
                     bgColor: UIColor.primary,
                     onTap: () async {
-                      if (userCtr.userInfo.value.isRealVip) {
-                        Get.toNamed(AppRoutes.shop);
-                        FireBaseUtil.membershipPageEvent(Get.currentRoute);
-                      } else {
-                        NormalDialog.showChargeableFeature();
-                      }
+                      Get.toNamed(AppRoutes.shop);
+                      FireBaseUtil.membershipPageEvent(Get.currentRoute);
                     },
                   ),
                 ),
