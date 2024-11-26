@@ -1,4 +1,5 @@
 class LanguagePl {
+  /// 波兰语
   static Map<String, String> get language {
     return {
       "tabHome": "Główna",

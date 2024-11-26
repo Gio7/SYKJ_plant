@@ -1,5 +1,5 @@
 class LanguageFi {
-  // 芬兰语
+  /// 芬兰语
   static Map<String, String> get language {
     return {
       "tabHome": "Koti",

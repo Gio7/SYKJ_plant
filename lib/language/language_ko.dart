@@ -1,4 +1,5 @@
 class LanguageKo {
+  /// 韩语
   static Map<String, String> get language {
     return {
       "tabHome": "홈",

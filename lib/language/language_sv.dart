@@ -1,4 +1,5 @@
 class LanguageSv {
+  /// 瑞典语
   static Map<String, String> get language {
     return {
       "tabHome": "Hem",

@@ -1,5 +1,5 @@
 class LanguageRo {
-  /// 罗马尼亚
+  /// 罗马尼亚语
   static Map<String, String> get language {
     return {
       "tabHome": "Acasă",
@@ -246,4 +246,4 @@ class LanguageRo {
   }
 }
 
-// 罗马尼亚
+// 罗马尼亚语

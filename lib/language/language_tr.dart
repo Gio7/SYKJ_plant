@@ -1,5 +1,5 @@
 class LanguageTr {
-  /// 土耳其
+  /// 土耳其语
   static Map<String, String> get language {
     return {
       "tabHome": "Ana Sayfa",
@@ -245,4 +245,4 @@ class LanguageTr {
   }
 }
 
-// 土耳其
+// 土耳其语

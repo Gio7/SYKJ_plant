@@ -1,4 +1,5 @@
 class LanguageNl {
+  /// 荷兰语
   static Map<String, String> get language {
     return {
       "tabHome": "Home",

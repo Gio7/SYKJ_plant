@@ -9,7 +9,7 @@ class GlobalData {
     } else if (packageName.contains('identification')){
       return 'http://192.168.0.111:19300';
     } else {
-      return'https://api.plantidentifier.co';
+      return 'https://api.plantidentifier.co';
     }
   }
 

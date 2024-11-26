@@ -1,4 +1,5 @@
-class LanguageEnUs {
+class LanguageEn {
+  /// 英语
   static Map<String, String> get language {
     return {
       "tabHome": "Home",

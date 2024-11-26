@@ -28,7 +28,7 @@ class DioUtil {
   language   //语言代码 
   */
   DioUtil._init() {
-    final dl = Get.deviceLocale;
+    final dl = Get.locale ?? Get.deviceLocale;
     String language = dl?.languageCode ?? '';
     final currentLanguage = Language().keys.keys.firstWhere(
           (element) => element.contains(language),
@@ -37,7 +37,6 @@ class DioUtil {
     if (currentLanguage.isEmpty) {
       language = 'en';
     }
-    // if (dl?.scriptCode != null && dl!.scriptCode!.isNotEmpty) {
     if (dl?.scriptCode == 'Hant') {
       language += '_${dl!.scriptCode}';
     }

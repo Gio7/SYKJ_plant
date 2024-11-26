@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 import 'language_da.dart';
 import 'language_de.dart';
-import 'language_en_us.dart';
+import 'language_en.dart';
 import 'language_es.dart';
 import 'language_fi.dart';
 import 'language_fr.dart';
@@ -20,54 +20,36 @@ import 'language_ru.dart';
 import 'language_sv.dart';
 import 'language_th.dart';
 import 'language_tr.dart';
-import 'language_zh_cn.dart';
-import 'language_zh_tw.dart';
+import 'language_zh_hans.dart';
+import 'language_zh_hant.dart';
 
 class Language extends Translations {
   @override
   Map<String, Map<String, String>> get keys {
     return {
-      'zh_CN': LanguageZhCn.language,
-      'zh_TW': LanguageZhTw.language,
-      'en_US': LanguageEnUs.language,
-      // 德语
-      'de': LanguageDe.language,
-      // 法语
-      'fr': LanguageFr.language,
-      // 西班牙语
-      'es': LanguageEs.language,
-      // 意大利语
-      'it': LanguageIt.language,
-      // 日语
-      'ja': LanguageJa.language,
-      // 韩语
-      'ko': LanguageKo.language,
-      // 荷兰语
-      'nl': LanguageNl.language,
-      // 葡萄牙语
-      'pt': LanguagePt.language,
-      // 土耳其
-      'tr': LanguageTr.language,
-      // 丹麦
-      'da': LanguageDa.language,
-      // 芬兰语
-      'fi': LanguageFi.language,
-      // 印尼语
-      'id': LanguageId.language,
-      // 马来西亚
-      'ms': LanguageMs.language,
-      // 挪威
-      'no': LanguageNo.language,
-      // 波兰语
-      'pl': LanguagePl.language,
-      // 罗马尼亚
-      'ro': LanguageRo.language,
-      // 俄语Ï
-      'ru': LanguageRu.language,
-      // 瑞典语
-      'sv': LanguageSv.language,
-      // 泰语
-      'th': LanguageTh.language,
+      'zh_Hant': LanguageZhHant.language, // 繁体中文
+      'zh_Hans': LanguageZhHans.language, // 简体中文
+      'zh': LanguageZhHans.language, // 简体中文
+      'en': LanguageEn.language, // 英文
+      'de': LanguageDe.language, // 德语
+      'fr': LanguageFr.language, // 法语
+      'es': LanguageEs.language, // 西班牙语
+      'it': LanguageIt.language, // 意大利语
+      'ja': LanguageJa.language, // 日语
+      'ko': LanguageKo.language, // 韩语
+      'nl': LanguageNl.language, // 荷兰语
+      'pt': LanguagePt.language, // 葡萄牙语
+      'tr': LanguageTr.language, // 土耳其语
+      'da': LanguageDa.language, // 丹麦语
+      'fi': LanguageFi.language, // 芬兰语
+      'id': LanguageId.language, // 印尼语
+      'ms': LanguageMs.language, // 马来语
+      'no': LanguageNo.language, // 挪威语
+      'pl': LanguagePl.language, // 波兰语
+      'ro': LanguageRo.language, // 罗马尼亚语
+      'ru': LanguageRu.language, // 俄语
+      'sv': LanguageSv.language, // 瑞典语
+      'th': LanguageTh.language, // 泰语
     };
   }
 }

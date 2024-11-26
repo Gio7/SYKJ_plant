@@ -181,20 +181,21 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const fallbackLocale = Locale('en');
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Plant Identifier',
       themeMode: ThemeMode.dark,
       initialBinding: CoreBindingController(),
       translations: Language(),
-      locale: _parseLocale(Get.deviceLocale ?? const Locale('en', 'US')),
-      fallbackLocale: const Locale('en', 'US'),
+      locale: adjustLocale(Get.deviceLocale ?? fallbackLocale),
+      fallbackLocale: fallbackLocale,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [Get.deviceLocale ?? const Locale('en', 'US')],
+      supportedLocales: [Get.deviceLocale ?? fallbackLocale],
       navigatorObservers: FireBaseUtil.observer == null ? [] : [FireBaseUtil.observer!],
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: UIColor.primary),
@@ -215,12 +216,14 @@ class MainApp extends StatelessWidget {
     );
   }
 
-  Locale _parseLocale(Locale locale) {
-    if (locale.scriptCode == 'Hans') {
-      return const Locale('zh', 'CN');
-    } else if (locale.scriptCode == 'Hant') {
-      return const Locale('zh', 'TW');
+  Locale adjustLocale(Locale deviceLocale) {
+    if (deviceLocale.languageCode == 'zh') {
+      if (deviceLocale.scriptCode == 'Hant') {
+        return const Locale('zh', 'Hant');
+      } else if (deviceLocale.scriptCode == 'Hans') {
+        return const Locale('zh', 'Hans');
+      }
     }
-    return locale;
+    return deviceLocale;
   }
 }

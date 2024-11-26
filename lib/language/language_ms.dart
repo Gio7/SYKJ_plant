@@ -1,5 +1,5 @@
 class LanguageMs {
-  /// 马来西亚
+  /// 马来语
   static Map<String, String> get language {
     return {
       "tabHome": "Utama",
@@ -245,4 +245,4 @@ class LanguageMs {
   }
 }
 
-// 马来西亚
+// 马来语

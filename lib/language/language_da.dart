@@ -1,5 +1,5 @@
 class LanguageDa {
-  /// 丹麦
+  /// 丹麦语
   static Map<String, String> get language {
     return {
       "tabHome": "Hjem",
@@ -246,4 +246,4 @@ class LanguageDa {
   }
 }
 
-// 丹麦
+// 丹麦语

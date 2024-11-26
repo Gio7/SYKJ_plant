@@ -64,7 +64,7 @@ class MemberProductModel with EquatableMixin {
         shopDescribe: json["shopDescribe"],
         selected: json["selected"],
         status: json["status"],
-        isFreeTrial: json["trial"],
+        isFreeTrial: json["trial"] ?? false,
       );
 
   @override

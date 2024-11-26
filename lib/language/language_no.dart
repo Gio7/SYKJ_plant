@@ -1,5 +1,5 @@
 class LanguageNo {
-  /// 挪威
+  /// 挪威语
   static Map<String, String> get language {
     return {
       "tabHome": "Hjem",
@@ -247,4 +247,4 @@ class LanguageNo {
   }
 }
 
-// 挪威
+// 挪威语

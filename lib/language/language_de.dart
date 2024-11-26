@@ -1,4 +1,5 @@
 class LanguageDe {
+  /// 德语
   static Map<String, String> get language {
     return {
       "tabHome": "Start",

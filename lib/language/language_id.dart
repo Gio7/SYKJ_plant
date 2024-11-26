@@ -1,4 +1,5 @@
 class LanguageId {
+  // 印尼语
   static Map<String, String> get language {
     return {
       "tabHome": "Beranda",
