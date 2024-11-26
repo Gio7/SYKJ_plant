@@ -189,13 +189,13 @@ class MainApp extends StatelessWidget {
       initialBinding: CoreBindingController(),
       translations: Language(),
       locale: adjustLocale(Get.deviceLocale ?? fallbackLocale),
-      fallbackLocale: fallbackLocale,
+      fallbackLocale: const Locale('en'),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [Get.deviceLocale ?? fallbackLocale],
+      supportedLocales: [adjustLocale(Get.deviceLocale ?? fallbackLocale)],
       navigatorObservers: FireBaseUtil.observer == null ? [] : [FireBaseUtil.observer!],
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: UIColor.primary),
@@ -217,12 +217,10 @@ class MainApp extends StatelessWidget {
   }
 
   Locale adjustLocale(Locale deviceLocale) {
-    if (deviceLocale.languageCode == 'zh') {
-      if (deviceLocale.scriptCode == 'Hant') {
-        return const Locale('zh', 'Hant');
-      } else if (deviceLocale.scriptCode == 'Hans') {
-        return const Locale('zh', 'Hans');
-      }
+    if (deviceLocale.scriptCode == 'Hant') {
+      return const Locale('zh', 'Hant');
+    } else if (deviceLocale.scriptCode == 'Hans') {
+      return const Locale('zh', 'Hans');
     }
     return deviceLocale;
   }
