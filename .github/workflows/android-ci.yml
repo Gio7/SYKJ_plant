@@ -90,4 +90,4 @@ jobs:
         with:
           _api_key: ${{ secrets.PGY_KEY }}
           appFilePath: ${{ env.UPLOAD_FILE_PATH }}
-          buildUpdateDescription: 'v1.1.4'
+          buildUpdateDescription: 'v1.1.4 增加测试代码'
