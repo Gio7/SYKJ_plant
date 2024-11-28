@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -9,7 +8,6 @@ import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/member_product_model.dart';
 import 'package:plant/models/userinfo_model.dart';
 import 'package:plant/pages/identify_history/identify_history_controller.dart';
-import 'package:plant/widgets/show_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'shop_page.dart';
@@ -112,22 +110,6 @@ class ShopController extends GetxController {
       ProductDetailsResponse? pdRes;
       if (ids.isNotEmpty) {
         pdRes = await GlobalData.buyShop.getProduct(ids);
-        if (formPage == ShopFormPage.normal) {
-          Get.dialog(
-            NormalDialog(
-              title: '${pdRes.productDetails.length}个商品',
-              confirmText: '复制价格',
-              onConfirm: () {
-                String text = '';
-                pdRes?.productDetails.forEach((element) {
-                  text += element.price;
-                  Clipboard.setData(ClipboardData(text: text));
-                });
-                Get.back();
-              },
-            ),
-          );
-        }
       }
       if (pdRes != null && pdRes.productDetails.isNotEmpty) {
         for (final apiShop in resList) {
