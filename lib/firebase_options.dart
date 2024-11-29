@@ -59,14 +59,14 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyD6NsCMq7-HL8ytu1gfK4sOdOSC0w0N1WE',
-    appId: '1:361651658601:ios:ae5f05d1c815d4e0d0e7f8',
-    messagingSenderId: '361651658601',
-    projectId: 'test-bundle-2024',
+    apiKey: 'AIzaSyAhFkMn6MYMvNOBDIWuLB2VaKqu4BdDfjQ',
+    appId: '1:225439231868:ios:68d1bba0d4c56a5fc2bef9',
+    messagingSenderId: '225439231868',
+    projectId: 'plant-identifier-for-ios',
     databaseURL: 'https://flutterfire-e2e-tests-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'test-bundle-2024.appspot.com',
-    androidClientId: 'com.plant.identification',
-    iosClientId: 'com.plant.identification',
-    iosBundleId: 'com.plant.identification',
+    storageBucket: 'plant-identifier-for-ios.appspot.com',
+    androidClientId: 'com.plant.identifier.diagnosis.scanner.app',
+    iosClientId: 'com.plant.identifier.diagnosis.scanner.app',
+    iosBundleId: 'com.plant.identifier.diagnosis.scanner.app',
   );
 }
