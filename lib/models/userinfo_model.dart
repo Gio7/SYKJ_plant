@@ -39,7 +39,7 @@ class UserInfoModel {
   final int? userid;
   final int? point;
 
-  final bool _isVip;
+  final bool isVip;
 
   final bool pushToken;
 
@@ -50,20 +50,29 @@ class UserInfoModel {
     this.memberType,
     this.userid,
     this.point,
-    bool isVip = false,
+    this.isVip = false,
     this.pushToken = false,
-  }) : _isVip = isVip;
+  });
 
-  factory UserInfoModel.fromJson(Map<String, dynamic> json) => UserInfoModel(
-        expireTime: json["expireTime"],
-        expireTimestamp: json["expireTimestamp"],
-        nickname: json["nickname"],
-        memberType: MemberType.fromValue(json["memberType"]),
-        userid: json["userid"],
-        point: json["point"],
-        isVip: json["isVip"] ?? false,
-        pushToken: json["pushToken"] ?? false
-      );
+  factory UserInfoModel.fromJson(Map<String, dynamic> json) {
+    bool vip = json["isVip"] ?? false;
+    final expireTimestamp = json["expireTimestamp"];
+    if (expireTimestamp == null) {
+      vip = false;
+    } else {
+      vip = expireTimestamp > DateTime.now().millisecondsSinceEpoch;
+    }
+    return UserInfoModel(
+      expireTime: json["expireTime"],
+      expireTimestamp: expireTimestamp,
+      nickname: json["nickname"],
+      memberType: MemberType.fromValue(json["memberType"]),
+      userid: json["userid"],
+      point: json["point"],
+      isVip: vip,
+      pushToken: json["pushToken"] ?? false,
+    );
+  }
 
   toMap() => {
         "expireTime": expireTime,
@@ -72,12 +81,12 @@ class UserInfoModel {
         "memberType": memberType?.value,
         "userid": userid,
         "point": point,
-        "isVip": _isVip,
+        "isVip": isVip,
         "pushToken": pushToken
       };
 
   bool get isRealVip {
-    if (_isVip && memberType != MemberType.normal && expireTimestamp != null) {
+    if (isVip && memberType != MemberType.normal && expireTimestamp != null) {
       if (expireTimestamp! > DateTime.now().millisecondsSinceEpoch) {
         return true;
       }
