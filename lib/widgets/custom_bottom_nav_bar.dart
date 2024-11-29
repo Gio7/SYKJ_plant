@@ -10,6 +10,22 @@ class CustomBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const home = AssetImage('images/tabbar/home.png');
+    const homeSelected = AssetImage('images/tabbar/home_selected.png');
+    const diagnose = AssetImage('images/tabbar/diagnose.png');
+    const diagnoseSelected = AssetImage('images/tabbar/diagnose_selected.png');
+    const chat = AssetImage('images/tabbar/chat.png');
+    const chatSelected = AssetImage('images/tabbar/chat_selected.png');
+    const myPlant = AssetImage('images/tabbar/my_plant.png');
+    const myPlantSelected = AssetImage('images/tabbar/my_plant_selected.png');
+    precacheImage(home, context);
+    precacheImage(homeSelected, context);
+    precacheImage(diagnose, context);
+    precacheImage(diagnoseSelected, context);
+    precacheImage(chat, context);
+    precacheImage(chatSelected, context);
+    precacheImage(myPlant, context);
+    precacheImage(myPlantSelected, context);
     return SizedBox(
       height: 63 + Get.mediaQuery.padding.bottom, //78 + Get.mediaQuery.padding.bottom,
       child: Stack(
@@ -43,59 +59,27 @@ class CustomBottomNavBar extends StatelessWidget {
                   BottomNavigationBarItem(
                     tooltip: '',
                     label: 'tabHome'.tr,
-                    icon: Image.asset(
-                      'images/tabbar/home.png',
-                      width: 28,
-                      height: 28,
-                    ),
-                    activeIcon: Image.asset(
-                      'images/tabbar/home_selected.png',
-                      width: 28,
-                      height: 28,
-                    ),
+                    icon: const Image(image: home, height: 28),
+                    activeIcon: const Image(image: homeSelected, height: 28),
                   ),
                   BottomNavigationBarItem(
                     tooltip: '',
                     label: 'tabDiagnose'.tr,
-                    icon: Image.asset(
-                      'images/tabbar/diagnose.png',
-                      width: 28,
-                      height: 28,
-                    ),
-                    activeIcon: Image.asset(
-                      'images/tabbar/diagnose_selected.png',
-                      width: 28,
-                      height: 28,
-                    ),
+                    icon: const Image(image: diagnose, height: 28),
+                    activeIcon: const Image(image: diagnoseSelected, height: 28),
                   ),
                   const BottomNavigationBarItem(icon: SizedBox(), label: ''),
                   BottomNavigationBarItem(
                     tooltip: '',
                     label: "tabAskExpert".tr,
-                    icon: Image.asset(
-                      'images/tabbar/chat.png',
-                      width: 28,
-                      height: 28,
-                    ),
-                    activeIcon: Image.asset(
-                      'images/tabbar/chat_selected.png',
-                      width: 28,
-                      height: 28,
-                    ),
+                    icon: const Image(image: chat, height: 28),
+                    activeIcon: const Image(image: chatSelected, height: 28),
                   ),
                   BottomNavigationBarItem(
                     tooltip: '',
                     label: "tabMyPlants".tr,
-                    icon: Image.asset(
-                      'images/tabbar/my_plant.png',
-                      width: 28,
-                      height: 28,
-                    ),
-                    activeIcon: Image.asset(
-                      'images/tabbar/my_plant_selected.png',
-                      width: 28,
-                      height: 28,
-                    ),
+                    icon: const Image(image: myPlant, height: 28),
+                    activeIcon: const Image(image: myPlantSelected, height: 28),
                   ),
                 ],
               ),
