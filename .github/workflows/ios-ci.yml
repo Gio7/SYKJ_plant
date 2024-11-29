@@ -73,4 +73,4 @@ jobs:
         with:
           _api_key: ${{ secrets.PGY_KEY }}
           appFilePath: build/ios/ipa/Plant Identifier.ipa
-          buildUpdateDescription: 'iOS v1.1.4'
+          buildUpdateDescription: 'iOS v1.1.4 测试账号，生产环境'
