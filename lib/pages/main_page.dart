@@ -25,7 +25,7 @@ class MainPage extends StatefulWidget {
   State<MainPage> createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin {
+class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   MainController mainController = Get.find();
   UserController userController = Get.find();
 
@@ -36,12 +36,28 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
     userController.getUserInfo().then((v) {
       WidgetsBinding.instance.addPostFrameCallback((_) => _checkOpenCount());
     });
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
     mainController.tabController.dispose();
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        userController.getUserInfo();
+        break;
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+      case AppLifecycleState.detached:
+      case AppLifecycleState.hidden:
+        break;
+    }
   }
 
   void _checkOpenCount() {
