@@ -21,6 +21,9 @@ jobs:
       UPLOAD_TO_PGY: ${{ inputs.upload-to-pgy }}
 
     steps:
+      - name: Set up Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.1.app
+
       - name: Checkout the code
         uses: actions/checkout@v2
 

@@ -43,8 +43,8 @@ class DioUtil {
     _dio = Dio(
       BaseOptions(
         baseUrl: GlobalData.baseUrl,
-        connectTimeout: const Duration(seconds: 60),
-        receiveTimeout: const Duration(seconds: 60),
+        connectTimeout: const Duration(seconds: 120),
+        receiveTimeout: const Duration(seconds: 120),
         responseType: ResponseType.json,
         listFormat: ListFormat.multiCompatible,
         headers: {
