@@ -93,8 +93,8 @@ void main() {
       // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
       FlutterError.onError = (FlutterErrorDetails details) {
         FireBaseUtil.logEvent('FlutterError', parameters: {
-          'exception': details.exceptionAsString(),
-          'stack': "${details.stack}",
+          'exception': _truncateString(details.exceptionAsString(), 99),
+          'stack': _truncateString("${details.stack}", 99),
         });
       };
     }
@@ -106,11 +106,19 @@ void main() {
     } else {
       // FirebaseCrashlytics.instance.recordError(error, stackTrace);
       FireBaseUtil.logEvent('FlutterError', parameters: {
-        'exception': "$error",
-        'stack': "$stackTrace",
+        'exception': _truncateString("$error", 99),
+        'stack': _truncateString("$stackTrace", 99),
       });
     }
   });
+}
+
+String _truncateString(String str, int length) {
+  if (str.length <= length) {
+    return str;
+  } else {
+    return str.substring(0, length);
+  }
 }
 
 Future<void> initMain() async {
