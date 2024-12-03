@@ -140,6 +140,13 @@ class SetPage extends StatelessWidget {
     );
   }
 
+  // void _share() {
+  //   Share.share(
+  //     "https://apps.apple.com/app/id6670429127",//https://play.google.com/store/apps/details?id=com.plant.identifier.diagnosis.scanner.app
+  //     sharePositionOrigin: Rect.fromLTWH(0, 0, Get.width, Get.height / 2),
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
     var userCtr = Get.find<UserController>();
@@ -245,7 +252,9 @@ class SetPage extends StatelessWidget {
               'contactUs'.tr,
             ),
             // _buildListItem(
-            //   () {},
+            //   () {
+            //     _share();
+            //   },
             //   'images/icon/set_share.png',
             //   'shareWithFriends'.tr,
             // ),

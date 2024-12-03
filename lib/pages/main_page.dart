@@ -48,15 +48,8 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    switch (state) {
-      case AppLifecycleState.resumed:
-        userController.getUserInfo();
-        break;
-      case AppLifecycleState.inactive:
-      case AppLifecycleState.paused:
-      case AppLifecycleState.detached:
-      case AppLifecycleState.hidden:
-        break;
+    if (state == AppLifecycleState.resumed) {
+      userController.getUserInfo();
     }
   }
 

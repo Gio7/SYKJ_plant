@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:advertising_id/advertising_id.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -91,7 +90,13 @@ void main() {
         Get.log(" ----捕获到同步异常---- \n${details.exceptionAsString()}\n\nStack Trace:\n${details.stack}", isError: true);
       };
     } else {
-      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+      // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+      FlutterError.onError = (FlutterErrorDetails details) {
+        FireBaseUtil.logEvent('FlutterError', parameters: {
+          'exception': details.exceptionAsString(),
+          'stack': "${details.stack}",
+        });
+      };
     }
     FlutterNativeSplash.remove();
     runApp(const MainApp());
@@ -99,7 +104,11 @@ void main() {
     if (kDebugMode) {
       Get.log(" ----捕获到异步异常---- \n$error\n\nStack Trace:\n$stackTrace", isError: true);
     } else {
-      FirebaseCrashlytics.instance.recordError(error, stackTrace, fatal: true);
+      // FirebaseCrashlytics.instance.recordError(error, stackTrace);
+      FireBaseUtil.logEvent('FlutterError', parameters: {
+        'exception': "$error",
+        'stack': "$stackTrace",
+      });
     }
   });
 }
