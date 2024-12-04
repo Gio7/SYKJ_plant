@@ -91,13 +91,13 @@ class DioUtil {
   }
 
   /// get请求
-  static dynamic httpGet(String url, {Map<String, dynamic>? parameters, bool allData = false}) async {
+  static dynamic httpGet(String url, {Map<String, dynamic>? parameters, bool ignoreAll = false}) async {
     try {
       var response = await _dio!.get(url, queryParameters: parameters);
       if (response.statusCode == 200) {
         var responseData = response.data;
         if (responseData['code'] == 200 || responseData['code'] == 0) {
-          if (allData) {
+          if (ignoreAll) {
             return responseData;
           }
           return responseData['data'];
@@ -133,7 +133,7 @@ class DioUtil {
   }
 
   /// post请求
-  static Future<dynamic> httpPost(String url, {required Map<String, dynamic> data, bool allData = false, bool ignore208 = false, bool ignoreAll = false}) async {
+  static Future<dynamic> httpPost(String url, {required Map<String, dynamic> data, bool isBuyShop = false, bool ignoreAll = false}) async {
     try {
       var response = await _dio!.post(url, data: data);
       if (ignoreAll) {
@@ -141,8 +141,8 @@ class DioUtil {
       }
       if (response.statusCode == 200) {
         var responseData = response.data;
-        if (ignore208 && responseData['code'] == 208) {
-          return responseData['data'];
+        if (isBuyShop && (responseData['code'] == 208 || responseData['code'] == 204)) {
+          return responseData;
         }
         if (responseData['code'] == 200 || responseData['code'] == 0) {
           return responseData['data'];

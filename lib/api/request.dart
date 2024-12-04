@@ -74,7 +74,7 @@ class Request {
     return await DioUtil.httpGet(
       _plantScanHistory,
       parameters: {'pageNum': pageNum, 'pageSize': pageSize, 'type': type},
-      allData: true,
+      ignoreAll: true,
     );
   }
 
@@ -112,7 +112,7 @@ class Request {
 
   /// 验证订单
   static Future<dynamic> verifyOrder(String data, int timeStamp) async {
-    return await DioUtil.httpPost(_verifyOrder, data: {"data": data, "timeStamp": timeStamp}, ignore208: true);
+    return await DioUtil.httpPost(_verifyOrder, data: {"data": data, "timeStamp": timeStamp}, isBuyShop: true);
   }
 
   static Future<dynamic> exchangeGift(String cdkey) async {
@@ -127,7 +127,7 @@ class Request {
     return await DioUtil.httpGet(
       _diagnosisHistory,
       parameters: {'pageNum': pageNum, 'pageSize': pageSize},
-      allData: true,
+      ignoreAll: true,
     );
   }
 
@@ -172,7 +172,7 @@ class Request {
   }
 
   static Future<dynamic> getReminders(int pageNum, [int pageSize = 30]) async {
-    return await DioUtil.httpGet(_getReminders, parameters: {'pageNum': pageNum, 'pageSize': pageSize}, allData: true);
+    return await DioUtil.httpGet(_getReminders, parameters: {'pageNum': pageNum, 'pageSize': pageSize}, ignoreAll: true);
   }
 
   static Future<void> plantAlarmUpdate({

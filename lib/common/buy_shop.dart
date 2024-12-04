@@ -35,16 +35,18 @@ class BuyShop {
     final Stream<List<PurchaseDetails>> purchaseUpdated = _inAppPurchase.purchaseStream;
     _subscription = purchaseUpdated.listen((purchaseDetailsList) {
       Get.log('检测到需要处理的订单数：${purchaseDetailsList.length}');
+      final List<PurchaseDetails> restoredList = purchaseDetailsList.where((e) => e.status == PurchaseStatus.restored).toList();
+      final List<PurchaseDetails> otherList = purchaseDetailsList.where((e) => e.status != PurchaseStatus.restored).toList();
       if (_isResume) {
         _isResume = false;
-        if (purchaseDetailsList.isEmpty) {
+        if (otherList.isEmpty) {
           if (Get.isDialogOpen ?? false) {
             Get.back();
           }
           Fluttertoast.showToast(msg: 'restoreTips'.tr);
         }
       }
-      _listenToPurchaseUpdated(purchaseDetailsList);
+      _listenToPurchaseUpdated(restoredList, otherList);
     }, onDone: () {
       _subscription.cancel();
     }, onError: (error) {
@@ -58,8 +60,29 @@ class BuyShop {
     });
   }
 
-  Future<void> _listenToPurchaseUpdated(List<PurchaseDetails> purchaseDetailsList) async {
-    for (final purchaseDetails in purchaseDetailsList) {
+  Future<void> _listenToPurchaseUpdated(List<PurchaseDetails> restoredList, List<PurchaseDetails> otherList) async {
+    if (restoredList.isNotEmpty) {
+      Get.log("恢复订单,批量处理:${restoredList.length}个");
+      if (!(Get.isDialogOpen ?? false)) {
+        Get.dialog(const Center(child: CircularProgressIndicator()), barrierDismissible: false);
+      }
+      sign ??= await Request.getOrderKey();
+
+      await _checkPayInfo(restoredList.last);
+
+      await Get.find<UserController>().getUserInfo();
+      Get.back(closeOverlays: Get.currentRoute != '/');
+      for (final purchaseDetails in restoredList) {
+        try {
+          Get.log("关闭恢复订单");
+          _inAppPurchase.completePurchase(purchaseDetails);
+        } catch (e) {
+          Get.log("关闭恢复订单出错:${e.toString()}");
+        }
+      }
+    }
+    Get.log("处理订单,待处理:${otherList.length}个");
+    for (final purchaseDetails in otherList) {
       if (purchaseDetails.status == PurchaseStatus.pending) {
         Get.log("等待支付");
       } else {
@@ -118,14 +141,19 @@ class BuyShop {
     final time = DateTime.now().millisecondsSinceEpoch;
     final dataString = DesUtil.desEncrypt(jsonString, desKey, time);
     Get.log("开始验证支付的订单");
-    await Request.verifyOrder(dataString, time);
-    FireBaseUtil.logEvent(EventName.memberPurchaseSuccess);
-    orderNum = null;
-    Get.log("关闭支付的订单");
-    try {
-      await _inAppPurchase.completePurchase(purchaseDetails);
-    } catch (e) {
-      Get.log("关闭已支付订单出错:${e.toString()}");
+    final res = await Request.verifyOrder(dataString, time);
+    if (res?['code'] == 204 && orderNum != null) {
+      orderNum = null;
+      resumePurchase();
+    } else {
+      orderNum = null;
+      FireBaseUtil.logEvent(EventName.memberPurchaseSuccess);
+      Get.log("关闭支付的订单");
+      try {
+        await _inAppPurchase.completePurchase(purchaseDetails);
+      } catch (e) {
+        Get.log("关闭已支付订单出错:${e.toString()}");
+      }
     }
   }
 
