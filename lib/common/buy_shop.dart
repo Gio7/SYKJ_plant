@@ -15,7 +15,7 @@ import 'des_util.dart';
 import 'firebase_util.dart';
 import 'rsa.dart';
 
-class BuyShop {
+class BuyShopBackup {
   late InAppPurchase _inAppPurchase;
   late StreamSubscription<List<PurchaseDetails>> _subscription;
 

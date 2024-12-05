@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:plant/common/buy_engine.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/models/userinfo_model.dart';
@@ -34,7 +35,17 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
     mainController.tabController = TabController(length: 5, vsync: this)..addListener(() => setState(() {}));
     super.initState();
     userController.getUserInfo().then((v) {
-      WidgetsBinding.instance.addPostFrameCallback((_) => _checkOpenCount());
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        final v = await _checkOpenCount();
+        if (!v) {
+          final buy = BuyEngine();
+          buy.initialize();
+          await Future.delayed(const Duration(seconds: 20));
+          if (buy.sign == null) {
+            buy.dispose();
+          }
+        }
+      });
     });
     WidgetsBinding.instance.addObserver(this);
   }
@@ -53,30 +64,31 @@ class _MainPageState extends State<MainPage> with SingleTickerProviderStateMixin
     }
   }
 
-  void _checkOpenCount() {
+  Future<bool> _checkOpenCount() async {
     // 非会员每天前两次启动APP打开弹窗
     final userCtr = Get.find<UserController>();
     if (userCtr.isLogin.value && !userCtr.userInfo.value.isRealVip) {
-      SharedPreferences.getInstance().then((prefs) {
-        final timeNow = DateTime.now();
-        final today = DateTime(timeNow.year, timeNow.month, timeNow.day).millisecondsSinceEpoch;
-        int lastOpenTime = prefs.getInt('lastOpenTime') ?? 0;
-        int openCount = prefs.getInt('openCount') ?? 0;
+      final prefs = await SharedPreferences.getInstance();
+      final timeNow = DateTime.now();
+      final today = DateTime(timeNow.year, timeNow.month, timeNow.day).millisecondsSinceEpoch;
+      int lastOpenTime = prefs.getInt('lastOpenTime') ?? 0;
+      int openCount = prefs.getInt('openCount') ?? 0;
 
-        if (lastOpenTime == today) {
-          openCount += 1;
-        } else {
-          openCount = 1;
-        }
+      if (lastOpenTime == today) {
+        openCount += 1;
+      } else {
+        openCount = 1;
+      }
 
-        if (openCount <= 2) {
-          _showShopDialog(userCtr);
-        }
+      prefs.setInt('openCount', openCount);
+      prefs.setInt('lastOpenTime', today);
 
-        prefs.setInt('openCount', openCount);
-        prefs.setInt('lastOpenTime', today);
-      });
+      if (openCount <= 2) {
+        _showShopDialog(userCtr);
+        return true;
+      }
     }
+    return false;
   }
 
   void _showShopDialog(UserController userCtr) {

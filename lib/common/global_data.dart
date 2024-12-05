@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
 
-import 'buy_shop.dart';
-
 class GlobalData {
   static String get baseUrl {
     if (defaultTargetPlatform == TargetPlatform.android) {
@@ -20,8 +18,6 @@ class GlobalData {
   static String privacyNoticeUrl = 'https://plantidentifier.co/privacy_policy.html';
 
   static String unsubscribeUrl = '';
-
-  static BuyShop buyShop = BuyShop();
 
   static String versionName = '';
 

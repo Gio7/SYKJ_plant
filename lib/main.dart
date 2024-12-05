@@ -154,7 +154,6 @@ Future<void> initMain() async {
   }
 
   DioUtil.resetDio();
-  GlobalData.buyShop.initializeInAppPurchase();
 }
 
 Future<void> getConfig() async {

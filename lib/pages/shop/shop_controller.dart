@@ -2,6 +2,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:plant/api/request.dart';
+import 'package:plant/common/buy_engine.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/global_data.dart';
 import 'package:plant/controllers/user_controller.dart';
@@ -21,10 +22,21 @@ class ShopController extends GetxController {
 
   final ShopState state = ShopState();
 
+  late BuyEngine _buyEngine;
+
   @override
   onInit() {
     super.onInit();
+
+    _buyEngine = BuyEngine();
+    _buyEngine.initialize();
     getShopData();
+  }
+
+  @override
+  onClose() {
+    _buyEngine.dispose();
+    super.onClose();
   }
 
   Future<void> getShopData() async {
@@ -82,7 +94,7 @@ class ShopController extends GetxController {
 
   Future<void> restore() async {
     FireBaseUtil.logEvent(EventName.subscribeRestore);
-    GlobalData.buyShop.resumePurchase();
+    _buyEngine.restoredPurchase();
   }
 
   Future<void> subscribe() async {
@@ -96,7 +108,7 @@ class ShopController extends GetxController {
     } else {
       FireBaseUtil.logEvent(EventName.memberPurchaseSelect);
     }
-    GlobalData.buyShop.submit(state.currentProduct.value!, true);
+    _buyEngine.buyProduct(state.currentProduct.value!.productDetails, true);
   }
 
   Future<void> getShopList() async {
@@ -109,7 +121,7 @@ class ShopController extends GetxController {
       final Set<String> ids = resList.map((e) => e.shopId!).toSet();
       ProductDetailsResponse? pdRes;
       if (ids.isNotEmpty) {
-        pdRes = await GlobalData.buyShop.getProduct(ids);
+        pdRes = await _buyEngine.getProduct(ids);
       }
       if (pdRes != null && pdRes.productDetails.isNotEmpty) {
         for (final apiShop in resList) {
