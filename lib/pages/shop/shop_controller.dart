@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
@@ -48,11 +50,10 @@ class ShopController extends GetxController {
 
       if (state.currentProduct.value != null) {
         String text = "startYourFreeTrial".tr;
+        if (state.currentProduct.value?.isTrialProduct != true) {
+          text = "onlyCancelAnytime".tr;
+        }
         if (formPage == ShopFormPage.history) {
-          if (Get.find<UserController>().userInfo.value.memberType != MemberType.normal) {
-            text = "onlyCancelAnytime".tr;
-          }
-
           final count = Get.find<IdentifyHistoryController>().repository.total;
           String historyVipTips2 = "historyVipTips2".tr;
           historyVipTips2 = historyVipTips2.replaceFirst('0', '$count');

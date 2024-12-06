@@ -6,94 +6,97 @@ import 'package:plant/pages/shop/shop_controller.dart';
 import 'package:plant/widgets/btn.dart';
 import 'package:plant/widgets/loading_dialog.dart';
 
-class ShopFromDiagnose extends StatelessWidget {
-  const ShopFromDiagnose({super.key});
+class ShopFromIdentify extends StatelessWidget {
+  const ShopFromIdentify({super.key});
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<ShopController>();
     final List<String> tips = [
-      'vipFree'.tr,
       'unlmitedIdengtify'.tr,
       'enhanceFaster'.tr,
       'botanistSupport'.tr,
       'remindersForCare'.tr,
     ];
 
-    return Column(
-      children: [
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Image.asset(
-                  'images/icon/shop_from_diagnose.png',
-                  height: 234,
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  'Plant Identifier PRO',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: UIColor.c40BD95,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
+    return Obx(() {
+      final isFreeTrial = controller.state.currentProduct.value?.isTrialProduct == true;
+      if (isFreeTrial) {
+        tips.insert(0, 'vipFree'.tr);
+      }
+      return Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Image.asset(
+                    'images/icon/shop_from_diagnose.png',
+                    height: 234,
                   ),
-                ),
-                const SizedBox(height: 20),
-                Container(
-                  decoration: ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Plant Identifier PRO',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: UIColor.c40BD95,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
                     ),
-                    color: UIColor.transparent60,
                   ),
-                  child: Container(
-                    decoration: DottedDecoration(
-                      shape: Shape.box,
-                      color: UIColor.cAEE9CD,
-                      strokeWidth: 1,
-                      dash: const <int>[2, 2],
-                      borderRadius: BorderRadius.circular(16),
+                  const SizedBox(height: 20),
+                  Container(
+                    decoration: ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      color: UIColor.transparent60,
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    width: double.infinity,
-                    child: UnconstrainedBox(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          for (int i = 0; i < tips.length; i++)
-                            Padding(
-                              padding: EdgeInsets.only(top: i == 0 ? 0 : 16),
-                              child: Row(
-                                children: [
-                                  Image.asset('images/icon/check.png', height: 18),
-                                  const SizedBox(width: 8),
-                                  Text(
-                                    tips[i],
-                                    style: const TextStyle(
-                                      color: UIColor.c15221D,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  )
-                                ],
+                    child: Container(
+                      decoration: DottedDecoration(
+                        shape: Shape.box,
+                        color: UIColor.cAEE9CD,
+                        strokeWidth: 1,
+                        dash: const <int>[2, 2],
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      width: double.infinity,
+                      child: UnconstrainedBox(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            for (int i = 0; i < tips.length; i++)
+                              Padding(
+                                padding: EdgeInsets.only(top: i == 0 ? 0 : 16),
+                                child: Row(
+                                  children: [
+                                    Image.asset('images/icon/check.png', height: 18),
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      tips[i],
+                                      style: const TextStyle(
+                                        color: UIColor.c15221D,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
-                            ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Obx(
-            () => Text(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
               controller.state.priceIntroductionText.value,
               textAlign: TextAlign.center,
               style: const TextStyle(
@@ -103,24 +106,21 @@ class ShopFromDiagnose extends StatelessWidget {
               ),
             ),
           ),
-        ),
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Obx(() {
-            if (controller.state.priceIntroductionText.value.isNotEmpty) {
-              return NormalButton(
-                text: 'startFreeTrial'.tr,
-                textFontSize: 16,
-                textColor: UIColor.white,
-                bgColor: UIColor.primary,
-                onTap: () => controller.subscribe(),
-              );
-            }
-            return const LoadingDialog();
-          }),
-        ),
-      ],
-    );
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: controller.state.priceIntroductionText.value.isNotEmpty
+                ? NormalButton(
+                    text: isFreeTrial ? 'startFreeTrial'.tr : 'goProNow'.tr,
+                    textFontSize: 16,
+                    textColor: UIColor.white,
+                    bgColor: UIColor.primary,
+                    onTap: () => controller.subscribe(),
+                  )
+                : const LoadingDialog(),
+          ),
+        ],
+      );
+    });
   }
 }

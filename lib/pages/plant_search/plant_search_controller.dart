@@ -50,13 +50,14 @@ class PlantSearchController extends GetxController {
     Get.dialog(const LoadingDialog(), barrierDismissible: false);
     try {
       final res = await Request.getPlantByUniqueId(model.uniqueId!);
+      Get.back();
+      
       final p = PlantInfoModel.fromJsonBySearch(res);
       final ctr = Get.put(PlantController(ShootType.identify, hasCamera: false));
       ctr.repository.plantInfo = p;
-      Get.back();
 
       await Get.to(() => InfoIdentifyPage(hideBottom: true));
-      ctr.dispose();
+      Get.delete<PlantController>();
     } catch (e) {
       Get.back();
       Get.log(e.toString(), isError: true);

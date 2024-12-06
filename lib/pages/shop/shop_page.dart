@@ -55,7 +55,7 @@ class ShopPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: formPage == ShopFormPage.identify
-                      ? const ShopFromDiagnose()
+                      ? const ShopFromIdentify()
                       : formPage == ShopFormPage.history
                           ? const ShopFromHistory()
                           : formPage == ShopFormPage.main

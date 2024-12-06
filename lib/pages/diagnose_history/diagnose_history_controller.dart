@@ -44,6 +44,7 @@ class DiagnoseHistoryController extends GetxController {
     try {
       final res = await Request.diagnosisHistoryDetailById(id);
       Get.back();
+      
       final p = PlantDiagnosisModel.fromJson(res);
       final ctr = Get.put(PlantController(ShootType.diagnose, hasCamera: false));
       ctr.repository.diagnoseInfo = p;

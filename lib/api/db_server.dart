@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:plant/pages/diagnose_home/categorized_feed_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -68,7 +70,7 @@ class DbServer {
         },
       );
     } catch (e) {
-      print('Error opening database: $e');
+      // print('Error opening database: $e');
     }
   }
 

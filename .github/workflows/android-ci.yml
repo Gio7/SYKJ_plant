@@ -90,4 +90,4 @@ jobs:
         with:
           _api_key: ${{ secrets.PGY_KEY }}
           appFilePath: ${{ env.UPLOAD_FILE_PATH }}
-          buildUpdateDescription: 'v1.1.4 会员鉴权优化'
+          buildUpdateDescription: 'v1.1.6 试用商品整体优化'

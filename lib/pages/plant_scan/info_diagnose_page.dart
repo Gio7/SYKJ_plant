@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/controllers/user_controller.dart';
-import 'package:plant/models/userinfo_model.dart';
 import 'package:plant/router/app_pages.dart';
 import 'package:plant/widgets/btn.dart';
 import 'package:plant/widgets/loading_dialog.dart';
@@ -82,7 +81,7 @@ class InfoDiagnosePage extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: NormalButton(
-                    text: userCtr.userInfo.value.memberType == MemberType.normal ? 'startFreeTrial'.tr : 'goProNow'.tr,
+                    text: /* userCtr.userInfo.value.memberType == MemberType.normal ? 'startFreeTrial'.tr :  */'goProNow'.tr,
                     textColor: UIColor.white,
                     bgColor: UIColor.primary,
                     onTap: () async {
