@@ -2,9 +2,7 @@ import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plant/common/ui_color.dart';
-import 'package:plant/controllers/user_controller.dart';
 import 'package:plant/models/member_product_model.dart';
-import 'package:plant/models/userinfo_model.dart';
 import 'package:plant/pages/shop/shop_controller.dart';
 import 'package:plant/widgets/btn.dart';
 import 'package:plant/widgets/loading_dialog.dart';
@@ -22,8 +20,7 @@ class ShopNormal extends StatelessWidget {
         'botanistSupport'.tr,
         'remindersForCare'.tr,
       ];
-      final memberType = Get.find<UserController>().userInfo.value.memberType;
-      final isFreeTrial = controller.state.currentProduct.value?.isFreeTrial == true && memberType == MemberType.normal;
+      final isFreeTrial = controller.state.currentProduct.value?.isTrialProduct == true;
       if (isFreeTrial) {
         tips.insert(0, 'vipFree'.tr);
       }
@@ -77,7 +74,6 @@ class ShopNormal extends StatelessWidget {
                                 (e) => buildShopItem(
                                   isSelected: controller.state.currentProduct.value == e,
                                   e: e,
-                                  memberType: memberType,
                                 ),
                               )
                               .toList(),
@@ -174,7 +170,6 @@ class ShopNormal extends StatelessWidget {
   Widget buildShopItem({
     required bool isSelected,
     required MemberProductModel e,
-    required MemberType? memberType,
   }) {
     Color borderColor;
     Color titleColor;
@@ -191,7 +186,6 @@ class ShopNormal extends StatelessWidget {
       amountColor = UIColor.c8E8B8B;
       rightIcon = 'images/icon/unchecked_circle.png';
     }
-    final isFreeTrial = e.isFreeTrial == true && memberType == MemberType.normal;
     return GestureDetector(
       onTap: () => controller.selectProduct(e),
       child: Container(
@@ -222,7 +216,7 @@ class ShopNormal extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 4),
                     child: Text(
-                      isFreeTrial ? 'newFreeTrial'.tr : e.unitSingleStr,
+                      e.isTrialProduct ? 'newFreeTrial'.tr : e.unitSingleStr,
                       style: TextStyle(
                         color: titleColor,
                         fontSize: 16,
@@ -231,7 +225,7 @@ class ShopNormal extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    isFreeTrial ? "${'then'.tr} ${e.unitStr}" : e.unitStr,
+                    e.isTrialProduct ? "${'then'.tr} ${e.unitStr}" : e.unitStr,
                     style: TextStyle(
                       color: amountColor,
                       fontSize: 12,

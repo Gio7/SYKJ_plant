@@ -1,4 +1,5 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/foundation.dart';
 
 class FireBaseUtil {
   static FirebaseAnalytics? _analytics;
@@ -6,6 +7,9 @@ class FireBaseUtil {
   static FirebaseAnalyticsObserver? observer;
 
   static void initAnalyticsServices() {
+    if (kDebugMode) {
+      return;
+    }
     _analytics = FirebaseAnalytics.instance;
     if (_analytics != null) {
       observer = FirebaseAnalyticsObserver(analytics: _analytics!);

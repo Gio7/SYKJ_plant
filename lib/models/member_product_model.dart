@@ -11,6 +11,7 @@ class MemberProductModel with EquatableMixin {
   final int? createTimestamp;
   final int? id;
   final int? point;
+
   /// 1 = 非会员 2 = 周卡 3 = 年卡
   final int? memberType;
   final int? shopType;
@@ -22,8 +23,13 @@ class MemberProductModel with EquatableMixin {
   final bool? selected;
   final int? status;
   ProductDetails? productDetails;
+  ProductDetails? freeProductDetails;
 
-  final bool isFreeTrial;
+  // bool isFreeTrial;
+
+  bool get isTrialProduct {
+    return freeProductDetails != null;
+  }
 
   MemberProductModel({
     this.createBy,
@@ -43,10 +49,10 @@ class MemberProductModel with EquatableMixin {
     this.shopDescribe,
     this.selected,
     this.status,
-    this.isFreeTrial = false,
+    // this.isFreeTrial = false,
   });
 
-  factory MemberProductModel.fromJson(Map<String, dynamic> json, {bool isTrial = false}) => MemberProductModel(
+  factory MemberProductModel.fromJson(Map<String, dynamic> json) => MemberProductModel(
         createBy: json["createBy"],
         createTime: json["createTime"],
         updateBy: json["updateBy"],
@@ -64,7 +70,7 @@ class MemberProductModel with EquatableMixin {
         shopDescribe: json["shopDescribe"],
         selected: json["selected"],
         status: json["status"],
-        isFreeTrial: json["trial"] ?? false,
+        // isFreeTrial: json["trial"] ?? false,
       );
 
   @override

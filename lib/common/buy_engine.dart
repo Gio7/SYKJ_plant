@@ -22,8 +22,8 @@ class BuyEngine {
   }
 
   final InAppPurchase _inAppPurchase = InAppPurchase.instance;
-  late Stream<List<PurchaseDetails>> _purchaseStream;
-  late StreamSubscription<List<PurchaseDetails>>? _subscription;
+  Stream<List<PurchaseDetails>>? _purchaseStream;
+  StreamSubscription<List<PurchaseDetails>>? _subscription;
 
   bool _isRestored = false;
 
@@ -31,42 +31,10 @@ class BuyEngine {
 
   String? orderNum;
 
-  Future<void> initialize() async {
-    _purchaseStream = _inAppPurchase.purchaseStream;
-    _subscription = _purchaseStream.listen((purchaseDetailsList) {
-      Get.log('检测到需要处理的订单数：${purchaseDetailsList.length}');
-      if (_isRestored) {
-        _isRestored = false;
-        if (purchaseDetailsList.isEmpty) {
-          _disposeDialog();
-          Fluttertoast.showToast(msg: 'restoreTips'.tr);
-          return;
-        }
-        _handlePurchaseUpdates(purchaseDetailsList, isRestored: true);
-      } else {
-        _handlePurchaseUpdates(purchaseDetailsList);
-      }
-    }, onDone: () {
-      _subscription?.cancel();
-    }, onError: (error) {
-      error.printError();
-      Fluttertoast.showToast(
-        msg: 'paymentInitiationFailure'.tr,
-        toastLength: Toast.LENGTH_LONG,
-        timeInSecForIosWeb: 5,
-        gravity: ToastGravity.CENTER,
-      );
-    });
-  }
-
-  void dispose() {
-    _subscription?.cancel();
-  }
-
   Future<void> _checkPaySuccess() async {
     await Get.find<UserController>().getUserInfo();
     Get.back(closeOverlays: Get.currentRoute != '/');
-    dispose();
+    // dispose();
   }
 
   void _openDialog() {
@@ -81,13 +49,49 @@ class BuyEngine {
     }
   }
 
-  void _handlePurchaseUpdates(List<PurchaseDetails> purchaseDetailsList, {bool isRestored = false}) async {
-    if (isRestored) {
-      Get.log("恢复订单,批量处理:${purchaseDetailsList.length}个");
-      await _checkPayInfo(purchaseDetailsList.last, isRestored: true);
-      await _checkPaySuccess();
+  // void dispose() {
+  //   _subscription?.cancel();
+  // }
+
+  Future<void> _restoredOrder(List<PurchaseDetails> purchaseDetailsList) async {
+    _isRestored = false;
+    if (purchaseDetailsList.isEmpty) {
+      _disposeDialog();
+      Fluttertoast.showToast(msg: 'restoreTips'.tr);
       return;
     }
+    Get.log("恢复订单,批量处理:${purchaseDetailsList.length}个");
+    await _checkPayInfo(purchaseDetailsList.last, isRestored: true);
+    await _checkPaySuccess();
+  }
+
+  Future<void> initialize() async {
+    _purchaseStream ??= _inAppPurchase.purchaseStream;
+    _subscription ??= _purchaseStream?.listen((purchaseDetailsList) {
+      if (Get.isRegistered<UserController>()) {
+        if (Get.find<UserController>().isLogin.value) {
+          Get.log('检测到需要处理的订单数：${purchaseDetailsList.length}');
+          if (_isRestored) {
+            _restoredOrder(purchaseDetailsList);
+          } else {
+            _handlePurchaseUpdates(purchaseDetailsList);
+          }
+        }
+      }
+    }, onDone: () {
+      _subscription?.cancel();
+    }, onError: (error) {
+      error.printError();
+      Fluttertoast.showToast(
+        msg: 'paymentInitiationFailure'.tr,
+        toastLength: Toast.LENGTH_LONG,
+        timeInSecForIosWeb: 5,
+        gravity: ToastGravity.CENTER,
+      );
+    });
+  }
+
+  Future<void> _handlePurchaseUpdates(List<PurchaseDetails> purchaseDetailsList) async {
     Get.log("处理订单,待处理:${purchaseDetailsList.length}个");
     for (final purchase in purchaseDetailsList) {
       if (purchase.status == PurchaseStatus.pending) {
@@ -105,15 +109,27 @@ class BuyEngine {
         } else if (purchase.status == PurchaseStatus.canceled) {
           _disposeDialog();
           Fluttertoast.showToast(msg: 'paymentHasBeenCanceled'.tr);
-        } else if (purchase.status == PurchaseStatus.purchased || purchase.status == PurchaseStatus.restored) {
-          Get.log("监控到需要验证的订单，订单号：$orderNum");
-          await _checkPayInfo(purchase);
-          await _inAppPurchase.completePurchase(purchase);
-          FireBaseUtil.subscribeSuccess(purchase.productID);
-          await _checkPaySuccess();
+        } else if (purchase.status == PurchaseStatus.purchased) {
+          final lastPurchase = purchaseDetailsList.lastWhere((p) => p.status == PurchaseStatus.purchased);
+          if (purchase == lastPurchase) {
+            Get.log("监控到购买需要验证的订单，订单号：$orderNum");
+            await _checkPayInfo(purchase);
+            await _inAppPurchase.completePurchase(purchase);
+            FireBaseUtil.subscribeSuccess(purchase.productID);
+            await _checkPaySuccess();
+          }
+        } else if (purchase.status == PurchaseStatus.restored) {
+          final lastPurchase = purchaseDetailsList.lastWhere((p) => p.status == PurchaseStatus.restored);
+          if (purchase == lastPurchase) {
+            Get.log("监控到恢复需要验证的订单");
+            await _checkPayInfo(purchase);
+            await _inAppPurchase.completePurchase(purchase);
+            await _checkPaySuccess();
+          }
         }
         if (purchase.pendingCompletePurchase) {
-          _inAppPurchase.completePurchase(purchase);
+          Get.log("关闭订单，状态:${purchase.status}");
+          await _inAppPurchase.completePurchase(purchase);
         }
       }
     }
@@ -171,6 +187,7 @@ class BuyEngine {
         await _inAppPurchase.buyConsumable(purchaseParam: purchaseParam);
       }
     } catch (e) {
+      Get.log(e.toString());
       Fluttertoast.showToast(
         msg: e.toString(),
         toastLength: Toast.LENGTH_LONG,
@@ -211,17 +228,28 @@ class BuyEngine {
     final jsonString = jsonEncode(data);
     final time = DateTime.now().millisecondsSinceEpoch;
     final dataString = DesUtil.desEncrypt(jsonString, desKey, time);
-    Get.log("开始验证支付的订单");
+    Get.log("开始验证订单");
     final res = await Request.verifyOrder(dataString, time);
     orderNum = null;
-    if (res?['code'] == 204 && isRestored == false) {
-      restoredPurchase();
+    if (res?['code'] == 204) {
+      if (isRestored == false) {
+        return await _checkPayInfo(purchaseDetails, isRestored: true);
+      } else {
+        _disposeDialog();
+        Fluttertoast.showToast(
+          msg: "apiError".tr,
+          toastLength: Toast.LENGTH_LONG,
+          timeInSecForIosWeb: 5,
+          gravity: ToastGravity.CENTER,
+        );
+        throw Exception('订单验证失败');
+      }
     }
   }
 
   Future<ProductDetailsResponse> getProduct(Set<String> kIds) async {
     try {
-      return await InAppPurchase.instance.queryProductDetails(kIds);
+      return await _inAppPurchase.queryProductDetails(kIds);
     } catch (e) {
       rethrow;
     }

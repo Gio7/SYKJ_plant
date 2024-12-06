@@ -17,6 +17,7 @@ import 'package:plant/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'api/dio.dart';
+import 'common/buy_engine.dart';
 import 'common/firebase_message.dart';
 import 'common/firebase_util.dart';
 import 'common/ui_color.dart';
@@ -154,6 +155,8 @@ Future<void> initMain() async {
   }
 
   DioUtil.resetDio();
+  final buy = BuyEngine();
+  buy.initialize();
 }
 
 Future<void> getConfig() async {

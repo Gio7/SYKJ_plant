@@ -10,6 +10,14 @@ import 'package:plant/models/member_product_model.dart';
 import 'package:plant/models/userinfo_model.dart';
 import 'package:plant/pages/identify_history/identify_history_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
+//import for AppStoreProductDetails
+import 'package:in_app_purchase_storekit/in_app_purchase_storekit.dart';
+//import for SKProductWrapper
+import 'package:in_app_purchase_storekit/store_kit_wrappers.dart';
+//import for GooglePlayProductDetails
+import 'package:in_app_purchase_android/in_app_purchase_android.dart';
+//import for SkuDetailsWrapper
+// import 'package:in_app_purchase_android/billing_client_wrappers.dart';
 
 import 'shop_page.dart';
 
@@ -31,12 +39,6 @@ class ShopController extends GetxController {
     _buyEngine = BuyEngine();
     _buyEngine.initialize();
     getShopData();
-  }
-
-  @override
-  onClose() {
-    _buyEngine.dispose();
-    super.onClose();
   }
 
   Future<void> getShopData() async {
@@ -108,15 +110,19 @@ class ShopController extends GetxController {
     } else {
       FireBaseUtil.logEvent(EventName.memberPurchaseSelect);
     }
-    _buyEngine.buyProduct(state.currentProduct.value!.productDetails, true);
+    ProductDetails? product = state.currentProduct.value?.productDetails;
+    if (state.currentProduct.value?.freeProductDetails != null) {
+      product = state.currentProduct.value!.freeProductDetails;
+    }
+    _buyEngine.buyProduct(product, true);
   }
 
   Future<void> getShopList() async {
     final res = await Request.getShopList('0');
 
     try {
-      final isTrial = Get.find<UserController>().userInfo.value.memberType == MemberType.normal;
-      final resList = res.map((e) => MemberProductModel.fromJson(e, isTrial: isTrial)).toList();
+      final memberType = Get.find<UserController>().userInfo.value.memberType;
+      final resList = res.map((e) => MemberProductModel.fromJson(e)).toList();
       resList.removeWhere((e) => e.shopId == null);
       final Set<String> ids = resList.map((e) => e.shopId!).toSet();
       ProductDetailsResponse? pdRes;
@@ -126,6 +132,17 @@ class ShopController extends GetxController {
       if (pdRes != null && pdRes.productDetails.isNotEmpty) {
         for (final apiShop in resList) {
           apiShop.productDetails = pdRes.productDetails.firstWhereOrNull((element) => apiShop.shopId == element.id && element.rawPrice != 0);
+          if (apiShop.productDetails is AppStoreProductDetails) {
+            SKProductWrapper skProduct = (apiShop.productDetails as AppStoreProductDetails).skProduct;
+            // 判断Apple商品是否有试用
+            if (skProduct.introductoryPrice != null && memberType == MemberType.normal) {
+              apiShop.freeProductDetails = apiShop.productDetails;
+            }
+          } else if (apiShop.productDetails is GooglePlayProductDetails) {
+            // ProductDetailsWrapper skuDetails = (apiShop.productDetails as GooglePlayProductDetails).productDetails;
+            // 获取Google商品是否有试用
+            apiShop.freeProductDetails = pdRes.productDetails.firstWhereOrNull((element) => apiShop.shopId == element.id && element.rawPrice == 0);
+          }
         }
       }
       resList.removeWhere((e) => e.productDetails == null);
