@@ -21,6 +21,7 @@ import 'common/buy_engine.dart';
 import 'common/firebase_message.dart';
 import 'common/firebase_util.dart';
 import 'common/ui_color.dart';
+import 'controllers/main_controller.dart';
 import 'router/app_pages.dart';
 import 'widgets/easy_refresh_custom.dart';
 import 'controllers/core_binding.dart';
@@ -62,6 +63,15 @@ void main() {
             await getAdid();
             getFCMToken();
           });
+        }
+        if (Get.isRegistered<MainController>()) {
+          MainController mainController = Get.find<MainController>();
+          if (mainController.plantTypeList.isEmpty) {
+            mainController.getSearchList();
+          }
+          if (mainController.categorizedFeedList.isEmpty) {
+            mainController.getDiseaseHome();
+          }
         }
       }
     });

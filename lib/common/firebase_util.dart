@@ -2,6 +2,10 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 
 class FireBaseUtil {
+  FireBaseUtil._internal();
+  static final FireBaseUtil _instance = FireBaseUtil._internal();
+  factory FireBaseUtil() => _instance;
+
   static FirebaseAnalytics? _analytics;
 
   static FirebaseAnalyticsObserver? observer;

@@ -2,10 +2,15 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 // import 'package:plant/common/global_data.dart';
 
 class FirebaseMessage {
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  // 单例模式
+  FirebaseMessage._internal();
+  static final FirebaseMessage _instance = FirebaseMessage._internal();
+  factory FirebaseMessage() => _instance;
+
+  final FirebaseMessaging _messaging = FirebaseMessaging.instance;
 
   void init() async {
-     /*NotificationSettings settings = */await  messaging.requestPermission(
+    /*NotificationSettings settings = */ await _messaging.requestPermission(
       alert: true,
       announcement: false,
       badge: true,
