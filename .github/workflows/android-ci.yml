@@ -28,6 +28,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Extract version from pubspec.yaml
+        id: extract_version
+        run: |
+          version=$(grep '^version:' pubspec.yaml | awk '{print $2}')
+          
+          version_name=$(echo $version | sed 's/+.*//')
+          version_code=$(echo $version | sed 's/.*+//')
+          
+          echo "version=$version" >> $GITHUB_ENV
+          echo "version_name=$version_name" >> $GITHUB_ENV
+          echo "version_code=$version_code" >> $GITHUB_ENV
+
+      - name: Show version info
+        run: |
+          echo "Version: ${{ env.version }}"
+          echo "Version Name: ${{ env.version_name }}"
+          echo "Version Code: ${{ env.version_code }}"
+
       - uses: actions/setup-java@v1
         with:
           java-version: '17.x' # device_info_plus需要java17
@@ -56,22 +74,22 @@ jobs:
         if: env.BUILD_TYPE == 'aab'
         uses: actions/upload-artifact@v4
         with:
-          name: release-aab
+          name: "plant-aab-${{ env.version_name }}_${{ env.version_code }}"
           path: build/app/outputs/bundle/release/app-release.aab
 
-      - name: Archive release artifacts
-        if: env.BUILD_TYPE == 'release'
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+      # - name: Archive release artifacts
+      #   if: env.BUILD_TYPE == 'release'
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: release-apk
+      #     path: build/app/outputs/flutter-apk/app-release.apk
 
-      - name: Archive debug artifacts
-        if: env.BUILD_TYPE == 'debug'
-        uses: actions/upload-artifact@v4
-        with:
-          name: debug-apk
-          path: build/app/outputs/flutter-apk/app-debug.apk
+      # - name: Archive debug artifacts
+      #   if: env.BUILD_TYPE == 'debug'
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: debug-apk
+      #     path: build/app/outputs/flutter-apk/app-debug.apk
 
       - name: Set PGYER upload file path
         if: env.UPLOAD_TO_PGY == 'true'
@@ -90,4 +108,4 @@ jobs:
         with:
           _api_key: ${{ secrets.PGY_KEY }}
           appFilePath: ${{ env.UPLOAD_FILE_PATH }}
-          buildUpdateDescription: 'v1.1.6 试用商品整体优化'
+          buildUpdateDescription: 'v${{ env.version_name }} (Build: ${{ env.version_code }})'
