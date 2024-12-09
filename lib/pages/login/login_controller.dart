@@ -154,7 +154,9 @@ class LoginController extends GetxController {
 
   Future<void> login(String uid, String? email, {required int type}) async {
     try {
-      Get.dialog(const LoadingDialog());
+      if (Get.isDialogOpen != true) {
+        Get.dialog(const LoadingDialog());
+      }
       final uidEncode = await Rsa.encodeString(uid);
       final emailEncode = await Rsa.encodeString(email);
       final res = await Request.oneClickLogin(uidEncode, emailEncode, GlobalData.fcmToken);
@@ -187,7 +189,7 @@ class LoginController extends GetxController {
       } else if (type == 3) {
         FireBaseUtil.logEvent(EventName.apLoginFailure);
       }
-      if (Get.isDialogOpen ?? false) {
+      if (Get.isDialogOpen == true) {
         Get.back();
       }
       Get.log(e.toString(), isError: true);

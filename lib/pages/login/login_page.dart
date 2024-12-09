@@ -9,6 +9,7 @@ import 'package:plant/common/firebase_util.dart';
 import 'package:plant/common/ui_color.dart';
 import 'package:plant/widgets/btn.dart';
 import 'package:plant/pages/login/login_controller.dart';
+import 'package:plant/widgets/loading_dialog.dart';
 import 'package:plant/widgets/nav_bar.dart';
 import 'package:plant/pages/login/email_signup_page.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -23,21 +24,25 @@ class LoginPage extends StatelessWidget {
     Fluttertoast.showToast(msg: "normalError".tr, gravity: ToastGravity.CENTER);
   }
 
-  Future<AuthorizationCredentialAppleID?> signInWithApple() async {
+  Future<void> signInWithApple(LoginController loginCtr) async {
     try {
-      return await SignInWithApple.getAppleIDCredential(
+      final aca = await SignInWithApple.getAppleIDCredential(
         scopes: [
           AppleIDAuthorizationScopes.email,
           AppleIDAuthorizationScopes.fullName,
         ],
       );
+      if (aca.userIdentifier != null) {
+        await loginCtr.login(aca.userIdentifier!, aca.email, type: 3);
+        FireBaseUtil.logEvent(EventName.apLoginSuccess);
+        Get.back(closeOverlays: true);
+      }
     } on SignInWithAppleAuthorizationException catch (e) {
-      Get.log(e.toString(), isError: true);
       if (e.code != AuthorizationErrorCode.canceled) {
+        Get.log(e.toString(), isError: true);
         _showNormalErrorToast();
         rethrow;
       }
-      return null;
     } catch (e) {
       Get.log(e.toString(), isError: true);
       _showNormalErrorToast();
@@ -45,24 +50,40 @@ class LoginPage extends StatelessWidget {
     }
   }
 
-  Future<UserCredential> signInWithGoogle() async {
+  Future<void> signInWithGoogle(LoginController loginCtr) async {
     try {
       final gs = GoogleSignIn();
       await gs.signOut();
+
+      Get.dialog(const LoadingDialog());
+
       final GoogleSignInAccount? googleUser = await gs.signIn();
 
-      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-      if (googleAuth == null) {
-        throw 'googleAuth null';
+      if (googleUser == null) {
+        if (Get.isDialogOpen == true) {
+          Get.back();
+        }
+        return;
       }
+
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      return await FirebaseAuth.instance.signInWithCredential(credential);
+      final userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+      final uid = userCredential.user?.uid;
+      if (uid != null) {
+        await loginCtr.login(uid, userCredential.user?.email, type: 1);
+        FireBaseUtil.logEvent(EventName.gaLoginSuccess);
+        Get.back(closeOverlays: true);
+      }
     } on PlatformException catch (e) {
+      if (Get.isDialogOpen == true) {
+        Get.back();
+      }
       Get.log("PlatformException: $e", isError: true);
       if (e.code == 'network_error') {
         Fluttertoast.showToast(msg: 'apiError'.tr, gravity: ToastGravity.CENTER);
@@ -71,9 +92,10 @@ class LoginPage extends StatelessWidget {
       }
       rethrow;
     } catch (e) {
-      if (e != 'googleAuth null') {
-        _showNormalErrorToast();
+      if (Get.isDialogOpen == true) {
+        Get.back();
       }
+      _showNormalErrorToast();
       Get.log(e.toString(), isError: true);
       rethrow;
     }
@@ -183,12 +205,7 @@ class LoginPage extends StatelessWidget {
           child: NormalButton(
             onTap: () async {
               FireBaseUtil.logEvent(EventName.apLoginBtn);
-              final aca = await signInWithApple();
-              if (aca?.userIdentifier != null) {
-                await loginCtr.login(aca!.userIdentifier!, aca.email, type: 3);
-                FireBaseUtil.logEvent(EventName.apLoginSuccess);
-                Get.back(closeOverlays: true);
-              }
+              await signInWithApple(loginCtr);
             },
             bgColor: UIColor.primary,
             text: 'continueWithApple'.tr,
@@ -203,13 +220,7 @@ class LoginPage extends StatelessWidget {
           child: NormalButton(
             onTap: () async {
               FireBaseUtil.logEvent(EventName.gaLoginBtn);
-              final userCredential = await signInWithGoogle();
-              final uid = userCredential.user?.uid;
-              if (uid != null) {
-                await loginCtr.login(uid, userCredential.user?.email, type: 1);
-                FireBaseUtil.logEvent(EventName.gaLoginSuccess);
-                Get.back(closeOverlays: true);
-              }
+              await signInWithGoogle(loginCtr);
             },
             bgColor: UIColor.primary,
             text: 'continueWithGoogle'.tr,
